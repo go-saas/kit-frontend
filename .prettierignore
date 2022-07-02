@@ -21,3 +21,5 @@ yarn-error.log
 CNAME
 /build
 /public
+
+packages/api/
