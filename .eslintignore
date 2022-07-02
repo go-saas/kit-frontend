@@ -6,4 +6,5 @@ public
 dist
 .umi
 mock
-packages/api/
+
+packages/

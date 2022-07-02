@@ -1,0 +1,35 @@
+{
+  "name": "@kit/core",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": "./dist/index.js",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "types"
+  ],
+  "scripts": {
+    "build": "tsc --build && tsc-alias",
+    "dev": "tsc-watch --build --preserveWatchOutput --incremental  --onCompilationComplete \"tsc-alias\""
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "prettier": "^2.6.2",
+    "@typescript-eslint/eslint-plugin": "^5.23.0",
+    "@typescript-eslint/parser": "^5.23.0",
+    "@types/lodash-es": "^4.17.5",
+    "tsc-alias": "^1.6.7",
+    "tsc-watch": "^5.0.3",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@micro-zoe/micro-app": "^0.8.5",
+    "axios": "^0.26.1",
+    "moment": "^2.29.1",
+    "lodash-es": "^4.17.21"
+  }
+}
