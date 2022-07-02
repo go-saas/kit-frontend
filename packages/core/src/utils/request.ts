@@ -2,15 +2,25 @@ import axios from 'axios';
 import storage from './storage';
 import { ACCESS_TOKEN_KEY, CSRF_TOKEN_KEY } from '@/enums/cacheEnum';
 import { getSettingTenantId, setSettingTenantId } from './auth';
-import type { AxiosRequestConfig, AxiosInstance } from 'axios';
-import type { UploadFileParams } from '#/axios';
+import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import { ContentTypeEnum } from '@/enums/httpEnum';
-
 export interface ErrorMessage {
   code: number;
   message: string;
   reason: string;
   metadata: any;
+}
+
+export interface UploadFileParams {
+  // Other parameters
+  data?: Recordable;
+  // File parameter interface field name
+  name?: string;
+  // file name
+  file: File | Blob;
+  // file name
+  filename?: string;
+  [key: string]: any;
 }
 
 export const service = axios.create({
@@ -22,40 +32,39 @@ export function setupService(fn: (i: AxiosInstance) => void) {
   fn(service);
 }
 
-//Auth
-service.interceptors.request.use((config) => {
+export function authRequestInterceptor(config: AxiosRequestConfig) {
   const token = storage.get(ACCESS_TOKEN_KEY);
   config.headers = config.headers || {};
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
   return config;
-});
+}
 
-//CSRF
-service.interceptors.request.use((config) => {
+export function csrfRequestInterceptor(config: AxiosRequestConfig) {
   const csrf = storage.getCookie(CSRF_TOKEN_KEY);
   config.headers = config.headers || {};
   if (csrf) {
     config.headers[CSRF_TOKEN_KEY] = csrf;
   }
   return config;
-});
-service.interceptors.response.use(function (res) {
+}
+
+export function csrfRespInterceptor(res: AxiosResponse) {
   if (res.headers[CSRF_TOKEN_KEY]) {
     storage.setCookie(CSRF_TOKEN_KEY, res.headers[CSRF_TOKEN_KEY]);
   }
   return res;
-}, undefined);
+}
 
-service.interceptors.request.use((config) => {
+export function saasRequestInterceptor(config: AxiosRequestConfig) {
   const t = getSettingTenantId();
   config.headers = config.headers || {};
   if (t) {
     config.headers['__tenant'] = t;
   }
   return config;
-});
+}
 
 //ErrorHandling
 

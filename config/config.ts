@@ -42,7 +42,7 @@ export default defineConfig({
     'root-entry-name': 'variable',
   },
   ignoreMomentLocale: true,
-  proxy: proxy[REACT_APP_ENV || 'dev'],
+  proxy: proxy(REACT_APP_ENV)[REACT_APP_ENV || 'dev'],
   manifest: {
     basePath: '/',
   },
@@ -63,4 +63,7 @@ export default defineConfig({
       projectName: 'swagger',
     },
   ],
+  define: {
+    BASE_URL: REACT_APP_ENV == 'dev' ? '/basic-api' : '',
+  },
 });

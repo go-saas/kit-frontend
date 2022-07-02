@@ -15,14 +15,14 @@
 import { Configuration } from './configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios, { AxiosInstance, AxiosRequestConfig } from 'axios';
 
 export const BASE_PATH = '';
 
-let defaultAxios;
+let factory :()=>AxiosInstance
 
-export function setDefaultAxiosInstance(i: AxiosInstance) {
-  defaultAxios = i;
+export function setDefaultAxiosFactory(i: ()=>AxiosInstance) {
+  factory = i
 }
 
 /**
@@ -57,7 +57,7 @@ export class BaseAPI {
   constructor(
     configuration?: Configuration,
     protected basePath: string = BASE_PATH,
-    protected axios: AxiosInstance = defaultAxios ?? globalAxios,
+    protected axios: AxiosInstance = factory !=null ? factory() : globalAxios,
   ) {
     if (configuration) {
       this.configuration = configuration;

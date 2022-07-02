@@ -15,14 +15,4 @@ declare global {
   };
   declare type TimeoutHandle = ReturnType<typeof setTimeout>;
   declare type IntervalHandle = ReturnType<typeof setInterval>;
-
-  interface Window {
-    microApp: any;
-    __MICRO_APP_NAME__?: string;
-    __MICRO_APP_ENVIRONMENT__: boolean;
-    __MICRO_APP_BASE_ROUTE__: string;
-    __MICRO_APP_PUBLIC_PATH__: string;
-    __MICRO_APP_BASE_APPLICATION__?: boolean;
-    rawWindow?: Window;
-  }
 }

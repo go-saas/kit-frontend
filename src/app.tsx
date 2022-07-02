@@ -5,8 +5,18 @@ import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history, Link } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
-import { currentUser as queryCurrentUser } from './services/ant-design-pro/api';
+import { AccountApi } from '@kit/api';
 
+import type { RequestConfig } from 'umi';
+import {
+  authRequestInterceptor,
+  csrfRequestInterceptor,
+  csrfRespInterceptor,
+  saasRequestInterceptor,
+} from '@kit/core';
+import type { UserInfo } from '@kit/core';
+import { getRequestInstance } from '@@/plugin-request/request';
+import { setDefaultAxiosFactory } from '@kit/api';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 
@@ -15,15 +25,17 @@ const loginPath = '/user/login';
  * */
 export async function getInitialState(): Promise<{
   settings?: Partial<LayoutSettings>;
-  currentUser?: API.CurrentUser;
+  currentUser?: UserInfo;
   loading?: boolean;
-  fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
+  fetchUserInfo?: () => Promise<UserInfo | undefined>;
 }> {
+  setDefaultAxiosFactory(getRequestInstance);
   const fetchUserInfo = async () => {
     try {
-      const msg = await queryCurrentUser();
-      return msg.data;
+      const resp = await new AccountApi().accountGetProfile();
+      return resp.data as any as UserInfo;
     } catch (error) {
+      console.log(error);
       history.push(loginPath);
     }
     return undefined;
@@ -94,4 +106,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     },
     ...initialState?.settings,
   };
+};
+
+export const request: RequestConfig = {
+  baseURL: BASE_URL,
+  requestInterceptors: [authRequestInterceptor, csrfRequestInterceptor, saasRequestInterceptor],
+  responseInterceptors: [csrfRespInterceptor],
 };

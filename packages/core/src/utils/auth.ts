@@ -1,7 +1,7 @@
 import { Storage } from './storage';
 import { ACCESS_TOKEN_KEY, TENANT_KEY, USER_INFO_KEY, PERMISSION_KEY } from '@/enums/cacheEnum';
 import type { PermissionAcl } from '@/permission/types';
-import type { UserInfo } from '#/store';
+import type { UserInfo } from '@/permission';
 export function getSettingTenantId(): Nullable<string> {
   return Storage.get(TENANT_KEY);
 }

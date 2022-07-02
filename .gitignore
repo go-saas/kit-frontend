@@ -39,3 +39,5 @@ screenshot
 
 build
 *.tsbuildinfo
+
+.env.local

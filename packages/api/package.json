@@ -20,7 +20,7 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.26.1"
+    "axios": "^0.27.2"
   },
   "devDependencies": {
     "@openapitools/openapi-generator-cli": "^2.4.26",
