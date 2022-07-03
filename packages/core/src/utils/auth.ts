@@ -8,6 +8,7 @@ export function getSettingTenantId(): Nullable<string> {
 export function setSettingTenantId(v?: Nullable<string>) {
   Storage.set(TENANT_KEY, v);
   if (v) {
+    //max expire time
     Storage.setCookie('__tenant', v, 2147483647);
   } else {
     Storage.removeCookie('__tenant');

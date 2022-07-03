@@ -7,11 +7,14 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { FormattedMessage, history, SelectLang, useIntl, useModel } from '@umijs/max';
-import { Alert, message, Tabs } from 'antd';
-import React, { useState } from 'react';
+import { Alert, message, Tabs, Input } from 'antd';
+import type { InputRef } from 'antd';
+import React, { useState, useRef } from 'react';
 import styles from './index.less';
 import { AuthWebApi } from '@kit/api';
 import { getRequestInstance } from '@@/plugin-request/request';
+import { useMount } from 'ahooks';
+const { Search } = Input;
 
 const LoginMessage: React.FC<{
   content: string;
@@ -45,6 +48,8 @@ const Login: React.FC = () => {
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
 
+  const [tenantSwitching, setTenantSwitching] = useState<boolean>(false);
+
   const intl = useIntl();
 
   const fetchUserInfo = async () => {
@@ -57,11 +62,21 @@ const Login: React.FC = () => {
     }
   };
 
+  const onSwitch = async (value: string) => {
+    if (value == initialState?.currentTenant?.tenant?.name ?? '') {
+      return;
+    }
+    try {
+      initialState?.changeTenant?.(value);
+    } catch (e) {
+    } finally {
+      setTenantSwitching(false);
+    }
+  };
+
   const handleSubmit = async (values: LoginParams) => {
     try {
       // 登录
-      const a = getRequestInstance();
-      console.log(a);
       const data = await new AuthWebApi(undefined, undefined, getRequestInstance()).authWebWebLogin(
         {
           body: { username: values.username, password: values.password },
@@ -90,7 +105,11 @@ const Login: React.FC = () => {
     }
   };
   const { status, type: loginType } = userLoginState;
+  const titile = initialState?.currentTenant?.tenant?.displayName ?? 'GO SAAS KIT';
+  const logo = initialState?.currentTenant?.tenant?.logo?.url ?? '/logo.svg';
 
+  const inputRef = useRef<InputRef>(null);
+  useMount(() => inputRef.current!.focus());
   return (
     <div className={styles.container}>
       <div className={styles.lang} data-lang>
@@ -98,8 +117,8 @@ const Login: React.FC = () => {
       </div>
       <div className={styles.content}>
         <LoginForm
-          logo={<img alt="logo" src="/logo.svg" />}
-          title="GO SAAS KIT"
+          logo={<img alt="logo" src={logo} />}
+          title={titile}
           subTitle={intl.formatMessage({
             id: 'pages.layouts.userLayout.title',
             defaultMessage: '',
@@ -112,6 +131,18 @@ const Login: React.FC = () => {
             await handleSubmit(values as LoginParams);
           }}
         >
+          <Search
+            placeholder={intl.formatMessage({
+              id: 'saas.switch.placeholder',
+            })}
+            enterButton={intl.formatMessage({
+              id: 'saas.switch',
+            })}
+            defaultValue={initialState?.currentTenant?.tenant?.name || ''}
+            size="large"
+            onSearch={onSwitch}
+            loading={tenantSwitching}
+          />
           <Tabs activeKey={type} onChange={setType}>
             <Tabs.TabPane
               key="account"
@@ -142,6 +173,7 @@ const Login: React.FC = () => {
               <ProFormText
                 name="username"
                 fieldProps={{
+                  ref: inputRef,
                   size: 'large',
                   prefix: <UserOutlined className={styles.prefixIcon} />,
                 }}

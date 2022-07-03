@@ -11,6 +11,14 @@ export interface ErrorMessage {
   metadata: any;
 }
 
+export function isErrorMessage(obj: any): obj is ErrorMessage {
+  if (typeof obj === 'object' && !Array.isArray(obj) && obj !== null) {
+    // 👇️ check for type property
+    return 'code' in obj && 'message' in obj && 'reason' in obj;
+  }
+  return false;
+}
+
 export interface UploadFileParams {
   // Other parameters
   data?: Recordable;
