@@ -18,8 +18,9 @@ import {
 } from '@kit/core';
 import type { UserInfo, UserTenantInfo } from '@kit/core';
 import { getRequestInstance } from '@@/plugin-request/request';
-import { setDefaultAxiosFactory } from '@kit/api';
-
+import type { V1Menu } from '@kit/api';
+import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
+import { transformMenu } from '@/utils/menuTransform';
 const isDev = process.env.NODE_ENV === 'development';
 const loginPath = '/user/login';
 // 错误处理方案： 错误类型
@@ -41,6 +42,7 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<UserInfo | undefined>;
   changeTenant?: (name: string) => Promise<void>;
+  availableMenu?: V1Menu[];
 }> {
   setDefaultAxiosFactory(getRequestInstance);
 
@@ -72,6 +74,15 @@ export async function getInitialState(): Promise<{
     }
     return undefined;
   };
+
+  //fetch menu
+  let availableMenu: V1Menu[] = [];
+  try {
+    const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
+    availableMenu = menuResp.data?.items ?? [];
+  } catch (error) {
+    console.log(error);
+  }
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
@@ -80,6 +91,7 @@ export async function getInitialState(): Promise<{
       currentUser,
       changeTenant,
       settings: defaultSettings,
+      availableMenu,
     };
   }
   return {
@@ -87,18 +99,20 @@ export async function getInitialState(): Promise<{
     currentTenant,
     changeTenant,
     settings: defaultSettings,
+    availableMenu,
   };
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    // menu: {
-    //   params: initialState,
-    //   request: async (params, defaultMenuData) => {
-    //     return initialState.menuData;
-    //   },
-    // },
+    menu: {
+      params: initialState,
+      request: async () => {
+        return transformMenu(initialState?.availableMenu ?? []);
+      },
+    },
+
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
     waterMarkProps: {

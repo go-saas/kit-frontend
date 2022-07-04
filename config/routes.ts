@@ -20,6 +20,12 @@
     component: './Welcome',
   },
   {
+    path: '/iframe/*',
+    name: 'iframe',
+    icon: 'smile',
+    component: '../components/Iframe',
+  },
+  {
     path: '/admin',
     name: 'admin',
     icon: 'crown',

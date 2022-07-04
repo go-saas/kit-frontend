@@ -15,7 +15,6 @@ import { AuthWebApi } from '@kit/api';
 import { getRequestInstance } from '@@/plugin-request/request';
 import { useMount } from 'ahooks';
 const { Search } = Input;
-
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => {
@@ -91,7 +90,6 @@ const Login: React.FC = () => {
       const redirect =
         data.data.redirect || new URL(window.location.href).searchParams.get('redirect') || '/';
       history.push(redirect);
-      setUserLoginState({ type: 'account' });
       return;
       // 如果失败去设置用户错误信息
     } catch (error) {
