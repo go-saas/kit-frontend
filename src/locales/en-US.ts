@@ -6,7 +6,8 @@ import pwa from './en-US/pwa';
 import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import saas from './en-US/saas';
-
+import sys from './en-US/sys';
+import dev from './en-US/dev';
 export default {
   'navBar.lang': 'Languages',
   'layout.user.link.help': 'Help',
@@ -24,4 +25,6 @@ export default {
   ...component,
   ...pages,
   ...saas,
+  ...sys,
+  ...dev,
 };

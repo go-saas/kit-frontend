@@ -18,9 +18,9 @@ export function transformMenu(allMenu: V1Menu[], iconType = 'Outlined') {
           id: p.id,
           icon: p.icon,
           locale: p.title,
-          name: p.name,
+          name: p.title,
           path: p.path,
-          component: p.component,
+          //component: p.component,
           requirment: p.requirement,
           key: p.id,
         };
@@ -52,5 +52,6 @@ export function transformMenu(allMenu: V1Menu[], iconType = 'Outlined') {
     return items;
   };
   const ret = findChildren('');
+  console.log(ret);
   return ret;
 }

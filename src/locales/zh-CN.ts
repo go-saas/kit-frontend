@@ -6,7 +6,8 @@ import pwa from './zh-CN/pwa';
 import settingDrawer from './zh-CN/settingDrawer';
 import settings from './zh-CN/settings';
 import saas from './zh-CN/saas';
-
+import sys from './zh-CN/sys';
+import dev from './zh-CN/dev';
 export default {
   'navBar.lang': '语言',
   'layout.user.link.help': '帮助',
@@ -24,4 +25,6 @@ export default {
   ...pwa,
   ...component,
   ...saas,
+  ...sys,
+  ...dev,
 };
