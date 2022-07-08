@@ -61,12 +61,6 @@
     component: '../components/Iframe',
   },
   {
-    name: 'list.table-list',
-    icon: 'table',
-    path: '/list',
-    component: './TableList',
-  },
-  {
     name: 'dashboard',
     icon: 'table',
     path: '/dashboard',

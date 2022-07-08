@@ -7,7 +7,7 @@ export declare type Route = {
   routes?: Route[];
 } & MenuDataItem;
 
-export function transformMenu(allMenu: V1Menu[], iconType = 'Outlined') {
+export function transformMenu(allMenu: V1Menu[]) {
   console.log(allMenu);
   const findChildren = (id: string): Route[] => {
     const items: MenuDataItem[] = allMenu
@@ -31,11 +31,7 @@ export function transformMenu(allMenu: V1Menu[], iconType = 'Outlined') {
         //fix icon
         const icon = p.icon;
         if (typeof icon === 'string') {
-          const fixIconName = icon.slice(0, 1).toLocaleUpperCase() + icon.slice(1) + iconType;
-
-          item.icon = React.createElement(
-            allIcons[fixIconName] || allIcons[icon] || allIcons['Appstore' + iconType],
-          );
+          item.icon = React.createElement(allIcons[icon] || allIcons.AppstoreOutlined);
         }
         return item;
       });

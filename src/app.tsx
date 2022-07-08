@@ -1,9 +1,9 @@
 import RightContent from '@/components/RightContent';
-import { LinkOutlined } from '@ant-design/icons';
+import { ProBreadcrumb } from '@ant-design/pro-components';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history, Link } from '@umijs/max';
+import { history } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { AccountApi, TenantServiceApi } from '@kit/api';
 import { message, notification } from 'antd';
@@ -21,7 +21,9 @@ import { getRequestInstance } from '@@/plugin-request/request';
 import type { V1Menu } from '@kit/api';
 import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
 import { transformMenu } from '@/utils/menuTransform';
+
 const isDev = process.env.NODE_ENV === 'development';
+
 const loginPath = '/user/login';
 // 错误处理方案： 错误类型
 enum ErrorShowType {
@@ -106,7 +108,7 @@ export async function getInitialState(): Promise<{
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
-    title: initialState?.currentTenant?.tenant?.displayName ?? '',
+    title: initialState?.currentTenant?.tenant?.displayName ?? 'GO SAAS KIT',
     menu: {
       params: {
         userId: initialState?.currentUser?.id,
@@ -131,6 +133,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
       }
     },
     menuHeaderRender: undefined,
+    headerContentRender: () => {
+      return <ProBreadcrumb />;
+    },
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
