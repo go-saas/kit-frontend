@@ -40,117 +40,71 @@ export function setupService(fn: (i: AxiosInstance) => void) {
   fn(service);
 }
 
-export function authRequestInterceptor(config: AxiosRequestConfig) {
-  const token = storage.get(ACCESS_TOKEN_KEY);
-  config.headers = config.headers || {};
-  if (token) {
-    config.headers['Authorization'] = `Bearer ${token}`;
-  }
-  return config;
+export function authRequestInterceptor() {
+  return function (config: AxiosRequestConfig) {
+    const token = storage.get(ACCESS_TOKEN_KEY);
+    config.headers = config.headers || {};
+    if (token) {
+      config.headers['Authorization'] = `Bearer ${token}`;
+    }
+    return config;
+  };
 }
 
-export function csrfRequestInterceptor(config: AxiosRequestConfig) {
-  const csrf = storage.getCookie(CSRF_TOKEN_KEY);
-  config.headers = config.headers || {};
-  if (csrf) {
-    config.headers[CSRF_TOKEN_KEY] = csrf;
-  }
-  return config;
+export function authRespInterceptor(unauthorizedAction?: () => void, forbiddenAction?: () => void) {
+  return [
+    (resp: AxiosResponse) => {
+      return resp;
+    },
+    (error: any) => {
+      const code = error?.response?.status ?? 0;
+      if (code == 401) {
+        unauthorizedAction?.();
+      }
+      if (code == 403) {
+        forbiddenAction?.();
+      }
+      return Promise.reject(error);
+    },
+  ];
 }
 
-export function csrfRespInterceptor(res: AxiosResponse) {
-  if (res.headers[CSRF_TOKEN_KEY]) {
-    storage.setCookie(CSRF_TOKEN_KEY, res.headers[CSRF_TOKEN_KEY]);
-  }
-  return res;
+export function csrfRequestInterceptor() {
+  return function (config: AxiosRequestConfig) {
+    const csrf = storage.getCookie(CSRF_TOKEN_KEY);
+    config.headers = config.headers || {};
+    if (csrf) {
+      config.headers[CSRF_TOKEN_KEY] = csrf;
+    }
+    return config;
+  };
 }
 
-export function saasRequestInterceptor(config: AxiosRequestConfig) {
-  const t = getSettingTenantId();
-  config.headers = config.headers || {};
-  if (t) {
-    config.headers['__tenant'] = t;
-  }
-  return config;
+export function csrfRespInterceptor() {
+  return function (res: AxiosResponse) {
+    if (res.headers[CSRF_TOKEN_KEY]) {
+      storage.setCookie(CSRF_TOKEN_KEY, res.headers[CSRF_TOKEN_KEY]);
+    }
+    return res;
+  };
 }
 
-//ErrorHandling
+export function saasRequestInterceptor() {
+  return function (config: AxiosRequestConfig) {
+    const t = getSettingTenantId();
+    config.headers = config.headers || {};
+    if (t) {
+      config.headers['__tenant'] = t;
+    }
+    return config;
+  };
+}
 
-// service.interceptors.response.use(
-//   function (response) {
-//     // Any status code that lie within the range of 2xx cause this function to trigger
-//     // Do something with response data
-//     return response;
-//   },
-//   function (error) {
-//     //handle error
-//     const { t } = useI18n();
-//     const errorLogStore = useErrorLogStoreWithOut();
-//     errorLogStore.addAjaxErrorInfo(error);
-
-//     const { response, code, message, config } = error || {};
-
-//     const errorMessageMode = config?.requestOptions?.errorMessageMode || 'message';
-
-//     const errorBody = response?.data as ErrorMessage;
-
-//     let msg: string = errorBody?.message;
-//     if (!!!msg) {
-//       msg = errorBody.reason;
-//     }
-//     if (!!!msg) {
-//       msg = '';
-//     }
-//     const err: string = error?.toString?.() ?? '';
-
-//     let errMessage = msg;
-//     try {
-//       if (code === 'ECONNABORTED' && message.indexOf('timeout') !== -1) {
-//         errMessage = t('sys.api.apiTimeoutMessage');
-//       }
-//       if (err?.includes('Network Error')) {
-//         errMessage = t('sys.api.networkExceptionMsg');
-//       }
-//       if (['TENANT_NOT_FOUND', 'TENANT_FORBIDDEN'].includes(errorBody?.reason)) {
-//         if (errorBody?.reason == 'TENANT_NOT_FOUND') {
-//           createErrorModal({
-//             title: t('sys.api.errorTip'),
-//             content: t('saas.tenantNotFound'),
-//             onOk: () => {
-//               window.location.reload();
-//             },
-//           });
-//         }
-
-//         if (errorBody?.reason == 'TENANT_FORBIDDEN') {
-//           createErrorModal({
-//             title: t('sys.api.errorTip'),
-//             content: t('saas.tenantForbidden'),
-//             onOk: () => {
-//               window.location.reload();
-//             },
-//           });
-//         }
-//         setSettingTenantId(null);
-//       }
-//       if (errMessage) {
-//         if (errorMessageMode === 'modal') {
-//           createErrorModal({ title: t('sys.api.errorTip'), content: errMessage });
-//         } else if (errorMessageMode === 'message') {
-//           createMessage.error(errMessage);
-//         }
-//         return Promise.reject(new Error(errMessage));
-//       }
-//     } catch (error) {
-//       throw new Error(error as unknown as string);
-//     }
-
-//     checkStatus(error?.response?.status, errorBody?.reason ?? '', msg, errorMessageMode);
-//     return Promise.reject(error);
-//   },
-// );
-
-export function uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFileParams) {
+export function uploadFile<T = any>(
+  config: AxiosRequestConfig,
+  params: UploadFileParams,
+  instance?: AxiosInstance,
+) {
   const formData = new window.FormData();
   const customFilename = params.name || 'file';
 
@@ -174,7 +128,7 @@ export function uploadFile<T = any>(config: AxiosRequestConfig, params: UploadFi
     });
   }
 
-  return service.request<T>({
+  return (instance ?? service).request<T>({
     ...config,
     method: 'POST',
     data: formData,

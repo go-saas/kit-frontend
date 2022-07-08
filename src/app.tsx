@@ -13,6 +13,7 @@ import {
   csrfRequestInterceptor,
   csrfRespInterceptor,
   saasRequestInterceptor,
+  authRespInterceptor,
   setSettingTenantId,
   isErrorMessage,
 } from '@kit/core';
@@ -21,8 +22,9 @@ import { getRequestInstance } from '@@/plugin-request/request';
 import type { V1Menu } from '@kit/api';
 import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
 import { transformMenu } from '@/utils/menuTransform';
+import type { AxiosResponse } from 'umi';
 
-const isDev = process.env.NODE_ENV === 'development';
+// const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
 // 错误处理方案： 错误类型
@@ -166,7 +168,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 
 function errorInterceptor() {
   return [
-    (resp: any) => {
+    (resp: AxiosResponse) => {
       return resp;
     },
     (error: any) => {
@@ -237,6 +239,18 @@ function errorInterceptor() {
 
 export const request: RequestConfig = {
   baseURL: BASE_URL,
-  requestInterceptors: [authRequestInterceptor, csrfRequestInterceptor, saasRequestInterceptor],
-  responseInterceptors: [csrfRespInterceptor, errorInterceptor() as any],
+  withCredentials: true,
+  requestInterceptors: [
+    authRequestInterceptor(),
+    csrfRequestInterceptor(),
+    saasRequestInterceptor(),
+  ],
+  responseInterceptors: [
+    csrfRespInterceptor(),
+    errorInterceptor() as any,
+    authRespInterceptor(() => {
+      //redirect to login
+      history.push(loginPath);
+    }),
+  ],
 };
