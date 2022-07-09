@@ -13,6 +13,7 @@
  */
 
 
+import { V1UpdateRolePermissionAcl } from './v1-update-role-permission-acl';
 
 /**
  * 
@@ -32,5 +33,11 @@ export interface V1UpdateRole {
      * @memberof V1UpdateRole
      */
     'name': string;
+    /**
+     * 
+     * @type {Array<V1UpdateRolePermissionAcl>}
+     * @memberof V1UpdateRole
+     */
+    'acl'?: Array<V1UpdateRolePermissionAcl>;
 }
 

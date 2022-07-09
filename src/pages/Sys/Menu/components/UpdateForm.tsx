@@ -6,6 +6,7 @@ import {
   ProFormSwitch,
   ProForm,
   EditableProTable,
+  ProDescriptions,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import React, { useState, useEffect } from 'react';
@@ -14,7 +15,6 @@ import type { PermissionRequirement } from '@kit/core';
 import { Card, Divider, Form } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 
-const { Meta } = Card;
 export type FormValueType = {
   parentMenu?: V1Menu;
 } & Partial<V1Menu>;
@@ -61,9 +61,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   }, [req]);
 
   useEffect(() => {
-    console.log(editableKeys);
-  }, [editableKeys]);
-  useEffect(() => {
     setReq(
       props.values?.requirement?.map((p) => {
         return { id: uuidv4(), ...p };
@@ -76,7 +73,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       visible={props.updateModalVisible}
       onFinish={async (formData) => {
         formData.parent = props.values?.parentMenu?.id;
-        await props.onSubmit(formData);
+        await props.onSubmit({ id: props.values?.id, ...formData });
       }}
       drawerProps={{
         onClose: () => {
@@ -93,14 +90,16 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           })}
           size="small"
         >
-          <FormattedMessage id="sys.menu.name" defaultMessage="Menu Name" />
-          <Meta
-            title={intl.formatMessage({
-              id: props.values?.parentMenu?.title,
-              defaultMessage: props.values?.parentMenu?.name ?? '',
-            })}
-            description={props.values?.parentMenu?.path ?? ''}
-          />
+          <ProDescriptions>
+            <ProDescriptions.Item
+              label={intl.formatMessage({
+                id: props.values?.parentMenu?.title,
+                defaultMessage: props.values?.parentMenu?.name ?? '',
+              })}
+            >
+              {props.values?.parentMenu?.path ?? ''}
+            </ProDescriptions.Item>
+          </ProDescriptions>
         </Card>
       )}
       {props.values?.parentMenu && <Divider />}

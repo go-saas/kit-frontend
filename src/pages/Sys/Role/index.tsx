@@ -4,10 +4,11 @@ import {
   PageContainer,
   ProDescriptions,
   ProTable,
+  ProCard,
   TableDropdown,
 } from '@ant-design/pro-components';
 import { FormattedMessage } from '@umijs/max';
-import { Button, Drawer, message } from 'antd';
+import { Button, Drawer, message, Switch } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 import requestTransform from '@/utils/requestTransform';
@@ -19,6 +20,7 @@ import type {
   V1RoleFilter,
 } from '@kit/api';
 import { RoleServiceApi } from '@kit/api';
+import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 const handleAdd = async (fields: V1CreateRoleRequest) => {
   const hide = message.loading('正在添加');
@@ -35,30 +37,24 @@ const handleAdd = async (fields: V1CreateRoleRequest) => {
 };
 
 const handleUpdate = async (fields: V1UpdateRoleRequest) => {
-  const hide = message.loading('Configuring');
   try {
     await new RoleServiceApi().roleServiceUpdateRole2({ body: fields, roleId: fields.role!.id! });
-    hide();
-
     message.success('Configuration is successful');
     return true;
   } catch (error) {
-    hide();
-    message.error('Configuration failed, please try again!');
     return false;
   }
 };
 
 const handleRemove = async (selectedRow: V1Role) => {
-  const hide = message.loading('正在删除');
+  if (selectedRow.isPreserved) {
+    return;
+  }
   try {
     await new RoleServiceApi().roleServiceDeleteRole({ id: selectedRow.id! });
-    hide();
-    message.success('Deleted successfully and will refresh soon');
+    message.success('Configuration is successful');
     return true;
   } catch (error) {
-    hide();
-    message.error('Delete failed, please try again');
     return false;
   }
 };
@@ -76,32 +72,92 @@ const TableList: React.FC = () => {
       title: <FormattedMessage id="sys.role.name" defaultMessage="Role Name" />,
       dataIndex: 'name',
       valueType: 'text',
+      render: (dom, entity) => {
+        return (
+          <a
+            onClick={() => {
+              setCurrentRow(entity);
+              setShowDetail(true);
+            }}
+          >
+            {dom}
+          </a>
+        );
+      },
     },
     {
       title: <FormattedMessage id="sys.role.isPreserved" defaultMessage="Role Preserved" />,
       dataIndex: 'isPreserved',
       valueType: 'switch',
+      render: (dom, entity) => {
+        return entity.isPreserved ? <CheckOutlined /> : <CloseOutlined />;
+      },
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
       key: 'option',
       valueType: 'option',
       render: (_, record) => [
-        <a
-          key="editable"
-          onClick={() => {
-            setCurrentRow(record);
-            handleUpdateModalVisible(true);
-          }}
-        >
+        record.isPreserved ? (
           <FormattedMessage id="pages.searchTable.edit" defaultMessage="Edit" />
-        </a>,
+        ) : (
+          <a
+            key="editable"
+            onClick={() => {
+              setCurrentRow(record);
+              setShowDetail(false);
+              handleUpdateModalVisible(true);
+            }}
+          >
+            <FormattedMessage id="pages.searchTable.edit" defaultMessage="Edit" />
+          </a>
+        ),
         <TableDropdown
           key="actionGroup"
           onSelect={() => handleRemove(record)}
           menus={[{ key: 'delete', name: '删除' }]}
         />,
       ],
+    },
+  ];
+
+  const permission: ProColumns<V1Role>[] = [
+    {
+      title: <FormattedMessage id="sys.role.permission" defaultMessage="Role Permission" />,
+      dataIndex: 'defGroups',
+      render: (dom, entity) => {
+        const g = (entity.defGroups ?? []).map((p) => {
+          const defs = (p.def ?? []).map((q) => {
+            return (
+              <ProDescriptions column={3} key={q.displayName}>
+                <ProDescriptions.Item
+                  label={
+                    <FormattedMessage id="sys.permission.namespace" defaultMessage="Namespace" />
+                  }
+                >
+                  {q.namespace}
+                </ProDescriptions.Item>
+                <ProDescriptions.Item
+                  label={<FormattedMessage id="sys.permission.action" defaultMessage="Action" />}
+                >
+                  {q.action}
+                </ProDescriptions.Item>
+                <ProDescriptions.Item
+                  label={<FormattedMessage id="sys.permission.action" defaultMessage="Action" />}
+                >
+                  <Switch defaultChecked={q.granted} disabled />
+                </ProDescriptions.Item>
+              </ProDescriptions>
+            );
+          });
+          return (
+            <ProCard title={p.displayName} key={p.displayName}>
+              {defs}
+            </ProCard>
+          );
+        });
+        return <div>{g}</div>;
+      },
     },
   ];
 
@@ -132,7 +188,33 @@ const TableList: React.FC = () => {
         request={getData}
         columns={columns}
       />
-      )
+      <Drawer
+        width={800}
+        visible={showDetail}
+        onClose={() => {
+          setCurrentRow(undefined);
+          setShowDetail(false);
+        }}
+        closable={false}
+        destroyOnClose
+      >
+        {currentRow?.id && (
+          <ProDescriptions<V1Role>
+            column={1}
+            title={currentRow?.name}
+            request={async () => {
+              const resp = await new RoleServiceApi().roleServiceGetRole({ id: currentRow.id! });
+              return {
+                data: resp.data,
+              };
+            }}
+            params={{
+              id: currentRow?.id,
+            }}
+            columns={[...columns, ...permission] as ProDescriptionsItemProps<V1Role>[]}
+          />
+        )}
+      </Drawer>
       <UpdateForm
         onSubmit={async (value) => {
           const { id } = value;
@@ -161,29 +243,6 @@ const TableList: React.FC = () => {
         values={currentRow || {}}
         columns={columns}
       />
-      <Drawer
-        width={600}
-        visible={showDetail}
-        onClose={() => {
-          setCurrentRow(undefined);
-          setShowDetail(false);
-        }}
-        closable={false}
-      >
-        {currentRow?.name && (
-          <ProDescriptions<V1Role>
-            column={2}
-            title={currentRow?.name}
-            request={async () => ({
-              data: currentRow || {},
-            })}
-            params={{
-              id: currentRow?.name,
-            }}
-            columns={columns as ProDescriptionsItemProps<V1Role>[]}
-          />
-        )}
-      </Drawer>
     </PageContainer>
   );
 };

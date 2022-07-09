@@ -26,19 +26,19 @@ export interface V1RemoveSubjectPermissionRequest {
      * @type {string}
      * @memberof V1RemoveSubjectPermissionRequest
      */
-    'namespace': string;
+    'namespace'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof V1RemoveSubjectPermissionRequest
      */
-    'resource': string;
+    'resource'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof V1RemoveSubjectPermissionRequest
      */
-    'action': string;
+    'action'?: string | null;
     /**
      * 
      * @type {string}
@@ -56,6 +56,6 @@ export interface V1RemoveSubjectPermissionRequest {
      * @type {string}
      * @memberof V1RemoveSubjectPermissionRequest
      */
-    'tenantId'?: string;
+    'tenantId'?: string | null;
 }
 

@@ -41,30 +41,22 @@ const handleAdd = async (fields: V1CreateMenuRequest) => {
 };
 
 const handleUpdate = async (fields: V1UpdateMenuRequest) => {
-  const hide = message.loading('Configuring');
   try {
     await new MenuServiceApi().menuServiceUpdateMenu2({ body: fields, menuId: fields.menu!.id! });
-    hide();
 
     message.success('Configuration is successful');
     return true;
   } catch (error) {
-    hide();
-    message.error('Configuration failed, please try again!');
     return false;
   }
 };
 
 const handleRemove = async (selectedRow: V1Menu) => {
-  const hide = message.loading('正在删除');
   try {
     await new MenuServiceApi().menuServiceDeleteMenu({ id: selectedRow.id! });
-    hide();
     message.success('Deleted successfully and will refresh soon');
     return true;
   } catch (error) {
-    hide();
-    message.error('Delete failed, please try again');
     return false;
   }
 };
@@ -161,6 +153,7 @@ const TableList: React.FC = () => {
           key="create"
           onClick={() => {
             setCurrentRow({ parentMenu: record });
+            setShowDetail(false);
             handleUpdateModalVisible(true);
           }}
         >
@@ -170,6 +163,7 @@ const TableList: React.FC = () => {
           key="editable"
           onClick={() => {
             setCurrentRow(record);
+            setShowDetail(false);
             handleUpdateModalVisible(true);
           }}
         >
@@ -288,6 +282,7 @@ const TableList: React.FC = () => {
           setShowDetail(false);
         }}
         closable={false}
+        destroyOnClose
       >
         {currentRow?.name && (
           <ProDescriptions<V1Menu>

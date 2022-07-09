@@ -13,6 +13,8 @@
  */
 
 
+import { Permissionv1PermissionDefGroup } from './permissionv1-permission-def-group';
+import { V1Permission } from './v1-permission';
 
 /**
  * 
@@ -38,5 +40,17 @@ export interface V1Role {
      * @memberof V1Role
      */
     'isPreserved'?: boolean;
+    /**
+     * 
+     * @type {Array<V1Permission>}
+     * @memberof V1Role
+     */
+    'acl'?: Array<V1Permission>;
+    /**
+     * 
+     * @type {Array<Permissionv1PermissionDefGroup>}
+     * @memberof V1Role
+     */
+    'defGroups'?: Array<Permissionv1PermissionDefGroup>;
 }
 
