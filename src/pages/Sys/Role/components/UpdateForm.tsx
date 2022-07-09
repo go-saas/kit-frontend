@@ -45,7 +45,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       initialValues={props.values}
       visible={props.updateModalVisible}
       onFinish={async (formData) => {
-        console.log(formData);
         const group = formData.defGroups as Permissionv1PermissionDefGroup[] | undefined;
         const acl: V1UpdateRolePermissionAcl[] = (group ?? [])
           .flatMap((p) => p.def ?? [])

@@ -21,6 +21,7 @@ import type {
 import { TenantServiceApi } from '@kit/api';
 
 import { useIntl } from 'umi';
+
 const service = new TenantServiceApi();
 
 const TableList: React.FC = () => {

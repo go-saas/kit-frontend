@@ -120,7 +120,6 @@ const TableList: React.FC = () => {
       title: <FormattedMessage id="sys.menu.path" defaultMessage="Route Path" />,
       dataIndex: 'path',
       valueType: 'text',
-      width: 120,
     },
     {
       title: <FormattedMessage id="sys.menu.priority" defaultMessage="Priority" />,
