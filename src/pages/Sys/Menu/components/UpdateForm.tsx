@@ -43,7 +43,6 @@ export type UpdateFormProps = {
   onSubmit: (values: FormValueType) => Promise<void>;
   updateModalVisible: boolean;
   values: FormValueType;
-  columns: ProColumns<V1Menu>[];
 };
 
 export type RequirementWithId = {

@@ -20,46 +20,11 @@ import type {
 } from '@kit/api';
 import { MenuServiceApi } from '@kit/api';
 import * as allIcons from '@ant-design/icons';
-
+import { useIntl } from 'umi';
 type MenuWithChildren = {
   parentMenu?: MenuWithChildren;
   children?: MenuWithChildren[];
 } & V1Menu;
-
-const handleAdd = async (fields: V1CreateMenuRequest) => {
-  const hide = message.loading('正在添加');
-  try {
-    await new MenuServiceApi().menuServiceCreateMenu({ body: fields });
-    hide();
-    message.success('Added successfully');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Adding failed, please try again!');
-    return false;
-  }
-};
-
-const handleUpdate = async (fields: V1UpdateMenuRequest) => {
-  try {
-    await new MenuServiceApi().menuServiceUpdateMenu2({ body: fields, menuId: fields.menu!.id! });
-
-    message.success('Configuration is successful');
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
-
-const handleRemove = async (selectedRow: V1Menu) => {
-  try {
-    await new MenuServiceApi().menuServiceDeleteMenu({ id: selectedRow.id! });
-    message.success('Deleted successfully and will refresh soon');
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
 
 const TableList: React.FC = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
@@ -68,6 +33,58 @@ const TableList: React.FC = () => {
 
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<MenuWithChildren | undefined | null>(undefined);
+
+  const intl = useIntl();
+  const handleAdd = async (fields: V1CreateMenuRequest) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.creating', defaultMessage: 'Creating...' }),
+    );
+    try {
+      await new MenuServiceApi().menuServiceCreateMenu({ body: fields });
+      hide();
+      message.success(
+        intl.formatMessage({ id: 'common.created', defaultMessage: 'Created Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
+
+  const handleUpdate = async (fields: V1UpdateMenuRequest) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
+    );
+    try {
+      await new MenuServiceApi().menuServiceUpdateMenu2({ body: fields, menuId: fields.menu!.id! });
+      hide();
+      message.success(
+        intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
+
+  const handleRemove = async (selectedRow: V1Menu) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.deleting', defaultMessage: 'Deleting...' }),
+    );
+    try {
+      await new MenuServiceApi().menuServiceDeleteMenu({ id: selectedRow.id! });
+      message.success(
+        intl.formatMessage({ id: 'common.deleted', defaultMessage: 'Delete Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      return false;
+    } finally {
+      hide();
+    }
+  };
 
   const columns: ProColumns<MenuWithChildren>[] = [
     {
@@ -171,8 +188,20 @@ const TableList: React.FC = () => {
         </a>,
         <TableDropdown
           key="actionGroup"
-          onSelect={() => handleRemove(record)}
-          menus={[{ key: 'delete', name: '删除' }]}
+          onSelect={async (key) => {
+            if (key == 'delete') {
+              const ok = await handleRemove(record);
+              if (ok && actionRef.current) {
+                actionRef.current.reload();
+              }
+            }
+          }}
+          menus={[
+            {
+              key: 'delete',
+              name: <FormattedMessage id="common.delete" defaultMessage="Delete" />,
+            },
+          ]}
         />,
       ],
     },
@@ -272,7 +301,6 @@ const TableList: React.FC = () => {
         }}
         updateModalVisible={updateModalVisible}
         values={currentRow || {}}
-        columns={columns}
       />
       <Drawer
         width={600}

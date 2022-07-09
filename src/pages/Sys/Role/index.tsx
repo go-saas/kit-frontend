@@ -21,43 +21,7 @@ import type {
 } from '@kit/api';
 import { RoleServiceApi } from '@kit/api';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-
-const handleAdd = async (fields: V1CreateRoleRequest) => {
-  const hide = message.loading('正在添加');
-  try {
-    await new RoleServiceApi().roleServiceCreateRole({ body: fields });
-    hide();
-    message.success('Added successfully');
-    return true;
-  } catch (error) {
-    hide();
-    message.error('Adding failed, please try again!');
-    return false;
-  }
-};
-
-const handleUpdate = async (fields: V1UpdateRoleRequest) => {
-  try {
-    await new RoleServiceApi().roleServiceUpdateRole2({ body: fields, roleId: fields.role!.id! });
-    message.success('Configuration is successful');
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
-
-const handleRemove = async (selectedRow: V1Role) => {
-  if (selectedRow.isPreserved) {
-    return;
-  }
-  try {
-    await new RoleServiceApi().roleServiceDeleteRole({ id: selectedRow.id! });
-    message.success('Configuration is successful');
-    return true;
-  } catch (error) {
-    return false;
-  }
-};
+import { useIntl } from 'umi';
 
 const TableList: React.FC = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
@@ -66,6 +30,61 @@ const TableList: React.FC = () => {
 
   const actionRef = useRef<ActionType>();
   const [currentRow, setCurrentRow] = useState<V1Role | undefined | null>(undefined);
+  const intl = useIntl();
+
+  const handleAdd = async (fields: V1CreateRoleRequest) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.creating', defaultMessage: 'Creating...' }),
+    );
+    try {
+      await new RoleServiceApi().roleServiceCreateRole({ body: fields });
+      hide();
+      message.success(
+        intl.formatMessage({ id: 'common.created', defaultMessage: 'Created Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
+
+  const handleUpdate = async (fields: V1UpdateRoleRequest) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
+    );
+    try {
+      await new RoleServiceApi().roleServiceUpdateRole2({ body: fields, roleId: fields.role!.id! });
+      hide();
+      message.success(
+        intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
+
+  const handleRemove = async (selectedRow: V1Role) => {
+    if (selectedRow.isPreserved) {
+      return;
+    }
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.deleting', defaultMessage: 'Deleting...' }),
+    );
+    try {
+      await new RoleServiceApi().roleServiceDeleteRole({ id: selectedRow.id! });
+      message.success(
+        intl.formatMessage({ id: 'common.deleted', defaultMessage: 'Delete Successfully' }),
+      );
+      hide();
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
 
   const columns: ProColumns<V1Role>[] = [
     {
@@ -114,8 +133,20 @@ const TableList: React.FC = () => {
         ),
         <TableDropdown
           key="actionGroup"
-          onSelect={() => handleRemove(record)}
-          menus={[{ key: 'delete', name: '删除' }]}
+          onSelect={async (key) => {
+            if (key == 'delete') {
+              const ok = await handleRemove(record);
+              if (ok && actionRef.current) {
+                actionRef.current.reload();
+              }
+            }
+          }}
+          menus={[
+            {
+              key: 'delete',
+              name: <FormattedMessage id="common.delete" defaultMessage="Delete" />,
+            },
+          ]}
         />,
       ],
     },
@@ -224,7 +255,6 @@ const TableList: React.FC = () => {
           } else {
             success = await handleAdd(value as V1CreateRoleRequest);
           }
-
           if (success) {
             handleUpdateModalVisible(false);
             setCurrentRow(undefined);
@@ -240,8 +270,7 @@ const TableList: React.FC = () => {
           }
         }}
         updateModalVisible={updateModalVisible}
-        values={currentRow || {}}
-        columns={columns}
+        values={(currentRow as any) || { name: '' }}
       />
     </PageContainer>
   );
