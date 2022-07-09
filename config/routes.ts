@@ -63,7 +63,6 @@
   {
     name: 'dashboard',
     icon: 'table',
-    path: '/dashboard',
     routes: [
       {
         name: 'workbench',
@@ -77,6 +76,7 @@
     redirect: '/dashboard/workbench',
   },
   {
+    path: '*',
     component: './404',
   },
 ];

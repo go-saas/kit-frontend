@@ -6,7 +6,7 @@ import {
   ProFormSwitch,
   ProFormUploadButton,
 } from '@ant-design/pro-components';
-import { FormattedMessage, useIntl } from '@umijs/max';
+import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
 import type { V1CreateTenantRequest, V1UpdateTenant } from '@kit/api';
 import { TenantServiceApi } from '@kit/api';
@@ -113,12 +113,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         rules={[
           {
             required: true,
-            message: (
-              <FormattedMessage
-                id="sys.tenant.nameRequired"
-                defaultMessage="Tenant Name is required"
-              />
-            ),
           },
         ]}
       />
@@ -131,12 +125,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         rules={[
           {
             required: true,
-            message: (
-              <FormattedMessage
-                id="sys.tenant.displayNameRequired"
-                defaultMessage="Tenant DisplayName is required"
-              />
-            ),
           },
         ]}
       />

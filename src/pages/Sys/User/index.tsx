@@ -133,19 +133,19 @@ const TableList: React.FC = () => {
       dataIndex: 'gender',
       valueType: 'radioButton',
       valueEnum: {
-        unknown: {
+        UNKNOWN: {
           text: <FormattedMessage id="sys.user.gender.unknown" defaultMessage="Unknown" />,
           status: 'Default',
         },
-        male: {
+        MALE: {
           text: <FormattedMessage id="sys.user.gender.male" defaultMessage="Male" />,
           status: 'Default',
         },
-        female: {
+        FEMALE: {
           text: <FormattedMessage id="sys.user.gender.female" defaultMessage="Female" />,
           status: 'Default',
         },
-        other: {
+        OTHER: {
           text: <FormattedMessage id="sys.user.gender.other" defaultMessage="Other" />,
           status: 'Default',
         },

@@ -94,6 +94,7 @@ const TableList: React.FC = () => {
         const icon = entity.icon ?? 'AppstoreOutlined';
         return React.createElement(allIcons[icon] || allIcons.AppstoreOutlined);
       },
+      width: 120,
     },
     {
       title: <FormattedMessage id="sys.menu.name" defaultMessage="Menu Name" />,
@@ -115,6 +116,7 @@ const TableList: React.FC = () => {
       title: <FormattedMessage id="sys.menu.title" defaultMessage="Menu Title" />,
       dataIndex: 'title',
       valueType: 'text',
+      ellipsis: true,
     },
     {
       title: <FormattedMessage id="sys.menu.path" defaultMessage="Route Path" />,
@@ -145,6 +147,7 @@ const TableList: React.FC = () => {
       title: <FormattedMessage id="sys.menu.microApp" defaultMessage="MicroApp" />,
       dataIndex: 'microApp',
       valueType: 'text',
+      ellipsis: true,
     },
     {
       title: (
@@ -152,6 +155,7 @@ const TableList: React.FC = () => {
       ),
       dataIndex: 'microAppDev',
       valueType: 'text',
+      ellipsis: true,
     },
     {
       title: (
@@ -159,11 +163,13 @@ const TableList: React.FC = () => {
       ),
       dataIndex: 'microAppBaseRoute',
       valueType: 'text',
+      ellipsis: true,
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
       key: 'option',
       valueType: 'option',
+      width: 180,
       render: (_, record) => [
         <a
           key="create"

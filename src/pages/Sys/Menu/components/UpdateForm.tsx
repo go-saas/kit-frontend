@@ -21,19 +21,19 @@ export type FormValueType = {
 
 const columns: ProColumns<RequirementWithId>[] = [
   {
-    title: <FormattedMessage id="sys.requirement.namepsace" defaultMessage="Namespace" />,
+    title: <FormattedMessage id="sys.permission.namepsace" defaultMessage="Namespace" />,
     dataIndex: 'namespace',
   },
   {
-    title: <FormattedMessage id="sys.requirement.resource" defaultMessage="Resource" />,
+    title: <FormattedMessage id="sys.permission.resource" defaultMessage="Resource" />,
     dataIndex: 'resource',
   },
   {
-    title: <FormattedMessage id="sys.requirement.action" defaultMessage="action" />,
+    title: <FormattedMessage id="sys.permission.action" defaultMessage="action" />,
     dataIndex: 'action',
   },
   {
-    title: <FormattedMessage id="sys.requirement.action" defaultMessage="action" />,
+    title: <FormattedMessage id="common.operate" defaultMessage="Operate" />,
     valueType: 'option',
   },
 ];
