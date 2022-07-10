@@ -6,18 +6,18 @@ import {
   ProFormSwitch,
   ProForm,
   EditableProTable,
-  ProDescriptions,
+  ProFormTreeSelect,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import React, { useState, useEffect } from 'react';
 import type { V1Menu } from '@kit/api';
 import type { PermissionRequirement } from '@kit/core';
-import { Card, Divider, Form } from 'antd';
+import { Form } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
+import type { MenuWithChildren } from '../data';
+import { getTreeData } from '../data';
 
-export type FormValueType = {
-  parentMenu?: V1Menu;
-} & Partial<V1Menu>;
+export type FormValueType = Partial<V1Menu>;
 
 const columns: ProColumns<RequirementWithId>[] = [
   {
@@ -45,6 +45,20 @@ export type UpdateFormProps = {
   values: FormValueType;
 };
 
+export async function getTreeSelectData() {
+  const tree = await getTreeData();
+  const transform = (menus: MenuWithChildren[]) => {
+    return menus.map((p): any => {
+      return {
+        title: <FormattedMessage id={p.title || p.name} defaultMessage={p.title || p.name} />,
+        value: p.id ?? '',
+        children: p.children ? transform(p.children) : undefined,
+      };
+    });
+  };
+  return transform(tree);
+}
+
 export type RequirementWithId = {
   id: string;
 } & PermissionRequirement;
@@ -71,7 +85,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       initialValues={props.values}
       visible={props.updateModalVisible}
       onFinish={async (formData) => {
-        formData.parent = props.values?.parentMenu?.id;
+        console.log(formData);
         await props.onSubmit({ id: props.values?.id, ...formData });
       }}
       drawerProps={{
@@ -81,27 +95,15 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         destroyOnClose: true,
       }}
     >
-      {props.values?.parentMenu && (
-        <Card
-          title={intl.formatMessage({
-            id: 'sys.menu.parent',
-            defaultMessage: 'Parent Menu',
-          })}
-          size="small"
-        >
-          <ProDescriptions>
-            <ProDescriptions.Item
-              label={intl.formatMessage({
-                id: props.values?.parentMenu?.title,
-                defaultMessage: props.values?.parentMenu?.name ?? '',
-              })}
-            >
-              {props.values?.parentMenu?.path ?? ''}
-            </ProDescriptions.Item>
-          </ProDescriptions>
-        </Card>
-      )}
-      {props.values?.parentMenu && <Divider />}
+      <ProFormTreeSelect
+        name="parent"
+        allowClear
+        label={intl.formatMessage({
+          id: 'sys.menu.parent',
+          defaultMessage: 'Parent Menu',
+        })}
+        request={getTreeSelectData}
+      />
       <ProFormText
         name="name"
         label={intl.formatMessage({

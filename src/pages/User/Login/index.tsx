@@ -93,12 +93,6 @@ const Login: React.FC = () => {
       return;
       // 如果失败去设置用户错误信息
     } catch (error) {
-      const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
-      });
-      console.log(error);
-      message.error(defaultLoginFailureMessage);
       setUserLoginState({ status: 'error', type: 'account' });
     }
   };

@@ -160,7 +160,13 @@ const TableList: React.FC = () => {
         const g = (entity.defGroups ?? []).map((p) => {
           const defs = (p.def ?? []).map((q) => {
             return (
-              <ProDescriptions column={3} key={q.displayName}>
+              <ProDescriptions
+                column={3}
+                key={q.name}
+                title={
+                  <div style={{ fontSize: '14px', fontWeight: 'normal' }}>{q.displayName}</div>
+                }
+              >
                 <ProDescriptions.Item
                   label={
                     <FormattedMessage id="sys.permission.namespace" defaultMessage="Namespace" />
@@ -173,16 +179,20 @@ const TableList: React.FC = () => {
                 >
                   {q.action}
                 </ProDescriptions.Item>
-                <ProDescriptions.Item
-                  label={<FormattedMessage id="sys.permission.action" defaultMessage="Action" />}
-                >
+                <ProDescriptions.Item>
                   <Switch defaultChecked={q.granted} disabled />
                 </ProDescriptions.Item>
               </ProDescriptions>
             );
           });
           return (
-            <ProCard title={p.displayName} key={p.displayName}>
+            <ProCard
+              size="small"
+              title={<div style={{ fontSize: '16px', fontWeight: 'bold' }}>{p.displayName}</div>}
+              key={p.name}
+              bordered
+              headerBordered
+            >
               {defs}
             </ProCard>
           );

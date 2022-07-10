@@ -21,6 +21,7 @@ import type {
 import { UserServiceApi } from '@kit/api';
 import { UserOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
+import RoleTag from '@/components/Roletag';
 
 const service = new UserServiceApi();
 const TableList: React.FC = () => {
@@ -93,6 +94,18 @@ const TableList: React.FC = () => {
           <Avatar size={50} src={<Image src={entity.avatar.url} style={{ width: 48 }} />} />
         ) : (
           <Avatar size={50} icon={<UserOutlined />} />
+        );
+      },
+    },
+    {
+      title: <FormattedMessage id="sys.user.role" defaultMessage="Role" />,
+      render: (dom, entity) => {
+        return (
+          <div>
+            {(entity.roles ?? []).map((p) => (
+              <RoleTag role={p} key={p.id} />
+            ))}
+          </div>
         );
       },
     },

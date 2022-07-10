@@ -3,4 +3,5 @@ export default {
   'sys.user.management': 'User Management',
   'sys.role.management': 'Role Management',
   'sys.menu.management': 'Menu Management',
+  'sys.role.preserved.admin': 'Administrator',
 };

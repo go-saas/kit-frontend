@@ -21,10 +21,8 @@ import type {
 import { MenuServiceApi } from '@kit/api';
 import * as allIcons from '@ant-design/icons';
 import { useIntl } from 'umi';
-type MenuWithChildren = {
-  parentMenu?: MenuWithChildren;
-  children?: MenuWithChildren[];
-} & V1Menu;
+import type { MenuWithChildren } from './data';
+import { getTreeData } from './data';
 
 const TableList: React.FC = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
@@ -117,6 +115,15 @@ const TableList: React.FC = () => {
       dataIndex: 'title',
       valueType: 'text',
       ellipsis: true,
+      render: (dom, entity) => {
+        console.log(entity);
+        return (
+          <FormattedMessage
+            id={entity.title || entity.name}
+            defaultMessage={entity.title || entity.name}
+          />
+        );
+      },
     },
     {
       title: <FormattedMessage id="sys.menu.path" defaultMessage="Route Path" />,
@@ -172,16 +179,6 @@ const TableList: React.FC = () => {
       width: 180,
       render: (_, record) => [
         <a
-          key="create"
-          onClick={() => {
-            setCurrentRow({ parentMenu: record });
-            setShowDetail(false);
-            handleUpdateModalVisible(true);
-          }}
-        >
-          <FormattedMessage id="sys.menu.createChild" defaultMessage="New Child" />
-        </a>,
-        <a
           key="editable"
           onClick={() => {
             setCurrentRow(record);
@@ -212,26 +209,7 @@ const TableList: React.FC = () => {
     },
   ];
 
-  const getData = requestTransform<MenuWithChildren, V1MenuFilter>(async (req) => {
-    req.pageOffset = -1;
-    req.pageSize = -1;
-    const resp = await new MenuServiceApi().menuServiceListMenu2({ body: req });
-    const all = resp.data?.items ?? [];
-    //get children
-    const findChildren = (parent = '') => {
-      const children = all
-        .filter((p) => p.parent == parent)
-        .sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
-      for (const c of children) {
-        (c as MenuWithChildren).children = findChildren(c.id ?? '');
-      }
-      if (children.length == 0) {
-        return undefined;
-      }
-      return children;
-    };
-    const tree = findChildren('') ?? [];
-
+  const getData = requestTransform<MenuWithChildren, V1MenuFilter>(async () => {
     const newExpandedKeys: string[] = [];
     const render = (treeDatas: MenuWithChildren[]) => {
       // 获取到所有可展开的父节点
@@ -243,6 +221,7 @@ const TableList: React.FC = () => {
       });
       return newExpandedKeys;
     };
+    const tree = await getTreeData();
     setDefaultExpanded(render(tree));
 
     return {

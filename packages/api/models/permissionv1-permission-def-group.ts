@@ -52,5 +52,11 @@ export interface Permissionv1PermissionDefGroup {
      * @memberof Permissionv1PermissionDefGroup
      */
     'extra'?: object;
+    /**
+     * 
+     * @type {string}
+     * @memberof Permissionv1PermissionDefGroup
+     */
+    'name'?: string;
 }
 

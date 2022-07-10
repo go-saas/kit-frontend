@@ -4,6 +4,7 @@ import { ACCESS_TOKEN_KEY, CSRF_TOKEN_KEY } from '@/enums/cacheEnum';
 import { getSettingTenantId, setSettingTenantId } from './auth';
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import { ContentTypeEnum } from '@/enums/httpEnum';
+import { FriendlyError } from './errors';
 export interface ErrorMessage {
   code: number;
   message: string;
@@ -49,6 +50,25 @@ export function authRequestInterceptor() {
     }
     return config;
   };
+}
+
+export function bizErrorInterceptor() {
+  return [
+    (resp: AxiosResponse) => {
+      return resp;
+    },
+    (error: any) => {
+      if (error.response) {
+        // Axios 的错误
+        // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
+        const data = error.response.data || {};
+        if (isErrorMessage(data)) {
+          return Promise.reject(new FriendlyError(data.reason, data.message, error));
+        }
+      }
+      return Promise.reject(error);
+    },
+  ];
 }
 
 export function authRespInterceptor(unauthorizedAction?: () => void, forbiddenAction?: () => void) {

@@ -15,26 +15,20 @@ import {
   saasRequestInterceptor,
   authRespInterceptor,
   setSettingTenantId,
-  isErrorMessage,
+  bizErrorInterceptor,
 } from '@kit/core';
 import type { UserInfo, UserTenantInfo } from '@kit/core';
+import { FriendlyError } from '@kit/core';
 import { getRequestInstance } from '@@/plugin-request/request';
 import type { V1Menu } from '@kit/api';
 import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
 import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';
-
+import { ErrorShowType } from '@/utils/errors';
 // const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
 // 错误处理方案： 错误类型
-enum ErrorShowType {
-  SILENT = 0,
-  WARN_MESSAGE = 1,
-  ERROR_MESSAGE = 2,
-  NOTIFICATION = 3,
-  REDIRECT = 9,
-}
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -68,9 +62,7 @@ export async function getInitialState(): Promise<{
   };
   const fetchUserInfo = async () => {
     try {
-      const resp = await new AccountApi().accountGetProfile({
-        data: { showType: ErrorShowType.SILENT },
-      });
+      const resp = await new AccountApi().accountGetProfile({ showType: ErrorShowType.SILENT });
       return resp.data as any as UserInfo;
     } catch (error) {
       console.log(error);
@@ -172,34 +164,29 @@ function errorInterceptor() {
       return resp;
     },
     (error: any) => {
-      console.log(error);
-      const { config, code } = error || {};
+      console.log(error.wrap || error);
+      const { config, code, response, request } = error.wrap || error || {};
       let showType = ErrorShowType.ERROR_MESSAGE;
       let errorMessage = '';
       let errorCode = code;
 
-      let customCfg = config?.data || {};
-      if (typeof customCfg === 'string') {
-        customCfg = JSON.parse(customCfg);
+      if ('showType' in config) {
+        showType = config.showType;
       }
-      if ('showType' in customCfg) {
-        showType = customCfg.showType;
+
+      if (error instanceof FriendlyError) {
+        errorCode = error.reason;
+        errorMessage = error.message || errorCode;
       }
-      if (error.response) {
-        // Axios 的错误
-        // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-        if (isErrorMessage(error.response.data || {})) {
-          errorCode = error.response.data.reason;
-          errorMessage = error.response.data.message || error.response.data.reason;
-        }
+      if (response) {
         if (!errorMessage) {
-          const status = error.response.status;
+          const status = response.status;
           errorMessage = status.toString();
         }
         if (!errorCode) {
           errorCode = errorMessage;
         }
-      } else if (error.request) {
+      } else if (request) {
         // 请求已经成功发起，但没有收到响应
         // \`error.request\` 在浏览器中是 XMLHttpRequest 的实例，
         // 而在node.js中是 http.ClientRequest 的实例
@@ -232,7 +219,7 @@ function errorInterceptor() {
         default:
           message.error(errorMessage);
       }
-      return Promise.reject(error);
+      return Promise.reject(new FriendlyError(errorCode, errorMessage));
     },
   ];
 }
@@ -247,6 +234,7 @@ export const request: RequestConfig = {
   ],
   responseInterceptors: [
     csrfRespInterceptor(),
+    bizErrorInterceptor(),
     errorInterceptor() as any,
     authRespInterceptor(() => {
       //redirect to login

@@ -57,5 +57,11 @@ export interface Permissionv1PermissionDef {
      * @memberof Permissionv1PermissionDef
      */
     'granted'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof Permissionv1PermissionDef
+     */
+    'name'?: string;
 }
 

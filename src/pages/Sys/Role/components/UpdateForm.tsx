@@ -93,14 +93,32 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                       ] as Permissionv1PermissionDefGroup;
                       return (
                         <ProForm.Item key={group.key} name={group.name}>
-                          <ProCard title={g.displayName}>
+                          <ProCard
+                            size="small"
+                            title={
+                              <div style={{ fontSize: '16px', fontWeight: 'bold' }}>
+                                {g.displayName}
+                              </div>
+                            }
+                            key={g.name}
+                            bordered
+                            headerBordered
+                          >
                             <Form.List name={[group.name, 'def']}>
                               {(defs) => (
                                 <>
                                   {defs.map((def) => {
                                     const q = g.def![def.name] as Permissionv1PermissionDef;
                                     return (
-                                      <ProDescriptions column={3} key={q.displayName}>
+                                      <ProDescriptions
+                                        column={3}
+                                        key={q.name}
+                                        title={
+                                          <div style={{ fontSize: '14px', fontWeight: 'normal' }}>
+                                            {q.displayName}
+                                          </div>
+                                        }
+                                      >
                                         <ProDescriptions.Item
                                           label={
                                             <FormattedMessage
@@ -121,14 +139,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                                         >
                                           {q.action}
                                         </ProDescriptions.Item>
-                                        <ProDescriptions.Item
-                                          label={
-                                            <FormattedMessage
-                                              id="sys.permission.action"
-                                              defaultMessage="Action"
-                                            />
-                                          }
-                                        >
+                                        <ProDescriptions.Item>
                                           <ProFormSwitch name={[def.name, 'granted']} />
                                         </ProDescriptions.Item>
                                       </ProDescriptions>
