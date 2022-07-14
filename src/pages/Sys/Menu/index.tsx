@@ -116,7 +116,6 @@ const TableList: React.FC = () => {
       valueType: 'text',
       ellipsis: true,
       render: (dom, entity) => {
-        console.log(entity);
         return (
           <FormattedMessage
             id={entity.title || entity.name}
@@ -235,6 +234,9 @@ const TableList: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={false}
+        pagination={{
+          defaultPageSize: 10,
+        }}
         toolBarRender={() => [
           <Button
             type="primary"

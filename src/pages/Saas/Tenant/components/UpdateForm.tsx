@@ -5,12 +5,17 @@ import {
   ProForm,
   ProFormSwitch,
   ProFormUploadButton,
+  ProFormDependency,
 } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
 import type { V1CreateTenantRequest, V1UpdateTenant } from '@kit/api';
-import { TenantServiceApi } from '@kit/api';
+import { TenantServiceApi, AuthApi } from '@kit/api';
 import { uploadApi } from '@/utils/upload';
+import Userselect from '@/components/Userselect';
+import { FriendlyError } from '@kit/core';
+import { ErrorShowType } from '@/utils/errors';
+import { message } from 'antd';
 
 const service = new TenantServiceApi();
 
@@ -42,9 +47,19 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       initialValues={props.values}
       visible={props.updateModalVisible}
       onFinish={async (formData) => {
-        const { logo, ...data } = formData;
+        const { logo, user, password, ...data } = formData;
         const newLogo = logo?.id;
-        await props.onSubmit({ id: props.values?.id, logo: newLogo, ...data });
+        const ret = {
+          id: props.values?.id,
+          logo: newLogo,
+          adminUserId: user?.user?.id,
+          adminEmail: user?.email,
+          adminUsername: user?.username,
+          adminPassword: password,
+          ...data,
+        };
+        console.log(ret);
+        await props.onSubmit(ret);
       }}
       drawerProps={{
         onClose: () => {
@@ -135,48 +150,102 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           defaultMessage: 'Tenant Region',
         })}
       />
-      <ProFormSwitch
-        name="separateDb"
-        label={intl.formatMessage({
-          id: 'saas.tenant.separateDb',
-          defaultMessage: 'Tenant Separate Storage',
-        })}
-      />
-      <ProForm.Item noStyle shouldUpdate>
-        {(form) => {
-          if (!form.getFieldValue('separateDb')) {
-            return <div />;
-          }
-          return (
-            <>
-              <ProFormText
-                name="adminUsername"
-                label={intl.formatMessage({
-                  id: 'saas.tenant.adminUsername',
-                  defaultMessage: 'Tenant Admin Username',
-                })}
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              />
-              <ProFormText.Password
-                name="adminPassword"
-                label={intl.formatMessage({
-                  id: 'saas.tenant.adminPassword',
-                  defaultMessage: 'Tenant Admin Password',
-                })}
-                rules={[
-                  {
-                    required: true,
-                  },
-                ]}
-              />
-            </>
-          );
-        }}
-      </ProForm.Item>
+      {!props.values.id && (
+        <ProFormSwitch
+          name="separateDb"
+          label={intl.formatMessage({
+            id: 'saas.tenant.separateDb',
+            defaultMessage: 'Tenant Separate Storage',
+          })}
+        />
+      )}
+      {!props.values.id && (
+        <>
+          <ProForm.Item
+            name="user"
+            label={intl.formatMessage({
+              id: 'saas.tenant.admin',
+              defaultMessage: 'Tenant Administrator',
+            })}
+          >
+            <Userselect />
+          </ProForm.Item>
+          <ProFormDependency name={['user']}>
+            {({ user }) => {
+              if (!user?.user) {
+                //create user
+                return (
+                  <>
+                    <ProFormText.Password
+                      name="password"
+                      label={intl.formatMessage({
+                        id: 'sys.user.password',
+                        defaultMessage: 'Password',
+                      })}
+                      rules={[
+                        {
+                          required: true,
+                          validator: async (rule, value) => {
+                            if (!value) {
+                              return;
+                            } else {
+                              //validate the password
+                              try {
+                                await new AuthApi().authValidatePassword(
+                                  {
+                                    body: { password: value },
+                                  },
+                                  { showType: ErrorShowType.SILENT },
+                                );
+                                return;
+                              } catch (err: any) {
+                                if (err instanceof FriendlyError) {
+                                  return Promise.reject(err);
+                                }
+                                message.error(err);
+                              }
+                            }
+                            return;
+                          },
+                        },
+                      ]}
+                    />
+                    <ProFormText.Password
+                      name="confirmPassword"
+                      label={intl.formatMessage({
+                        id: 'sys.user.confirmPassword',
+                        defaultMessage: 'Confirm Password',
+                      })}
+                      rules={[
+                        {
+                          required: true,
+                        },
+                        ({ getFieldValue }) => ({
+                          validator(_, value) {
+                            if (!value || getFieldValue('password') === value) {
+                              return Promise.resolve();
+                            }
+                            return Promise.reject(
+                              new Error(
+                                intl.formatMessage({
+                                  id: 'sys.user.confirmPasswordMissmatch',
+                                  defaultMessage:
+                                    'The two passwords that you entered do not match!',
+                                }),
+                              ),
+                            );
+                          },
+                        }),
+                      ]}
+                    />
+                  </>
+                );
+              }
+              return <></>;
+            }}
+          </ProFormDependency>
+        </>
+      )}
     </DrawerForm>
   );
 };

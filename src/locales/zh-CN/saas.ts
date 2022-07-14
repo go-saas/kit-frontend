@@ -10,4 +10,5 @@ export default {
   'saas.tenant.separateDb': '偏好独立数据库',
   'saas.tenant.adminUsername': '管理员用户名',
   'saas.tenant.adminPassword': '管理员密码',
+  'saas.tenant.admin': '管理员',
 };

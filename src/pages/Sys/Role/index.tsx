@@ -225,6 +225,9 @@ const TableList: React.FC = () => {
             <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
+        pagination={{
+          defaultPageSize: 10,
+        }}
         type="table"
         request={getData}
         columns={columns}

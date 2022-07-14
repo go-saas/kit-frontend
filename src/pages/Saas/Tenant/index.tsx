@@ -182,6 +182,9 @@ const TableList: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={false}
+        pagination={{
+          defaultPageSize: 10,
+        }}
         toolBarRender={() => [
           <Button
             type="primary"

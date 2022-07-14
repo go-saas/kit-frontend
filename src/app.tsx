@@ -209,7 +209,7 @@ function errorInterceptor() {
         default:
           message.error(errorMessage);
       }
-      return Promise.reject(new FriendlyError(code, errorCode, errorMessage));
+      return new FriendlyError(code, errorCode, errorMessage);
     },
   ];
 }
