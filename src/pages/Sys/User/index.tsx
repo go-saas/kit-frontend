@@ -22,6 +22,7 @@ import { UserServiceApi } from '@kit/api';
 import { UserOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
 import RoleTag from '@/components/Roletag';
+import { genderValueEnum } from './gender';
 
 const service = new UserServiceApi();
 const TableList: React.FC = () => {
@@ -145,24 +146,12 @@ const TableList: React.FC = () => {
       title: <FormattedMessage id="sys.user.gender" defaultMessage="Gender" />,
       dataIndex: 'gender',
       valueType: 'radioButton',
-      valueEnum: {
-        UNKNOWN: {
-          text: <FormattedMessage id="sys.user.gender.unknown" defaultMessage="Unknown" />,
-          status: 'Default',
-        },
-        MALE: {
-          text: <FormattedMessage id="sys.user.gender.male" defaultMessage="Male" />,
-          status: 'Default',
-        },
-        FEMALE: {
-          text: <FormattedMessage id="sys.user.gender.female" defaultMessage="Female" />,
-          status: 'Default',
-        },
-        OTHER: {
-          text: <FormattedMessage id="sys.user.gender.other" defaultMessage="Other" />,
-          status: 'Default',
-        },
-      },
+      valueEnum: genderValueEnum,
+    },
+    {
+      title: <FormattedMessage id="sys.user.birthday" defaultMessage="Birthday" />,
+      dataIndex: 'birthday',
+      valueType: 'date',
     },
     {
       title: <FormattedMessage id="pages.searchTable.titleOption" defaultMessage="Operating" />,
@@ -211,6 +200,9 @@ const TableList: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={false}
+        pagination={{
+          defaultPageSize: 10,
+        }}
         toolBarRender={() => [
           <Button
             type="primary"
@@ -278,7 +270,9 @@ const TableList: React.FC = () => {
           }
         }}
         updateModalVisible={updateModalVisible}
-        values={(currentRow as any) || { name: '' }}
+        values={
+          { ...(currentRow || {}), rolesId: currentRow?.roles?.map((p) => p.id!) ?? [] } as any
+        }
       />
     </PageContainer>
   );

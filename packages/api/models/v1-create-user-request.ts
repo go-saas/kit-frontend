@@ -26,7 +26,7 @@ export interface V1CreateUserRequest {
      * @type {string}
      * @memberof V1CreateUserRequest
      */
-    'username': string | null;
+    'username'?: string | null;
     /**
      * 
      * @type {string}

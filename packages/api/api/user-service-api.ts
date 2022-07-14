@@ -35,6 +35,8 @@ import { V1ListUsersRequest } from '../models';
 // @ts-ignore
 import { V1ListUsersResponse } from '../models';
 // @ts-ignore
+import { V1SearchUserResponse } from '../models';
+// @ts-ignore
 import { V1UpdateUserRequest } from '../models';
 // @ts-ignore
 import { V1User } from '../models';
@@ -209,7 +211,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         userServiceInviteUser: async (body: V1InviteUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('userServiceInviteUser', 'body', body)
-            const localVarPath = `/v1/user/invite`;
+            const localVarPath = `/v1/user/public/invite`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -669,6 +671,63 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
+         * @param {string} [identity] 
+         * @param {string} [username] 
+         * @param {string} [email] 
+         * @param {string} [phone] 
+         * @param {string} [fields] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceSearchUser: async (identity?: string, username?: string, email?: string, phone?: string, fields?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/user/public/search`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+            if (identity !== undefined) {
+                localVarQueryParameter['identity'] = identity;
+            }
+
+            if (username !== undefined) {
+                localVarQueryParameter['username'] = username;
+            }
+
+            if (email !== undefined) {
+                localVarQueryParameter['email'] = email;
+            }
+
+            if (phone !== undefined) {
+                localVarQueryParameter['phone'] = phone;
+            }
+
+            if (fields !== undefined) {
+                localVarQueryParameter['fields'] = fields;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @summary UpdateUser  authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
@@ -911,6 +970,20 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} [identity] 
+         * @param {string} [username] 
+         * @param {string} [email] 
+         * @param {string} [phone] 
+         * @param {string} [fields] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async userServiceSearchUser(identity?: string, username?: string, email?: string, phone?: string, fields?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1SearchUserResponse>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceSearchUser(identity, username, email, phone, fields, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary UpdateUser  authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
@@ -1081,6 +1154,19 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
          */
         userServiceListUsers2(body: V1ListUsersRequest, options?: any): AxiosPromise<V1ListUsersResponse> {
             return localVarFp.userServiceListUsers2(body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} [identity] 
+         * @param {string} [username] 
+         * @param {string} [email] 
+         * @param {string} [phone] 
+         * @param {string} [fields] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userServiceSearchUser(identity?: string, username?: string, email?: string, phone?: string, fields?: string, options?: any): AxiosPromise<V1SearchUserResponse> {
+            return localVarFp.userServiceSearchUser(identity, username, email, phone, fields, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1689,6 +1775,48 @@ export interface UserServiceApiUserServiceListUsers2Request {
 }
 
 /**
+ * Request parameters for userServiceSearchUser operation in UserServiceApi.
+ * @export
+ * @interface UserServiceApiUserServiceSearchUserRequest
+ */
+export interface UserServiceApiUserServiceSearchUserRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof UserServiceApiUserServiceSearchUser
+     */
+    readonly identity?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof UserServiceApiUserServiceSearchUser
+     */
+    readonly username?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof UserServiceApiUserServiceSearchUser
+     */
+    readonly email?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof UserServiceApiUserServiceSearchUser
+     */
+    readonly phone?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof UserServiceApiUserServiceSearchUser
+     */
+    readonly fields?: string
+}
+
+/**
  * Request parameters for userServiceUpdateUser operation in UserServiceApi.
  * @export
  * @interface UserServiceApiUserServiceUpdateUserRequest
@@ -1819,6 +1947,17 @@ export class UserServiceApi extends BaseAPI {
      */
     public userServiceListUsers2(requestParameters: UserServiceApiUserServiceListUsers2Request, options?: AxiosRequestConfig) {
         return UserServiceApiFp(this.configuration).userServiceListUsers2(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {UserServiceApiUserServiceSearchUserRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserServiceApi
+     */
+    public userServiceSearchUser(requestParameters: UserServiceApiUserServiceSearchUserRequest = {}, options?: AxiosRequestConfig) {
+        return UserServiceApiFp(this.configuration).userServiceSearchUser(requestParameters.identity, requestParameters.username, requestParameters.email, requestParameters.phone, requestParameters.fields, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

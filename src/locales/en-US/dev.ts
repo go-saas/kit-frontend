@@ -3,4 +3,5 @@ export default {
   'dev.docs': 'OpenApi Documents',
   'dev.jaeger': 'Jaeger',
   'dev.jobs': 'Background Jobs',
+  'dev.events.kafka': 'Kafka',
 };

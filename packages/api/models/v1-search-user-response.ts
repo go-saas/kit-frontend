@@ -13,19 +13,19 @@
  */
 
 
-import { Userv1UserRole } from './userv1-user-role';
+import { SearchUserResponseSearchUser } from './search-user-response-search-user';
 
 /**
  * 
  * @export
- * @interface V1GetUserRoleReply
+ * @interface V1SearchUserResponse
  */
-export interface V1GetUserRoleReply {
+export interface V1SearchUserResponse {
     /**
      * 
-     * @type {Array<Userv1UserRole>}
-     * @memberof V1GetUserRoleReply
+     * @type {SearchUserResponseSearchUser}
+     * @memberof V1SearchUserResponse
      */
-    'roles'?: Array<Userv1UserRole>;
+    'user'?: SearchUserResponseSearchUser;
 }
 

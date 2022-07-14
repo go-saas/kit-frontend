@@ -89,6 +89,7 @@ const Login: React.FC = () => {
       await fetchUserInfo();
       const redirect =
         data.data.redirect || new URL(window.location.href).searchParams.get('redirect') || '/';
+      console.log(redirect);
       history.push(redirect);
       return;
       // 如果失败去设置用户错误信息

@@ -121,7 +121,7 @@ const TableList: React.FC = () => {
       valueType: 'text',
     },
     {
-      title: <FormattedMessage id="saas.tenant.separateDb" defaultMessage="Tenant SeparateDb" />,
+      title: <FormattedMessage id="saas.tenant.separateDb" defaultMessage="Prefer SeparateDb" />,
       dataIndex: 'separateDb',
       valueType: 'switch',
     },

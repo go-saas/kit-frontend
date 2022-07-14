@@ -13,19 +13,24 @@
  */
 
 
-import { Userv1UserRole } from './userv1-user-role';
 
 /**
  * 
  * @export
- * @interface V1GetUserRoleReply
+ * @interface Userv1UserRole
  */
-export interface V1GetUserRoleReply {
+export interface Userv1UserRole {
     /**
      * 
-     * @type {Array<Userv1UserRole>}
-     * @memberof V1GetUserRoleReply
+     * @type {string}
+     * @memberof Userv1UserRole
      */
-    'roles'?: Array<Userv1UserRole>;
+    'id'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Userv1UserRole
+     */
+    'name'?: string;
 }
 

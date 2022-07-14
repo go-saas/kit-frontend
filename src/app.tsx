@@ -20,7 +20,6 @@ import {
 import type { UserInfo, UserTenantInfo } from '@kit/core';
 import { FriendlyError } from '@kit/core';
 import { getRequestInstance } from '@@/plugin-request/request';
-import type { V1Menu } from '@kit/api';
 import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
 import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';
@@ -40,7 +39,6 @@ export async function getInitialState(): Promise<{
   loading?: boolean;
   fetchUserInfo?: () => Promise<UserInfo | undefined>;
   changeTenant?: (name: string) => Promise<void>;
-  availableMenu?: V1Menu[];
 }> {
   setDefaultAxiosFactory(getRequestInstance);
 
@@ -71,14 +69,6 @@ export async function getInitialState(): Promise<{
     return undefined;
   };
 
-  //fetch menu
-  let availableMenu: V1Menu[] = [];
-  try {
-    const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
-    availableMenu = menuResp.data?.items ?? [];
-  } catch (error) {
-    console.log(error);
-  }
   // 如果不是登录页面，执行
   if (history.location.pathname !== loginPath) {
     const currentUser = await fetchUserInfo();
@@ -87,7 +77,6 @@ export async function getInitialState(): Promise<{
       currentUser,
       changeTenant,
       settings: defaultSettings,
-      availableMenu,
     };
   }
   return {
@@ -95,7 +84,6 @@ export async function getInitialState(): Promise<{
     currentTenant,
     changeTenant,
     settings: defaultSettings,
-    availableMenu,
   };
 }
 
@@ -109,7 +97,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         tenantId: initialState?.currentTenant?.tenant?.id,
       },
       request: async () => {
-        return transformMenu(initialState?.availableMenu ?? []);
+        const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
+        const availableMenu = menuResp.data?.items ?? [];
+        return transformMenu(availableMenu);
       },
     },
 
@@ -219,7 +209,7 @@ function errorInterceptor() {
         default:
           message.error(errorMessage);
       }
-      return Promise.reject(new FriendlyError(errorCode, errorMessage));
+      return Promise.reject(new FriendlyError(code, errorCode, errorMessage));
     },
   ];
 }

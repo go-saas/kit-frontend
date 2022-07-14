@@ -63,7 +63,7 @@ export function bizErrorInterceptor() {
         // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
         const data = error.response.data || {};
         if (isErrorMessage(data)) {
-          return Promise.reject(new FriendlyError(data.reason, data.message, error));
+          return Promise.reject(new FriendlyError(data.code, data.reason, data.message, error));
         }
       }
       return Promise.reject(error);
@@ -77,7 +77,7 @@ export function authRespInterceptor(unauthorizedAction?: () => void, forbiddenAc
       return resp;
     },
     (error: any) => {
-      const code = error?.response?.status ?? 0;
+      const code = error.code ?? error.wrap?.response?.status ?? error?.response?.status ?? 0;
       if (code == 401) {
         unauthorizedAction?.();
       }

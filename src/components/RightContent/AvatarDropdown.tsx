@@ -18,17 +18,24 @@ export type GlobalHeaderRightProps = {
  */
 const loginOut = async () => {
   await new AuthWebApi().authWebWebLogout({ body: {} });
-  const { search, pathname } = history.location;
+  const { search, pathname } = window.location;
   const urlParams = new URL(window.location.href).searchParams;
   /** 此方法会跳转到 redirect 参数所在的位置 */
   const redirect = urlParams.get('redirect');
   // Note: There may be security issues, please note
+
+  //TODO validating search
+  let newSearch = '';
+  if (pathname != '/user/login') {
+    newSearch = stringify({
+      redirect: pathname + search,
+    });
+  }
+
   if (window.location.pathname !== '/user/login' && !redirect) {
     history.replace({
       pathname: '/user/login',
-      search: stringify({
-        redirect: pathname + search,
-      }),
+      search: newSearch,
     });
   }
 };

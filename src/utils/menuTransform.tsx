@@ -8,7 +8,6 @@ export declare type Route = {
 } & MenuDataItem;
 
 export function transformMenu(allMenu: V1Menu[]) {
-  console.log(allMenu);
   const findChildren = (id: string): Route[] => {
     const items: MenuDataItem[] = allMenu
       .filter((p) => p.parent == id)

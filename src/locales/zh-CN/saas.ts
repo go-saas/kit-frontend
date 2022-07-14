@@ -7,7 +7,7 @@ export default {
   'saas.tenant.name': '名称（域名）',
   'saas.tenant.displayName': '显示名称',
   'saas.tenant.region': '地域',
-  'saas.tenant.separateDb': '独立数据库',
+  'saas.tenant.separateDb': '偏好独立数据库',
   'saas.tenant.adminUsername': '管理员用户名',
   'saas.tenant.adminPassword': '管理员密码',
 };

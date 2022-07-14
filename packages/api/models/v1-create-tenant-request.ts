@@ -68,5 +68,11 @@ export interface V1CreateTenantRequest {
      * @memberof V1CreateTenantRequest
      */
     'adminPassword'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1CreateTenantRequest
+     */
+    'adminUserId'?: string | null;
 }
 
