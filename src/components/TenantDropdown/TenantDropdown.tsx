@@ -3,7 +3,6 @@ import { useModel } from 'umi';
 import { Dropdown, Menu } from 'antd';
 import { FormattedMessage } from 'umi';
 import { DownOutlined } from '@ant-design/icons';
-import { setSettingTenantId } from '@kit/core';
 
 export type TenantDropdownProps = {
   logo: React.ReactNode | string;
@@ -26,12 +25,7 @@ const TenantDropdown: React.FC<TenantDropdownProps> = (props) => {
         <a
           onClick={() => {
             //change tenant
-            if (!p.tenant?.id) {
-              setSettingTenantId();
-            } else {
-              setSettingTenantId(p.tenant.id);
-            }
-            window.location.reload();
+            initialState?.changeTenant?.(p.tenant?.id ?? '');
           }}
         >
           {p.isHost ? (

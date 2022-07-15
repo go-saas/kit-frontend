@@ -224,6 +224,23 @@ function errorInterceptor() {
   ];
 }
 
+function tenantErrorInterceptor() {
+  return [
+    (resp: AxiosResponse) => {
+      return resp;
+    },
+    (error: any) => {
+      if (error instanceof FriendlyError) {
+        if (['TENANT_NOT_FOUND', 'TENANT_FORBIDDEN'].includes(error.reason)) {
+          setSettingTenantId();
+          window.location.reload();
+        }
+      }
+      return Promise.reject(error);
+    },
+  ];
+}
+
 export const request: RequestConfig = {
   baseURL: BASE_URL,
   withCredentials: true,
@@ -240,5 +257,6 @@ export const request: RequestConfig = {
       //redirect to login
       history.push(loginPath);
     }),
+    tenantErrorInterceptor(),
   ],
 };
