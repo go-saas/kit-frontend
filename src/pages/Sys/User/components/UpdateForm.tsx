@@ -245,7 +245,12 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         fieldProps={{
           tagRender: (p) => {
             const { value } = p;
-            return <RoleTag role={allRoles.find((r) => r.id == value)!} />;
+            const role = allRoles.find((r) => r.id == value);
+            if (role) {
+              return <RoleTag role={role} />;
+            } else {
+              return value;
+            }
           },
         }}
         mode="tags"

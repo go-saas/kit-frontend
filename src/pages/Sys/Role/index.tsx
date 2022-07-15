@@ -22,6 +22,7 @@ import type {
 import { RoleServiceApi } from '@kit/api';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
+import Roletag from '@/components/Roletag';
 
 const TableList: React.FC = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
@@ -99,7 +100,7 @@ const TableList: React.FC = () => {
               setShowDetail(true);
             }}
           >
-            {dom}
+            <Roletag role={entity} />
           </a>
         );
       },
