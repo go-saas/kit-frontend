@@ -44,8 +44,13 @@ export async function getInitialState(): Promise<{
   setDefaultAxiosFactory(getRequestInstance);
 
   let currentTenant: UserTenantInfo | undefined = undefined;
-  const currentReps = await new TenantServiceApi().tenantServiceGetCurrentTenant();
-  currentTenant = currentReps.data as any as UserTenantInfo;
+
+  try {
+    const currentReps = await new TenantServiceApi().tenantServiceGetCurrentTenant();
+    currentTenant = currentReps.data as any as UserTenantInfo;
+  } catch (e) {
+    console.log(e);
+  }
 
   const changeTenant = async (idOrName: string) => {
     if (!idOrName) {
@@ -214,7 +219,7 @@ function errorInterceptor() {
         default:
           message.error(errorMessage);
       }
-      return new FriendlyError(code, errorCode, errorMessage);
+      return Promise.reject(new FriendlyError(code, errorCode, errorMessage));
     },
   ];
 }

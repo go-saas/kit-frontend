@@ -12,7 +12,6 @@ import type { InputRef } from 'antd';
 import React, { useState, useRef } from 'react';
 import styles from './index.less';
 import { AuthWebApi } from '@kit/api';
-import { getRequestInstance } from '@@/plugin-request/request';
 import { useMount } from 'ahooks';
 const { Search } = Input;
 const LoginMessage: React.FC<{
@@ -76,11 +75,9 @@ const Login: React.FC = () => {
   const handleSubmit = async (values: LoginParams) => {
     try {
       // 登录
-      const data = await new AuthWebApi(undefined, undefined, getRequestInstance()).authWebWebLogin(
-        {
-          body: { username: values.username, password: values.password },
-        },
-      );
+      const data = await new AuthWebApi().authWebWebLogin({
+        body: { username: values.username, password: values.password },
+      });
       const defaultLoginSuccessMessage = intl.formatMessage({
         id: 'pages.login.success',
         defaultMessage: '登录成功！',
