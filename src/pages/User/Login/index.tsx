@@ -76,7 +76,7 @@ const Login: React.FC = () => {
     try {
       // 登录
       const data = await new AuthWebApi().authWebWebLogin({
-        body: { username: values.username, password: values.password },
+        body: { username: values.username, password: values.password, remember: values.autoLogin },
       });
       const defaultLoginSuccessMessage = intl.formatMessage({
         id: 'pages.login.success',

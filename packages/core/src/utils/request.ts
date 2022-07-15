@@ -1,7 +1,7 @@
 import axios from 'axios';
 import storage from './storage';
 import { ACCESS_TOKEN_KEY, CSRF_TOKEN_KEY } from '@/enums/cacheEnum';
-import { getSettingTenantId, setSettingTenantId } from './auth';
+import { getSettingTenantId } from './auth';
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import { ContentTypeEnum } from '@/enums/httpEnum';
 import { FriendlyError } from './errors';
