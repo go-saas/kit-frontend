@@ -2,6 +2,7 @@ export default {
   'saas.title': 'Saas',
   'saas.tenant.management': '租户管理',
   'saas.switch': '切换租户',
+  'saas.switch.backToHost': '返回管理端',
   'saas.switch.placeholder': '输入租户域名',
   'saas.tenant.logo': '图标',
   'saas.tenant.name': '名称（域名）',

@@ -24,6 +24,7 @@ import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
 import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';
 import { ErrorShowType } from '@/utils/errors';
+import TenantDropdown from '@/components/TenantDropdown';
 // const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
@@ -75,6 +76,7 @@ export async function getInitialState(): Promise<{
     return {
       fetchUserInfo,
       currentUser,
+      currentTenant,
       changeTenant,
       settings: defaultSettings,
     };
@@ -91,6 +93,9 @@ export async function getInitialState(): Promise<{
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
     title: initialState?.currentTenant?.tenant?.displayName ?? 'GO SAAS KIT',
+    headerTitleRender: (logo, title) => {
+      return <TenantDropdown logo={logo} title={title} />;
+    },
     menu: {
       params: {
         userId: initialState?.currentUser?.id,

@@ -77,25 +77,23 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   if (!currentUser || !currentUser.name) {
     return loading;
   }
-
+  console.log(menu);
   const menuItems: ItemType[] = [
-    ...(menu
-      ? [
-          {
-            key: 'center',
-            icon: <UserOutlined />,
-            label: '个人中心',
-          },
-          {
-            key: 'settings',
-            icon: <SettingOutlined />,
-            label: '个人设置',
-          },
-          {
-            type: 'divider' as const,
-          },
-        ]
-      : []),
+    ...[
+      {
+        key: 'center',
+        icon: <UserOutlined />,
+        label: '个人中心',
+      },
+      {
+        key: 'settings',
+        icon: <SettingOutlined />,
+        label: '个人设置',
+      },
+      {
+        type: 'divider' as const,
+      },
+    ],
     {
       key: 'logout',
       icon: <LogoutOutlined />,
