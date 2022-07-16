@@ -31,7 +31,7 @@ export default defineConfig({
     ie: 11,
   },
   // umi routes: https://umijs.org/docs/routing
-  routes,
+  routes: routes(),
   access: {},
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn
   theme: {
@@ -51,5 +51,8 @@ export default defineConfig({
   presets: ['umi-presets-pro'],
   define: {
     BASE_URL: REACT_APP_ENV == 'dev' ? '/basic-api' : '',
+  },
+  qiankun: {
+    master: {},
   },
 });

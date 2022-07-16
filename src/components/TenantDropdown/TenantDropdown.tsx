@@ -16,8 +16,6 @@ const TenantDropdown: React.FC<TenantDropdownProps> = (props) => {
   const expectNow = allTenants.filter(
     (p) => p.tenant?.id != initialState?.currentUser?.currentTenant?.tenant?.id,
   );
-  console.log(initialState);
-  console.log(expectNow);
   const menuItems = expectNow.map((p) => {
     return {
       key: p.tenant?.id ?? '',

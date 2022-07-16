@@ -69,7 +69,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const [req, setReq] = useState<RequirementWithId[]>();
   const [editableKeys, setEditableRowKeys] = useState<React.Key[]>();
   useEffect(() => {
-    console.log(req);
     setEditableRowKeys(req?.map((p) => p.id));
   }, [req]);
 

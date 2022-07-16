@@ -25,6 +25,7 @@ import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';
 import { ErrorShowType } from '@/utils/errors';
 import TenantDropdown from '@/components/TenantDropdown';
+
 // const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
@@ -94,6 +95,28 @@ export async function getInitialState(): Promise<{
   };
 }
 
+// let extraRoutes: any;
+
+// export function patchClientRoutes({ routes }: { routes: RouteObject[] }) {
+//   // 根据 extraRoutes 对 routes 做一些修改
+//   console.log(routes);
+//   console.log(extraRoutes);
+// }
+
+// export function render(oldRender: () => void) {
+//   setDefaultAxiosFactory(getRequestInstance);
+//   getMenu().then((res) => {
+//     extraRoutes = res;
+//     oldRender();
+//   });
+// }
+
+async function getMenu() {
+  const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
+  const availableMenu = menuResp.data?.items ?? [];
+  return transformMenu(availableMenu);
+}
+
 // ProLayout 支持的api https://procomponents.ant.design/components/layout
 export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) => {
   return {
@@ -107,17 +130,15 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
         tenantId: initialState?.currentTenant?.tenant?.id,
       },
       request: async () => {
-        const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
-        const availableMenu = menuResp.data?.items ?? [];
-        return transformMenu(availableMenu);
+        return getMenu();
       },
     },
 
     rightContentRender: () => <RightContent />,
     disableContentMargin: false,
-    waterMarkProps: {
-      content: initialState?.currentUser?.name,
-    },
+    // waterMarkProps: {
+    //   content: initialState?.currentUser?.name,
+    // },
     onPageChange: () => {
       const { location } = history;
       console.log(history);
