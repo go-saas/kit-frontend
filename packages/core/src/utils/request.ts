@@ -1,7 +1,7 @@
 import axios from 'axios';
 import storage from './storage';
 import { ACCESS_TOKEN_KEY, CSRF_TOKEN_KEY } from '@/enums/cacheEnum';
-import { getSettingTenantId } from './auth';
+import { getSettingTenantId, setSettingTenantId } from './auth';
 import type { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 import { ContentTypeEnum } from '@/enums/httpEnum';
 import { FriendlyError } from './errors';
@@ -52,23 +52,26 @@ export function authRequestInterceptor() {
   };
 }
 
-export function bizErrorInterceptor() {
-  return [
-    (resp: AxiosResponse) => {
-      return resp;
-    },
-    (error: any) => {
-      if (error.response) {
-        // Axios 的错误
-        // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
-        const data = error.response.data || {};
-        if (isErrorMessage(data)) {
-          return Promise.reject(new FriendlyError(data.code, data.reason, data.message, error));
-        }
-      }
-      return Promise.reject(error);
-    },
-  ];
+export function csrfRequestInterceptor() {
+  return function (config: AxiosRequestConfig) {
+    const csrf = storage.getCookie(CSRF_TOKEN_KEY);
+    config.headers = config.headers || {};
+    if (csrf) {
+      config.headers[CSRF_TOKEN_KEY] = csrf;
+    }
+    return config;
+  };
+}
+
+export function saasRequestInterceptor() {
+  return function (config: AxiosRequestConfig) {
+    const t = getSettingTenantId();
+    config.headers = config.headers || {};
+    if (t) {
+      config.headers['__tenant'] = t;
+    }
+    return config;
+  };
 }
 
 export function authRespInterceptor(unauthorizedAction?: () => void, forbiddenAction?: () => void) {
@@ -89,17 +92,6 @@ export function authRespInterceptor(unauthorizedAction?: () => void, forbiddenAc
   ];
 }
 
-export function csrfRequestInterceptor() {
-  return function (config: AxiosRequestConfig) {
-    const csrf = storage.getCookie(CSRF_TOKEN_KEY);
-    config.headers = config.headers || {};
-    if (csrf) {
-      config.headers[CSRF_TOKEN_KEY] = csrf;
-    }
-    return config;
-  };
-}
-
 export function csrfRespInterceptor() {
   return function (res: AxiosResponse) {
     if (res.headers[CSRF_TOKEN_KEY]) {
@@ -109,15 +101,40 @@ export function csrfRespInterceptor() {
   };
 }
 
-export function saasRequestInterceptor() {
-  return function (config: AxiosRequestConfig) {
-    const t = getSettingTenantId();
-    config.headers = config.headers || {};
-    if (t) {
-      config.headers['__tenant'] = t;
-    }
-    return config;
-  };
+export function bizErrorInterceptor() {
+  return [
+    (resp: AxiosResponse) => {
+      return resp;
+    },
+    (error: any) => {
+      if (error.response) {
+        // Axios 的错误
+        // 请求成功发出且服务器也响应了状态码，但状态代码超出了 2xx 的范围
+        const data = error.response.data || {};
+        if (isErrorMessage(data)) {
+          return Promise.reject(new FriendlyError(data.code, data.reason, data.message, error));
+        }
+      }
+      return Promise.reject(error);
+    },
+  ];
+}
+
+export function tenantErrorInterceptor() {
+  return [
+    (resp: AxiosResponse) => {
+      return resp;
+    },
+    (error: any) => {
+      if (error instanceof FriendlyError) {
+        if (['TENANT_NOT_FOUND', 'TENANT_FORBIDDEN'].includes(error.reason)) {
+          setSettingTenantId();
+          window.location.reload();
+        }
+      }
+      return Promise.reject(error);
+    },
+  ];
 }
 
 export function uploadFile<T = any>(
@@ -160,7 +177,6 @@ export function uploadFile<T = any>(
   });
 }
 
-//TODO check this
 export interface UploadApiResult {
   id: string;
   message: string;

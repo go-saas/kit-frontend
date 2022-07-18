@@ -11,7 +11,7 @@ import { FormattedMessage } from '@umijs/max';
 import { Button, Drawer, message, Switch } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import requestTransform from '@/utils/requestTransform';
+import { requestTransform } from '@kit/core';
 import type {
   V1CreateRoleRequest,
   V1UpdateRole,

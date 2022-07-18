@@ -10,7 +10,7 @@ import { FormattedMessage } from '@umijs/max';
 import { Button, Drawer, message, Image, Avatar } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import requestTransform from '@/utils/requestTransform';
+import { requestTransform } from '@kit/core';
 import type {
   V1CreateUserRequest,
   V1UpdateUser,

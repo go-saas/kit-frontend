@@ -16,6 +16,7 @@ import {
   authRespInterceptor,
   setSettingTenantId,
   bizErrorInterceptor,
+  tenantErrorInterceptor,
 } from '@kit/core';
 import type { UserInfo, UserTenantInfo } from '@kit/core';
 import { FriendlyError } from '@kit/core';
@@ -94,22 +95,6 @@ export async function getInitialState(): Promise<{
     settings: defaultSettings,
   };
 }
-
-// let extraRoutes: any;
-
-// export function patchClientRoutes({ routes }: { routes: RouteObject[] }) {
-//   // 根据 extraRoutes 对 routes 做一些修改
-//   console.log(routes);
-//   console.log(extraRoutes);
-// }
-
-// export function render(oldRender: () => void) {
-//   setDefaultAxiosFactory(getRequestInstance);
-//   getMenu().then((res) => {
-//     extraRoutes = res;
-//     oldRender();
-//   });
-// }
 
 async function getMenu() {
   const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
@@ -241,23 +226,6 @@ function errorInterceptor() {
           message.error(errorMessage);
       }
       return Promise.reject(new FriendlyError(code, errorCode, errorMessage));
-    },
-  ];
-}
-
-function tenantErrorInterceptor() {
-  return [
-    (resp: AxiosResponse) => {
-      return resp;
-    },
-    (error: any) => {
-      if (error instanceof FriendlyError) {
-        if (['TENANT_NOT_FOUND', 'TENANT_FORBIDDEN'].includes(error.reason)) {
-          setSettingTenantId();
-          window.location.reload();
-        }
-      }
-      return Promise.reject(error);
     },
   ];
 }

@@ -1,19 +1,20 @@
 export declare type SortOrder = 'descend' | 'ascend' | null;
 
-export default function transform<TData, TFilter>(
+export function requestTransform<TData, TFilter>(
   func: (req: TListRequest<TFilter>) => Promise<TPagedResult<TData>>,
 ): (
   params: TAntdReq | null,
   sort: Record<string, SortOrder>,
-  filter: Record<string, React.ReactText[] | null>,
+  filter: any,
 ) => Promise<TAntdList<TData>> {
   //TODO build query item
   return async (
     params: TAntdReq | null,
     sort: Record<string, SortOrder>,
-    filter: Record<string, React.ReactText[] | null>,
+    filter: any,
   ): Promise<TAntdList<TData>> => {
     const sorting: string[] = [];
+    console.log(filter);
     for (const k in sort) {
       if (sort[k] == 'descend') {
         sorting.push('-' + k);
