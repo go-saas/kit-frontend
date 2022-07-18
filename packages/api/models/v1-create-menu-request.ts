@@ -135,5 +135,11 @@ export interface V1CreateMenuRequest {
      * @memberof V1CreateMenuRequest
      */
     'microAppDev'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1CreateMenuRequest
+     */
+    'hideInMenu'?: boolean;
 }
 

@@ -24,7 +24,6 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.0",
-    "@openapitools/openapi-generator-cli": "^2.4.26",
     "typescript": "^4.4.4"
   }
 }

@@ -147,5 +147,11 @@ export interface V1Menu {
      * @memberof V1Menu
      */
     'microAppDev'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Menu
+     */
+    'hideInMenu'?: boolean;
 }
 
