@@ -41,6 +41,8 @@ export function transformMenu(allMenu: V1Menu[]) {
       if (i.children.length > 0) {
         //redirect到第一个
         i.routes = [{ path: i.path, redirect: i.routes[0].path }, ...i.routes];
+      } else {
+        i.children = undefined;
       }
     }
 
