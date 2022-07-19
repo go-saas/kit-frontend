@@ -18,7 +18,6 @@
     "lint:js": "eslint --cache --ext .js,.jsx,.ts,.tsx --format=pretty ./src",
     "lint:prettier": "prettier -c --write \"src/**/*\" --end-of-line auto",
     "playwright": "playwright install && playwright test",
-    "prepare": "husky install",
     "prettier": "prettier -c --write \"src/**/*\"",
     "serve": "umi-serve",
     "start": "cross-env UMI_ENV=dev max dev",
