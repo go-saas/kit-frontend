@@ -7,6 +7,7 @@ import { history } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { AccountApi, TenantServiceApi } from '@kit/api';
 import { message, notification } from 'antd';
+import { addLocale } from '@@/plugin-locale/localeExports';
 import type { RequestConfig } from 'umi';
 import {
   authRequestInterceptor,
@@ -21,12 +22,13 @@ import {
 import type { UserInfo, UserTenantInfo } from '@kit/core';
 import { FriendlyError } from '@kit/core';
 import { getRequestInstance } from '@@/plugin-request/request';
-import { setDefaultAxiosFactory, MenuServiceApi } from '@kit/api';
+import type { V1LocaleLanguage } from '@kit/api';
+import { setDefaultAxiosFactory, MenuServiceApi, LocaleServiceApi } from '@kit/api';
 import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';
 import { ErrorShowType } from '@/utils/errors';
 import TenantDropdown from '@/components/TenantDropdown';
-
+import pRetry from 'p-retry';
 // const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
@@ -47,12 +49,24 @@ export async function getInitialState(): Promise<{
 
   let currentTenant: UserTenantInfo | undefined = undefined;
 
+  await pRetry(
+    async () => {
+      const currentReps = await new TenantServiceApi().tenantServiceGetCurrentTenant();
+      currentTenant = currentReps.data as any as UserTenantInfo;
+    },
+    { forever: true, randomize: true, maxTimeout: 5000 },
+  );
+
   try {
-    const currentReps = await new TenantServiceApi().tenantServiceGetCurrentTenant();
-    currentTenant = currentReps.data as any as UserTenantInfo;
-  } catch (e) {
-    console.log(e);
-  }
+    const locales = await new LocaleServiceApi().localeServiceListMessages();
+    ((locales.data?.items as V1LocaleLanguage[] | undefined) ?? []).forEach((p) => {
+      const msg: Record<string, string> = {};
+      (p.msg ?? []).forEach((m) => {
+        msg[m.id!] = m.other!;
+      });
+      addLocale(p.name!, msg, { momentLocale: p.name!, antd: p.name! });
+    });
+  } catch (e) {}
 
   const changeTenant = async (idOrName: string) => {
     if (!idOrName) {
@@ -71,7 +85,6 @@ export async function getInitialState(): Promise<{
       const resp = await new AccountApi().accountGetProfile({ showType: ErrorShowType.SILENT });
       return resp.data as any as UserInfo;
     } catch (error) {
-      console.log(error);
       history.push(loginPath);
     }
     return undefined;
@@ -126,7 +139,6 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // },
     onPageChange: () => {
       const { location } = history;
-      console.log(history);
       // 如果没有登录，重定向到 login
       if (!initialState?.currentUser && location.pathname !== loginPath) {
         history.push(loginPath);

@@ -5,6 +5,7 @@ api/account-api.ts
 api/auth-api.ts
 api/auth-web-api.ts
 api/event-service-api.ts
+api/locale-service-api.ts
 api/menu-service-api.ts
 api/msg-service-api.ts
 api/permission-service-api.ts
@@ -67,6 +68,7 @@ models/v1-invite-user-reply.ts
 models/v1-invite-user-request.ts
 models/v1-list-menu-reply.ts
 models/v1-list-menu-request.ts
+models/v1-list-message-reply.ts
 models/v1-list-roles-request.ts
 models/v1-list-roles-response.ts
 models/v1-list-subject-permission-request.ts
@@ -75,6 +77,8 @@ models/v1-list-tenant-reply.ts
 models/v1-list-tenant-request.ts
 models/v1-list-users-request.ts
 models/v1-list-users-response.ts
+models/v1-locale-language.ts
+models/v1-locale-message.ts
 models/v1-login-auth-reply.ts
 models/v1-login-auth-request.ts
 models/v1-login-passwordless-reply.ts
@@ -83,6 +87,7 @@ models/v1-logout-request.ts
 models/v1-logout-response.ts
 models/v1-menu-filter.ts
 models/v1-menu.ts
+models/v1-message-filter.ts
 models/v1-message-proto.ts
 models/v1-oauth-client.ts
 models/v1-oauth-provider.ts

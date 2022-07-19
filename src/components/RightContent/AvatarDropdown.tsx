@@ -40,7 +40,7 @@ const loginOut = async () => {
   }
 };
 
-const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
+const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({}) => {
   const { initialState, setInitialState } = useModel('@@initialState');
 
   const onMenuClick = useCallback(
@@ -77,7 +77,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({ menu }) => {
   if (!currentUser || !currentUser.name) {
     return loading;
   }
-  console.log(menu);
+
   const menuItems: ItemType[] = [
     ...[
       {

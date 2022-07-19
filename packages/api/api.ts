@@ -18,6 +18,7 @@ export * from './api/account-api';
 export * from './api/auth-api';
 export * from './api/auth-web-api';
 export * from './api/event-service-api';
+export * from './api/locale-service-api';
 export * from './api/menu-service-api';
 export * from './api/msg-service-api';
 export * from './api/permission-service-api';
