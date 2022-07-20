@@ -6,7 +6,7 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { FormattedMessage, history, SelectLang, useIntl, useModel } from '@umijs/max';
+import { FormattedMessage, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, message, Tabs, Input } from 'antd';
 import type { InputRef } from 'antd';
 import React, { useState, useRef } from 'react';
@@ -87,7 +87,8 @@ const Login: React.FC = () => {
       const redirect =
         data.data.redirect || new URL(window.location.href).searchParams.get('redirect') || '/';
       console.log(redirect);
-      history.push(redirect);
+      //history.push(redirect);
+      window.location.replace(redirect);
       return;
       // 如果失败去设置用户错误信息
     } catch (error) {

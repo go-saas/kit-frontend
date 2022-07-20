@@ -7,6 +7,8 @@ import {
   ProForm,
   EditableProTable,
   ProFormTreeSelect,
+  ProFormRadio,
+  ProFormDependency,
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import React, { useState, useEffect } from 'react';
@@ -146,13 +148,88 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           defaultMessage: 'Menu Priority',
         })}
       />
-      <ProFormText
-        name="iframe"
+      <ProFormRadio.Group
+        name="component"
         label={intl.formatMessage({
-          id: 'sys.menu.iframe',
-          defaultMessage: 'Menu Iframe',
+          id: 'sys.menu.component',
+          defaultMessage: 'Component',
         })}
+        radioType="button"
+        valueEnum={{
+          NONE: {
+            text: <FormattedMessage id="sys.menu.component.none" defaultMessage="NONE" />,
+            status: 'Default',
+          },
+          IFRAME: {
+            text: <FormattedMessage id="sys.menu.component.iframe" defaultMessage="IFRAME" />,
+            status: 'Default',
+          },
+          MICROAPP: {
+            text: <FormattedMessage id="sys.menu.component.microapp" defaultMessage="MICROAPP" />,
+            status: 'Default',
+          },
+        }}
       />
+      <ProFormDependency name={['component']}>
+        {({ component }) => {
+          if (component == 'IFRAME') {
+            return (
+              <ProFormText
+                name="iframe"
+                label={intl.formatMessage({
+                  id: 'sys.menu.iframe',
+                  defaultMessage: 'Menu Iframe',
+                })}
+                rules={[{ required: true }]}
+              />
+            );
+          }
+          return <></>;
+        }}
+      </ProFormDependency>
+      <ProFormDependency name={['component']}>
+        {({ component }) => {
+          if (component == 'MICROAPP') {
+            return (
+              <>
+                <ProFormText
+                  name="microAppName"
+                  label={intl.formatMessage({
+                    id: 'sys.menu.microAppName',
+                    defaultMessage: 'MicroAppName',
+                  })}
+                  rules={[{ required: true }]}
+                />
+                <ProFormText
+                  name="microApp"
+                  label={intl.formatMessage({
+                    id: 'sys.menu.microApp',
+                    defaultMessage: 'MicroApp',
+                  })}
+                  rules={[{ required: true }]}
+                />
+                <ProFormText
+                  name="microAppDev"
+                  label={intl.formatMessage({
+                    id: 'sys.menu.microAppDev',
+                    defaultMessage: 'MicroAppDev',
+                  })}
+                  rules={[{ required: true }]}
+                />
+                <ProFormText
+                  name="microAppBaseRoute"
+                  label={intl.formatMessage({
+                    id: 'sys.menu.microAppBaseRoute',
+                    defaultMessage: 'MicroAppBaseRoute',
+                  })}
+                  rules={[{ required: true }]}
+                />
+              </>
+            );
+          }
+          return <></>;
+        }}
+      </ProFormDependency>
       <ProFormSwitch
         name="ignoreAuth"
         label={intl.formatMessage({

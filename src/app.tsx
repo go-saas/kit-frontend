@@ -1,6 +1,6 @@
 import RightContent from '@/components/RightContent';
 import { ProBreadcrumb } from '@ant-design/pro-components';
-import type { Settings as LayoutSettings } from '@ant-design/pro-components';
+import type { Settings as LayoutSettings, MenuDataItem } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
@@ -24,11 +24,15 @@ import { FriendlyError } from '@kit/core';
 import { getRequestInstance } from '@@/plugin-request/request';
 import type { V1LocaleLanguage } from '@kit/api';
 import { setDefaultAxiosFactory, MenuServiceApi, LocaleServiceApi } from '@kit/api';
+import type { Route } from '@/utils/menuTransform';
 import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';
 import { ErrorShowType } from '@/utils/errors';
 import TenantDropdown from '@/components/TenantDropdown';
 import pRetry from 'p-retry';
+import type { RouteObject } from 'react-router-dom';
+import { accessTree } from '@/utils/tree';
+
 // const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
@@ -45,8 +49,6 @@ export async function getInitialState(): Promise<{
   fetchUserInfo?: () => Promise<UserInfo | undefined>;
   changeTenant?: (name: string) => Promise<void>;
 }> {
-  setDefaultAxiosFactory(getRequestInstance);
-
   let currentTenant: UserTenantInfo | undefined = undefined;
 
   await pRetry(
@@ -109,10 +111,75 @@ export async function getInitialState(): Promise<{
   };
 }
 
+let initialMenus: MenuDataItem[] | undefined = undefined;
+
 async function getMenu() {
+  if (initialMenus) {
+    return initialMenus;
+  }
+  setDefaultAxiosFactory(getRequestInstance);
   const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
   const availableMenu = menuResp.data?.items ?? [];
-  return transformMenu(availableMenu);
+  initialMenus = transformMenu(availableMenu);
+  return initialMenus;
+}
+
+export async function qiankun() {
+  const apps: Record<string, any> = {};
+  const allMenus = await getMenu();
+  await accessTree<Route>(allMenus, async (t) => {
+    if ((t as Route).route?.type == 'microApp') {
+      const a = (t as Route).route!;
+      apps[a.microAppName!] = {
+        entry: a?.microAppEntry,
+        credentials: true,
+      };
+    }
+    return true;
+  });
+  const appArray = Object.keys(apps).map((key) => {
+    return { name: key, ...apps[key] };
+  });
+  console.log(appArray);
+  return {
+    apps: appArray,
+    lifeCycles: {
+      beforeLoad: (props: any) => {
+        console.log(props);
+      },
+      afterMount: (props: any) => {
+        console.log(props);
+      },
+    },
+  };
+}
+
+// 动态添加路由（含微应用路由）
+let extraRoutes: Route[] = [];
+export async function render(oldRender: () => any) {
+  extraRoutes = await getMenu();
+
+  // await accessTree<Route>(allMenus, async (t) => {
+  //   if ((t as Route).route) {
+  //     //omit id
+  //     const { id, ...data } = t as Route;
+  //     extraRoutes.push(data);
+  //   }
+  //   return true;
+  // });
+  oldRender();
+}
+
+export function patchClientRoutes(params: { routes: RouteObject[] }) {
+  console.log(extraRoutes);
+  const withLayout = params.routes.find((p) => (p as any).id == 'ant-design-pro-layout')!.children!;
+  extraRoutes.forEach((it) => {
+    if (!withLayout.find((p) => p.path == it.path)) {
+      //need add route
+      withLayout!.unshift(it);
+    }
+  });
+  console.log(params.routes);
 }
 
 // ProLayout 支持的api https://procomponents.ant.design/components/layout

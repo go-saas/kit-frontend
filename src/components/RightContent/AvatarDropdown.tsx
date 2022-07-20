@@ -33,10 +33,16 @@ const loginOut = async () => {
   }
 
   if (window.location.pathname !== '/user/login' && !redirect) {
-    history.replace({
-      pathname: '/user/login',
-      search: newSearch,
-    });
+    // history.replace({
+    //   pathname: '/user/login',
+    //   search: newSearch,
+    // });
+    const currentPath = window.location + '';
+
+    const url = new URL(currentPath);
+    url.pathname = '/user/login';
+    url.search = newSearch;
+    window.location.replace(url.href);
   }
 };
 

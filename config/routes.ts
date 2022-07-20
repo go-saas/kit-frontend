@@ -57,12 +57,6 @@
       ],
     },
     {
-      path: '/iframe/*',
-      name: 'iframe',
-      icon: 'smile',
-      component: '../components/Iframe',
-    },
-    {
       name: 'dashboard',
       icon: 'table',
       routes: [
