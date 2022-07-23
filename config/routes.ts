@@ -45,6 +45,16 @@
       ],
     },
     {
+      path: '/oidc',
+      icon: 'smile',
+      routes: [
+        {
+          path: '/oidc/clients',
+          component: './Oidc/Client',
+        },
+      ],
+    },
+    {
       path: '/saas',
       name: 'saas',
       icon: 'smile',
