@@ -9,10 +9,11 @@ import {
 import { FormattedMessage, SelectLang, useIntl, useModel } from '@umijs/max';
 import { Alert, message, Tabs, Input } from 'antd';
 import type { InputRef } from 'antd';
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from './index.less';
 import { AuthWebApi } from '@kit/api';
 import { useMount } from 'ahooks';
+import { useSearchParams } from 'umi';
 const { Search } = Input;
 const LoginMessage: React.FC<{
   content: string;
@@ -49,7 +50,24 @@ const Login: React.FC = () => {
   const [tenantSwitching, setTenantSwitching] = useState<boolean>(false);
 
   const intl = useIntl();
+  const [searchParams] = useSearchParams();
 
+  const [redirect, setRedirect] = useState<string>();
+  const [currentLoginChallenge, setCurrentLoginChallenge] = useState<string>();
+
+  useEffect(() => {
+    const r = searchParams.get('redirect') || '/';
+    setRedirect(r);
+    const loginChallenge = searchParams.get('login_challenge') || undefined;
+    new AuthWebApi().authWebGetWebLogin({ redirect: r, loginChallenge }).then((resp) => {
+      const data = resp.data ?? {};
+      //TODO oauth providers
+      if (data.redirect) {
+        setRedirect(data.redirect);
+      }
+      setCurrentLoginChallenge(data.challenge);
+    });
+  }, [searchParams]);
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
     if (userInfo) {
@@ -76,19 +94,24 @@ const Login: React.FC = () => {
     try {
       // 登录
       const data = await new AuthWebApi().authWebWebLogin({
-        body: { username: values.username, password: values.password, remember: values.autoLogin },
+        body: {
+          username: values.username,
+          password: values.password,
+          remember: values.autoLogin,
+          challenge: currentLoginChallenge,
+        },
       });
+      console.log(data.data);
       const defaultLoginSuccessMessage = intl.formatMessage({
         id: 'pages.login.success',
         defaultMessage: '登录成功！',
       });
       message.success(defaultLoginSuccessMessage);
       await fetchUserInfo();
-      const redirect =
-        data.data.redirect || new URL(window.location.href).searchParams.get('redirect') || '/';
-      console.log(redirect);
+      const finalRedirect = data.data?.redirect || redirect || '/';
+      console.log(finalRedirect);
       //history.push(redirect);
-      window.location.replace(redirect);
+      window.location.replace(finalRedirect);
       return;
       // 如果失败去设置用户错误信息
     } catch (error) {
@@ -101,6 +124,7 @@ const Login: React.FC = () => {
 
   const inputRef = useRef<InputRef>(null);
   useMount(() => inputRef.current!.focus());
+
   return (
     <div className={styles.container}>
       <div className={styles.lang} data-lang>

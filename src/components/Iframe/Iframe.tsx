@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { Spin } from 'antd';
-import { useSearchParams } from 'umi';
 import styles from './index.less';
 export type IFrameProps = {
   frameSrc: string;
 };
 const Iframe: React.FC<IFrameProps> = (props) => {
   const [loading, setLoading] = useState<boolean>(true);
-  const [searchParams] = useSearchParams();
-  let url = (props.frameSrc || searchParams.get('url')) ?? '';
+  let url = props.frameSrc || '';
   if (!url.startsWith('http') && !url.startsWith('https')) {
     url = window.location.protocol + '//' + window.location.host + url;
   }

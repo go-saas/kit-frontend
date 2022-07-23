@@ -93,8 +93,8 @@ const TableList: React.FC = () => {
         },
       },
       {
-        title: <FormattedMessage id="oidc.client.name" defaultMessage="Client Name" />,
-        dataIndex: 'clientName',
+        title: <FormattedMessage id="oidc.client.id" defaultMessage="Client Id" />,
+        dataIndex: 'clientId',
         valueType: 'text',
         render: (dom, entity) => {
           return (
@@ -108,6 +108,11 @@ const TableList: React.FC = () => {
             </a>
           );
         },
+      },
+      {
+        title: <FormattedMessage id="oidc.client.name" defaultMessage="Client Name" />,
+        dataIndex: 'clientName',
+        valueType: 'text',
       },
       {
         title: <FormattedMessage id="oidc.client.uri" defaultMessage="Client Uri" />,
