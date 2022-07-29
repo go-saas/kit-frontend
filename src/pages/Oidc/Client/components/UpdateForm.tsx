@@ -152,6 +152,12 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           id: 'oidc.client.grantTypes',
           defaultMessage: 'Client GrantTypes',
         })}
+        valueEnum={{
+          authorization_code: 'authorization_code',
+          implicit: 'implicit',
+          client_credentials: 'client_credentials',
+          refresh_token: 'refresh_token',
+        }}
       />
       <ProFormText
         name="owner"
@@ -219,6 +225,14 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           id: 'oidc.client.responseTypes',
           defaultMessage: 'Client ResponseTypes',
         })}
+        valueEnum={{
+          code: 'code',
+          'code id_token': 'code id_token',
+          id_token: 'id_token',
+          'token id_token': 'token id_token',
+          token: 'token',
+          'token id_token code': 'token id_token code',
+        }}
       />
       <ProFormText
         name="scope"
@@ -226,20 +240,31 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           id: 'oidc.client.scope',
           defaultMessage: 'Client Scope',
         })}
+        tooltip="offline_access offline openid"
       />
-      <ProFormText
+      <ProFormSelect
         name="subjectType"
         label={intl.formatMessage({
           id: 'oidc.client.subjectType',
           defaultMessage: 'Client SubjectType',
         })}
+        valueEnum={{
+          pairwise: 'pairwise',
+          public: 'public',
+        }}
       />
-      <ProFormText
+      <ProFormSelect
         name="tokenEndpointAuthMethod"
         label={intl.formatMessage({
           id: 'oidc.client.tokenEndpointAuthMethod',
           defaultMessage: 'Client TokenEndpointAuthMethod',
         })}
+        valueEnum={{
+          client_secret_post: 'client_secret_post',
+          client_secret_basic: 'client_secret_basic',
+          private_key_jwt: 'private_key_jwt',
+          none: 'none',
+        }}
       />
       <ProFormText
         name="tokenEndpointAuthSigningAlg"
@@ -255,12 +280,16 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           defaultMessage: 'Client TosUri',
         })}
       />
-      <ProFormText
+      <ProFormSelect
         name="userinfoSignedResponseAlg"
         label={intl.formatMessage({
           id: 'oidc.client.userinfoSignedResponseAlg',
           defaultMessage: 'Client UserinfoSignedResponseAlg',
         })}
+        valueEnum={{
+          none: 'none',
+          RS256: 'RS256',
+        }}
       />
     </DrawerForm>
   );

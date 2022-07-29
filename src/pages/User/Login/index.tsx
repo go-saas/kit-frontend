@@ -6,8 +6,8 @@ import {
   ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
-import { FormattedMessage, SelectLang, useIntl, useModel } from '@umijs/max';
-import { Alert, message, Tabs, Input } from 'antd';
+import { FormattedMessage, SelectLang, useIntl, useModel, history } from '@umijs/max';
+import { Alert, message, Tabs, Input, Skeleton } from 'antd';
 import type { InputRef } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 import styles from './index.less';
@@ -55,18 +55,27 @@ const Login: React.FC = () => {
   const [redirect, setRedirect] = useState<string>();
   const [currentLoginChallenge, setCurrentLoginChallenge] = useState<string>();
 
+  const [loading, setLoading] = useState<boolean>();
+
   useEffect(() => {
     const r = searchParams.get('redirect') || '/';
     setRedirect(r);
     const loginChallenge = searchParams.get('login_challenge') || undefined;
-    new AuthWebApi().authWebGetWebLogin({ redirect: r, loginChallenge }).then((resp) => {
-      const data = resp.data ?? {};
-      //TODO oauth providers
-      if (data.redirect) {
-        setRedirect(data.redirect);
-      }
-      setCurrentLoginChallenge(data.challenge);
-    });
+    setLoading(true);
+    new AuthWebApi()
+      .authWebGetWebLogin({ redirect: r, loginChallenge })
+      .then((resp) => {
+        const data = resp.data ?? {};
+        //TODO oauth providers
+        if (data.redirect) {
+          //go redirect
+          history.push(data.redirect);
+        }
+        setCurrentLoginChallenge(data.challenge);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   }, [searchParams]);
   const fetchUserInfo = async () => {
     const userInfo = await initialState?.fetchUserInfo?.();
@@ -101,7 +110,6 @@ const Login: React.FC = () => {
           challenge: currentLoginChallenge,
         },
       });
-      console.log(data.data);
       const defaultLoginSuccessMessage = intl.formatMessage({
         id: 'pages.login.success',
         defaultMessage: '登录成功！',
@@ -109,17 +117,15 @@ const Login: React.FC = () => {
       message.success(defaultLoginSuccessMessage);
       await fetchUserInfo();
       const finalRedirect = data.data?.redirect || redirect || '/';
-      console.log(finalRedirect);
       //history.push(redirect);
       window.location.replace(finalRedirect);
       return;
-      // 如果失败去设置用户错误信息
     } catch (error) {
       setUserLoginState({ status: 'error', type: 'account' });
     }
   };
   const { status, type: loginType } = userLoginState;
-  const titile = initialState?.currentTenant?.tenant?.displayName || 'GO SAAS KIT';
+  const titile = initialState?.currentTenant?.tenant?.displayName || '';
   const logo = initialState?.currentTenant?.tenant?.logo?.url || '/logo.svg';
 
   const inputRef = useRef<InputRef>(null);
@@ -146,185 +152,187 @@ const Login: React.FC = () => {
             await handleSubmit(values as LoginParams);
           }}
         >
-          <Search
-            placeholder={intl.formatMessage({
-              id: 'saas.switch.placeholder',
-            })}
-            enterButton={intl.formatMessage({
-              id: 'saas.switch',
-            })}
-            defaultValue={initialState?.currentTenant?.tenant?.name || ''}
-            size="large"
-            onSearch={onSwitch}
-            loading={tenantSwitching}
-          />
-          <Tabs activeKey={type} onChange={setType}>
-            <Tabs.TabPane
-              key="account"
-              tab={intl.formatMessage({
-                id: 'pages.login.accountLogin.tab',
-                defaultMessage: '账户密码登录',
+          <Skeleton loading={loading} active>
+            <Search
+              placeholder={intl.formatMessage({
+                id: 'saas.switch.placeholder',
               })}
+              enterButton={intl.formatMessage({
+                id: 'saas.switch',
+              })}
+              defaultValue={initialState?.currentTenant?.tenant?.name || ''}
+              size="large"
+              onSearch={onSwitch}
+              loading={tenantSwitching}
             />
-            {/* <Tabs.TabPane
+            <Tabs activeKey={type} onChange={setType}>
+              <Tabs.TabPane
+                key="account"
+                tab={intl.formatMessage({
+                  id: 'pages.login.accountLogin.tab',
+                  defaultMessage: '账户密码登录',
+                })}
+              />
+              {/* <Tabs.TabPane
               key="mobile"
               tab={intl.formatMessage({
                 id: 'pages.login.phoneLogin.tab',
                 defaultMessage: '手机号登录',
               })}
             /> */}
-          </Tabs>
+            </Tabs>
 
-          {status === 'error' && loginType === 'account' && (
-            <LoginMessage
-              content={intl.formatMessage({
-                id: 'pages.login.accountLogin.errorMessage',
-                defaultMessage: '凭证或密码错误',
-              })}
-            />
-          )}
-          {type === 'account' && (
-            <>
-              <ProFormText
-                name="username"
-                fieldProps={{
-                  ref: inputRef,
-                  size: 'large',
-                  prefix: <UserOutlined className={styles.prefixIcon} />,
-                }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.username.placeholder',
-                  defaultMessage: '用户名或邮箱',
+            {status === 'error' && loginType === 'account' && (
+              <LoginMessage
+                content={intl.formatMessage({
+                  id: 'pages.login.accountLogin.errorMessage',
+                  defaultMessage: '凭证或密码错误',
                 })}
-                rules={[
-                  {
-                    required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.username.required"
-                        defaultMessage="请输入用户名或者邮箱!"
-                      />
-                    ),
-                  },
-                ]}
               />
-              <ProFormText.Password
-                name="password"
-                fieldProps={{
-                  size: 'large',
-                  prefix: <LockOutlined className={styles.prefixIcon} />,
-                }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.password.placeholder',
-                  defaultMessage: '密码',
-                })}
-                rules={[
-                  {
-                    required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.password.required"
-                        defaultMessage="请输入密码！"
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </>
-          )}
+            )}
+            {type === 'account' && (
+              <>
+                <ProFormText
+                  name="username"
+                  fieldProps={{
+                    ref: inputRef,
+                    size: 'large',
+                    prefix: <UserOutlined className={styles.prefixIcon} />,
+                  }}
+                  placeholder={intl.formatMessage({
+                    id: 'pages.login.username.placeholder',
+                    defaultMessage: '用户名或邮箱',
+                  })}
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.username.required"
+                          defaultMessage="请输入用户名或者邮箱!"
+                        />
+                      ),
+                    },
+                  ]}
+                />
+                <ProFormText.Password
+                  name="password"
+                  fieldProps={{
+                    size: 'large',
+                    prefix: <LockOutlined className={styles.prefixIcon} />,
+                  }}
+                  placeholder={intl.formatMessage({
+                    id: 'pages.login.password.placeholder',
+                    defaultMessage: '密码',
+                  })}
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.password.required"
+                          defaultMessage="请输入密码！"
+                        />
+                      ),
+                    },
+                  ]}
+                />
+              </>
+            )}
 
-          {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
-          {type === 'mobile' && (
-            <>
-              <ProFormText
-                fieldProps={{
-                  size: 'large',
-                  prefix: <MobileOutlined className={styles.prefixIcon} />,
-                }}
-                name="mobile"
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.phoneNumber.placeholder',
-                  defaultMessage: '手机号',
-                })}
-                rules={[
-                  {
-                    required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.phoneNumber.required"
-                        defaultMessage="请输入手机号！"
-                      />
-                    ),
-                  },
-                  {
-                    pattern: /^1\d{10}$/,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.phoneNumber.invalid"
-                        defaultMessage="手机号格式错误！"
-                      />
-                    ),
-                  },
-                ]}
-              />
-              <ProFormCaptcha
-                fieldProps={{
-                  size: 'large',
-                  prefix: <LockOutlined className={styles.prefixIcon} />,
-                }}
-                captchaProps={{
-                  size: 'large',
-                }}
-                placeholder={intl.formatMessage({
-                  id: 'pages.login.captcha.placeholder',
-                  defaultMessage: '请输入验证码',
-                })}
-                captchaTextRender={(timing, count) => {
-                  if (timing) {
-                    return `${count} ${intl.formatMessage({
-                      id: 'pages.getCaptchaSecondText',
+            {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+            {type === 'mobile' && (
+              <>
+                <ProFormText
+                  fieldProps={{
+                    size: 'large',
+                    prefix: <MobileOutlined className={styles.prefixIcon} />,
+                  }}
+                  name="mobile"
+                  placeholder={intl.formatMessage({
+                    id: 'pages.login.phoneNumber.placeholder',
+                    defaultMessage: '手机号',
+                  })}
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.phoneNumber.required"
+                          defaultMessage="请输入手机号！"
+                        />
+                      ),
+                    },
+                    {
+                      pattern: /^1\d{10}$/,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.phoneNumber.invalid"
+                          defaultMessage="手机号格式错误！"
+                        />
+                      ),
+                    },
+                  ]}
+                />
+                <ProFormCaptcha
+                  fieldProps={{
+                    size: 'large',
+                    prefix: <LockOutlined className={styles.prefixIcon} />,
+                  }}
+                  captchaProps={{
+                    size: 'large',
+                  }}
+                  placeholder={intl.formatMessage({
+                    id: 'pages.login.captcha.placeholder',
+                    defaultMessage: '请输入验证码',
+                  })}
+                  captchaTextRender={(timing, count) => {
+                    if (timing) {
+                      return `${count} ${intl.formatMessage({
+                        id: 'pages.getCaptchaSecondText',
+                        defaultMessage: '获取验证码',
+                      })}`;
+                    }
+                    return intl.formatMessage({
+                      id: 'pages.login.phoneLogin.getVerificationCode',
                       defaultMessage: '获取验证码',
-                    })}`;
-                  }
-                  return intl.formatMessage({
-                    id: 'pages.login.phoneLogin.getVerificationCode',
-                    defaultMessage: '获取验证码',
-                  });
-                }}
-                name="captcha"
-                rules={[
-                  {
-                    required: true,
-                    message: (
-                      <FormattedMessage
-                        id="pages.login.captcha.required"
-                        defaultMessage="请输入验证码！"
-                      />
-                    ),
-                  },
-                ]}
-                onGetCaptcha={async () => {
-                  message.success('获取验证码成功！验证码为：1234');
-                }}
-              />
-            </>
-          )}
-          <div
-            style={{
-              marginBottom: 24,
-            }}
-          >
-            <ProFormCheckbox noStyle name="autoLogin">
-              <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
-            </ProFormCheckbox>
-            <a
+                    });
+                  }}
+                  name="captcha"
+                  rules={[
+                    {
+                      required: true,
+                      message: (
+                        <FormattedMessage
+                          id="pages.login.captcha.required"
+                          defaultMessage="请输入验证码！"
+                        />
+                      ),
+                    },
+                  ]}
+                  onGetCaptcha={async () => {
+                    message.success('获取验证码成功！验证码为：1234');
+                  }}
+                />
+              </>
+            )}
+            <div
               style={{
-                float: 'right',
+                marginBottom: 24,
               }}
             >
-              <FormattedMessage id="pages.login.forgotPassword" defaultMessage="忘记密码" />
-            </a>
-          </div>
+              <ProFormCheckbox noStyle name="autoLogin">
+                <FormattedMessage id="pages.login.rememberMe" defaultMessage="自动登录" />
+              </ProFormCheckbox>
+              <a
+                style={{
+                  float: 'right',
+                }}
+              >
+                <FormattedMessage id="pages.login.forgotPassword" defaultMessage="忘记密码" />
+              </a>
+            </div>
+          </Skeleton>
         </LoginForm>
       </div>
       <Footer />

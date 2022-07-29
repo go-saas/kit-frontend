@@ -1,6 +1,6 @@
 import RightContent from '@/components/RightContent';
 import { ProBreadcrumb } from '@ant-design/pro-components';
-import type { Settings as LayoutSettings, MenuDataItem } from '@ant-design/pro-components';
+import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
@@ -92,36 +92,33 @@ export async function getInitialState(): Promise<{
     return undefined;
   };
 
-  // 如果不是登录页面，执行
-  if (history.location.pathname !== loginPath) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      currentTenant,
-      changeTenant,
-      settings: defaultSettings,
-    };
-  }
+  const currentUser = await fetchUserInfo();
   return {
     fetchUserInfo,
+    currentUser,
     currentTenant,
     changeTenant,
     settings: defaultSettings,
   };
 }
 
-let initialMenus: MenuDataItem[] | undefined = undefined;
+let initialMenus: Route[] | undefined = undefined;
 
 async function getMenu() {
   if (initialMenus) {
     return initialMenus;
   }
   setDefaultAxiosFactory(getRequestInstance);
-  const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
-  const availableMenu = menuResp.data?.items ?? [];
-  initialMenus = transformMenu(availableMenu);
-  return initialMenus;
+  await pRetry(
+    async () => {
+      const menuResp = await new MenuServiceApi().menuServiceGetAvailableMenus();
+      const availableMenu = menuResp.data?.items ?? [];
+      initialMenus = transformMenu(availableMenu);
+    },
+    { forever: true, randomize: true, maxTimeout: 5000 },
+  );
+
+  return initialMenus!;
 }
 
 export async function qiankun() {

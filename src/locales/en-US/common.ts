@@ -11,4 +11,6 @@ export default {
   'common.createdAt': 'Creation Time',
   'common.updatedAt': 'Update Time',
   'common.operate': 'Operate',
+  'common.deny': 'Deny',
+  'common.allow': 'Allow',
 };

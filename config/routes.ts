@@ -11,6 +11,16 @@
           component: './User/Login',
         },
         {
+          name: 'consent',
+          path: '/user/consent',
+          component: './User/Consent',
+        },
+        {
+          name: 'logout',
+          path: '/user/logout',
+          component: './User/Logout',
+        },
+        {
           component: './404',
         },
       ],

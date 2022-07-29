@@ -11,4 +11,6 @@ export default {
   'common.createdAt': '创建时间',
   'common.updatedAt': '更新时间',
   'common.operate': '操作',
+  'common.deny': '拒绝',
+  'common.allow': '允许',
 };

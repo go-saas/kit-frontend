@@ -25,24 +25,48 @@ export interface V1OAuthClient {
      * @type {string}
      * @memberof V1OAuthClient
      */
-    'id'?: string;
+    'clientId'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof V1OAuthClient
      */
-    'name'?: string;
+    'clientName'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof V1OAuthClient
      */
-    'logoUrl'?: string;
+    'clientUri'?: string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof V1OAuthClient
+     */
+    'contacts'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1OAuthClient
+     */
+    'logoUri'?: string | null;
     /**
      * 
      * @type {object}
      * @memberof V1OAuthClient
      */
-    'metadata'?: object;
+    'metadata'?: object | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1OAuthClient
+     */
+    'owner'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1OAuthClient
+     */
+    'policyUri'?: string | null;
 }
 
