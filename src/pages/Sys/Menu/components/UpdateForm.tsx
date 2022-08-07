@@ -141,6 +141,13 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           defaultMessage: 'Menu Route',
         })}
       />
+      <ProFormSwitch
+        name="hideInMenu"
+        label={intl.formatMessage({
+          id: 'sys.menu.hideInMenu',
+          defaultMessage: 'Hide In Menu (Route Only)',
+        })}
+      />
       <ProFormDigit
         name="priority"
         label={intl.formatMessage({

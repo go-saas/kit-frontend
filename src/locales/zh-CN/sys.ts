@@ -29,6 +29,7 @@ export default {
   'sys.menu.icon': '图标',
   'sys.menu.name': '名称',
   'sys.menu.title': '标题',
+  'sys.menu.hideInMenu': '隐藏(只控制路由)',
   'sys.menu.path': '路由路径',
   'sys.menu.priority': '优先级(越小越前)',
   'sys.menu.ignoreAuth': '无需权限',
