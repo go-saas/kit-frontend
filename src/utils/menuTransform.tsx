@@ -37,6 +37,7 @@ export function transformMenu(allMenu: V1Menu[]) {
           //component: p.component,
           requirment: p.requirement,
           key: p.id,
+          hideInMenu: p.hideInMenu,
         };
         if (p.iframe) {
           item.route = {
