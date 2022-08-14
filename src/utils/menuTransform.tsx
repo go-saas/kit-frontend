@@ -3,7 +3,7 @@ import type { MenuDataItem } from '@ant-design/pro-layout';
 import * as allIcons from '@ant-design/icons';
 import type { V1Menu, V1PermissionRequirement } from '@kit/api';
 import Iframe from '@/components/Iframe';
-import { MicroAppWithMemoHistory } from 'umi';
+import MicroApp from '@/components/MicroApp';
 const isDev = process.env.NODE_ENV === 'development';
 
 export declare type RouteData = {
@@ -46,14 +46,15 @@ export function transformMenu(allMenu: V1Menu[]) {
           item.element = <Iframe key={p.id!} frameSrc={p.iframe!} />;
         }
         if (p.microAppName) {
+          const entry = isDev ? p.microAppDev : p.microApp;
           item.route = {
             microAppName: p.microAppName,
-            microAppEntry: isDev ? p.microAppDev : p.microApp,
+            microAppEntry: entry,
             microAppBasename: p.microAppBaseRoute,
             type: 'microApp',
           };
           item.element = (
-            <MicroAppWithMemoHistory key={p.id!} name={p.microAppName} url={p.microAppBaseRoute} />
+            <MicroApp key={p.id!} name={p.microAppName} url={p.microAppBaseRoute!} entry={entry} />
           );
         }
 
