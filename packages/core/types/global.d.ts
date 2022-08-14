@@ -15,4 +15,8 @@ declare global {
   };
   declare type TimeoutHandle = ReturnType<typeof setTimeout>;
   declare type IntervalHandle = ReturnType<typeof setInterval>;
+
+  interface Window {
+    __POWERED_BY_QIANKUN__: bool;
+  }
 }
