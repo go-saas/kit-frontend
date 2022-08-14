@@ -10,9 +10,12 @@ const App: React.FC<MicroAppPros> = (props) => {
   const location = useLocation();
   const [searchParams] = useSearchParams();
   let e = props.entry;
-  if (e.startsWith('//')) {
+  if (e.startsWith('http://') || e.startsWith('https://')) {
+  } else if (e.startsWith('//')) {
     //handle entry without protocol
     e = window.location.protocol + e;
+  } else {
+    e = new URL(e, window.location.host).href;
   }
 
   const entry = new URL(e);
