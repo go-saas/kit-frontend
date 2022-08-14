@@ -1,4 +1,4 @@
-import { MicroAppWithMemoHistory, useLocation } from '@umijs/max';
+import { MicroAppWithMemoHistory, useLocation, useSearchParams } from '@umijs/max';
 
 export type MicroAppPros = {
   name: string;
@@ -8,6 +8,7 @@ export type MicroAppPros = {
 
 const App: React.FC<MicroAppPros> = (props) => {
   const location = useLocation();
+  const [searchParams] = useSearchParams();
   let e = props.entry;
   if (e.startsWith('//')) {
     //handle entry without protocol
@@ -27,8 +28,16 @@ const App: React.FC<MicroAppPros> = (props) => {
   }
 
   url = entry.pathname + url.slice(1);
-  console.log(url);
+  const hostPrefix = entry.protocol + '//' + entry.hostname;
+  const newUrl = new URL(hostPrefix);
+  newUrl.hash = location.hash;
+  newUrl.pathname = url;
 
+  for (const [key, value] of searchParams) {
+    newUrl.searchParams.set(key, value);
+  }
+  url = newUrl.href.slice(hostPrefix.length);
+  console.log(url);
   return <MicroAppWithMemoHistory key={url} name={props.name} url={url} />;
 };
 export default App;
