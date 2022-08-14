@@ -15,7 +15,7 @@ const App: React.FC<MicroAppPros> = (props) => {
     //handle entry without protocol
     e = window.location.protocol + e;
   } else {
-    e = new URL(e, window.location.host).href;
+    e = new URL(e, window.location.protocol + '//' + window.location.host).href;
   }
 
   const entry = new URL(e);
