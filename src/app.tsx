@@ -202,11 +202,11 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     //   content: initialState?.currentUser?.name,
     // },
     onPageChange: () => {
-      const { location } = history;
+      // const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
-        history.push(loginPath);
-      }
+      // if (!initialState?.currentUser && location.pathname !== loginPath) {
+      //   history.push(loginPath);
+      // }
     },
     menuHeaderRender: undefined,
     headerContentRender: () => {
