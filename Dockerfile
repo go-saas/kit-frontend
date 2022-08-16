@@ -5,7 +5,7 @@ ARG EXTRA_ROUTES
 ENV EXTRA_ROUTES $EXTRA_ROUTES
 WORKDIR /usr/app
 
-RUN npm install -g pnpm@7.4.1
+RUN npm install -g pnpm@7.9.0
 
 
 COPY .npmrc ./
