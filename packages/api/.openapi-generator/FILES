@@ -10,6 +10,7 @@ api/key-service-api.ts
 api/locale-service-api.ts
 api/menu-service-api.ts
 api/msg-service-api.ts
+api/notification-service-api.ts
 api/permission-service-api.ts
 api/role-service-api.ts
 api/tenant-service-api.ts
@@ -27,6 +28,7 @@ models/client-service-update-oauth2-client-request.ts
 models/data-address.ts
 models/data-dynamic-value.ts
 models/event-service-event-request.ts
+models/googlerpc-status.ts
 models/index.ts
 models/key-json-web-key-set-generator-request.ts
 models/key-jsonweb-key-set.ts
@@ -34,6 +36,7 @@ models/key-jsonweb-key.ts
 models/key-service-create-json-web-key-set-request.ts
 models/key-service-update-json-web-key-request.ts
 models/key-service-update-json-web-key-set-request.ts
+models/operation-boolean-filter-operators.ts
 models/operation-date-filter-operators.ts
 models/operation-string-filter-operation.ts
 models/permissionv1-permission-def-group.ts
@@ -41,7 +44,6 @@ models/permissionv1-permission-def.ts
 models/protobuf-any.ts
 models/protobuf-null-value.ts
 models/role-service-update-role-permission-request.ts
-models/rpc-status.ts
 models/search-user-response-search-user.ts
 models/userv1-user-role.ts
 models/v1-add-subject-permission-request.ts
@@ -57,6 +59,7 @@ models/v1-create-role-request.ts
 models/v1-create-tenant-request.ts
 models/v1-create-user-request.ts
 models/v1-delete-menu-reply.ts
+models/v1-delete-notification-reply.ts
 models/v1-delete-tenant-reply.ts
 models/v1-effect.ts
 models/v1-forget-password-reply.ts
@@ -83,6 +86,8 @@ models/v1-invite-user-request.ts
 models/v1-list-menu-reply.ts
 models/v1-list-menu-request.ts
 models/v1-list-message-reply.ts
+models/v1-list-notification-reply.ts
+models/v1-list-notification-request.ts
 models/v1-list-roles-request.ts
 models/v1-list-roles-response.ts
 models/v1-list-subject-permission-request.ts
@@ -103,6 +108,8 @@ models/v1-menu-filter.ts
 models/v1-menu.ts
 models/v1-message-filter.ts
 models/v1-message-proto.ts
+models/v1-notification-filter.ts
+models/v1-notification.ts
 models/v1-oauth-client.ts
 models/v1-oauth-provider.ts
 models/v1-passwordless-token-auth-reply.ts
