@@ -1,149 +1,161 @@
-import { getNotices } from '@/services/ant-design-pro/api';
-import { useRequest } from '@umijs/max';
-import { message, Tag } from 'antd';
-import { groupBy } from 'lodash';
-import moment from 'moment';
+import type { V1Notification } from '@kit/api';
+import { NotificationServiceApi } from '@kit/api';
+import { Card, Space, Switch } from 'antd';
+import { Avatar, Divider, List, Skeleton, Badge } from 'antd';
 import { useEffect, useState } from 'react';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './index.less';
-import NoticeIcon from './NoticeIcon';
-
+import { BellOutlined, DeleteOutlined } from '@ant-design/icons';
+import classNames from 'classnames';
+import HeaderDropdown from '../HeaderDropdown';
 export type GlobalHeaderRightProps = {
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
   onNoticeClear?: (tabName?: string) => void;
 };
 
-const getNoticeData = (notices: API.NoticeIconItem[]): Record<string, API.NoticeIconItem[]> => {
-  if (!notices || notices.length === 0 || !Array.isArray(notices)) {
-    return {};
-  }
-
-  const newNotices = notices.map((notice) => {
-    const newNotice = { ...notice };
-
-    if (newNotice.datetime) {
-      newNotice.datetime = moment(notice.datetime as string).fromNow();
-    }
-
-    if (newNotice.id) {
-      newNotice.key = newNotice.id;
-    }
-
-    if (newNotice.extra && newNotice.status) {
-      const color = {
-        todo: '',
-        processing: 'blue',
-        urgent: 'red',
-        doing: 'gold',
-      }[newNotice.status];
-      newNotice.extra = (
-        <Tag
-          color={color}
-          style={{
-            marginRight: 0,
-          }}
-        >
-          {newNotice.extra}
-        </Tag>
-      ) as any;
-    }
-
-    return newNotice;
-  });
-  return groupBy(newNotices, 'type');
-};
-
-const getUnreadData = (noticeData: Record<string, API.NoticeIconItem[]>) => {
-  const unreadMsg: Record<string, number> = {};
-  Object.keys(noticeData).forEach((key) => {
-    const value = noticeData[key];
-
-    if (!unreadMsg[key]) {
-      unreadMsg[key] = 0;
-    }
-
-    if (Array.isArray(value)) {
-      unreadMsg[key] = value.filter((item) => !item.read).length;
-    }
-  });
-  return unreadMsg;
-};
-
 const NoticeIconView: React.FC = () => {
-  const [notices, setNotices] = useState<API.NoticeIconItem[]>([]);
-  const { data } = useRequest(getNotices);
+  const service = new NotificationServiceApi();
+  const [loading, setLoading] = useState(false);
+
+  const [notices, setNotices] = useState<V1Notification[]>([]);
+  const [pageToken, setPageToken] = useState('');
+  const [unreadSize, setUnreadSize] = useState(0);
+  const [totalSize, setTotalSize] = useState(0);
+  const [unreadOnly, setUnreadOnly] = useState(false);
+  const loadMoreData = async (token?: string) => {
+    if (loading) {
+      return;
+    }
+    try {
+      setLoading(true);
+      const t = token ?? pageToken;
+      const resp = await service.notificationServiceListNotification2({
+        body: {
+          afterPageToken: t,
+          pageSize: 8,
+          filter: !unreadOnly
+            ? undefined
+            : {
+                hasRead: {
+                  $eq: false,
+                },
+              },
+        },
+      });
+      const { unreadSize: unread, nextAfterPageToken, items, filterSize: total } = resp.data;
+      setUnreadSize(unread);
+      if (!t) {
+        //should clear data
+        setNotices([...items]);
+      } else {
+        setNotices([...notices, ...items]);
+      }
+
+      setPageToken(nextAfterPageToken);
+
+      setTotalSize(total);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    setNotices(data || []);
-  }, [data]);
+    //clear data
+    setNotices([]);
+    loadMoreData('');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [unreadOnly]);
 
-  const noticeData = getNoticeData(notices);
-  const unreadMsg = getUnreadData(noticeData || {});
+  const changeReadState = async (id: string) => {
+    await service.notificationServiceReadNotification({ id: id, body: {} });
+    //refech
+    let shouldReduce = false;
 
-  const changeReadState = (id: string) => {
     setNotices(
+      //set read
       notices.map((item) => {
         const notice = { ...item };
-        if (notice.id === id) {
-          notice.read = true;
+        if (notice.id === id && notice.hasRead == false) {
+          notice.hasRead = true;
+          shouldReduce = true;
         }
         return notice;
       }),
     );
+    if (shouldReduce) {
+      setUnreadSize(unreadSize - 1);
+    }
   };
 
-  const clearReadState = (title: string, key: string) => {
-    setNotices(
-      notices.map((item) => {
-        const notice = { ...item };
-        if (notice.type === key) {
-          notice.read = true;
-        }
-        return notice;
-      }),
-    );
-    message.success(`${'清空了'} ${title}`);
+  const clearReadState = async () => {
+    await service.notificationServiceReadNotification({ id: '-', body: {} });
+    //reload state
+    await loadMoreData('');
   };
+  const noticeButtonClass = classNames(styles.noticeButton);
+  const NoticeBellIcon = <BellOutlined className={styles.icon} />;
+  const visible = false;
+  const trigger = (
+    <span className={classNames(noticeButtonClass, { opened: visible })}>
+      <Badge count={unreadSize} style={{ boxShadow: 'none' }} className={styles.badge}>
+        {NoticeBellIcon}
+      </Badge>
+    </span>
+  );
+
+  const notificationBox = (
+    <Card
+      extra={
+        <Space>
+          <span>仅显示未读</span>
+          <Switch checked={unreadOnly} onChange={(v) => setUnreadOnly(v)} />
+        </Space>
+      }
+      actions={[<DeleteOutlined key="delete" onClick={clearReadState} />]}
+    >
+      <InfiniteScroll
+        dataLength={notices.length}
+        next={loadMoreData}
+        hasMore={notices.length < totalSize}
+        loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+        endMessage={<Divider plain>It is all, nothing more 🤐</Divider>}
+        height={400}
+      >
+        <List
+          dataSource={notices}
+          renderItem={(item) => {
+            const itemCls = classNames(styles.item, {
+              [styles.read]: item.hasRead,
+            });
+            return (
+              <List.Item
+                key={item.id}
+                onClick={() => changeReadState(item.id!)}
+                className={itemCls}
+              >
+                <List.Item.Meta
+                  avatar={<Avatar src={item.image} />}
+                  title={item.title}
+                  description={item.desc}
+                />
+              </List.Item>
+            );
+          }}
+        />
+      </InfiniteScroll>
+    </Card>
+  );
 
   return (
-    <NoticeIcon
-      className={styles.action}
-      count={0}
-      onItemClick={(item) => {
-        changeReadState(item.id!);
-      }}
-      onClear={(title: string, key: string) => clearReadState(title, key)}
-      loading={false}
-      clearText="清空"
-      viewMoreText="查看更多"
-      onViewMore={() => message.info('Click on view more')}
-      clearClose
+    <HeaderDropdown
+      placement="bottomRight"
+      overlay={notificationBox}
+      overlayClassName={styles.popover}
+      trigger={['click']}
     >
-      <NoticeIcon.Tab
-        tabKey="notification"
-        count={unreadMsg.notification}
-        list={noticeData.notification}
-        title="通知"
-        emptyText="你已查看所有通知"
-        showViewMore
-      />
-      <NoticeIcon.Tab
-        tabKey="message"
-        count={unreadMsg.message}
-        list={noticeData.message}
-        title="消息"
-        emptyText="您已读完所有消息"
-        showViewMore
-      />
-      <NoticeIcon.Tab
-        tabKey="event"
-        title="待办"
-        emptyText="你已完成所有待办"
-        count={unreadMsg.event}
-        list={noticeData.event}
-        showViewMore
-      />
-    </NoticeIcon>
+      {trigger}
+    </HeaderDropdown>
   );
 };
 

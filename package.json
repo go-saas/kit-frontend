@@ -61,6 +61,7 @@
     "react-dev-inspector": "^1.7.0",
     "react-dom": "^17.0.0",
     "react-helmet-async": "^1.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

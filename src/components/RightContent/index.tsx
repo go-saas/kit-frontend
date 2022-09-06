@@ -3,6 +3,7 @@ import { Space } from 'antd';
 import React from 'react';
 import Avatar from './AvatarDropdown';
 import styles from './index.less';
+import NoticeIconView from '../NoticeIcon';
 
 export type SiderTheme = 'light' | 'dark';
 
@@ -21,6 +22,7 @@ const GlobalHeaderRight: React.FC = () => {
   }
   return (
     <Space className={className}>
+      <NoticeIconView />
       <Avatar />
       <SelectLang className={styles.action} />
     </Space>
