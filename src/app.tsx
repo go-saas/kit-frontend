@@ -32,6 +32,8 @@ import TenantDropdown from '@/components/TenantDropdown';
 import pRetry from 'p-retry';
 import type { RouteObject } from 'react-router-dom';
 import { accessTree } from '@/utils/tree';
+import Realtime from './components/Realtime';
+import React from 'react';
 
 // const isDev = process.env.NODE_ENV === 'development';
 
@@ -239,6 +241,10 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     ...initialState?.settings,
   };
 };
+
+export function rootContainer(container: any) {
+  return React.createElement(Realtime, null, container);
+}
 
 function errorInterceptor() {
   return [

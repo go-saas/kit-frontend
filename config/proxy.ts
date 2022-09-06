@@ -16,6 +16,7 @@ export default function getConfig(env?: Nullable<string>) {
         // 依赖 origin 的功能可能需要这个，比如 cookie
         changeOrigin: true,
         pathRewrite: { '^/basic-api': '' },
+        ws: true,
       },
     },
   };
