@@ -20,7 +20,9 @@ const Realtime: React.FC<Props> = ({ children, routes }: any) => {
   useEffect(() => {
     const { host, protocol } = window.location;
     const centrifuge = new Centrifuge(
-      protocol === 'https' ? 'wss' : 'ws' + '://' + host + BASE_URL + '/v1/realtime/connect/ws',
+      protocol.startsWith('https')
+        ? 'wss'
+        : 'ws' + '://' + host + BASE_URL + '/v1/realtime/connect/ws',
     );
     centrifuge.on('publication', function (ctx) {
       if (ctx.channel.startsWith('notification#')) {
