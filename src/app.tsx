@@ -101,6 +101,18 @@ export async function getInitialState(): Promise<{
   };
 
   const currentUser = await fetchUserInfo();
+
+  if (currentUser) {
+    if (currentUser.currentTenant?.isHost) {
+      if ((currentUser.tenants ?? []).length > 0) {
+        if (!currentUser.tenants.find((p) => p.isHost)) {
+          //not in host side
+          await changeTenant(currentUser.tenants.find((p) => !p.isHost)?.tenant?.id);
+        }
+      }
+    }
+  }
+
   return {
     fetchUserInfo,
     currentUser,
