@@ -73,14 +73,20 @@ export async function getInitialState(): Promise<{
   } catch (e) {}
 
   const changeTenant = async (idOrName: string) => {
-    if (!idOrName) {
+    let par = idOrName;
+    if (!par) {
+      par = '-';
+    }
+    const tenantPub = await new TenantServiceApi().tenantServiceChangeTenant({
+      idOrName: par,
+      body: {},
+    });
+
+    if (tenantPub.data.isHost) {
       //change to host
       setSettingTenantId();
     } else {
-      const tenantPub = await new TenantServiceApi().tenantServiceGetTenantPublic({
-        idOrName: idOrName,
-      });
-      setSettingTenantId(tenantPub.data?.id);
+      setSettingTenantId(tenantPub.data?.tenant.id);
     }
     window.location.reload();
   };

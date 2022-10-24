@@ -49,6 +49,7 @@ models/userv1-user-role.ts
 models/v1-add-subject-permission-request.ts
 models/v1-change-password-by-forget-request.ts
 models/v1-change-password-by-pre-request.ts
+models/v1-change-tenant-reply.ts
 models/v1-check-permission-reply.ts
 models/v1-check-permission-request.ts
 models/v1-check-subjects-permission-reply.ts

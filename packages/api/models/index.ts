@@ -28,6 +28,7 @@ export * from './userv1-user-role';
 export * from './v1-add-subject-permission-request';
 export * from './v1-change-password-by-forget-request';
 export * from './v1-change-password-by-pre-request';
+export * from './v1-change-tenant-reply';
 export * from './v1-check-permission-reply';
 export * from './v1-check-permission-request';
 export * from './v1-check-subjects-permission-reply';

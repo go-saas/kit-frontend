@@ -23,6 +23,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
+import { V1ChangeTenantReply } from '../models';
+// @ts-ignore
 import { V1CreateTenantRequest } from '../models';
 // @ts-ignore
 import { V1DeleteTenantReply } from '../models';
@@ -44,6 +46,48 @@ import { V1UpdateTenantRequest } from '../models';
  */
 export const TenantServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} idOrName 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tenantServiceChangeTenant: async (idOrName: string, body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'idOrName' is not null or undefined
+            assertParamExists('tenantServiceChangeTenant', 'idOrName', idOrName)
+            // verify required parameter 'body' is not null or undefined
+            assertParamExists('tenantServiceChangeTenant', 'body', body)
+            const localVarPath = `/v1/saas/change-tenant/{idOrName}`
+                .replace(`{${"idOrName"}}`, encodeURIComponent(String(idOrName)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearer required
+            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @summary CreateTenant  authz: saas.tenant,*,create
@@ -632,6 +676,17 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} idOrName 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async tenantServiceChangeTenant(idOrName: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ChangeTenantReply>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceChangeTenant(idOrName, body, options);
+            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+        },
+        /**
+         * 
          * @summary CreateTenant  authz: saas.tenant,*,create
          * @param {V1CreateTenantRequest} body 
          * @param {*} [options] Override http request option.
@@ -788,6 +843,16 @@ export const TenantServiceApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
+         * @param {string} idOrName 
+         * @param {object} body 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        tenantServiceChangeTenant(idOrName: string, body: object, options?: any): AxiosPromise<V1ChangeTenantReply> {
+            return localVarFp.tenantServiceChangeTenant(idOrName, body, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @summary CreateTenant  authz: saas.tenant,*,create
          * @param {V1CreateTenantRequest} body 
          * @param {*} [options] Override http request option.
@@ -925,6 +990,27 @@ export const TenantServiceApiFactory = function (configuration?: Configuration, 
         },
     };
 };
+
+/**
+ * Request parameters for tenantServiceChangeTenant operation in TenantServiceApi.
+ * @export
+ * @interface TenantServiceApiTenantServiceChangeTenantRequest
+ */
+export interface TenantServiceApiTenantServiceChangeTenantRequest {
+    /**
+     * 
+     * @type {string}
+     * @memberof TenantServiceApiTenantServiceChangeTenant
+     */
+    readonly idOrName: string
+
+    /**
+     * 
+     * @type {object}
+     * @memberof TenantServiceApiTenantServiceChangeTenant
+     */
+    readonly body: object
+}
 
 /**
  * Request parameters for tenantServiceCreateTenant operation in TenantServiceApi.
@@ -1381,6 +1467,17 @@ export interface TenantServiceApiTenantServiceUpdateTenant2Request {
  * @extends {BaseAPI}
  */
 export class TenantServiceApi extends BaseAPI {
+    /**
+     * 
+     * @param {TenantServiceApiTenantServiceChangeTenantRequest} requestParameters Request parameters.
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TenantServiceApi
+     */
+    public tenantServiceChangeTenant(requestParameters: TenantServiceApiTenantServiceChangeTenantRequest, options?: AxiosRequestConfig) {
+        return TenantServiceApiFp(this.configuration).tenantServiceChangeTenant(requestParameters.idOrName, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @summary CreateTenant  authz: saas.tenant,*,create
