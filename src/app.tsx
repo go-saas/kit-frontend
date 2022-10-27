@@ -17,7 +17,6 @@ import {
   authRespInterceptor,
   setSettingTenantId,
   bizErrorInterceptor,
-  tenantErrorInterceptor,
 } from '@kit/core';
 import type { UserInfo, UserTenantInfo } from '@kit/core';
 import { FriendlyError } from '@kit/core';
@@ -39,6 +38,25 @@ import React from 'react';
 
 const loginPath = '/user/login';
 // 错误处理方案： 错误类型
+
+const changeTenant = async (idOrName?: string) => {
+  let par = idOrName;
+  if (!par) {
+    par = '-';
+  }
+  const tenantPub = await new TenantServiceApi().tenantServiceChangeTenant({
+    idOrName: par,
+    body: {},
+  });
+
+  if (tenantPub.data.isHost) {
+    //change to host
+    setSettingTenantId();
+  } else {
+    setSettingTenantId(tenantPub.data?.tenant.id);
+  }
+  window.location.reload();
+};
 
 /**
  * @see  https://umijs.org/zh-CN/plugins/plugin-initial-state
@@ -72,24 +90,6 @@ export async function getInitialState(): Promise<{
     });
   } catch (e) {}
 
-  const changeTenant = async (idOrName: string) => {
-    let par = idOrName;
-    if (!par) {
-      par = '-';
-    }
-    const tenantPub = await new TenantServiceApi().tenantServiceChangeTenant({
-      idOrName: par,
-      body: {},
-    });
-
-    if (tenantPub.data.isHost) {
-      //change to host
-      setSettingTenantId();
-    } else {
-      setSettingTenantId(tenantPub.data?.tenant.id);
-    }
-    window.location.reload();
-  };
   const fetchUserInfo = async () => {
     try {
       const resp = await new AccountApi().accountGetProfile({ showType: ErrorShowType.SILENT });
@@ -330,6 +330,22 @@ function errorInterceptor() {
   ];
 }
 
+function tenantErrorInterceptorRedirect() {
+  return [
+    (resp: AxiosResponse) => {
+      return resp;
+    },
+    (error: any) => {
+      if (error instanceof FriendlyError) {
+        if (['TENANT_NOT_FOUND', 'TENANT_FORBIDDEN'].includes(error.reason)) {
+          changeTenant();
+        }
+      }
+      return Promise.reject(error);
+    },
+  ];
+}
+
 export const request: RequestConfig = {
   baseURL: BASE_URL,
   withCredentials: true,
@@ -346,6 +362,6 @@ export const request: RequestConfig = {
       //redirect to login
       history.push(loginPath);
     }),
-    tenantErrorInterceptor(),
+    tenantErrorInterceptorRedirect(),
   ],
 };

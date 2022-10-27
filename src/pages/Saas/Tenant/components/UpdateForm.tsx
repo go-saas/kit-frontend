@@ -82,10 +82,10 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           let res: any;
           if (Array.isArray(value)) {
             if (value.length > 0) {
-              res = value[0]?.response;
+              res = value[0]?.response ?? value[0];
             }
           } else {
-            res = value.response;
+            res = value.response ?? value;
           }
           return { logo: res };
         }}

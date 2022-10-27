@@ -59,7 +59,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         const { avatar, user, ...data } = formData;
         const newAvatar = avatar?.id;
         await props.onSubmit({
-          id: props.values?.id,
+          id: props.values?.id ?? user?.user?.id,
           username: user?.username,
           email: user?.email,
           phone: user?.phone,
@@ -194,10 +194,10 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                     let res: any;
                     if (Array.isArray(value)) {
                       if (value.length > 0) {
-                        res = value[0]?.response;
+                        res = value[0]?.response ?? value[0];
                       }
                     } else {
-                      res = value.response;
+                      res = value.response ?? value;
                     }
                     return { logo: res };
                   }}
