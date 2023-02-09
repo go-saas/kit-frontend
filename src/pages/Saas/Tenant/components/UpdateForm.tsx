@@ -137,11 +137,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           id: 'saas.tenant.displayName',
           defaultMessage: 'Tenant DisplayName',
         })}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
       />
       <ProFormText
         name="region"

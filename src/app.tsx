@@ -86,7 +86,14 @@ export async function getInitialState(): Promise<{
       (p.msg ?? []).forEach((m) => {
         msg[m.id!] = m.other!;
       });
-      addLocale(p.name!, msg, { momentLocale: p.name!, antd: p.name! });
+      let name = p.name!;
+      if (name.startsWith('zh')) {
+        name = 'zh-CN';
+      }
+      if (name.startsWith('en')) {
+        name = 'en-US';
+      }
+      addLocale(name, msg, { momentLocale: name, antd: name });
     });
   } catch (e) {}
 
