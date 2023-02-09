@@ -10,11 +10,12 @@ import { FormattedMessage, SelectLang, useIntl, useModel, history } from '@umijs
 import { Alert, message, Tabs, Input, Skeleton } from 'antd';
 import type { InputRef } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
-import styles from './index.less';
+
 import { AuthWebApi } from '@kit/api';
 import { useMount } from 'ahooks';
 import { useSearchParams } from 'umi';
-const { Search } = Input;
+import { useEmotionCss } from '@ant-design/use-emotion-css';
+
 const LoginMessage: React.FC<{
   content: string;
 }> = ({ content }) => {
@@ -42,12 +43,32 @@ type LoginParams = {
   type?: string;
 };
 
+const Lang = () => {
+  const langClassName = useEmotionCss(({ token }) => {
+    return {
+      width: 42,
+      height: 42,
+      lineHeight: '42px',
+      position: 'fixed',
+      right: 16,
+      borderRadius: token.borderRadius,
+      ':hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+    };
+  });
+
+  return (
+    <div className={langClassName} data-lang>
+      {SelectLang && <SelectLang />}
+    </div>
+  );
+};
+
 const Login: React.FC = () => {
   const [userLoginState, setUserLoginState] = useState<LoginResult>({ type: 'account' });
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
-
-  const [tenantSwitching, setTenantSwitching] = useState<boolean>(false);
 
   const intl = useIntl();
   const [searchParams] = useSearchParams();
@@ -56,6 +77,18 @@ const Login: React.FC = () => {
   const [currentLoginChallenge, setCurrentLoginChallenge] = useState<string>();
 
   const [loading, setLoading] = useState<boolean>();
+
+  const containerClassName = useEmotionCss(() => {
+    return {
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100vh',
+      overflow: 'auto',
+      backgroundImage:
+        "url('https://mdn.alipayobjects.com/yuyan_qk0oxh/afts/img/V-_oS6r-i7wAAAAAAAAAAAAAFl94AQBr')",
+      backgroundSize: '100% 100%',
+    };
+  });
 
   useEffect(() => {
     const r = searchParams.get('redirect') || '/';
@@ -84,18 +117,6 @@ const Login: React.FC = () => {
         ...s,
         currentUser: userInfo,
       }));
-    }
-  };
-
-  const onSwitch = async (value: string) => {
-    if (value == initialState?.currentTenant?.tenant?.name ?? '') {
-      return;
-    }
-    try {
-      initialState?.changeTenant?.(value);
-    } catch (e) {
-    } finally {
-      setTenantSwitching(false);
     }
   };
 
@@ -132,11 +153,14 @@ const Login: React.FC = () => {
   useMount(() => inputRef.current!.focus());
 
   return (
-    <div className={styles.container}>
-      <div className={styles.lang} data-lang>
-        {SelectLang && <SelectLang />}
-      </div>
-      <div className={styles.content}>
+    <div className={containerClassName}>
+      <Lang />
+      <div
+        style={{
+          flex: '1',
+          padding: '32px 0',
+        }}
+      >
         <LoginForm
           logo={<img alt="logo" src={logo} />}
           title={titile}
@@ -197,7 +221,7 @@ const Login: React.FC = () => {
                   fieldProps={{
                     ref: inputRef,
                     size: 'large',
-                    prefix: <UserOutlined className={styles.prefixIcon} />,
+                    prefix: <UserOutlined />,
                   }}
                   placeholder={intl.formatMessage({
                     id: 'pages.login.username.placeholder',
@@ -219,7 +243,7 @@ const Login: React.FC = () => {
                   name="password"
                   fieldProps={{
                     size: 'large',
-                    prefix: <LockOutlined className={styles.prefixIcon} />,
+                    prefix: <LockOutlined />,
                   }}
                   placeholder={intl.formatMessage({
                     id: 'pages.login.password.placeholder',
@@ -246,7 +270,7 @@ const Login: React.FC = () => {
                 <ProFormText
                   fieldProps={{
                     size: 'large',
-                    prefix: <MobileOutlined className={styles.prefixIcon} />,
+                    prefix: <MobileOutlined />,
                   }}
                   name="mobile"
                   placeholder={intl.formatMessage({
@@ -277,7 +301,7 @@ const Login: React.FC = () => {
                 <ProFormCaptcha
                   fieldProps={{
                     size: 'large',
-                    prefix: <LockOutlined className={styles.prefixIcon} />,
+                    prefix: <LockOutlined />,
                   }}
                   captchaProps={{
                     size: 'large',

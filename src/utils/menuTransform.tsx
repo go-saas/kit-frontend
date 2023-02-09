@@ -26,7 +26,7 @@ export declare type Route = {
 export function transformMenu(allMenu: V1Menu[]) {
   const findChildren = (id: string): Route[] => {
     const items: Route[] = allMenu
-      .filter((p) => p.parent == id)
+      .filter((p) => p.parent === id)
       .sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0))
       .map((p) => {
         const item: Route = {
@@ -69,7 +69,7 @@ export function transformMenu(allMenu: V1Menu[]) {
 
     for (const i of items) {
       i.children = findChildren(i.key);
-      if (i.children.length == 0) {
+      if (i.children.length === 0) {
         i.children = undefined;
       }
     }

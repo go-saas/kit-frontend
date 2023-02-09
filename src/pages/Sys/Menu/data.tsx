@@ -13,12 +13,12 @@ export async function getTreeData(): Promise<MenuWithChildren[]> {
   //get children
   const findChildren = (parent = '') => {
     const children = all
-      .filter((p) => p.parent == parent)
+      .filter((p) => p.parent === parent)
       .sort((a, b) => (a.priority ?? 0) - (b.priority ?? 0));
     for (const c of children) {
       (c as MenuWithChildren).children = findChildren(c.id ?? '');
     }
-    if (children.length == 0) {
+    if (children.length === 0) {
       return undefined;
     }
     return children;

@@ -76,7 +76,7 @@ const NoticeIconView: React.FC = () => {
       //set read
       notices.map((item) => {
         const notice = { ...item };
-        if (notice.id === id && notice.hasRead == false) {
+        if (notice.id === id && notice.hasRead === false) {
           notice.hasRead = true;
           shouldReduce = true;
         }

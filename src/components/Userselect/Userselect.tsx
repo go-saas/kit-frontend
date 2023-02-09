@@ -119,7 +119,7 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
   };
 
   const onSelect = (value: any) => {
-    const u = userList.find((p) => p.id == value);
+    const u = userList.find((p) => p.id === value);
     if (!u) {
       return;
     }
@@ -130,7 +130,7 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
   };
 
   const onBlur = () => {
-    if (userList.length == 0) {
+    if (userList.length === 0) {
       return;
     }
     const u = userList[0];
@@ -179,7 +179,7 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
           }
         }}
       >
-        {selectType == SelectType.USERNAME && (
+        {selectType === SelectType.USERNAME && (
           <ProForm.Item
             name="username"
             label={intl.formatMessage({
@@ -206,7 +206,7 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
           </ProForm.Item>
         )}
 
-        {selectType == SelectType.EMAIL && (
+        {selectType === SelectType.EMAIL && (
           <ProForm.Item
             name="email"
             label={intl.formatMessage({
@@ -233,7 +233,7 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
           </ProForm.Item>
         )}
 
-        {selectType == SelectType.PHONE && (
+        {selectType === SelectType.PHONE && (
           <ProForm.Item
             name="phone"
             label={intl.formatMessage({

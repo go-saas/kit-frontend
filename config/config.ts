@@ -4,7 +4,7 @@ import defaultSettings from './defaultSettings';
 import proxy from './proxy';
 import routes from './routes';
 
-const { REACT_APP_ENV } = process.env;
+const { REACT_APP_ENV = 'dev' } = process.env;
 
 export default defineConfig({
   hash: true,
@@ -18,10 +18,20 @@ export default defineConfig({
     siderWidth: 150,
     ...defaultSettings,
   },
+  /**
+   * @name moment2dayjs 插件
+   * @description 将项目中的 moment 替换为 dayjs
+   * @doc https://umijs.org/docs/max/moment2dayjs
+   */
+  moment2dayjs: {
+    preset: 'antd',
+    plugins: ['duration'],
+  },
   // https://umijs.org/zh-CN/plugins/plugin-locale
   locale: {
     // default zh-CN
     default: 'zh-CN',
+    title: true,
     antd: true,
     // default true, when it is true, will use `navigator.language` overwrite default
     baseNavigator: true,
@@ -39,7 +49,7 @@ export default defineConfig({
     'root-entry-name': 'variable',
   },
   ignoreMomentLocale: true,
-  proxy: proxy(REACT_APP_ENV)[REACT_APP_ENV || 'dev'],
+  proxy: proxy(REACT_APP_ENV)[REACT_APP_ENV as keyof typeof proxy],
   manifest: {
     basePath: '/',
   },
@@ -52,5 +62,8 @@ export default defineConfig({
   },
   qiankun: {
     master: {},
+  },
+  mfsu: {
+    strategy: 'normal',
   },
 });

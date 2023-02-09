@@ -8,6 +8,7 @@ import { AuthWebApi } from '@kit/api';
 import { LoginForm } from '@ant-design/pro-components';
 import { Button, Space, Avatar } from 'antd';
 import { SwapOutlined } from '@ant-design/icons';
+import { PageContainer } from '@ant-design/pro-components';
 
 const ConsentPage: React.FC = () => {
   const [searchParams] = useSearchParams();
@@ -59,7 +60,7 @@ const ConsentPage: React.FC = () => {
   const allowAction = async () => act(false);
 
   return (
-    <div className={styles.container}>
+    <PageContainer>
       <div className={styles.content}>
         <LoginForm
           logo={
@@ -102,7 +103,7 @@ const ConsentPage: React.FC = () => {
           }}
         />
       </div>
-    </div>
+    </PageContainer>
   );
 };
 

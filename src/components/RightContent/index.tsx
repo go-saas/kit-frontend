@@ -1,31 +1,51 @@
 import { SelectLang, useModel } from '@umijs/max';
-import { Space } from 'antd';
 import React from 'react';
 import Avatar from './AvatarDropdown';
-import styles from './index.less';
 import NoticeIconView from '../NoticeIcon';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
 
 export type SiderTheme = 'light' | 'dark';
 
 const GlobalHeaderRight: React.FC = () => {
+  const className = useEmotionCss(() => {
+    return {
+      display: 'flex',
+      height: '48px',
+      marginLeft: 'auto',
+      overflow: 'hidden',
+      gap: 8,
+    };
+  });
+
+  const actionClassName = useEmotionCss(({ token }) => {
+    return {
+      display: 'flex',
+      float: 'right',
+      height: '48px',
+      marginLeft: 'auto',
+      overflow: 'hidden',
+      cursor: 'pointer',
+      padding: '0 12px',
+      borderRadius: token.borderRadius,
+      '&:hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+    };
+  });
+
   const { initialState } = useModel('@@initialState');
 
   if (!initialState || !initialState.settings) {
     return null;
   }
 
-  const { navTheme, layout } = initialState.settings;
-  let className = styles.right;
-
-  if ((navTheme === 'dark' && layout === 'top') || layout === 'mix') {
-    className = `${styles.right}  ${styles.dark}`;
-  }
   return (
-    <Space className={className}>
+    <div className={className}>
       <NoticeIconView />
+
       <Avatar />
-      <SelectLang className={styles.action} />
-    </Space>
+      <SelectLang className={actionClassName} />
+    </div>
   );
 };
 export default GlobalHeaderRight;

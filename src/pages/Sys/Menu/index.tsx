@@ -190,7 +190,7 @@ const TableList: React.FC = () => {
         <TableDropdown
           key="actionGroup"
           onSelect={async (key) => {
-            if (key == 'delete') {
+            if (key === 'delete') {
               const ok = await handleRemove(record);
               if (ok && actionRef.current) {
                 actionRef.current.reload();
@@ -212,7 +212,7 @@ const TableList: React.FC = () => {
     const newExpandedKeys: string[] = [];
     const render = (treeDatas: MenuWithChildren[]) => {
       // 获取到所有可展开的父节点
-      treeDatas.map((item) => {
+      treeDatas.forEach((item) => {
         if (item.children) {
           newExpandedKeys.push(item.id!);
           render(item.children);
@@ -290,7 +290,7 @@ const TableList: React.FC = () => {
       />
       <Drawer
         width={600}
-        visible={showDetail}
+        open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
           setShowDetail(false);

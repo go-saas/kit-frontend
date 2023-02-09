@@ -152,7 +152,7 @@ export async function qiankun() {
   const apps: Record<string, any> = {};
   const allMenus = await getMenu();
   await accessTree<Route>(allMenus, async (t) => {
-    if ((t as Route).route?.type == 'microApp') {
+    if ((t as Route).route?.type === 'microApp') {
       const a = (t as Route).route!;
       apps[a.microAppName!] = {
         entry: a?.microAppEntry,
@@ -196,9 +196,10 @@ export async function render(oldRender: () => any) {
 
 export function patchClientRoutes(params: { routes: RouteObject[] }) {
   console.log(extraRoutes);
-  const withLayout = params.routes.find((p) => (p as any).id == 'ant-design-pro-layout')!.children!;
+  const withLayout = params.routes.find((p) => (p as any).id === 'ant-design-pro-layout')!
+    .children!;
   extraRoutes.forEach((it) => {
-    if (!withLayout.find((p) => p.path == it.path)) {
+    if (!withLayout.find((p) => p.path === it.path)) {
       //need add route
       withLayout!.unshift(it);
     }
@@ -242,24 +243,22 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
     // 自定义 403 页面
     // unAccessible: <div>unAccessible</div>,
     // 增加一个 loading 的状态
-    childrenRender: (children, props) => {
+    childrenRender: (children) => {
       // if (initialState?.loading) return <PageLoading />;
       return (
         <>
           {children}
-          {!props.location?.pathname?.includes('/login') && (
-            <SettingDrawer
-              disableUrlParams
-              enableDarkTheme
-              settings={initialState?.settings}
-              onSettingChange={(settings) => {
-                setInitialState((preInitialState) => ({
-                  ...preInitialState,
-                  settings,
-                }));
-              }}
-            />
-          )}
+          <SettingDrawer
+            disableUrlParams
+            enableDarkTheme
+            settings={initialState?.settings}
+            onSettingChange={(settings) => {
+              setInitialState((preInitialState) => ({
+                ...preInitialState,
+                settings,
+              }));
+            }}
+          />
         </>
       );
     },
@@ -315,7 +314,7 @@ function errorInterceptor() {
           // do nothing
           break;
         case ErrorShowType.WARN_MESSAGE:
-          message.warn(errorMessage);
+          message.warning(errorMessage);
           break;
         case ErrorShowType.ERROR_MESSAGE:
           message.error(errorMessage);

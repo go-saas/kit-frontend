@@ -135,7 +135,7 @@ const TableList: React.FC = () => {
         <TableDropdown
           key="actionGroup"
           onSelect={async (key) => {
-            if (key == 'delete') {
+            if (key === 'delete') {
               const ok = await handleRemove(record);
               if (ok && actionRef.current) {
                 actionRef.current.reload();
@@ -235,7 +235,7 @@ const TableList: React.FC = () => {
       />
       <Drawer
         width={800}
-        visible={showDetail}
+        open={showDetail}
         onClose={() => {
           setCurrentRow(undefined);
           setShowDetail(false);

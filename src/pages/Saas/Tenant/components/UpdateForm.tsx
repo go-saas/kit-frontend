@@ -45,7 +45,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     <DrawerForm
       formRef={formRef}
       initialValues={props.values}
-      visible={props.updateModalVisible}
+      open={props.updateModalVisible}
       onFinish={async (formData) => {
         const { logo, user, password, ...data } = formData;
         const newLogo = logo?.id;

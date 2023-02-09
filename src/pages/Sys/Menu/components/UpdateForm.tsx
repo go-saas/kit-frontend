@@ -84,7 +84,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   return (
     <DrawerForm
       initialValues={props.values}
-      visible={props.updateModalVisible}
+      open={props.updateModalVisible}
       onFinish={async (formData) => {
         console.log(formData);
         await props.onSubmit({ id: props.values?.id, ...formData });
@@ -179,7 +179,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       />
       <ProFormDependency name={['component']}>
         {({ component }) => {
-          if (component == 'IFRAME') {
+          if (component === 'IFRAME') {
             return (
               <ProFormText
                 name="iframe"
@@ -196,7 +196,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
       </ProFormDependency>
       <ProFormDependency name={['component']}>
         {({ component }) => {
-          if (component == 'MICROAPP') {
+          if (component === 'MICROAPP') {
             return (
               <>
                 <ProFormText

@@ -43,7 +43,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     <DrawerForm
       formRef={formRef}
       initialValues={props.values}
-      visible={props.updateModalVisible}
+      open={props.updateModalVisible}
       onFinish={async (formData) => {
         const group = formData.defGroups as Permissionv1PermissionDefGroup[] | undefined;
         const acl: V1UpdateRolePermissionAcl[] = (group ?? [])
@@ -52,7 +52,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           .map((p) => {
             return { namespace: p.namespace!, resource: '*', action: p.action!, effect: 'GRANT' };
           });
-        const { defGroups, ...data } = formData;
+        const { ...data } = formData;
         await props.onSubmit({ id: props.values?.id, ...data, acl: acl });
       }}
       drawerProps={{
