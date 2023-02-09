@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import { Spin } from 'antd';
-
+import styles from './index.less';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 export type IFrameProps = {
   frameSrc: string;
 };
 
 const Iframe: React.FC<IFrameProps> = (props) => {
-  const containerStyle = useEmotionCss(() => {
-    return {
-      height: '100%',
-      ':global(.ant-spin-container)': {
-        height: '100%',
-      },
-    };
-  });
   const iframeStyle = useEmotionCss(({ token }) => {
     return {
       width: '100%',
@@ -30,8 +22,9 @@ const Iframe: React.FC<IFrameProps> = (props) => {
   if (!url.startsWith('http') && !url.startsWith('https')) {
     url = window.location.protocol + '//' + window.location.host + url;
   }
+
   return (
-    <Spin size="large" spinning={loading} wrapperClassName={containerStyle}>
+    <Spin size="large" spinning={loading} wrapperClassName={styles.container}>
       <iframe src={url} onLoad={() => setLoading(false)} className={iframeStyle} />
     </Spin>
   );
