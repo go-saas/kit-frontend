@@ -48,7 +48,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @summary CreateUser  authz: user.user,*,create
+         * @summary CreateUser authz: user.user,*,create
          * @param {V1CreateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -87,7 +87,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary DeleteUser  authz: user.user,id,delete
+         * @summary DeleteUser authz: user.user,id,delete
          * @param {string} id 
          * @param {boolean} [force] default false. Just remove user out of tenant. set to true to remove user from system.
          * @param {*} [options] Override http request option.
@@ -129,7 +129,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary GetUser  authz: user.user,id,get
+         * @summary GetUser authz: user.user,id,get
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -166,7 +166,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary GetUserRoles  authz: user.user,id,get
+         * @summary GetUserRoles authz: user.user,id,get
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -203,7 +203,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary InviteUser  authz: user.user,*,create
+         * @summary InviteUser authz: user.user,*,create
          * @param {V1InviteUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -242,7 +242,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary ListUsers  authz: user.user,*,list
+         * @summary ListUsers authz: user.user,*,list
          * @param {number} [pageOffset] 
          * @param {number} [pageSize] 
          * @param {string} [search] 
@@ -632,7 +632,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary ListUsers  authz: user.user,*,list
+         * @summary ListUsers authz: user.user,*,list
          * @param {V1ListUsersRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -728,7 +728,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary UpdateUser  authz: user.user,id,update
+         * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
          * @param {*} [options] Override http request option.
@@ -771,7 +771,7 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
         },
         /**
          * 
-         * @summary UpdateUser  authz: user.user,id,update
+         * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
          * @param {*} [options] Override http request option.
@@ -824,7 +824,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @summary CreateUser  authz: user.user,*,create
+         * @summary CreateUser authz: user.user,*,create
          * @param {V1CreateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -835,7 +835,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary DeleteUser  authz: user.user,id,delete
+         * @summary DeleteUser authz: user.user,id,delete
          * @param {string} id 
          * @param {boolean} [force] default false. Just remove user out of tenant. set to true to remove user from system.
          * @param {*} [options] Override http request option.
@@ -847,7 +847,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary GetUser  authz: user.user,id,get
+         * @summary GetUser authz: user.user,id,get
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -858,7 +858,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary GetUserRoles  authz: user.user,id,get
+         * @summary GetUserRoles authz: user.user,id,get
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -869,7 +869,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary InviteUser  authz: user.user,*,create
+         * @summary InviteUser authz: user.user,*,create
          * @param {V1InviteUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -880,7 +880,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary ListUsers  authz: user.user,*,list
+         * @summary ListUsers authz: user.user,*,list
          * @param {number} [pageOffset] 
          * @param {number} [pageSize] 
          * @param {string} [search] 
@@ -959,7 +959,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary ListUsers  authz: user.user,*,list
+         * @summary ListUsers authz: user.user,*,list
          * @param {V1ListUsersRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -984,7 +984,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary UpdateUser  authz: user.user,id,update
+         * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
          * @param {*} [options] Override http request option.
@@ -996,7 +996,7 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @summary UpdateUser  authz: user.user,id,update
+         * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
          * @param {*} [options] Override http request option.
@@ -1018,7 +1018,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @summary CreateUser  authz: user.user,*,create
+         * @summary CreateUser authz: user.user,*,create
          * @param {V1CreateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1028,7 +1028,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary DeleteUser  authz: user.user,id,delete
+         * @summary DeleteUser authz: user.user,id,delete
          * @param {string} id 
          * @param {boolean} [force] default false. Just remove user out of tenant. set to true to remove user from system.
          * @param {*} [options] Override http request option.
@@ -1039,7 +1039,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary GetUser  authz: user.user,id,get
+         * @summary GetUser authz: user.user,id,get
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1049,7 +1049,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary GetUserRoles  authz: user.user,id,get
+         * @summary GetUserRoles authz: user.user,id,get
          * @param {string} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1059,7 +1059,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary InviteUser  authz: user.user,*,create
+         * @summary InviteUser authz: user.user,*,create
          * @param {V1InviteUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1069,7 +1069,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary ListUsers  authz: user.user,*,list
+         * @summary ListUsers authz: user.user,*,list
          * @param {number} [pageOffset] 
          * @param {number} [pageSize] 
          * @param {string} [search] 
@@ -1147,7 +1147,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary ListUsers  authz: user.user,*,list
+         * @summary ListUsers authz: user.user,*,list
          * @param {V1ListUsersRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1170,7 +1170,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary UpdateUser  authz: user.user,id,update
+         * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
          * @param {*} [options] Override http request option.
@@ -1181,7 +1181,7 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         },
         /**
          * 
-         * @summary UpdateUser  authz: user.user,id,update
+         * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
          * @param {V1UpdateUserRequest} body 
          * @param {*} [options] Override http request option.
@@ -1867,7 +1867,7 @@ export interface UserServiceApiUserServiceUpdateUser2Request {
 export class UserServiceApi extends BaseAPI {
     /**
      * 
-     * @summary CreateUser  authz: user.user,*,create
+     * @summary CreateUser authz: user.user,*,create
      * @param {UserServiceApiUserServiceCreateUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1879,7 +1879,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary DeleteUser  authz: user.user,id,delete
+     * @summary DeleteUser authz: user.user,id,delete
      * @param {UserServiceApiUserServiceDeleteUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1891,7 +1891,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary GetUser  authz: user.user,id,get
+     * @summary GetUser authz: user.user,id,get
      * @param {UserServiceApiUserServiceGetUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1903,7 +1903,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary GetUserRoles  authz: user.user,id,get
+     * @summary GetUserRoles authz: user.user,id,get
      * @param {UserServiceApiUserServiceGetUserRolesRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1915,7 +1915,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary InviteUser  authz: user.user,*,create
+     * @summary InviteUser authz: user.user,*,create
      * @param {UserServiceApiUserServiceInviteUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1927,7 +1927,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary ListUsers  authz: user.user,*,list
+     * @summary ListUsers authz: user.user,*,list
      * @param {UserServiceApiUserServiceListUsersRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1939,7 +1939,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary ListUsers  authz: user.user,*,list
+     * @summary ListUsers authz: user.user,*,list
      * @param {UserServiceApiUserServiceListUsers2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1962,7 +1962,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary UpdateUser  authz: user.user,id,update
+     * @summary UpdateUser authz: user.user,id,update
      * @param {UserServiceApiUserServiceUpdateUserRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -1974,7 +1974,7 @@ export class UserServiceApi extends BaseAPI {
 
     /**
      * 
-     * @summary UpdateUser  authz: user.user,id,update
+     * @summary UpdateUser authz: user.user,id,update
      * @param {UserServiceApiUserServiceUpdateUser2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

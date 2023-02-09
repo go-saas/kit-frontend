@@ -81,5 +81,11 @@ export interface V1CreateUserRequest {
      * @memberof V1CreateUserRequest
      */
     'rolesId'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1CreateUserRequest
+     */
+    'id'?: string;
 }
 

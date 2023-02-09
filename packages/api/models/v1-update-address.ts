@@ -13,7 +13,7 @@
  */
 
 
-import { DataAddress } from './data-address';
+import { LbsAddress } from './lbs-address';
 
 /**
  * 
@@ -47,10 +47,10 @@ export interface V1UpdateAddress {
     'prefer'?: boolean;
     /**
      * 
-     * @type {DataAddress}
+     * @type {LbsAddress}
      * @memberof V1UpdateAddress
      */
-    'address'?: DataAddress;
+    'address'?: LbsAddress;
     /**
      * 
      * @type {object}

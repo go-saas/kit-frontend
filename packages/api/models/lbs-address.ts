@@ -17,44 +17,62 @@
 /**
  * 
  * @export
- * @interface ClientListClientRequest
+ * @interface LbsAddress
  */
-export interface ClientListClientRequest {
+export interface LbsAddress {
     /**
      * 
      * @type {string}
-     * @memberof ClientListClientRequest
+     * @memberof LbsAddress
      */
-    'limit'?: string;
+    'country'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ClientListClientRequest
+     * @memberof LbsAddress
      */
-    'offset'?: string;
+    'region'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ClientListClientRequest
+     * @memberof LbsAddress
      */
-    'clientName'?: string;
+    'state'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ClientListClientRequest
+     * @memberof LbsAddress
      */
-    'owner'?: string;
+    'city'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ClientListClientRequest
+     * @memberof LbsAddress
      */
-    'afterPageToken'?: string;
+    'zipCode'?: string;
     /**
      * 
      * @type {string}
-     * @memberof ClientListClientRequest
+     * @memberof LbsAddress
      */
-    'beforePageToken'?: string;
+    'line1'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LbsAddress
+     */
+    'line2'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof LbsAddress
+     */
+    'line3'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof LbsAddress
+     */
+    'geo'?: object;
 }
 

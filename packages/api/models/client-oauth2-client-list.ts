@@ -33,5 +33,17 @@ export interface ClientOAuth2ClientList {
      * @memberof ClientOAuth2ClientList
      */
     'totalCount'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientOAuth2ClientList
+     */
+    'nextAfterPageToken'?: string | null;
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientOAuth2ClientList
+     */
+    'nextBeforePageToken'?: string | null;
 }
 

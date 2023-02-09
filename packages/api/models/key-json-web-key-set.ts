@@ -18,14 +18,14 @@ import { KeyJsonWebKey } from './key-json-web-key';
 /**
  * 
  * @export
- * @interface KeyServiceUpdateJsonWebKeyRequest
+ * @interface KeyJsonWebKeySet
  */
-export interface KeyServiceUpdateJsonWebKeyRequest {
+export interface KeyJsonWebKeySet {
     /**
      * 
-     * @type {KeyJsonWebKey}
-     * @memberof KeyServiceUpdateJsonWebKeyRequest
+     * @type {Array<KeyJsonWebKey>}
+     * @memberof KeyJsonWebKeySet
      */
-    'key'?: KeyJsonWebKey;
+    'keys'?: Array<KeyJsonWebKey>;
 }
 

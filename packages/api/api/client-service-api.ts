@@ -154,10 +154,12 @@ export const ClientServiceApiAxiosParamCreator = function (configuration?: Confi
          * @param {string} [offset] 
          * @param {string} [clientName] 
          * @param {string} [owner] 
+         * @param {string} [afterPageToken] 
+         * @param {string} [beforePageToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceListOAuth2Clients: async (limit?: string, offset?: string, clientName?: string, owner?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        clientServiceListOAuth2Clients: async (limit?: string, offset?: string, clientName?: string, owner?: string, afterPageToken?: string, beforePageToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/v1/oidc/clients`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -187,6 +189,14 @@ export const ClientServiceApiAxiosParamCreator = function (configuration?: Confi
 
             if (owner !== undefined) {
                 localVarQueryParameter['owner'] = owner;
+            }
+
+            if (afterPageToken !== undefined) {
+                localVarQueryParameter['afterPageToken'] = afterPageToken;
+            }
+
+            if (beforePageToken !== undefined) {
+                localVarQueryParameter['beforePageToken'] = beforePageToken;
             }
 
 
@@ -368,11 +378,13 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          * @param {string} [offset] 
          * @param {string} [clientName] 
          * @param {string} [owner] 
+         * @param {string} [afterPageToken] 
+         * @param {string} [beforePageToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async clientServiceListOAuth2Clients(limit?: string, offset?: string, clientName?: string, owner?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2ClientList>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceListOAuth2Clients(limit, offset, clientName, owner, options);
+        async clientServiceListOAuth2Clients(limit?: string, offset?: string, clientName?: string, owner?: string, afterPageToken?: string, beforePageToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2ClientList>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceListOAuth2Clients(limit, offset, clientName, owner, afterPageToken, beforePageToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -450,11 +462,13 @@ export const ClientServiceApiFactory = function (configuration?: Configuration, 
          * @param {string} [offset] 
          * @param {string} [clientName] 
          * @param {string} [owner] 
+         * @param {string} [afterPageToken] 
+         * @param {string} [beforePageToken] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceListOAuth2Clients(limit?: string, offset?: string, clientName?: string, owner?: string, options?: any): AxiosPromise<ClientOAuth2ClientList> {
-            return localVarFp.clientServiceListOAuth2Clients(limit, offset, clientName, owner, options).then((request) => request(axios, basePath));
+        clientServiceListOAuth2Clients(limit?: string, offset?: string, clientName?: string, owner?: string, afterPageToken?: string, beforePageToken?: string, options?: any): AxiosPromise<ClientOAuth2ClientList> {
+            return localVarFp.clientServiceListOAuth2Clients(limit, offset, clientName, owner, afterPageToken, beforePageToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -563,6 +577,20 @@ export interface ClientServiceApiClientServiceListOAuth2ClientsRequest {
      * @memberof ClientServiceApiClientServiceListOAuth2Clients
      */
     readonly owner?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientServiceApiClientServiceListOAuth2Clients
+     */
+    readonly afterPageToken?: string
+
+    /**
+     * 
+     * @type {string}
+     * @memberof ClientServiceApiClientServiceListOAuth2Clients
+     */
+    readonly beforePageToken?: string
 }
 
 /**
@@ -669,7 +697,7 @@ export class ClientServiceApi extends BaseAPI {
      * @memberof ClientServiceApi
      */
     public clientServiceListOAuth2Clients(requestParameters: ClientServiceApiClientServiceListOAuth2ClientsRequest = {}, options?: AxiosRequestConfig) {
-        return ClientServiceApiFp(this.configuration).clientServiceListOAuth2Clients(requestParameters.limit, requestParameters.offset, requestParameters.clientName, requestParameters.owner, options).then((request) => request(this.axios, this.basePath));
+        return ClientServiceApiFp(this.configuration).clientServiceListOAuth2Clients(requestParameters.limit, requestParameters.offset, requestParameters.clientName, requestParameters.owner, requestParameters.afterPageToken, requestParameters.beforePageToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

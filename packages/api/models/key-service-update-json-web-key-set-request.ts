@@ -13,7 +13,7 @@
  */
 
 
-import { KeyJSONWebKeySet } from './key-jsonweb-key-set';
+import { KeyJsonWebKeySet } from './key-json-web-key-set';
 
 /**
  * 
@@ -23,9 +23,9 @@ import { KeyJSONWebKeySet } from './key-jsonweb-key-set';
 export interface KeyServiceUpdateJsonWebKeySetRequest {
     /**
      * 
-     * @type {KeyJSONWebKeySet}
+     * @type {KeyJsonWebKeySet}
      * @memberof KeyServiceUpdateJsonWebKeySetRequest
      */
-    'keys'?: KeyJSONWebKeySet;
+    'keys'?: KeyJsonWebKeySet;
 }
 
