@@ -34,6 +34,8 @@ import { accessTree } from '@/utils/tree';
 import Realtime from './components/Realtime';
 import React from 'react';
 
+import enUS0 from 'antd/es/locale/en_US';
+import zhCN0 from 'antd/es/locale/zh_CN';
 // const isDev = process.env.NODE_ENV === 'development';
 
 const loginPath = '/user/login';
@@ -89,11 +91,13 @@ export async function getInitialState(): Promise<{
       let name = p.name!;
       if (name.startsWith('zh')) {
         name = 'zh-CN';
-      }
-      if (name.startsWith('en')) {
+        addLocale(name, msg, { momentLocale: name, antd: zhCN0 });
+      } else if (name.startsWith('en')) {
         name = 'en-US';
+        addLocale(name, msg, { momentLocale: name, antd: enUS0 });
+      } else {
+        addLocale(name, msg, { momentLocale: name, antd: enUS0 });
       }
-      addLocale(name, msg, { momentLocale: name, antd: name });
     });
   } catch (e) {}
 
