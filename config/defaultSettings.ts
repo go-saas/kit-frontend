@@ -6,14 +6,14 @@ const Settings: LayoutSettings & {
 } = {
   navTheme: 'light',
   // 拂晓蓝
-  primaryColor: '#1890ff',
+  colorPrimary: '#1890ff',
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
   title: 'GO-SAAS-KIT',
-  pwa: false,
+  pwa: true,
   logo: '/logo.svg',
   iconfontUrl: '',
 };

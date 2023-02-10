@@ -91,12 +91,12 @@ export async function getInitialState(): Promise<{
       let name = p.name!;
       if (name.startsWith('zh')) {
         name = 'zh-CN';
-        addLocale(name, msg, { momentLocale: name, antd: zhCN0 });
+        addLocale(name, msg, { momentLocale: name, antd: zhCN0 as any });
       } else if (name.startsWith('en')) {
         name = 'en-US';
-        addLocale(name, msg, { momentLocale: name, antd: enUS0 });
+        addLocale(name, msg, { momentLocale: name, antd: enUS0 as any });
       } else {
-        addLocale(name, msg, { momentLocale: name, antd: enUS0 });
+        addLocale(name, msg, { momentLocale: name, antd: enUS0 as any });
       }
     });
   } catch (e) {}
