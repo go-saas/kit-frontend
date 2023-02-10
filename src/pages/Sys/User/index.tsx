@@ -10,15 +10,15 @@ import { FormattedMessage } from '@umijs/max';
 import { Button, Drawer, message, Image, Avatar } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import { requestTransform } from '@kit/core';
+import { requestTransform } from '@gosaas/core';
 import type {
   V1CreateUserRequest,
   V1UpdateUser,
   V1UpdateUserRequest,
   V1User,
   V1UserFilter,
-} from '@kit/api';
-import { UserServiceApi } from '@kit/api';
+} from '@gosaas/api';
+import { UserServiceApi } from '@gosaas/api';
 import { UserOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
 import RoleTag from '@/components/Roletag';

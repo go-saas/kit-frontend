@@ -12,8 +12,8 @@ import {
 } from '@ant-design/pro-components';
 import { FormattedMessage, useIntl } from '@umijs/max';
 import React, { useState, useEffect } from 'react';
-import type { V1Menu } from '@kit/api';
-import type { PermissionRequirement } from '@kit/core';
+import type { V1Menu } from '@gosaas/api';
+import type { PermissionRequirement } from '@gosaas/core';
 import { Form } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import type { MenuWithChildren } from '../data';

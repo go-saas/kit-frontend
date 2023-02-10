@@ -11,15 +11,15 @@ import { FormattedMessage } from '@umijs/max';
 import { Button, Drawer, message, Switch } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import { requestTransform } from '@kit/core';
+import { requestTransform } from '@gosaas/core';
 import type {
   V1CreateRoleRequest,
   V1UpdateRole,
   V1UpdateRoleRequest,
   V1Role,
   V1RoleFilter,
-} from '@kit/api';
-import { RoleServiceApi } from '@kit/api';
+} from '@gosaas/api';
+import { RoleServiceApi } from '@gosaas/api';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { useIntl } from 'umi';
 import Roletag from '@/components/Roletag';

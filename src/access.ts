@@ -1,4 +1,4 @@
-import type { UserInfo } from '@kit/core';
+import type { UserInfo } from '@gosaas/core';
 /**
  * @see https://umijs.org/zh-CN/plugins/plugin-access
  * */

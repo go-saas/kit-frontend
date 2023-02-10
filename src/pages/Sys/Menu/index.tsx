@@ -10,15 +10,15 @@ import { FormattedMessage } from '@umijs/max';
 import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import { requestTransform } from '@kit/core';
+import { requestTransform } from '@gosaas/core';
 import type {
   V1CreateMenuRequest,
   V1UpdateMenu,
   V1UpdateMenuRequest,
   V1Menu,
   V1MenuFilter,
-} from '@kit/api';
-import { MenuServiceApi } from '@kit/api';
+} from '@gosaas/api';
+import { MenuServiceApi } from '@gosaas/api';
 import * as allIcons from '@ant-design/icons';
 import { useIntl } from 'umi';
 import type { MenuWithChildren } from './data';

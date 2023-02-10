@@ -11,7 +11,7 @@ import { Alert, message, Tabs, Input, Skeleton } from 'antd';
 import type { InputRef } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 
-import { AuthWebApi } from '@kit/api';
+import { AuthWebApi } from '@gosaas/api';
 import { useMount } from 'ahooks';
 import { useSearchParams } from 'umi';
 import { useEmotionCss } from '@ant-design/use-emotion-css';

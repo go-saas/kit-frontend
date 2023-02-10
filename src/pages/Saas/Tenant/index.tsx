@@ -10,15 +10,15 @@ import { FormattedMessage } from '@umijs/max';
 import { Button, Drawer, message, Image } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import { requestTransform } from '@kit/core';
+import { requestTransform } from '@gosaas/core';
 import type {
   V1CreateTenantRequest,
   V1UpdateTenant,
   V1UpdateTenantRequest,
   V1Tenant,
   V1TenantFilter,
-} from '@kit/api';
-import { TenantServiceApi } from '@kit/api';
+} from '@gosaas/api';
+import { TenantServiceApi } from '@gosaas/api';
 
 import { useIntl } from 'umi';
 

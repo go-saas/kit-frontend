@@ -11,8 +11,8 @@ import { Button, Drawer, message, Image, Divider, Skeleton } from 'antd';
 
 import React, { useEffect, useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
-import type { ClientOAuth2Client } from '@kit/api';
-import { ClientServiceApi } from '@kit/api';
+import type { ClientOAuth2Client } from '@gosaas/api';
+import { ClientServiceApi } from '@gosaas/api';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useIntl } from 'umi';
 

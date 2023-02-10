@@ -1,6 +1,6 @@
 import { getRequestInstance } from '@@/plugin-request/request';
-import type { UploadFileParams, UploadApiResult } from '@kit/core';
-import { uploadFile } from '@kit/core';
+import type { UploadFileParams, UploadApiResult } from '@gosaas/core';
+import { uploadFile } from '@gosaas/core';
 
 /**
  * @description: Upload interface

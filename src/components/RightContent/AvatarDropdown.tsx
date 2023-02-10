@@ -7,7 +7,7 @@ import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
 import HeaderDropdown from '../HeaderDropdown';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { AuthWebApi } from '@kit/api';
+import { AuthWebApi } from '@gosaas/api';
 import { setAlpha } from '@ant-design/pro-components';
 
 export type GlobalHeaderRightProps = {

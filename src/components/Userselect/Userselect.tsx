@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
 import { Radio, Card, Avatar, AutoComplete, Form } from 'antd';
-import type { UserServiceApiUserServiceSearchUserRequest } from '@kit/api';
-import { UserServiceApi } from '@kit/api';
+import type { UserServiceApiUserServiceSearchUserRequest } from '@gosaas/api';
+import { UserServiceApi } from '@gosaas/api';
 import { useIntl } from '@umijs/max';
 import { DeleteOutlined, UserOutlined } from '@ant-design/icons';
 import type { ProFormInstance } from '@ant-design/pro-components';

@@ -16,8 +16,8 @@ import type {
   V1UpdateRolePermissionAcl,
   V1UpdateRole,
   V1CreateRoleRequest,
-} from '@kit/api';
-import { RoleServiceApi } from '@kit/api';
+} from '@gosaas/api';
+import { RoleServiceApi } from '@gosaas/api';
 export type FormValueType = V1CreateRoleRequest & V1UpdateRole;
 
 export type UpdateFormProps = {

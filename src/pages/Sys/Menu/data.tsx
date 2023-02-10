@@ -1,5 +1,5 @@
-import type { V1Menu } from '@kit/api';
-import { MenuServiceApi } from '@kit/api';
+import type { V1Menu } from '@gosaas/api';
+import { MenuServiceApi } from '@gosaas/api';
 export type MenuWithChildren = {
   parentMenu?: MenuWithChildren;
   children?: MenuWithChildren[];

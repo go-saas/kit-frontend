@@ -1,5 +1,5 @@
 import React from 'react';
-import type { V1Role } from '@kit/api';
+import type { V1Role } from '@gosaas/api';
 import { Tag } from 'antd';
 import { useIntl } from 'umi';
 import { getName } from './RoleName';

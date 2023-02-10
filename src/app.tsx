@@ -5,7 +5,7 @@ import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
-import { AccountApi, TenantServiceApi } from '@kit/api';
+import { AccountApi, TenantServiceApi } from '@gosaas/api';
 import { message, notification } from 'antd';
 import { addLocale } from '@@/plugin-locale/localeExports';
 import type { RequestConfig } from 'umi';
@@ -17,12 +17,12 @@ import {
   authRespInterceptor,
   setSettingTenantId,
   bizErrorInterceptor,
-} from '@kit/core';
-import type { UserInfo, UserTenantInfo } from '@kit/core';
-import { FriendlyError } from '@kit/core';
+} from '@gosaas/core';
+import type { UserInfo, UserTenantInfo } from '@gosaas/core';
+import { FriendlyError } from '@gosaas/core';
 import { getRequestInstance } from '@@/plugin-request/request';
-import type { V1LocaleLanguage } from '@kit/api';
-import { setDefaultAxiosFactory, MenuServiceApi, LocaleServiceApi } from '@kit/api';
+import type { V1LocaleLanguage } from '@gosaas/api';
+import { setDefaultAxiosFactory, MenuServiceApi, LocaleServiceApi } from '@gosaas/api';
 import type { Route } from '@/utils/menuTransform';
 import { transformMenu } from '@/utils/menuTransform';
 import type { AxiosResponse } from 'umi';

@@ -9,11 +9,11 @@ import {
 } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
-import type { V1CreateTenantRequest, V1UpdateTenant } from '@kit/api';
-import { TenantServiceApi, AuthApi } from '@kit/api';
+import type { V1CreateTenantRequest, V1UpdateTenant } from '@gosaas/api';
+import { TenantServiceApi, AuthApi } from '@gosaas/api';
 import { uploadApi } from '@/utils/upload';
 import Userselect from '@/components/Userselect';
-import { FriendlyError } from '@kit/core';
+import { FriendlyError } from '@gosaas/core';
 import { ErrorShowType } from '@/utils/errors';
 import { message } from 'antd';
 

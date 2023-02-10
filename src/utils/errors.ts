@@ -1,1 +1,1 @@
-export { ErrorShowType } from '@kit/core';
+export { ErrorShowType } from '@gosaas/core';

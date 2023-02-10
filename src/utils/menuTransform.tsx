@@ -1,7 +1,7 @@
 import React from 'react';
 import type { MenuDataItem } from '@ant-design/pro-layout';
 import * as allIcons from '@ant-design/icons';
-import type { V1Menu, V1PermissionRequirement } from '@kit/api';
+import type { V1Menu, V1PermissionRequirement } from '@gosaas/api';
 import Iframe from '@/components/Iframe';
 import MicroApp from '@/components/MicroApp';
 const isDev = process.env.NODE_ENV === 'development';

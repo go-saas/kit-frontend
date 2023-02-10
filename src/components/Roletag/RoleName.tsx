@@ -1,4 +1,4 @@
-import type { V1Role } from '@kit/api';
+import type { V1Role } from '@gosaas/api';
 
 export const getName = (intl: any, role: V1Role) => {
   if (role.isPreserved) {

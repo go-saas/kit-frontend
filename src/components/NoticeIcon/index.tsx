@@ -1,5 +1,5 @@
-import type { V1Notification } from '@kit/api';
-import { NotificationServiceApi } from '@kit/api';
+import type { V1Notification } from '@gosaas/api';
+import { NotificationServiceApi } from '@gosaas/api';
 import { Card, Space, Switch } from 'antd';
 import { Avatar, Divider, List, Skeleton, Badge } from 'antd';
 import { useEffect, useState } from 'react';

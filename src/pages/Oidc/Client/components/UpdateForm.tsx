@@ -8,8 +8,8 @@ import {
 } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
-import type { ClientOAuth2Client } from '@kit/api';
-import { ClientServiceApi } from '@kit/api';
+import type { ClientOAuth2Client } from '@gosaas/api';
+import { ClientServiceApi } from '@gosaas/api';
 
 const service = new ClientServiceApi();
 
