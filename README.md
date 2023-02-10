@@ -20,4 +20,12 @@ Build
 
 ```
 pnpm run build
+
+```
+
+Publish
+
+```
+pnpm login
+pnpm publish -r --access public
 ```
