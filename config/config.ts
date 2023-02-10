@@ -53,7 +53,7 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  monorepoRedirect: {},
+  monorepoRedirect: { srcDir: ['dist'], peerDeps: true },
   // Fast Refresh 热更新
   fastRefresh: true,
   presets: ['umi-presets-pro'],

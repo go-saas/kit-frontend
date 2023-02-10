@@ -7,12 +7,13 @@ import {
   TableDropdown,
 } from '@ant-design/pro-components';
 import { FormattedMessage } from '@umijs/max';
-import { Button, Drawer, message, Image } from 'antd';
-import React, { useRef, useState } from 'react';
+import { Button, Drawer, message, Image, Divider, Skeleton } from 'antd';
+
+import React, { useEffect, useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 import type { ClientOAuth2Client } from '@kit/api';
 import { ClientServiceApi } from '@kit/api';
-
+import InfiniteScroll from 'react-infinite-scroll-component';
 import { useIntl } from 'umi';
 
 const service = new ClientServiceApi();
@@ -78,6 +79,33 @@ const TableList: React.FC = () => {
       hide();
       return false;
     }
+  };
+
+  const [afterPageToken, setAfterPageToken] = useState<string>();
+  const [allData, setAllData] = useState<ClientOAuth2Client[]>();
+  const [totalSize, setTotalSize] = useState<number>(0);
+  const [hasMore, setHasMore] = useState<boolean>(true);
+  const fetchData = async () => {
+    const limit = 10;
+    const resp = await service.clientServiceListOAuth2Clients({
+      limit: limit.toString(),
+      afterPageToken: afterPageToken,
+    });
+    setTotalSize(resp.data?.totalSize | 0);
+    setAllData([...(allData ?? []), ...(resp.data?.items ?? [])]);
+    setHasMore((resp.data?.items ?? []).length === limit);
+    setAfterPageToken(resp.data?.nextAfterPageToken);
+  };
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const reload = async () => {
+    setTotalSize(0);
+    setHasMore(true);
+    setAfterPageToken(undefined);
+    setAllData([]);
+    await fetchData();
   };
 
   const columns = (
@@ -280,93 +308,114 @@ const TableList: React.FC = () => {
 
   return (
     <PageContainer>
-      <ProTable<ClientOAuth2Client>
-        actionRef={actionRef}
-        rowKey="id"
-        search={false}
-        pagination={{
-          defaultPageSize: 10,
+      <div
+        id="oidcClientScrollableDiv"
+        style={{
+          height: 900,
+          overflow: 'auto',
         }}
-        toolBarRender={() => [
-          <Button
-            type="primary"
-            key="primary"
-            onClick={() => {
-              setCurrentRow(undefined);
-              handleUpdateModalVisible(true);
-            }}
-          >
-            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
-          </Button>,
-        ]}
-        type="table"
-        request={async ({ pageSize, current }) => {
-          const limit = pageSize || 0;
-          const resp = await service.clientServiceListOAuth2Clients({
-            limit: limit.toString(),
-            offset: (((current || 0) - 1) * limit).toString(),
-          });
-          return {
-            data: resp.data.items ?? [],
-            total: resp.data.totalSize!,
-          };
-        }}
-        columns={columns()}
-      />
-      <Drawer
-        width={800}
-        open={showDetail}
-        onClose={() => {
-          setCurrentRow(undefined);
-          setShowDetail(false);
-        }}
-        closable={false}
-        destroyOnClose
       >
-        {currentRow?.clientId && (
-          <ProDescriptions<ClientOAuth2Client>
-            column={2}
-            title={currentRow?.clientName}
-            request={async () => {
-              const resp = await service.clientServiceGetOAuth2Client({ id: currentRow.clientId! });
-              return {
-                data: resp.data,
-              };
-            }}
-            params={{
-              id: currentRow?.clientId,
-            }}
-            columns={columns(detailColumns)}
+        <InfiniteScroll
+          dataLength={totalSize}
+          next={fetchData}
+          hasMore={hasMore}
+          loader={<Skeleton avatar paragraph={{ rows: 1 }} active />}
+          endMessage={
+            <Divider plain>
+              <FormattedMessage id="common.pagination.total.all" defaultMessage="It's all" /> 🤐
+            </Divider>
+          }
+          scrollableTarget="oidcClientScrollableDiv"
+        >
+          <ProTable<ClientOAuth2Client>
+            actionRef={actionRef}
+            rowKey="id"
+            search={false}
+            pagination={false}
+            options={{ reload: reload }}
+            toolBarRender={() => [
+              `${intl.formatMessage({
+                id: 'common.pagination.total.total',
+                defaultMessage: '总共',
+              })} ${totalSize} ${intl.formatMessage({
+                id: 'common.pagination.total.item',
+                defaultMessage: '条',
+              })}`,
+              <Button
+                type="primary"
+                key="primary"
+                onClick={() => {
+                  setCurrentRow(undefined);
+                  handleUpdateModalVisible(true);
+                }}
+              >
+                <PlusOutlined />{' '}
+                <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
+              </Button>,
+            ]}
+            type="list"
+            dataSource={allData}
+            columns={columns()}
           />
-        )}
-      </Drawer>
-      <UpdateForm
-        onSubmit={async (value) => {
-          const { clientId } = value;
-          let success = false;
-          if (clientId) {
-            success = await handleUpdate(value as ClientOAuth2Client);
-          } else {
-            success = await handleAdd(value as ClientOAuth2Client);
-          }
+        </InfiniteScroll>
 
-          if (success) {
-            handleUpdateModalVisible(false);
+        <Drawer
+          width={800}
+          open={showDetail}
+          onClose={() => {
             setCurrentRow(undefined);
-            if (actionRef.current) {
-              actionRef.current.reload();
+            setShowDetail(false);
+          }}
+          closable={false}
+          destroyOnClose
+        >
+          {currentRow?.clientId && (
+            <ProDescriptions<ClientOAuth2Client>
+              column={2}
+              title={currentRow?.clientName}
+              request={async () => {
+                const resp = await service.clientServiceGetOAuth2Client({
+                  id: currentRow.clientId!,
+                });
+                return {
+                  data: resp.data,
+                };
+              }}
+              params={{
+                id: currentRow?.clientId,
+              }}
+              columns={columns(detailColumns)}
+            />
+          )}
+        </Drawer>
+        <UpdateForm
+          onSubmit={async (value) => {
+            const { clientId } = value;
+            let success = false;
+            if (clientId) {
+              success = await handleUpdate(value as ClientOAuth2Client);
+            } else {
+              success = await handleAdd(value as ClientOAuth2Client);
             }
-          }
-        }}
-        onCancel={() => {
-          handleUpdateModalVisible(false);
-          if (!showDetail) {
-            setCurrentRow(undefined);
-          }
-        }}
-        updateModalVisible={updateModalVisible}
-        values={(currentRow as any) || {}}
-      />
+
+            if (success) {
+              handleUpdateModalVisible(false);
+              setCurrentRow(undefined);
+              if (actionRef.current) {
+                actionRef.current.reload();
+              }
+            }
+          }}
+          onCancel={() => {
+            handleUpdateModalVisible(false);
+            if (!showDetail) {
+              setCurrentRow(undefined);
+            }
+          }}
+          updateModalVisible={updateModalVisible}
+          values={(currentRow as any) || {}}
+        />
+      </div>
     </PageContainer>
   );
 };

@@ -13,4 +13,11 @@ export default {
   'common.operate': '操作',
   'common.deny': '拒绝',
   'common.allow': '允许',
+  'common.pagination': {
+    total: {
+      total: '总共',
+      item: '条',
+      all: '加载完毕',
+    },
+  },
 };

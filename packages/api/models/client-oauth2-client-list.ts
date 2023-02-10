@@ -32,7 +32,7 @@ export interface ClientOAuth2ClientList {
      * @type {number}
      * @memberof ClientOAuth2ClientList
      */
-    'totalCount'?: number;
+    'totalSize'?: number;
     /**
      * 
      * @type {string}

@@ -13,4 +13,11 @@ export default {
   'common.operate': 'Operate',
   'common.deny': 'Deny',
   'common.allow': 'Allow',
+  'common.pagination': {
+    total: {
+      total: '',
+      item: 'item(s)',
+      all: "It's all",
+    },
+  },
 };
