@@ -1,13 +1,12 @@
 import type { V1Menu } from '@gosaas/api';
 import { MenuServiceApi } from '@gosaas/api';
 export type MenuWithChildren = {
-  parentMenu?: MenuWithChildren;
   children?: MenuWithChildren[];
 } & V1Menu;
 
 export async function getTreeData(): Promise<MenuWithChildren[]> {
   const resp = await new MenuServiceApi().menuServiceListMenu2({
-    body: { pageOffset: -1, pageSize: -1 },
+    body: { pageOffset: 0, pageSize: -1 },
   });
   const all = resp.data?.items ?? [];
   //get children

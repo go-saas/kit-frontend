@@ -1,7 +1,7 @@
 import React from 'react';
 import type { V1Role } from '@gosaas/api';
 import { Tag } from 'antd';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 import { getName } from './RoleName';
 type RoleTagProps = {
   role: V1Role;

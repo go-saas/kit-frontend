@@ -1,7 +1,7 @@
 import React from 'react';
-import { useModel } from 'umi';
+import { useModel } from '@umijs/max';
 import { Dropdown, Menu } from 'antd';
-import { FormattedMessage } from 'umi';
+import { FormattedMessage } from '@umijs/max';
 import { DownOutlined } from '@ant-design/icons';
 
 export type TenantDropdownProps = {

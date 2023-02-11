@@ -8,7 +8,7 @@ import defaultSettings from '../config/defaultSettings';
 import { AccountApi, TenantServiceApi } from '@gosaas/api';
 import { message, notification } from 'antd';
 import { addLocale } from '@@/plugin-locale/localeExports';
-import type { RequestConfig } from 'umi';
+import type { RequestConfig } from '@umijs/max';
 import {
   authRequestInterceptor,
   csrfRequestInterceptor,
@@ -25,7 +25,7 @@ import type { V1LocaleLanguage } from '@gosaas/api';
 import { setDefaultAxiosFactory, MenuServiceApi, LocaleServiceApi } from '@gosaas/api';
 import type { Route } from '@/utils/menuTransform';
 import { transformMenu } from '@/utils/menuTransform';
-import type { AxiosResponse } from 'umi';
+import type { AxiosResponse } from '@umijs/max';
 import { ErrorShowType } from '@/utils/errors';
 import TenantDropdown from '@/components/TenantDropdown';
 import pRetry from 'p-retry';

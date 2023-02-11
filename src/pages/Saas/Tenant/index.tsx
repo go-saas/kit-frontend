@@ -20,7 +20,7 @@ import type {
 } from '@gosaas/api';
 import { TenantServiceApi } from '@gosaas/api';
 
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 
 const service = new TenantServiceApi();
 

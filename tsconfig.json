@@ -14,6 +14,7 @@
     "strict": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
+    "noImplicitAny": false,
     "paths": {
       "@/*": ["./src/*"],
       "@@/*": ["./src/.umi/*"],

@@ -20,7 +20,7 @@ import type {
 } from '@gosaas/api';
 import { MenuServiceApi } from '@gosaas/api';
 import * as allIcons from '@ant-design/icons';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 import type { MenuWithChildren } from './data';
 import { getTreeData } from './data';
 
@@ -234,9 +234,7 @@ const TableList: React.FC = () => {
         actionRef={actionRef}
         rowKey="id"
         search={false}
-        pagination={{
-          defaultPageSize: 10,
-        }}
+        pagination={false}
         toolBarRender={() => [
           <Button
             type="primary"

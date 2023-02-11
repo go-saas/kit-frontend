@@ -13,7 +13,7 @@ import React, { useState, useRef, useEffect } from 'react';
 
 import { AuthWebApi } from '@gosaas/api';
 import { useMount } from 'ahooks';
-import { useSearchParams } from 'umi';
+import { useSearchParams } from '@umijs/max';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 
 const LoginMessage: React.FC<{

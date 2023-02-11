@@ -21,7 +21,7 @@ import type {
 } from '@gosaas/api';
 import { RoleServiceApi } from '@gosaas/api';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 import Roletag from '@/components/Roletag';
 
 const TableList: React.FC = () => {

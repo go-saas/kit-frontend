@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useSearchParams } from 'umi';
+import { useSearchParams } from '@umijs/max';
 import { history, useModel, FormattedMessage } from '@umijs/max';
 import type { V1GetConsentResponse } from '@gosaas/api';
 import styles from './index.less';

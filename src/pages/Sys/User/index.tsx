@@ -20,7 +20,7 @@ import type {
 } from '@gosaas/api';
 import { UserServiceApi } from '@gosaas/api';
 import { UserOutlined } from '@ant-design/icons';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 import RoleTag from '@/components/Roletag';
 import { genderValueEnum } from './gender';
 

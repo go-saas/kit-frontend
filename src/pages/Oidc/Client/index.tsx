@@ -14,7 +14,7 @@ import UpdateForm from './components/UpdateForm';
 import type { ClientOAuth2Client } from '@gosaas/api';
 import { ClientServiceApi } from '@gosaas/api';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import { useIntl } from 'umi';
+import { useIntl } from '@umijs/max';
 
 const service = new ClientServiceApi();
 
