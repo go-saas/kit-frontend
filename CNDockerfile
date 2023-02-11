@@ -6,7 +6,6 @@ RUN npm install -g pnpm@7.4.1
 
 RUN pnpm config set registry https://registry.npmmirror.com
 
-COPY .npmrc ./
 COPY pnpm-lock.yaml ./
 
 RUN pnpm fetch
