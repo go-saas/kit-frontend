@@ -11,7 +11,7 @@ import { FriendlyError } from '@gosaas/core';
 import { message } from 'antd';
 import Userselect from '@/components/Userselect';
 import { genderValueEnum } from '../gender';
-import { uploadApi } from '@/utils/upload';
+import { uploadApi, uploadTransformSingle, uploadConvertValue } from '@/utils/upload';
 import RoleTag from '@/components/Roletag/Roletag';
 import { getName } from '@/components/Roletag/RoleName';
 
@@ -187,29 +187,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                     id: 'sys.user.avatar',
                     defaultMessage: 'User Avatar',
                   })}
-                  transform={(value: any) => {
-                    if (!value) {
-                      return value;
-                    }
-                    let res: any;
-                    if (Array.isArray(value)) {
-                      if (value.length > 0) {
-                        res = value[0]?.response ?? value[0];
-                      }
-                    } else {
-                      res = value.response ?? value;
-                    }
-                    return { logo: res };
-                  }}
-                  convertValue={(value: any) => {
-                    if (!value) {
-                      return value;
-                    }
-                    if (Array.isArray(value)) {
-                      return value;
-                    }
-                    return [value];
-                  }}
+                  transform={uploadTransformSingle}
+                  convertValue={uploadConvertValue}
                   fieldProps={{
                     customRequest: (opt) => {
                       const { onProgress, onError, onSuccess, file, filename } = opt;

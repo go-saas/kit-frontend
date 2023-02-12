@@ -11,7 +11,7 @@ import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
 import type { V1CreateTenantRequest, V1UpdateTenant } from '@gosaas/api';
 import { TenantServiceApi, AuthApi } from '@gosaas/api';
-import { uploadApi } from '@/utils/upload';
+import { uploadApi, uploadConvertValue, uploadTransformSingle } from '@/utils/upload';
 import Userselect from '@/components/Userselect';
 import { FriendlyError } from '@gosaas/core';
 import { ErrorShowType } from '@/utils/errors';
@@ -75,29 +75,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           id: 'saas.tenant.logo',
           defaultMessage: 'Tenant Logo',
         })}
-        transform={(value: any) => {
-          if (!value) {
-            return value;
-          }
-          let res: any;
-          if (Array.isArray(value)) {
-            if (value.length > 0) {
-              res = value[0]?.response ?? value[0];
-            }
-          } else {
-            res = value.response ?? value;
-          }
-          return { logo: res };
-        }}
-        convertValue={(value: any) => {
-          if (!value) {
-            return value;
-          }
-          if (Array.isArray(value)) {
-            return value;
-          }
-          return [value];
-        }}
+        transform={uploadTransformSingle}
+        convertValue={uploadConvertValue}
         fieldProps={{
           customRequest: (opt) => {
             const { onProgress, onError, onSuccess, file, filename } = opt;
