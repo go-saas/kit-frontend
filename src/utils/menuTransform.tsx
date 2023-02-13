@@ -4,6 +4,11 @@ import * as allIcons from '@ant-design/icons';
 import type { V1Menu, V1PermissionRequirement } from '@gosaas/api';
 import Iframe from '@/components/Iframe';
 import MicroApp from '@/components/MicroApp';
+import { MasterOptions } from '@@/plugin-qiankun-master/types';
+import { getMasterOptions } from '@@/plugin-qiankun-master/masterOptions';
+import { patchMicroAppRoute } from '@@/plugin-qiankun-master/common';
+import { getMicroAppRouteComponent } from '@@/plugin-qiankun-master/getMicroAppRouteComponent';
+
 const isDev = process.env.NODE_ENV === 'development';
 
 export declare type RouteData = {
@@ -24,6 +29,7 @@ export declare type Route = {
   };
 
 export function transformMenu(allMenu: V1Menu[]) {
+  const { routeBindingAlias, base, masterHistoryType } = getMasterOptions() as MasterOptions;
   const findChildren = (id: string): Route[] => {
     const items: Route[] = allMenu
       .filter((p) => p.parent === id)
@@ -49,14 +55,35 @@ export function transformMenu(allMenu: V1Menu[]) {
         if (p.microAppName) {
           const entry = isDev ? p.microAppDev : p.microApp;
           item.route = {
+            //meta just for app.tsx qiankun() function
             microAppName: p.microAppName,
             microAppEntry: entry,
             microAppBasename: p.microAppBaseRoute,
             type: 'microApp',
           };
-          item.element = (
-            <MicroApp key={p.id!} name={p.microAppName} url={p.microAppBaseRoute!} entry={entry} />
-          );
+          if (p.microAppBaseRoute) {
+            item.element = (
+              <MicroApp
+                key={p.id!}
+                name={p.microAppName}
+                url={p.microAppBaseRoute!}
+                entry={entry!}
+              />
+            );
+          } else {
+            item.microApp = p.microAppName;
+            //see @@/plugin-qiankun-master/masterRuntimePlugin.tsx#L57
+            patchMicroAppRoute(
+              item,
+              getMicroAppRouteComponent as any,
+              {
+                base,
+                routePath: item.path,
+                masterHistoryType,
+                routeBindingAlias,
+              } as any,
+            );
+          }
         }
 
         //fix icon
