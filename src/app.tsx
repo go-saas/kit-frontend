@@ -186,15 +186,6 @@ export async function qiankun() {
 let extraRoutes: Route[] = [];
 export async function render(oldRender: () => any) {
   extraRoutes = await getMenu();
-
-  // await accessTree<Route>(allMenus, async (t) => {
-  //   if ((t as Route).route) {
-  //     //omit id
-  //     const { id, ...data } = t as Route;
-  //     extraRoutes.push(data);
-  //   }
-  //   return true;
-  // });
   oldRender();
 }
 

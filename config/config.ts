@@ -56,6 +56,10 @@ export default defineConfig({
   monorepoRedirect: { srcDir: ['dist'], peerDeps: true },
   // Fast Refresh 热更新
   fastRefresh: true,
+  headScripts: [
+    // 解决首次加载时白屏的问题
+    { src: '/scripts/loading.js', async: true },
+  ],
   presets: ['umi-presets-pro'],
   define: {
     BASE_URL: REACT_APP_ENV == 'dev' ? '/basic-api' : '',
