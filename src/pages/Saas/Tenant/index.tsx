@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import type { ActionType, ProColumnType } from '@ant-design/pro-components';
 import {
   PageContainer,
   ProDescriptions,
@@ -84,7 +84,7 @@ const TableList: React.FC = () => {
     }
   };
 
-  const columns: ProColumns<V1Tenant>[] = [
+  const columns: ProColumnType<V1Tenant>[] = [
     {
       title: <FormattedMessage id="saas.tenant.logo" defaultMessage="Tenant Logo" />,
       dataIndex: 'logo',

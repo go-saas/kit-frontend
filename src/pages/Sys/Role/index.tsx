@@ -1,5 +1,9 @@
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
+import type {
+  ActionType,
+  ProColumnType,
+  ProDescriptionsItemProps,
+} from '@ant-design/pro-components';
 import {
   PageContainer,
   ProDescriptions,
@@ -87,7 +91,7 @@ const TableList: React.FC = () => {
     }
   };
 
-  const columns: ProColumns<V1Role>[] = [
+  const columns: ProColumnType<V1Role>[] = [
     {
       title: <FormattedMessage id="sys.role.name" defaultMessage="Role Name" />,
       dataIndex: 'name',
@@ -153,7 +157,7 @@ const TableList: React.FC = () => {
     },
   ];
 
-  const permission: ProColumns<V1Role>[] = [
+  const permission: ProColumnType<V1Role>[] = [
     {
       title: <FormattedMessage id="sys.role.permission" defaultMessage="Role Permission" />,
       dataIndex: 'defGroups',

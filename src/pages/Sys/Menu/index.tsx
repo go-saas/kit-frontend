@@ -1,5 +1,9 @@
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns, ProDescriptionsItemProps } from '@ant-design/pro-components';
+import type {
+  ActionType,
+  ProColumnType,
+  ProDescriptionsItemProps,
+} from '@ant-design/pro-components';
 import {
   PageContainer,
   ProDescriptions,
@@ -84,7 +88,7 @@ const TableList: React.FC = () => {
     }
   };
 
-  const columns: ProColumns<MenuWithChildren>[] = [
+  const columns: ProColumnType<MenuWithChildren>[] = [
     {
       title: <FormattedMessage id="sys.menu.icon" defaultMessage="Menu Icon" />,
       dataIndex: 'icon',

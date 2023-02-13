@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import type { ActionType, ProColumnType } from '@ant-design/pro-components';
 import {
   PageContainer,
   ProDescriptions,
@@ -85,7 +85,7 @@ const TableList: React.FC = () => {
     }
   };
 
-  const columns: ProColumns<V1User>[] = [
+  const columns: ProColumnType<V1User>[] = [
     {
       title: <FormattedMessage id="sys.user.avatar" defaultMessage="User Avatar" />,
       dataIndex: 'avatar',

@@ -1,4 +1,4 @@
-import type { ProColumns } from '@ant-design/pro-components';
+import type { ProColumnType } from '@ant-design/pro-components';
 import {
   ProFormText,
   ProFormDigit,
@@ -21,7 +21,7 @@ import { getTreeData } from '../data';
 
 export type FormValueType = Partial<V1Menu>;
 
-const columns: ProColumns<RequirementWithId>[] = [
+const columns: ProColumnType<RequirementWithId>[] = [
   {
     title: <FormattedMessage id="sys.permission.namepsace" defaultMessage="Namespace" />,
     dataIndex: 'namespace',

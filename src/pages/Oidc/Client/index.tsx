@@ -1,5 +1,5 @@
 import { PlusOutlined } from '@ant-design/icons';
-import type { ActionType, ProColumns } from '@ant-design/pro-components';
+import type { ActionType, ProColumnType } from '@ant-design/pro-components';
 import {
   PageContainer,
   ProDescriptions,
@@ -109,8 +109,8 @@ const TableList: React.FC = () => {
   };
 
   const columns = (
-    extra: ProColumns<ClientOAuth2Client>[] = [],
-  ): ProColumns<ClientOAuth2Client>[] => {
+    extra: ProColumnType<ClientOAuth2Client>[] = [],
+  ): ProColumnType<ClientOAuth2Client>[] => {
     return [
       {
         title: <FormattedMessage id="oidc.client.logo" defaultMessage="Client Logo" />,
@@ -205,7 +205,7 @@ const TableList: React.FC = () => {
     ];
   };
 
-  const detailColumns: ProColumns<ClientOAuth2Client>[] = [
+  const detailColumns: ProColumnType<ClientOAuth2Client>[] = [
     {
       title: (
         <FormattedMessage
