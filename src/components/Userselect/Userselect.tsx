@@ -46,7 +46,6 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
   const [userList, setUserList] = useState<SelectUser[]>([]);
   const [open, setOpen] = useState<boolean>(false);
   const formRef = useRef<ProFormInstance>();
-  const [form] = Form.useForm();
 
   useEffect(() => {
     if (props.value?.user) {
@@ -169,97 +168,107 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
           </Radio.Button>
         </Radio.Group>
       </ProForm.Item>
-      <ProForm
-        formRef={formRef}
-        submitter={false}
-        form={form}
-        onValuesChange={(changeValues) => {
-          if (!currentUser) {
-            props?.onChange?.(changeValues);
-          }
-        }}
-      >
-        {selectType === SelectType.USERNAME && (
-          <ProForm.Item
-            name="username"
-            label={intl.formatMessage({
-              id: 'sys.user.username',
-              defaultMessage: 'Username',
-            })}
-            rules={[{ required: true }]}
+      {selectType === SelectType.USERNAME && (
+        <ProForm.Item
+          name="username"
+          label={intl.formatMessage({
+            id: 'sys.user.username',
+            defaultMessage: 'Username',
+          })}
+          rules={[{ required: true }]}
+        >
+          <AutoComplete<string>
+            showSearch
+            open={open}
+            onSelect={onSelect}
+            onChange={(p) => {
+              if (!currentUser) {
+                props?.onChange?.({
+                  username: p,
+                });
+              }
+            }}
+            onBlur={onBlur}
+            onSearch={async (p) => {
+              await search({ username: p });
+            }}
           >
-            <AutoComplete<SelectUser>
-              showSearch
-              open={open}
-              onSelect={onSelect}
-              onBlur={onBlur}
-              onSearch={async (p) => {
-                await search({ username: p });
-              }}
-            >
-              {userList.map((p) => (
-                <Option key={p.id} value={p.id}>
-                  {optionItemRender(p)}
-                </Option>
-              ))}
-            </AutoComplete>
-          </ProForm.Item>
-        )}
+            {userList.map((p) => (
+              <Option key={p.id} value={p.id}>
+                {optionItemRender(p)}
+              </Option>
+            ))}
+          </AutoComplete>
+        </ProForm.Item>
+      )}
 
-        {selectType === SelectType.EMAIL && (
-          <ProForm.Item
-            name="email"
-            label={intl.formatMessage({
-              id: 'sys.user.email',
-              defaultMessage: 'Email',
-            })}
-            rules={[{ required: true, type: 'email' }]}
+      {selectType === SelectType.EMAIL && (
+        <ProForm.Item
+          name="email"
+          label={intl.formatMessage({
+            id: 'sys.user.email',
+            defaultMessage: 'Email',
+          })}
+          rules={[{ required: true, type: 'email' }]}
+        >
+          <AutoComplete<string>
+            showSearch
+            open={open}
+            onSelect={onSelect}
+            onChange={(p) => {
+              if (!currentUser) {
+                props?.onChange?.({
+                  email: p,
+                });
+              }
+            }}
+            onBlur={onBlur}
+            onSearch={async (p) => {
+              await search({ email: p });
+            }}
           >
-            <AutoComplete<SelectUser>
-              showSearch
-              open={open}
-              onSelect={onSelect}
-              onBlur={onBlur}
-              onSearch={async (p) => {
-                await search({ email: p });
-              }}
-            >
-              {userList.map((p) => (
-                <Option key={p.id} value={p.id}>
-                  {optionItemRender(p)}
-                </Option>
-              ))}
-            </AutoComplete>
-          </ProForm.Item>
-        )}
+            {userList.map((p) => (
+              <Option key={p.id} value={p.id}>
+                {optionItemRender(p)}
+              </Option>
+            ))}
+          </AutoComplete>
+        </ProForm.Item>
+      )}
 
-        {selectType === SelectType.PHONE && (
-          <ProForm.Item
-            name="phone"
-            label={intl.formatMessage({
-              id: 'sys.user.phone',
-              defaultMessage: 'Phone',
-            })}
-            rules={[{ required: true }]}
+      {selectType === SelectType.PHONE && (
+        <ProForm.Item
+          name="phone"
+          label={intl.formatMessage({
+            id: 'sys.user.phone',
+            defaultMessage: 'Phone',
+          })}
+          rules={[{ required: true }]}
+        >
+          <AutoComplete<string>
+            showSearch
+            open={open}
+            onSelect={onSelect}
+            onChange={(p) => {
+              if (!currentUser) {
+                props?.onChange?.({
+                  email: p,
+                });
+              }
+            }}
+            onBlur={onBlur}
+            onSearch={async (p) => {
+              await search({ phone: p });
+            }}
           >
-            <AutoComplete<SelectUser>
-              showSearch
-              open={open}
-              onSelect={onSelect}
-              onBlur={onBlur}
-              onSearch={async (p) => {
-                await search({ phone: p });
-              }}
-            >
-              {userList.map((p) => (
-                <Option key={p.id} value={p.id}>
-                  {optionItemRender(p)}
-                </Option>
-              ))}
-            </AutoComplete>
-          </ProForm.Item>
-        )}
-      </ProForm>
+            {userList.map((p) => (
+              <Option key={p.id} value={p.id}>
+                {optionItemRender(p)}
+              </Option>
+            ))}
+          </AutoComplete>
+        </ProForm.Item>
+      )}
     </>
   );
 };

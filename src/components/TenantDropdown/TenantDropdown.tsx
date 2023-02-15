@@ -1,6 +1,6 @@
 import React from 'react';
 import { useModel } from '@umijs/max';
-import { Dropdown, Menu } from 'antd';
+import { Dropdown } from 'antd';
 import { FormattedMessage } from '@umijs/max';
 import { DownOutlined } from '@ant-design/icons';
 
@@ -36,15 +36,14 @@ const TenantDropdown: React.FC<TenantDropdownProps> = (props) => {
     };
   });
 
-  const menus = <Menu items={menuItems} />;
   return (
-    <a>
+    <>
       {initialState?.currentTenant?.tenant?.logo?.url ? (
         <img src={initialState?.currentTenant?.tenant?.logo?.url} />
       ) : (
         props.logo
       )}
-      <Dropdown overlay={menus}>
+      <Dropdown menu={{ items: menuItems }}>
         <a onClick={(e) => e.preventDefault()}>
           {initialState?.currentTenant?.tenant?.displayName ? (
             <h1>{initialState?.currentTenant?.tenant?.displayName}</h1>
@@ -54,7 +53,7 @@ const TenantDropdown: React.FC<TenantDropdownProps> = (props) => {
           <DownOutlined style={{ paddingLeft: 8 }} />
         </a>
       </Dropdown>
-    </a>
+    </>
   );
 };
 

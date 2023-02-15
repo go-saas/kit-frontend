@@ -11,7 +11,8 @@ import { FriendlyError } from '@gosaas/core';
 import { message } from 'antd';
 import Userselect from '@/components/Userselect';
 import { genderValueEnum } from '../gender';
-import { uploadApi, uploadTransformSingle, uploadConvertValue } from '@/utils/upload';
+import { uploadApi } from '@/utils/upload';
+import { uploadConvertValue, uploadTransformSingle } from '@gosaas/core';
 import RoleTag from '@/components/Roletag/Roletag';
 import { getName } from '@/components/Roletag/RoleName';
 

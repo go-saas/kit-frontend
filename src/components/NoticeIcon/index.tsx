@@ -44,17 +44,18 @@ const NoticeIconView: React.FC = () => {
         },
       });
       const { unreadSize: unread, nextAfterPageToken, items, filterSize: total } = resp.data;
-      setUnreadSize(unread);
+      setUnreadSize(unread!);
+      const nItems = items?.map((p) => p!) ?? [];
       if (!t) {
         //should clear data
-        setNotices([...items]);
+        setNotices(nItems);
       } else {
-        setNotices([...notices, ...items]);
+        setNotices([...notices, ...nItems]);
       }
 
-      setPageToken(nextAfterPageToken);
+      setPageToken(nextAfterPageToken || '');
 
-      setTotalSize(total);
+      setTotalSize(total!);
     } finally {
       setLoading(false);
     }

@@ -7,7 +7,7 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { FormattedMessage, SelectLang, useIntl, useModel, history } from '@umijs/max';
-import { Alert, message, Tabs, Input, Skeleton } from 'antd';
+import { Alert, message, Tabs, Skeleton } from 'antd';
 import type { InputRef } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -189,22 +189,19 @@ const Login: React.FC = () => {
               onSearch={onSwitch}
               loading={tenantSwitching}
             /> */}
-            <Tabs activeKey={type} onChange={setType}>
-              <Tabs.TabPane
-                key="account"
-                tab={intl.formatMessage({
-                  id: 'pages.login.accountLogin.tab',
-                  defaultMessage: '账户密码登录',
-                })}
-              />
-              {/* <Tabs.TabPane
-              key="mobile"
-              tab={intl.formatMessage({
-                id: 'pages.login.phoneLogin.tab',
-                defaultMessage: '手机号登录',
-              })}
-            /> */}
-            </Tabs>
+            <Tabs
+              activeKey={type}
+              onChange={setType}
+              items={[
+                {
+                  key: 'account',
+                  label: intl.formatMessage({
+                    id: 'pages.login.accountLogin.tab',
+                    defaultMessage: '账户密码登录',
+                  }),
+                },
+              ]}
+            ></Tabs>
 
             {status === 'error' && loginType === 'account' && (
               <LoginMessage

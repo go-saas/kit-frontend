@@ -6,3 +6,5 @@ export * from './dateUtil';
 export * from './request';
 export * from './errors';
 export * from './requestTransform';
+export * from './upload';
+export * from './duration';

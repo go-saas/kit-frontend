@@ -1,6 +1,6 @@
 {
   "name": "@gosaas/core",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
-    "moment": "^2.29.1",
+    "dayjs": "^1.11.7",
     "lodash-es": "^4.17.21"
   }
 }

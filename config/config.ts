@@ -53,7 +53,7 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
-  monorepoRedirect: { srcDir: ['dist'], peerDeps: true },
+  monorepoRedirect: { srcDir: ['.', 'src'], peerDeps: true },
   // Fast Refresh 热更新
   fastRefresh: true,
   headScripts: [
