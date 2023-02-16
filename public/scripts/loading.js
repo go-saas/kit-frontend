@@ -191,10 +191,8 @@
           </div>
         </div>
         <div class="loading-title">
-          ...
         </div>
         <div class="loading-sub-title">
-
         </div>
       </div>
     `;

@@ -65,25 +65,38 @@ export type RequirementWithId = {
   id: string;
 } & PermissionRequirement;
 
+function formatData(
+  p: FormValueType,
+): { requirement: RequirementWithId[] } & Omit<FormValueType, 'requirement'> {
+  const { requirement, ...rest } = p;
+
+  return {
+    requirement:
+      requirement?.map((p) => {
+        return { id: uuidv4(), ...p };
+      }) ?? [],
+    ...rest,
+  };
+}
+
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const intl = useIntl();
 
-  const [req, setReq] = useState<RequirementWithId[]>();
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>();
-  useEffect(() => {
-    setEditableRowKeys(req?.map((p) => p.id));
-  }, [req]);
+  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(
+    formatData(props.values).requirement.map((p) => p.id),
+  );
+
+  const [form] = Form.useForm();
+
+  const requirement = Form.useWatch<RequirementWithId[]>('requirement', form);
 
   useEffect(() => {
-    setReq(
-      props.values?.requirement?.map((p) => {
-        return { id: uuidv4(), ...p };
-      }) ?? [],
-    );
-  }, [props]);
+    setEditableRowKeys(requirement?.map((p) => p.id));
+  }, [requirement]);
   return (
     <DrawerForm
-      initialValues={props.values}
+      form={form}
+      initialValues={formatData(props.values)}
       open={props.updateModalVisible}
       onFinish={async (formData) => {
         console.log(formData);
@@ -256,7 +269,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 defaultMessage: 'Menu Auth Requirement',
               })}
               name="requirement"
-              initialValue={req}
               trigger="onValuesChange"
             >
               <EditableProTable<RequirementWithId>
