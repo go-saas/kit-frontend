@@ -7,8 +7,6 @@ import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import saas from './en-US/saas';
 import sys from './en-US/sys';
-import dev from './en-US/dev';
-import common from './en-US/common';
 export default {
   'navBar.lang': 'Languages',
   'layout.user.link.help': 'Help',
@@ -18,7 +16,6 @@ export default {
   'app.preview.down.block': 'Download this page to your local project',
   'app.welcome.link.fetch-blocks': 'Get all block',
   'app.welcome.link.block-list': 'Quickly build standard, pages based on `block` development',
-  ...common,
   ...globalHeader,
   ...menu,
   ...settingDrawer,
@@ -28,5 +25,4 @@ export default {
   ...pages,
   ...saas,
   ...sys,
-  ...dev,
 };

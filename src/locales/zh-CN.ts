@@ -7,8 +7,6 @@ import settingDrawer from './zh-CN/settingDrawer';
 import settings from './zh-CN/settings';
 import saas from './zh-CN/saas';
 import sys from './zh-CN/sys';
-import dev from './zh-CN/dev';
-import common from './zh-CN/common';
 export default {
   'navBar.lang': '语言',
   'layout.user.link.help': '帮助',
@@ -18,7 +16,6 @@ export default {
   'app.preview.down.block': '下载此页面到本地项目',
   'app.welcome.link.fetch-blocks': '获取全部区块',
   'app.welcome.link.block-list': '基于 block 开发，快速构建标准页面',
-  ...common,
   ...pages,
   ...globalHeader,
   ...menu,
@@ -28,5 +25,4 @@ export default {
   ...component,
   ...saas,
   ...sys,
-  ...dev,
 };
