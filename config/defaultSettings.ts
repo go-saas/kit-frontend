@@ -14,7 +14,7 @@ const Settings: LayoutSettings & {
   colorWeak: false,
   title: 'GO-SAAS-KIT',
   pwa: true,
-  logo: '/logo.svg',
+  logo: '/logo.png',
   iconfontUrl: '',
 };
 

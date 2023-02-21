@@ -147,7 +147,7 @@ const Login: React.FC = () => {
   };
   const { status, type: loginType } = userLoginState;
   const titile = initialState?.currentTenant?.tenant?.displayName || '';
-  const logo = initialState?.currentTenant?.tenant?.logo?.url || '/logo.svg';
+  const logo = initialState?.currentTenant?.tenant?.logo?.url || '/logo.png';
 
   const inputRef = useRef<InputRef>(null);
   useMount(() => inputRef.current!.focus());
