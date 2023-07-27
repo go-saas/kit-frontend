@@ -5,7 +5,7 @@ ARG EXTRA_ROUTES
 ENV EXTRA_ROUTES $EXTRA_ROUTES
 WORKDIR /usr/app
 
-RUN npm install -g pnpm@7.14.0
+RUN npm install -g pnpm@8.6.10
 
 
 COPY pnpm-lock.yaml ./
