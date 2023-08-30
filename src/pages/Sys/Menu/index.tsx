@@ -262,7 +262,6 @@ const TableList: React.FC = () => {
         }}
         columns={columns}
       />
-      )
       <UpdateForm
         onSubmit={async (value) => {
           const { id } = value;
