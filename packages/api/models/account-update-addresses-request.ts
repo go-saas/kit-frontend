@@ -13,19 +13,21 @@
  */
 
 
-import { KeyJSONWebKey } from './key-jsonweb-key';
+// May contain unused imports in some cases
+// @ts-ignore
+import { AccountUpdateAddressesRequestAddress } from './account-update-addresses-request-address';
 
 /**
  * 
  * @export
- * @interface KeyJSONWebKeySet
+ * @interface AccountUpdateAddressesRequest
  */
-export interface KeyJSONWebKeySet {
+export interface AccountUpdateAddressesRequest {
     /**
      * 
-     * @type {Array<KeyJSONWebKey>}
-     * @memberof KeyJSONWebKeySet
+     * @type {AccountUpdateAddressesRequestAddress}
+     * @memberof AccountUpdateAddressesRequest
      */
-    'keys'?: Array<KeyJSONWebKey>;
+    'address': AccountUpdateAddressesRequestAddress;
 }
 

@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1TenantInfo } from './v1-tenant-info';
 
 /**

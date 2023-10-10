@@ -13,7 +13,11 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { Permissionv1PermissionDef } from './permissionv1-permission-def';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1PermissionSide } from './v1-permission-side';
 
 /**
@@ -59,4 +63,6 @@ export interface Permissionv1PermissionDefGroup {
      */
     'name'?: string;
 }
+
+
 

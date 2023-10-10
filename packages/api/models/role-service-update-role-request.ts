@@ -13,24 +13,26 @@
  */
 
 
-import { V1UpdateUser } from './v1-update-user';
+// May contain unused imports in some cases
+// @ts-ignore
+import { RoleServiceUpdateRoleRequestRole } from './role-service-update-role-request-role';
 
 /**
  * 
  * @export
- * @interface V1UpdateUserRequest
+ * @interface RoleServiceUpdateRoleRequest
  */
-export interface V1UpdateUserRequest {
+export interface RoleServiceUpdateRoleRequest {
     /**
      * 
-     * @type {V1UpdateUser}
-     * @memberof V1UpdateUserRequest
+     * @type {RoleServiceUpdateRoleRequestRole}
+     * @memberof RoleServiceUpdateRoleRequest
      */
-    'user'?: V1UpdateUser;
+    'role'?: RoleServiceUpdateRoleRequestRole;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateUserRequest
+     * @memberof RoleServiceUpdateRoleRequest
      */
     'updateMask'?: string;
 }

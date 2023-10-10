@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1LocaleMessage } from './v1-locale-message';
 
 /**

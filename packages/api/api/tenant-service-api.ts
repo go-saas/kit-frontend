@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -22,6 +23,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
+// @ts-ignore
+import { TenantServiceUpdateTenantRequest } from '../models';
 // @ts-ignore
 import { V1ChangeTenantReply } from '../models';
 // @ts-ignore
@@ -38,8 +41,6 @@ import { V1ListTenantRequest } from '../models';
 import { V1Tenant } from '../models';
 // @ts-ignore
 import { V1TenantInfo } from '../models';
-// @ts-ignore
-import { V1UpdateTenantRequest } from '../models';
 /**
  * TenantServiceApi - axios parameter creator
  * @export
@@ -582,11 +583,11 @@ export const TenantServiceApiAxiosParamCreator = function (configuration?: Confi
          * 
          * @summary UpdateTenant authz: saas.tenant,{id},update
          * @param {string} tenantId 
-         * @param {V1UpdateTenantRequest} body 
+         * @param {TenantServiceUpdateTenantRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceUpdateTenant: async (tenantId: string, body: V1UpdateTenantRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        tenantServiceUpdateTenant: async (tenantId: string, body: TenantServiceUpdateTenantRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('tenantServiceUpdateTenant', 'tenantId', tenantId)
             // verify required parameter 'body' is not null or undefined
@@ -625,11 +626,11 @@ export const TenantServiceApiAxiosParamCreator = function (configuration?: Confi
          * 
          * @summary UpdateTenant authz: saas.tenant,{id},update
          * @param {string} tenantId 
-         * @param {V1UpdateTenantRequest} body 
+         * @param {TenantServiceUpdateTenantRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceUpdateTenant2: async (tenantId: string, body: V1UpdateTenantRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        tenantServiceUpdateTenant2: async (tenantId: string, body: TenantServiceUpdateTenantRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tenantId' is not null or undefined
             assertParamExists('tenantServiceUpdateTenant2', 'tenantId', tenantId)
             // verify required parameter 'body' is not null or undefined
@@ -811,11 +812,11 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary UpdateTenant authz: saas.tenant,{id},update
          * @param {string} tenantId 
-         * @param {V1UpdateTenantRequest} body 
+         * @param {TenantServiceUpdateTenantRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tenantServiceUpdateTenant(tenantId: string, body: V1UpdateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
+        async tenantServiceUpdateTenant(tenantId: string, body: TenantServiceUpdateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceUpdateTenant(tenantId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -823,11 +824,11 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary UpdateTenant authz: saas.tenant,{id},update
          * @param {string} tenantId 
-         * @param {V1UpdateTenantRequest} body 
+         * @param {TenantServiceUpdateTenantRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async tenantServiceUpdateTenant2(tenantId: string, body: V1UpdateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
+        async tenantServiceUpdateTenant2(tenantId: string, body: TenantServiceUpdateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceUpdateTenant2(tenantId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -843,33 +844,32 @@ export const TenantServiceApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
-         * @param {string} idOrName 
-         * @param {object} body 
+         * @param {TenantServiceApiTenantServiceChangeTenantRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceChangeTenant(idOrName: string, body: object, options?: any): AxiosPromise<V1ChangeTenantReply> {
-            return localVarFp.tenantServiceChangeTenant(idOrName, body, options).then((request) => request(axios, basePath));
+        tenantServiceChangeTenant(requestParameters: TenantServiceApiTenantServiceChangeTenantRequest, options?: AxiosRequestConfig): AxiosPromise<V1ChangeTenantReply> {
+            return localVarFp.tenantServiceChangeTenant(requestParameters.idOrName, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary CreateTenant authz: saas.tenant,*,create
-         * @param {V1CreateTenantRequest} body 
+         * @param {TenantServiceApiTenantServiceCreateTenantRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceCreateTenant(body: V1CreateTenantRequest, options?: any): AxiosPromise<V1Tenant> {
-            return localVarFp.tenantServiceCreateTenant(body, options).then((request) => request(axios, basePath));
+        tenantServiceCreateTenant(requestParameters: TenantServiceApiTenantServiceCreateTenantRequest, options?: AxiosRequestConfig): AxiosPromise<V1Tenant> {
+            return localVarFp.tenantServiceCreateTenant(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary DeleteTenant authz: saas.tenant,{id},delete
-         * @param {string} id 
+         * @param {TenantServiceApiTenantServiceDeleteTenantRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceDeleteTenant(id: string, options?: any): AxiosPromise<V1DeleteTenantReply> {
-            return localVarFp.tenantServiceDeleteTenant(id, options).then((request) => request(axios, basePath));
+        tenantServiceDeleteTenant(requestParameters: TenantServiceApiTenantServiceDeleteTenantRequest, options?: AxiosRequestConfig): AxiosPromise<V1DeleteTenantReply> {
+            return localVarFp.tenantServiceDeleteTenant(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -877,116 +877,68 @@ export const TenantServiceApiFactory = function (configuration?: Configuration, 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceGetCurrentTenant(options?: any): AxiosPromise<V1GetCurrentTenantReply> {
+        tenantServiceGetCurrentTenant(options?: AxiosRequestConfig): AxiosPromise<V1GetCurrentTenantReply> {
             return localVarFp.tenantServiceGetCurrentTenant(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary GetTenant authz: saas.tenant,{id},get
-         * @param {string} idOrName 
+         * @param {TenantServiceApiTenantServiceGetTenantRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceGetTenant(idOrName: string, options?: any): AxiosPromise<V1Tenant> {
-            return localVarFp.tenantServiceGetTenant(idOrName, options).then((request) => request(axios, basePath));
+        tenantServiceGetTenant(requestParameters: TenantServiceApiTenantServiceGetTenantRequest, options?: AxiosRequestConfig): AxiosPromise<V1Tenant> {
+            return localVarFp.tenantServiceGetTenant(requestParameters.idOrName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary GetTenant authz: saas.tenant,{id},get
-         * @param {string} idOrName 
+         * @param {TenantServiceApiTenantServiceGetTenantPublicRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceGetTenantPublic(idOrName: string, options?: any): AxiosPromise<V1TenantInfo> {
-            return localVarFp.tenantServiceGetTenantPublic(idOrName, options).then((request) => request(axios, basePath));
+        tenantServiceGetTenantPublic(requestParameters: TenantServiceApiTenantServiceGetTenantPublicRequest, options?: AxiosRequestConfig): AxiosPromise<V1TenantInfo> {
+            return localVarFp.tenantServiceGetTenantPublic(requestParameters.idOrName, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ListTenant authz: saas.tenant,*,list
-         * @param {number} [pageOffset] 
-         * @param {number} [pageSize] 
-         * @param {string} [search] 
-         * @param {Array<string>} [sort] 
-         * @param {string} [fields] 
-         * @param {string} [filterId$eq] 
-         * @param {string} [filterId$neq] 
-         * @param {string} [filterId$contains] 
-         * @param {string} [filterId$startsWith] 
-         * @param {string} [filterId$nstartsWith] 
-         * @param {string} [filterId$endsWith] 
-         * @param {string} [filterId$nendsWith] 
-         * @param {Array<string>} [filterId$in] 
-         * @param {Array<string>} [filterId$nin] 
-         * @param {boolean} [filterId$null] 
-         * @param {boolean} [filterId$nnull] 
-         * @param {boolean} [filterId$empty] 
-         * @param {boolean} [filterId$nempty] 
-         * @param {string} [filterId$like] 
-         * @param {string} [filterName$eq] 
-         * @param {string} [filterName$neq] 
-         * @param {string} [filterName$contains] 
-         * @param {string} [filterName$startsWith] 
-         * @param {string} [filterName$nstartsWith] 
-         * @param {string} [filterName$endsWith] 
-         * @param {string} [filterName$nendsWith] 
-         * @param {Array<string>} [filterName$in] 
-         * @param {Array<string>} [filterName$nin] 
-         * @param {boolean} [filterName$null] 
-         * @param {boolean} [filterName$nnull] 
-         * @param {boolean} [filterName$empty] 
-         * @param {boolean} [filterName$nempty] 
-         * @param {string} [filterName$like] 
-         * @param {string} [filterRegion$eq] 
-         * @param {string} [filterRegion$neq] 
-         * @param {string} [filterRegion$contains] 
-         * @param {string} [filterRegion$startsWith] 
-         * @param {string} [filterRegion$nstartsWith] 
-         * @param {string} [filterRegion$endsWith] 
-         * @param {string} [filterRegion$nendsWith] 
-         * @param {Array<string>} [filterRegion$in] 
-         * @param {Array<string>} [filterRegion$nin] 
-         * @param {boolean} [filterRegion$null] 
-         * @param {boolean} [filterRegion$nnull] 
-         * @param {boolean} [filterRegion$empty] 
-         * @param {boolean} [filterRegion$nempty] 
-         * @param {string} [filterRegion$like] 
+         * @param {TenantServiceApiTenantServiceListTenantRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceListTenant(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterRegion$eq?: string, filterRegion$neq?: string, filterRegion$contains?: string, filterRegion$startsWith?: string, filterRegion$nstartsWith?: string, filterRegion$endsWith?: string, filterRegion$nendsWith?: string, filterRegion$in?: Array<string>, filterRegion$nin?: Array<string>, filterRegion$null?: boolean, filterRegion$nnull?: boolean, filterRegion$empty?: boolean, filterRegion$nempty?: boolean, filterRegion$like?: string, options?: any): AxiosPromise<V1ListTenantReply> {
-            return localVarFp.tenantServiceListTenant(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterRegion$eq, filterRegion$neq, filterRegion$contains, filterRegion$startsWith, filterRegion$nstartsWith, filterRegion$endsWith, filterRegion$nendsWith, filterRegion$in, filterRegion$nin, filterRegion$null, filterRegion$nnull, filterRegion$empty, filterRegion$nempty, filterRegion$like, options).then((request) => request(axios, basePath));
+        tenantServiceListTenant(requestParameters: TenantServiceApiTenantServiceListTenantRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListTenantReply> {
+            return localVarFp.tenantServiceListTenant(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, requestParameters.filterRegion$eq, requestParameters.filterRegion$neq, requestParameters.filterRegion$contains, requestParameters.filterRegion$startsWith, requestParameters.filterRegion$nstartsWith, requestParameters.filterRegion$endsWith, requestParameters.filterRegion$nendsWith, requestParameters.filterRegion$in, requestParameters.filterRegion$nin, requestParameters.filterRegion$null, requestParameters.filterRegion$nnull, requestParameters.filterRegion$empty, requestParameters.filterRegion$nempty, requestParameters.filterRegion$like, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ListTenant authz: saas.tenant,*,list
-         * @param {V1ListTenantRequest} body 
+         * @param {TenantServiceApiTenantServiceListTenant2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceListTenant2(body: V1ListTenantRequest, options?: any): AxiosPromise<V1ListTenantReply> {
-            return localVarFp.tenantServiceListTenant2(body, options).then((request) => request(axios, basePath));
+        tenantServiceListTenant2(requestParameters: TenantServiceApiTenantServiceListTenant2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListTenantReply> {
+            return localVarFp.tenantServiceListTenant2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary UpdateTenant authz: saas.tenant,{id},update
-         * @param {string} tenantId 
-         * @param {V1UpdateTenantRequest} body 
+         * @param {TenantServiceApiTenantServiceUpdateTenantRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceUpdateTenant(tenantId: string, body: V1UpdateTenantRequest, options?: any): AxiosPromise<V1Tenant> {
-            return localVarFp.tenantServiceUpdateTenant(tenantId, body, options).then((request) => request(axios, basePath));
+        tenantServiceUpdateTenant(requestParameters: TenantServiceApiTenantServiceUpdateTenantRequest, options?: AxiosRequestConfig): AxiosPromise<V1Tenant> {
+            return localVarFp.tenantServiceUpdateTenant(requestParameters.tenantId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary UpdateTenant authz: saas.tenant,{id},update
-         * @param {string} tenantId 
-         * @param {V1UpdateTenantRequest} body 
+         * @param {TenantServiceApiTenantServiceUpdateTenant2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        tenantServiceUpdateTenant2(tenantId: string, body: V1UpdateTenantRequest, options?: any): AxiosPromise<V1Tenant> {
-            return localVarFp.tenantServiceUpdateTenant2(tenantId, body, options).then((request) => request(axios, basePath));
+        tenantServiceUpdateTenant2(requestParameters: TenantServiceApiTenantServiceUpdateTenant2Request, options?: AxiosRequestConfig): AxiosPromise<V1Tenant> {
+            return localVarFp.tenantServiceUpdateTenant2(requestParameters.tenantId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1433,10 +1385,10 @@ export interface TenantServiceApiTenantServiceUpdateTenantRequest {
 
     /**
      * 
-     * @type {V1UpdateTenantRequest}
+     * @type {TenantServiceUpdateTenantRequest}
      * @memberof TenantServiceApiTenantServiceUpdateTenant
      */
-    readonly body: V1UpdateTenantRequest
+    readonly body: TenantServiceUpdateTenantRequest
 }
 
 /**
@@ -1454,10 +1406,10 @@ export interface TenantServiceApiTenantServiceUpdateTenant2Request {
 
     /**
      * 
-     * @type {V1UpdateTenantRequest}
+     * @type {TenantServiceUpdateTenantRequest}
      * @memberof TenantServiceApiTenantServiceUpdateTenant2
      */
-    readonly body: V1UpdateTenantRequest
+    readonly body: TenantServiceUpdateTenantRequest
 }
 
 /**
@@ -1585,3 +1537,4 @@ export class TenantServiceApi extends BaseAPI {
         return TenantServiceApiFp(this.configuration).tenantServiceUpdateTenant2(requestParameters.tenantId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

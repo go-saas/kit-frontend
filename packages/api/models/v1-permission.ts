@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Effect } from './v1-effect';
 
 /**
@@ -58,4 +60,6 @@ export interface V1Permission {
      */
     'tenantId'?: string;
 }
+
+
 

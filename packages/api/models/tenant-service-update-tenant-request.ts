@@ -13,24 +13,26 @@
  */
 
 
-import { V1UpdateMenu } from './v1-update-menu';
+// May contain unused imports in some cases
+// @ts-ignore
+import { TenantServiceUpdateTenantRequestTenant } from './tenant-service-update-tenant-request-tenant';
 
 /**
  * 
  * @export
- * @interface V1UpdateMenuRequest
+ * @interface TenantServiceUpdateTenantRequest
  */
-export interface V1UpdateMenuRequest {
+export interface TenantServiceUpdateTenantRequest {
     /**
      * 
-     * @type {V1UpdateMenu}
-     * @memberof V1UpdateMenuRequest
+     * @type {TenantServiceUpdateTenantRequestTenant}
+     * @memberof TenantServiceUpdateTenantRequest
      */
-    'menu'?: V1UpdateMenu;
+    'tenant'?: TenantServiceUpdateTenantRequestTenant;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateMenuRequest
+     * @memberof TenantServiceUpdateTenantRequest
      */
     'updateMask'?: string;
 }

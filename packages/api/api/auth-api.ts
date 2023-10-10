@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -217,7 +218,7 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {string} [redirect] redirect url.
+         * @param {string} [redirect] redirect url
          * @param {string} [loginChallenge] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -614,7 +615,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} [redirect] redirect url.
+         * @param {string} [redirect] redirect url
          * @param {string} [loginChallenge] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -716,122 +717,121 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
     return {
         /**
          * 
-         * @param {V1ChangePasswordByForgetRequest} body 
+         * @param {AuthApiAuthChangePasswordByForgetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authChangePasswordByForget(body: V1ChangePasswordByForgetRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.authChangePasswordByForget(body, options).then((request) => request(axios, basePath));
+        authChangePasswordByForget(requestParameters: AuthApiAuthChangePasswordByForgetRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.authChangePasswordByForget(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1ChangePasswordByPreRequest} body 
+         * @param {AuthApiAuthChangePasswordByPreRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authChangePasswordByPre(body: V1ChangePasswordByPreRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.authChangePasswordByPre(body, options).then((request) => request(axios, basePath));
+        authChangePasswordByPre(requestParameters: AuthApiAuthChangePasswordByPreRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.authChangePasswordByPre(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ForgetPassword  verify forget password token
-         * @param {V1ForgetPasswordRequest} body 
+         * @param {AuthApiAuthForgetPasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authForgetPassword(body: V1ForgetPasswordRequest, options?: any): AxiosPromise<V1ForgetPasswordReply> {
-            return localVarFp.authForgetPassword(body, options).then((request) => request(axios, basePath));
+        authForgetPassword(requestParameters: AuthApiAuthForgetPasswordRequest, options?: AxiosRequestConfig): AxiosPromise<V1ForgetPasswordReply> {
+            return localVarFp.authForgetPassword(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authGetCsrfToken(options?: any): AxiosPromise<V1GetCsrfTokenResponse> {
+        authGetCsrfToken(options?: AxiosRequestConfig): AxiosPromise<V1GetCsrfTokenResponse> {
             return localVarFp.authGetCsrfToken(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [redirect] redirect url.
-         * @param {string} [loginChallenge] 
+         * @param {AuthApiAuthGetLoginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authGetLogin(redirect?: string, loginChallenge?: string, options?: any): AxiosPromise<V1GetLoginResponse> {
-            return localVarFp.authGetLogin(redirect, loginChallenge, options).then((request) => request(axios, basePath));
+        authGetLogin(requestParameters: AuthApiAuthGetLoginRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1GetLoginResponse> {
+            return localVarFp.authGetLogin(requestParameters.redirect, requestParameters.loginChallenge, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1LoginAuthRequest} body 
+         * @param {AuthApiAuthLoginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLogin(body: V1LoginAuthRequest, options?: any): AxiosPromise<V1LoginAuthReply> {
-            return localVarFp.authLogin(body, options).then((request) => request(axios, basePath));
+        authLogin(requestParameters: AuthApiAuthLoginRequest, options?: AxiosRequestConfig): AxiosPromise<V1LoginAuthReply> {
+            return localVarFp.authLogin(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1LoginPasswordlessRequest} body 
+         * @param {AuthApiAuthLoginPasswordlessRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authLoginPasswordless(body: V1LoginPasswordlessRequest, options?: any): AxiosPromise<V1LoginPasswordlessReply> {
-            return localVarFp.authLoginPasswordless(body, options).then((request) => request(axios, basePath));
+        authLoginPasswordless(requestParameters: AuthApiAuthLoginPasswordlessRequest, options?: AxiosRequestConfig): AxiosPromise<V1LoginPasswordlessReply> {
+            return localVarFp.authLoginPasswordless(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1RefreshTokenAuthRequest} body 
+         * @param {AuthApiAuthRefreshRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authRefresh(body: V1RefreshTokenAuthRequest, options?: any): AxiosPromise<V1RefreshTokenAuthReply> {
-            return localVarFp.authRefresh(body, options).then((request) => request(axios, basePath));
+        authRefresh(requestParameters: AuthApiAuthRefreshRequest, options?: AxiosRequestConfig): AxiosPromise<V1RefreshTokenAuthReply> {
+            return localVarFp.authRefresh(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {object} body 
+         * @param {AuthApiAuthRegisterRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authRegister(body: object, options?: any): AxiosPromise<object> {
-            return localVarFp.authRegister(body, options).then((request) => request(axios, basePath));
+        authRegister(requestParameters: AuthApiAuthRegisterRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.authRegister(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1ForgetPasswordTokenRequest} body 
+         * @param {AuthApiAuthSendForgetPasswordTokenRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authSendForgetPasswordToken(body: V1ForgetPasswordTokenRequest, options?: any): AxiosPromise<V1ForgetPasswordTokenReply> {
-            return localVarFp.authSendForgetPasswordToken(body, options).then((request) => request(axios, basePath));
+        authSendForgetPasswordToken(requestParameters: AuthApiAuthSendForgetPasswordTokenRequest, options?: AxiosRequestConfig): AxiosPromise<V1ForgetPasswordTokenReply> {
+            return localVarFp.authSendForgetPasswordToken(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1PasswordlessTokenAuthRequest} body 
+         * @param {AuthApiAuthSendPasswordlessTokenRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authSendPasswordlessToken(body: V1PasswordlessTokenAuthRequest, options?: any): AxiosPromise<V1PasswordlessTokenAuthReply> {
-            return localVarFp.authSendPasswordlessToken(body, options).then((request) => request(axios, basePath));
+        authSendPasswordlessToken(requestParameters: AuthApiAuthSendPasswordlessTokenRequest, options?: AxiosRequestConfig): AxiosPromise<V1PasswordlessTokenAuthReply> {
+            return localVarFp.authSendPasswordlessToken(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1TokenRequest} body 
+         * @param {AuthApiAuthTokenRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authToken(body: V1TokenRequest, options?: any): AxiosPromise<V1TokenReply> {
-            return localVarFp.authToken(body, options).then((request) => request(axios, basePath));
+        authToken(requestParameters: AuthApiAuthTokenRequest, options?: AxiosRequestConfig): AxiosPromise<V1TokenReply> {
+            return localVarFp.authToken(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ValidatePassword  server validation for password strength
-         * @param {V1ValidatePasswordRequest} body 
+         * @param {AuthApiAuthValidatePasswordRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authValidatePassword(body: V1ValidatePasswordRequest, options?: any): AxiosPromise<V1ValidatePasswordReply> {
-            return localVarFp.authValidatePassword(body, options).then((request) => request(axios, basePath));
+        authValidatePassword(requestParameters: AuthApiAuthValidatePasswordRequest, options?: AxiosRequestConfig): AxiosPromise<V1ValidatePasswordReply> {
+            return localVarFp.authValidatePassword(requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -885,7 +885,7 @@ export interface AuthApiAuthForgetPasswordRequest {
  */
 export interface AuthApiAuthGetLoginRequest {
     /**
-     * redirect url.
+     * redirect url
      * @type {string}
      * @memberof AuthApiAuthGetLogin
      */
@@ -1162,3 +1162,4 @@ export class AuthApi extends BaseAPI {
         return AuthApiFp(this.configuration).authValidatePassword(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -25,6 +26,8 @@ import { GooglerpcStatus } from '../models';
 // @ts-ignore
 import { RoleServiceUpdateRolePermissionRequest } from '../models';
 // @ts-ignore
+import { RoleServiceUpdateRoleRequest } from '../models';
+// @ts-ignore
 import { V1CreateRoleRequest } from '../models';
 // @ts-ignore
 import { V1GetRolePermissionResponse } from '../models';
@@ -34,8 +37,6 @@ import { V1ListRolesRequest } from '../models';
 import { V1ListRolesResponse } from '../models';
 // @ts-ignore
 import { V1Role } from '../models';
-// @ts-ignore
-import { V1UpdateRoleRequest } from '../models';
 /**
  * RoleServiceApi - axios parameter creator
  * @export
@@ -122,7 +123,7 @@ export const RoleServiceApiAxiosParamCreator = function (configuration?: Configu
          * 
          * @summary authz: user.role,id,get
          * @param {string} id id or name should be provided
-         * @param {string} [name] id or name should be provided.
+         * @param {string} [name] id or name should be provided
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -437,11 +438,11 @@ export const RoleServiceApiAxiosParamCreator = function (configuration?: Configu
          * 
          * @summary authz: user.role,id,update
          * @param {string} roleId 
-         * @param {V1UpdateRoleRequest} body 
+         * @param {RoleServiceUpdateRoleRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceUpdateRole: async (roleId: string, body: V1UpdateRoleRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        roleServiceUpdateRole: async (roleId: string, body: RoleServiceUpdateRoleRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'roleId' is not null or undefined
             assertParamExists('roleServiceUpdateRole', 'roleId', roleId)
             // verify required parameter 'body' is not null or undefined
@@ -480,11 +481,11 @@ export const RoleServiceApiAxiosParamCreator = function (configuration?: Configu
          * 
          * @summary authz: user.role,id,update
          * @param {string} roleId 
-         * @param {V1UpdateRoleRequest} body 
+         * @param {RoleServiceUpdateRoleRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceUpdateRole2: async (roleId: string, body: V1UpdateRoleRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        roleServiceUpdateRole2: async (roleId: string, body: RoleServiceUpdateRoleRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'roleId' is not null or undefined
             assertParamExists('roleServiceUpdateRole2', 'roleId', roleId)
             // verify required parameter 'body' is not null or undefined
@@ -597,7 +598,7 @@ export const RoleServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary authz: user.role,id,get
          * @param {string} id id or name should be provided
-         * @param {string} [name] id or name should be provided.
+         * @param {string} [name] id or name should be provided
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -673,11 +674,11 @@ export const RoleServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary authz: user.role,id,update
          * @param {string} roleId 
-         * @param {V1UpdateRoleRequest} body 
+         * @param {RoleServiceUpdateRoleRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async roleServiceUpdateRole(roleId: string, body: V1UpdateRoleRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Role>> {
+        async roleServiceUpdateRole(roleId: string, body: RoleServiceUpdateRoleRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Role>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.roleServiceUpdateRole(roleId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -685,11 +686,11 @@ export const RoleServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary authz: user.role,id,update
          * @param {string} roleId 
-         * @param {V1UpdateRoleRequest} body 
+         * @param {RoleServiceUpdateRoleRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async roleServiceUpdateRole2(roleId: string, body: V1UpdateRoleRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Role>> {
+        async roleServiceUpdateRole2(roleId: string, body: RoleServiceUpdateRoleRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Role>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.roleServiceUpdateRole2(roleId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -717,126 +718,90 @@ export const RoleServiceApiFactory = function (configuration?: Configuration, ba
         /**
          * 
          * @summary authz: user.role,*,create
-         * @param {V1CreateRoleRequest} body 
+         * @param {RoleServiceApiRoleServiceCreateRoleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceCreateRole(body: V1CreateRoleRequest, options?: any): AxiosPromise<V1Role> {
-            return localVarFp.roleServiceCreateRole(body, options).then((request) => request(axios, basePath));
+        roleServiceCreateRole(requestParameters: RoleServiceApiRoleServiceCreateRoleRequest, options?: AxiosRequestConfig): AxiosPromise<V1Role> {
+            return localVarFp.roleServiceCreateRole(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary authz: user.role,id,delete
-         * @param {string} id 
+         * @param {RoleServiceApiRoleServiceDeleteRoleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceDeleteRole(id: string, options?: any): AxiosPromise<object> {
-            return localVarFp.roleServiceDeleteRole(id, options).then((request) => request(axios, basePath));
+        roleServiceDeleteRole(requestParameters: RoleServiceApiRoleServiceDeleteRoleRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.roleServiceDeleteRole(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary authz: user.role,id,get
-         * @param {string} id id or name should be provided
-         * @param {string} [name] id or name should be provided.
+         * @param {RoleServiceApiRoleServiceGetRoleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceGetRole(id: string, name?: string, options?: any): AxiosPromise<V1Role> {
-            return localVarFp.roleServiceGetRole(id, name, options).then((request) => request(axios, basePath));
+        roleServiceGetRole(requestParameters: RoleServiceApiRoleServiceGetRoleRequest, options?: AxiosRequestConfig): AxiosPromise<V1Role> {
+            return localVarFp.roleServiceGetRole(requestParameters.id, requestParameters.name, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {RoleServiceApiRoleServiceGetRolePermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceGetRolePermission(id: string, options?: any): AxiosPromise<V1GetRolePermissionResponse> {
-            return localVarFp.roleServiceGetRolePermission(id, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @summary authz: user.role,*,list
-         * @param {number} [pageOffset] 
-         * @param {number} [pageSize] 
-         * @param {string} [search] 
-         * @param {Array<string>} [sort] 
-         * @param {string} [fields] 
-         * @param {string} [filterId$eq] 
-         * @param {string} [filterId$neq] 
-         * @param {string} [filterId$contains] 
-         * @param {string} [filterId$startsWith] 
-         * @param {string} [filterId$nstartsWith] 
-         * @param {string} [filterId$endsWith] 
-         * @param {string} [filterId$nendsWith] 
-         * @param {Array<string>} [filterId$in] 
-         * @param {Array<string>} [filterId$nin] 
-         * @param {boolean} [filterId$null] 
-         * @param {boolean} [filterId$nnull] 
-         * @param {boolean} [filterId$empty] 
-         * @param {boolean} [filterId$nempty] 
-         * @param {string} [filterId$like] 
-         * @param {string} [filterName$eq] 
-         * @param {string} [filterName$neq] 
-         * @param {string} [filterName$contains] 
-         * @param {string} [filterName$startsWith] 
-         * @param {string} [filterName$nstartsWith] 
-         * @param {string} [filterName$endsWith] 
-         * @param {string} [filterName$nendsWith] 
-         * @param {Array<string>} [filterName$in] 
-         * @param {Array<string>} [filterName$nin] 
-         * @param {boolean} [filterName$null] 
-         * @param {boolean} [filterName$nnull] 
-         * @param {boolean} [filterName$empty] 
-         * @param {boolean} [filterName$nempty] 
-         * @param {string} [filterName$like] 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        roleServiceListRoles(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, options?: any): AxiosPromise<V1ListRolesResponse> {
-            return localVarFp.roleServiceListRoles(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, options).then((request) => request(axios, basePath));
+        roleServiceGetRolePermission(requestParameters: RoleServiceApiRoleServiceGetRolePermissionRequest, options?: AxiosRequestConfig): AxiosPromise<V1GetRolePermissionResponse> {
+            return localVarFp.roleServiceGetRolePermission(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary authz: user.role,*,list
-         * @param {V1ListRolesRequest} body 
+         * @param {RoleServiceApiRoleServiceListRolesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceListRoles2(body: V1ListRolesRequest, options?: any): AxiosPromise<V1ListRolesResponse> {
-            return localVarFp.roleServiceListRoles2(body, options).then((request) => request(axios, basePath));
+        roleServiceListRoles(requestParameters: RoleServiceApiRoleServiceListRolesRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListRolesResponse> {
+            return localVarFp.roleServiceListRoles(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @summary authz: user.role,*,list
+         * @param {RoleServiceApiRoleServiceListRoles2Request} requestParameters Request parameters.
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        roleServiceListRoles2(requestParameters: RoleServiceApiRoleServiceListRoles2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListRolesResponse> {
+            return localVarFp.roleServiceListRoles2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary authz: user.role,id,update
-         * @param {string} roleId 
-         * @param {V1UpdateRoleRequest} body 
+         * @param {RoleServiceApiRoleServiceUpdateRoleRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceUpdateRole(roleId: string, body: V1UpdateRoleRequest, options?: any): AxiosPromise<V1Role> {
-            return localVarFp.roleServiceUpdateRole(roleId, body, options).then((request) => request(axios, basePath));
+        roleServiceUpdateRole(requestParameters: RoleServiceApiRoleServiceUpdateRoleRequest, options?: AxiosRequestConfig): AxiosPromise<V1Role> {
+            return localVarFp.roleServiceUpdateRole(requestParameters.roleId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary authz: user.role,id,update
-         * @param {string} roleId 
-         * @param {V1UpdateRoleRequest} body 
+         * @param {RoleServiceApiRoleServiceUpdateRole2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceUpdateRole2(roleId: string, body: V1UpdateRoleRequest, options?: any): AxiosPromise<V1Role> {
-            return localVarFp.roleServiceUpdateRole2(roleId, body, options).then((request) => request(axios, basePath));
+        roleServiceUpdateRole2(requestParameters: RoleServiceApiRoleServiceUpdateRole2Request, options?: AxiosRequestConfig): AxiosPromise<V1Role> {
+            return localVarFp.roleServiceUpdateRole2(requestParameters.roleId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
-         * @param {RoleServiceUpdateRolePermissionRequest} body 
+         * @param {RoleServiceApiRoleServiceUpdateRolePermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        roleServiceUpdateRolePermission(id: string, body: RoleServiceUpdateRolePermissionRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.roleServiceUpdateRolePermission(id, body, options).then((request) => request(axios, basePath));
+        roleServiceUpdateRolePermission(requestParameters: RoleServiceApiRoleServiceUpdateRolePermissionRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.roleServiceUpdateRolePermission(requestParameters.id, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -883,7 +848,7 @@ export interface RoleServiceApiRoleServiceGetRoleRequest {
     readonly id: string
 
     /**
-     * id or name should be provided.
+     * id or name should be provided
      * @type {string}
      * @memberof RoleServiceApiRoleServiceGetRole
      */
@@ -1171,10 +1136,10 @@ export interface RoleServiceApiRoleServiceUpdateRoleRequest {
 
     /**
      * 
-     * @type {V1UpdateRoleRequest}
+     * @type {RoleServiceUpdateRoleRequest}
      * @memberof RoleServiceApiRoleServiceUpdateRole
      */
-    readonly body: V1UpdateRoleRequest
+    readonly body: RoleServiceUpdateRoleRequest
 }
 
 /**
@@ -1192,10 +1157,10 @@ export interface RoleServiceApiRoleServiceUpdateRole2Request {
 
     /**
      * 
-     * @type {V1UpdateRoleRequest}
+     * @type {RoleServiceUpdateRoleRequest}
      * @memberof RoleServiceApiRoleServiceUpdateRole2
      */
-    readonly body: V1UpdateRoleRequest
+    readonly body: RoleServiceUpdateRoleRequest
 }
 
 /**
@@ -1332,3 +1297,4 @@ export class RoleServiceApi extends BaseAPI {
         return RoleServiceApiFp(this.configuration).roleServiceUpdateRolePermission(requestParameters.id, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -348,58 +349,49 @@ export const NotificationServiceApiFactory = function (configuration?: Configura
     return {
         /**
          * 
-         * @param {string} id 
+         * @param {NotificationServiceApiNotificationServiceDeleteNotificationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        notificationServiceDeleteNotification(id: string, options?: any): AxiosPromise<V1DeleteNotificationReply> {
-            return localVarFp.notificationServiceDeleteNotification(id, options).then((request) => request(axios, basePath));
+        notificationServiceDeleteNotification(requestParameters: NotificationServiceApiNotificationServiceDeleteNotificationRequest, options?: AxiosRequestConfig): AxiosPromise<V1DeleteNotificationReply> {
+            return localVarFp.notificationServiceDeleteNotification(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {NotificationServiceApiNotificationServiceGetNotificationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        notificationServiceGetNotification(id: string, options?: any): AxiosPromise<V1Notification> {
-            return localVarFp.notificationServiceGetNotification(id, options).then((request) => request(axios, basePath));
+        notificationServiceGetNotification(requestParameters: NotificationServiceApiNotificationServiceGetNotificationRequest, options?: AxiosRequestConfig): AxiosPromise<V1Notification> {
+            return localVarFp.notificationServiceGetNotification(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [afterPageToken] 
-         * @param {string} [beforePageToken] 
-         * @param {number} [pageSize] 
-         * @param {Array<string>} [sort] 
-         * @param {string} [fields] 
-         * @param {boolean} [filterHasRead$eq] 
-         * @param {boolean} [filterHasRead$neq] 
-         * @param {boolean} [filterHasRead$null] 
-         * @param {boolean} [filterHasRead$nnull] 
+         * @param {NotificationServiceApiNotificationServiceListNotificationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        notificationServiceListNotification(afterPageToken?: string, beforePageToken?: string, pageSize?: number, sort?: Array<string>, fields?: string, filterHasRead$eq?: boolean, filterHasRead$neq?: boolean, filterHasRead$null?: boolean, filterHasRead$nnull?: boolean, options?: any): AxiosPromise<V1ListNotificationReply> {
-            return localVarFp.notificationServiceListNotification(afterPageToken, beforePageToken, pageSize, sort, fields, filterHasRead$eq, filterHasRead$neq, filterHasRead$null, filterHasRead$nnull, options).then((request) => request(axios, basePath));
+        notificationServiceListNotification(requestParameters: NotificationServiceApiNotificationServiceListNotificationRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListNotificationReply> {
+            return localVarFp.notificationServiceListNotification(requestParameters.afterPageToken, requestParameters.beforePageToken, requestParameters.pageSize, requestParameters.sort, requestParameters.fields, requestParameters.filterHasRead$eq, requestParameters.filterHasRead$neq, requestParameters.filterHasRead$null, requestParameters.filterHasRead$nnull, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1ListNotificationRequest} body 
+         * @param {NotificationServiceApiNotificationServiceListNotification2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        notificationServiceListNotification2(body: V1ListNotificationRequest, options?: any): AxiosPromise<V1ListNotificationReply> {
-            return localVarFp.notificationServiceListNotification2(body, options).then((request) => request(axios, basePath));
+        notificationServiceListNotification2(requestParameters: NotificationServiceApiNotificationServiceListNotification2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListNotificationReply> {
+            return localVarFp.notificationServiceListNotification2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ReadNotification set notification as read
-         * @param {string} id id. set \&quot;-\&quot; for read all
-         * @param {object} body 
+         * @param {NotificationServiceApiNotificationServiceReadNotificationRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        notificationServiceReadNotification(id: string, body: object, options?: any): AxiosPromise<object> {
-            return localVarFp.notificationServiceReadNotification(id, body, options).then((request) => request(axios, basePath));
+        notificationServiceReadNotification(requestParameters: NotificationServiceApiNotificationServiceReadNotificationRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.notificationServiceReadNotification(requestParameters.id, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -600,3 +592,4 @@ export class NotificationServiceApi extends BaseAPI {
         return NotificationServiceApiFp(this.configuration).notificationServiceReadNotification(requestParameters.id, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

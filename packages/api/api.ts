@@ -27,5 +27,7 @@ export * from './api/notification-service-api';
 export * from './api/permission-service-api';
 export * from './api/role-service-api';
 export * from './api/tenant-service-api';
+export * from './api/user-admin-service-api';
 export * from './api/user-service-api';
+export * from './api/we-chat-auth-service-api';
 

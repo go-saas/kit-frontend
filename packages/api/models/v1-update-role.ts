@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1UpdateRolePermissionAcl } from './v1-update-role-permission-acl';
 
 /**

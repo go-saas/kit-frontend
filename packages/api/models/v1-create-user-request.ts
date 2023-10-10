@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Gender } from './v1-gender';
 
 /**
@@ -88,4 +90,6 @@ export interface V1CreateUserRequest {
      */
     'id'?: string;
 }
+
+
 

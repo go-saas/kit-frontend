@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1LocaleLanguage } from './v1-locale-language';
 
 /**

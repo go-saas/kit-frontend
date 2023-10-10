@@ -13,7 +13,6 @@
  */
 
 
-import { V1Gender } from './v1-gender';
 
 /**
  * 
@@ -27,60 +26,6 @@ export interface V1UpdateUser {
      * @memberof V1UpdateUser
      */
     'id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'username'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'name'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'phone'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'email'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'birthday'?: string | null;
-    /**
-     * 
-     * @type {V1Gender}
-     * @memberof V1UpdateUser
-     */
-    'gender'?: V1Gender;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'password'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'confirmPassword'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateUser
-     */
-    'avatar'?: string;
     /**
      * 
      * @type {Array<string>}

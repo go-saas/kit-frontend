@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -431,73 +432,66 @@ export const ClientServiceApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
-         * @param {ClientOAuth2Client} body 
+         * @param {ClientServiceApiClientServiceCreateOAuth2ClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceCreateOAuth2Client(body: ClientOAuth2Client, options?: any): AxiosPromise<ClientOAuth2Client> {
-            return localVarFp.clientServiceCreateOAuth2Client(body, options).then((request) => request(axios, basePath));
+        clientServiceCreateOAuth2Client(requestParameters: ClientServiceApiClientServiceCreateOAuth2ClientRequest, options?: AxiosRequestConfig): AxiosPromise<ClientOAuth2Client> {
+            return localVarFp.clientServiceCreateOAuth2Client(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {ClientServiceApiClientServiceDeleteOAuth2ClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceDeleteOAuth2Client(id: string, options?: any): AxiosPromise<object> {
-            return localVarFp.clientServiceDeleteOAuth2Client(id, options).then((request) => request(axios, basePath));
+        clientServiceDeleteOAuth2Client(requestParameters: ClientServiceApiClientServiceDeleteOAuth2ClientRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.clientServiceDeleteOAuth2Client(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {ClientServiceApiClientServiceGetOAuth2ClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceGetOAuth2Client(id: string, options?: any): AxiosPromise<ClientOAuth2Client> {
-            return localVarFp.clientServiceGetOAuth2Client(id, options).then((request) => request(axios, basePath));
+        clientServiceGetOAuth2Client(requestParameters: ClientServiceApiClientServiceGetOAuth2ClientRequest, options?: AxiosRequestConfig): AxiosPromise<ClientOAuth2Client> {
+            return localVarFp.clientServiceGetOAuth2Client(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [limit] 
-         * @param {string} [offset] 
-         * @param {string} [clientName] 
-         * @param {string} [owner] 
-         * @param {string} [afterPageToken] 
-         * @param {string} [beforePageToken] 
+         * @param {ClientServiceApiClientServiceListOAuth2ClientsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceListOAuth2Clients(limit?: string, offset?: string, clientName?: string, owner?: string, afterPageToken?: string, beforePageToken?: string, options?: any): AxiosPromise<ClientOAuth2ClientList> {
-            return localVarFp.clientServiceListOAuth2Clients(limit, offset, clientName, owner, afterPageToken, beforePageToken, options).then((request) => request(axios, basePath));
+        clientServiceListOAuth2Clients(requestParameters: ClientServiceApiClientServiceListOAuth2ClientsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<ClientOAuth2ClientList> {
+            return localVarFp.clientServiceListOAuth2Clients(requestParameters.limit, requestParameters.offset, requestParameters.clientName, requestParameters.owner, requestParameters.afterPageToken, requestParameters.beforePageToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {ClientListClientRequest} body 
+         * @param {ClientServiceApiClientServiceListOAuth2Clients2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceListOAuth2Clients2(body: ClientListClientRequest, options?: any): AxiosPromise<ClientOAuth2ClientList> {
-            return localVarFp.clientServiceListOAuth2Clients2(body, options).then((request) => request(axios, basePath));
+        clientServiceListOAuth2Clients2(requestParameters: ClientServiceApiClientServiceListOAuth2Clients2Request, options?: AxiosRequestConfig): AxiosPromise<ClientOAuth2ClientList> {
+            return localVarFp.clientServiceListOAuth2Clients2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
-         * @param {ClientServicePatchOAuth2ClientRequest} body 
+         * @param {ClientServiceApiClientServicePatchOAuth2ClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServicePatchOAuth2Client(id: string, body: ClientServicePatchOAuth2ClientRequest, options?: any): AxiosPromise<ClientOAuth2Client> {
-            return localVarFp.clientServicePatchOAuth2Client(id, body, options).then((request) => request(axios, basePath));
+        clientServicePatchOAuth2Client(requestParameters: ClientServiceApiClientServicePatchOAuth2ClientRequest, options?: AxiosRequestConfig): AxiosPromise<ClientOAuth2Client> {
+            return localVarFp.clientServicePatchOAuth2Client(requestParameters.id, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
-         * @param {ClientServiceUpdateOAuth2ClientRequest} body 
+         * @param {ClientServiceApiClientServiceUpdateOAuth2ClientRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        clientServiceUpdateOAuth2Client(id: string, body: ClientServiceUpdateOAuth2ClientRequest, options?: any): AxiosPromise<ClientOAuth2Client> {
-            return localVarFp.clientServiceUpdateOAuth2Client(id, body, options).then((request) => request(axios, basePath));
+        clientServiceUpdateOAuth2Client(requestParameters: ClientServiceApiClientServiceUpdateOAuth2ClientRequest, options?: AxiosRequestConfig): AxiosPromise<ClientOAuth2Client> {
+            return localVarFp.clientServiceUpdateOAuth2Client(requestParameters.id, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -733,3 +727,4 @@ export class ClientServiceApi extends BaseAPI {
         return ClientServiceApiFp(this.configuration).clientServiceUpdateOAuth2Client(requestParameters.id, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

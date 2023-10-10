@@ -13,24 +13,26 @@
  */
 
 
-import { V1UpdateTenant } from './v1-update-tenant';
+// May contain unused imports in some cases
+// @ts-ignore
+import { UserAdminServiceUpdateUserAdminRequestUser } from './user-admin-service-update-user-admin-request-user';
 
 /**
  * 
  * @export
- * @interface V1UpdateTenantRequest
+ * @interface UserAdminServiceUpdateUserAdminRequest
  */
-export interface V1UpdateTenantRequest {
+export interface UserAdminServiceUpdateUserAdminRequest {
     /**
      * 
-     * @type {V1UpdateTenant}
-     * @memberof V1UpdateTenantRequest
+     * @type {UserAdminServiceUpdateUserAdminRequestUser}
+     * @memberof UserAdminServiceUpdateUserAdminRequest
      */
-    'tenant'?: V1UpdateTenant;
+    'user'?: UserAdminServiceUpdateUserAdminRequestUser;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateTenantRequest
+     * @memberof UserAdminServiceUpdateUserAdminRequest
      */
     'updateMask'?: string;
 }

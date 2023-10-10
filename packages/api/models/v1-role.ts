@@ -13,7 +13,11 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { Permissionv1PermissionDefGroup } from './permissionv1-permission-def-group';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Permission } from './v1-permission';
 
 /**

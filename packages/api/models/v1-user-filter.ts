@@ -13,8 +13,14 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { OperationDateFilterOperators } from './operation-date-filter-operators';
+// May contain unused imports in some cases
+// @ts-ignore
 import { OperationStringFilterOperation } from './operation-string-filter-operation';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1RoleFilter } from './v1-role-filter';
 
 /**

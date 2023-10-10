@@ -13,7 +13,11 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1TenantConnectionString } from './v1-tenant-connection-string';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1TenantFeature } from './v1-tenant-feature';
 
 /**

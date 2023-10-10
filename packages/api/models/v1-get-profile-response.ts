@@ -13,9 +13,17 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { BlobBlobFile } from './blob-blob-file';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Gender } from './v1-gender';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Role } from './v1-role';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1UserTenant } from './v1-user-tenant';
 
 /**
@@ -91,4 +99,6 @@ export interface V1GetProfileResponse {
      */
     'currentTenant'?: V1UserTenant;
 }
+
+
 

@@ -13,8 +13,14 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { BlobBlobFile } from './blob-blob-file';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Gender } from './v1-gender';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Role } from './v1-role';
 
 /**
@@ -78,4 +84,6 @@ export interface V1User {
      */
     'avatar'?: BlobBlobFile;
 }
+
+
 

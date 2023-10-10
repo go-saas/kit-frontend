@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -99,12 +100,12 @@ export const LocaleServiceApiFactory = function (configuration?: Configuration, 
     return {
         /**
          * 
-         * @param {Array<string>} [filterNameIn] 
+         * @param {LocaleServiceApiLocaleServiceListMessagesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        localeServiceListMessages(filterNameIn?: Array<string>, options?: any): AxiosPromise<V1ListMessageReply> {
-            return localVarFp.localeServiceListMessages(filterNameIn, options).then((request) => request(axios, basePath));
+        localeServiceListMessages(requestParameters: LocaleServiceApiLocaleServiceListMessagesRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListMessageReply> {
+            return localVarFp.localeServiceListMessages(requestParameters.filterNameIn, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -141,3 +142,4 @@ export class LocaleServiceApi extends BaseAPI {
         return LocaleServiceApiFp(this.configuration).localeServiceListMessages(requestParameters.filterNameIn, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

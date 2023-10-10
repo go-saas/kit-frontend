@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { ClientPatchOAuth2Client } from './client-patch-oauth2-client';
 
 /**

@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1TenantFilter } from './v1-tenant-filter';
 
 /**

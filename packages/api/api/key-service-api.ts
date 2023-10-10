@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -418,72 +419,66 @@ export const KeyServiceApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
-         * @param {string} set 
-         * @param {KeyServiceCreateJsonWebKeySetRequest} body 
+         * @param {KeyServiceApiKeyServiceCreateJsonWebKeySetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceCreateJsonWebKeySet(set: string, body: KeyServiceCreateJsonWebKeySetRequest, options?: any): AxiosPromise<KeyJsonWebKeySet> {
-            return localVarFp.keyServiceCreateJsonWebKeySet(set, body, options).then((request) => request(axios, basePath));
+        keyServiceCreateJsonWebKeySet(requestParameters: KeyServiceApiKeyServiceCreateJsonWebKeySetRequest, options?: AxiosRequestConfig): AxiosPromise<KeyJsonWebKeySet> {
+            return localVarFp.keyServiceCreateJsonWebKeySet(requestParameters.set, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} set 
-         * @param {string} kid 
+         * @param {KeyServiceApiKeyServiceDeleteJsonWebKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceDeleteJsonWebKey(set: string, kid: string, options?: any): AxiosPromise<object> {
-            return localVarFp.keyServiceDeleteJsonWebKey(set, kid, options).then((request) => request(axios, basePath));
+        keyServiceDeleteJsonWebKey(requestParameters: KeyServiceApiKeyServiceDeleteJsonWebKeyRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.keyServiceDeleteJsonWebKey(requestParameters.set, requestParameters.kid, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} set 
+         * @param {KeyServiceApiKeyServiceDeleteJsonWebKeySetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceDeleteJsonWebKeySet(set: string, options?: any): AxiosPromise<object> {
-            return localVarFp.keyServiceDeleteJsonWebKeySet(set, options).then((request) => request(axios, basePath));
+        keyServiceDeleteJsonWebKeySet(requestParameters: KeyServiceApiKeyServiceDeleteJsonWebKeySetRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.keyServiceDeleteJsonWebKeySet(requestParameters.set, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} set 
-         * @param {string} kid 
+         * @param {KeyServiceApiKeyServiceGetJsonWebKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceGetJsonWebKey(set: string, kid: string, options?: any): AxiosPromise<KeyJsonWebKeySet> {
-            return localVarFp.keyServiceGetJsonWebKey(set, kid, options).then((request) => request(axios, basePath));
+        keyServiceGetJsonWebKey(requestParameters: KeyServiceApiKeyServiceGetJsonWebKeyRequest, options?: AxiosRequestConfig): AxiosPromise<KeyJsonWebKeySet> {
+            return localVarFp.keyServiceGetJsonWebKey(requestParameters.set, requestParameters.kid, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} set 
+         * @param {KeyServiceApiKeyServiceGetJsonWebKeySetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceGetJsonWebKeySet(set: string, options?: any): AxiosPromise<KeyJsonWebKeySet> {
-            return localVarFp.keyServiceGetJsonWebKeySet(set, options).then((request) => request(axios, basePath));
+        keyServiceGetJsonWebKeySet(requestParameters: KeyServiceApiKeyServiceGetJsonWebKeySetRequest, options?: AxiosRequestConfig): AxiosPromise<KeyJsonWebKeySet> {
+            return localVarFp.keyServiceGetJsonWebKeySet(requestParameters.set, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} set 
-         * @param {string} kid 
-         * @param {KeyServiceUpdateJsonWebKeyRequest} body 
+         * @param {KeyServiceApiKeyServiceUpdateJsonWebKeyRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceUpdateJsonWebKey(set: string, kid: string, body: KeyServiceUpdateJsonWebKeyRequest, options?: any): AxiosPromise<KeyJsonWebKey> {
-            return localVarFp.keyServiceUpdateJsonWebKey(set, kid, body, options).then((request) => request(axios, basePath));
+        keyServiceUpdateJsonWebKey(requestParameters: KeyServiceApiKeyServiceUpdateJsonWebKeyRequest, options?: AxiosRequestConfig): AxiosPromise<KeyJsonWebKey> {
+            return localVarFp.keyServiceUpdateJsonWebKey(requestParameters.set, requestParameters.kid, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} set 
-         * @param {KeyServiceUpdateJsonWebKeySetRequest} body 
+         * @param {KeyServiceApiKeyServiceUpdateJsonWebKeySetRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        keyServiceUpdateJsonWebKeySet(set: string, body: KeyServiceUpdateJsonWebKeySetRequest, options?: any): AxiosPromise<KeyJsonWebKeySet> {
-            return localVarFp.keyServiceUpdateJsonWebKeySet(set, body, options).then((request) => request(axios, basePath));
+        keyServiceUpdateJsonWebKeySet(requestParameters: KeyServiceApiKeyServiceUpdateJsonWebKeySetRequest, options?: AxiosRequestConfig): AxiosPromise<KeyJsonWebKeySet> {
+            return localVarFp.keyServiceUpdateJsonWebKeySet(requestParameters.set, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -712,3 +707,4 @@ export class KeyServiceApi extends BaseAPI {
         return KeyServiceApiFp(this.configuration).keyServiceUpdateJsonWebKeySet(requestParameters.set, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { Userv1UserRole } from './userv1-user-role';
 
 /**

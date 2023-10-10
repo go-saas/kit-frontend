@@ -13,19 +13,24 @@
  */
 
 
-import { V1UpdateAddress } from './v1-update-address';
 
 /**
  * 
  * @export
- * @interface V1UpdateAddressesRequest
+ * @interface V1WechatMiniProgramCodeReq
  */
-export interface V1UpdateAddressesRequest {
+export interface V1WechatMiniProgramCodeReq {
     /**
      * 
-     * @type {V1UpdateAddress}
-     * @memberof V1UpdateAddressesRequest
+     * @type {string}
+     * @memberof V1WechatMiniProgramCodeReq
      */
-    'address'?: V1UpdateAddress;
+    'appId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1WechatMiniProgramCodeReq
+     */
+    'code': string;
 }
 

@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -22,6 +23,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
+// @ts-ignore
+import { MenuServiceUpdateMenuRequest } from '../models';
 // @ts-ignore
 import { V1CreateMenuRequest } from '../models';
 // @ts-ignore
@@ -34,8 +37,6 @@ import { V1ListMenuReply } from '../models';
 import { V1ListMenuRequest } from '../models';
 // @ts-ignore
 import { V1Menu } from '../models';
-// @ts-ignore
-import { V1UpdateMenuRequest } from '../models';
 /**
  * MenuServiceApi - axios parameter creator
  * @export
@@ -492,11 +493,11 @@ export const MenuServiceApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @param {string} menuId 
-         * @param {V1UpdateMenuRequest} body 
+         * @param {MenuServiceUpdateMenuRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceUpdateMenu: async (menuId: string, body: V1UpdateMenuRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        menuServiceUpdateMenu: async (menuId: string, body: MenuServiceUpdateMenuRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'menuId' is not null or undefined
             assertParamExists('menuServiceUpdateMenu', 'menuId', menuId)
             // verify required parameter 'body' is not null or undefined
@@ -534,11 +535,11 @@ export const MenuServiceApiAxiosParamCreator = function (configuration?: Configu
         /**
          * 
          * @param {string} menuId 
-         * @param {V1UpdateMenuRequest} body 
+         * @param {MenuServiceUpdateMenuRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceUpdateMenu2: async (menuId: string, body: V1UpdateMenuRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        menuServiceUpdateMenu2: async (menuId: string, body: MenuServiceUpdateMenuRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'menuId' is not null or undefined
             assertParamExists('menuServiceUpdateMenu2', 'menuId', menuId)
             // verify required parameter 'body' is not null or undefined
@@ -691,22 +692,22 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} menuId 
-         * @param {V1UpdateMenuRequest} body 
+         * @param {MenuServiceUpdateMenuRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async menuServiceUpdateMenu(menuId: string, body: V1UpdateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
+        async menuServiceUpdateMenu(menuId: string, body: MenuServiceUpdateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceUpdateMenu(menuId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
          * 
          * @param {string} menuId 
-         * @param {V1UpdateMenuRequest} body 
+         * @param {MenuServiceUpdateMenuRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async menuServiceUpdateMenu2(menuId: string, body: V1UpdateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
+        async menuServiceUpdateMenu2(menuId: string, body: MenuServiceUpdateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceUpdateMenu2(menuId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -722,122 +723,74 @@ export const MenuServiceApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @param {V1CreateMenuRequest} body 
+         * @param {MenuServiceApiMenuServiceCreateMenuRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceCreateMenu(body: V1CreateMenuRequest, options?: any): AxiosPromise<V1Menu> {
-            return localVarFp.menuServiceCreateMenu(body, options).then((request) => request(axios, basePath));
+        menuServiceCreateMenu(requestParameters: MenuServiceApiMenuServiceCreateMenuRequest, options?: AxiosRequestConfig): AxiosPromise<V1Menu> {
+            return localVarFp.menuServiceCreateMenu(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {MenuServiceApiMenuServiceDeleteMenuRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceDeleteMenu(id: string, options?: any): AxiosPromise<V1DeleteMenuReply> {
-            return localVarFp.menuServiceDeleteMenu(id, options).then((request) => request(axios, basePath));
+        menuServiceDeleteMenu(requestParameters: MenuServiceApiMenuServiceDeleteMenuRequest, options?: AxiosRequestConfig): AxiosPromise<V1DeleteMenuReply> {
+            return localVarFp.menuServiceDeleteMenu(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceGetAvailableMenus(options?: any): AxiosPromise<V1GetAvailableMenusReply> {
+        menuServiceGetAvailableMenus(options?: AxiosRequestConfig): AxiosPromise<V1GetAvailableMenusReply> {
             return localVarFp.menuServiceGetAvailableMenus(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {MenuServiceApiMenuServiceGetMenuRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceGetMenu(id: string, options?: any): AxiosPromise<V1Menu> {
-            return localVarFp.menuServiceGetMenu(id, options).then((request) => request(axios, basePath));
+        menuServiceGetMenu(requestParameters: MenuServiceApiMenuServiceGetMenuRequest, options?: AxiosRequestConfig): AxiosPromise<V1Menu> {
+            return localVarFp.menuServiceGetMenu(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {number} [pageOffset] 
-         * @param {number} [pageSize] 
-         * @param {string} [search] 
-         * @param {Array<string>} [sort] 
-         * @param {string} [fields] 
-         * @param {string} [filterId$eq] 
-         * @param {string} [filterId$neq] 
-         * @param {string} [filterId$contains] 
-         * @param {string} [filterId$startsWith] 
-         * @param {string} [filterId$nstartsWith] 
-         * @param {string} [filterId$endsWith] 
-         * @param {string} [filterId$nendsWith] 
-         * @param {Array<string>} [filterId$in] 
-         * @param {Array<string>} [filterId$nin] 
-         * @param {boolean} [filterId$null] 
-         * @param {boolean} [filterId$nnull] 
-         * @param {boolean} [filterId$empty] 
-         * @param {boolean} [filterId$nempty] 
-         * @param {string} [filterId$like] 
-         * @param {string} [filterName$eq] 
-         * @param {string} [filterName$neq] 
-         * @param {string} [filterName$contains] 
-         * @param {string} [filterName$startsWith] 
-         * @param {string} [filterName$nstartsWith] 
-         * @param {string} [filterName$endsWith] 
-         * @param {string} [filterName$nendsWith] 
-         * @param {Array<string>} [filterName$in] 
-         * @param {Array<string>} [filterName$nin] 
-         * @param {boolean} [filterName$null] 
-         * @param {boolean} [filterName$nnull] 
-         * @param {boolean} [filterName$empty] 
-         * @param {boolean} [filterName$nempty] 
-         * @param {string} [filterName$like] 
-         * @param {string} [filterParent$eq] 
-         * @param {string} [filterParent$neq] 
-         * @param {string} [filterParent$contains] 
-         * @param {string} [filterParent$startsWith] 
-         * @param {string} [filterParent$nstartsWith] 
-         * @param {string} [filterParent$endsWith] 
-         * @param {string} [filterParent$nendsWith] 
-         * @param {Array<string>} [filterParent$in] 
-         * @param {Array<string>} [filterParent$nin] 
-         * @param {boolean} [filterParent$null] 
-         * @param {boolean} [filterParent$nnull] 
-         * @param {boolean} [filterParent$empty] 
-         * @param {boolean} [filterParent$nempty] 
-         * @param {string} [filterParent$like] 
+         * @param {MenuServiceApiMenuServiceListMenuRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceListMenu(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterParent$eq?: string, filterParent$neq?: string, filterParent$contains?: string, filterParent$startsWith?: string, filterParent$nstartsWith?: string, filterParent$endsWith?: string, filterParent$nendsWith?: string, filterParent$in?: Array<string>, filterParent$nin?: Array<string>, filterParent$null?: boolean, filterParent$nnull?: boolean, filterParent$empty?: boolean, filterParent$nempty?: boolean, filterParent$like?: string, options?: any): AxiosPromise<V1ListMenuReply> {
-            return localVarFp.menuServiceListMenu(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterParent$eq, filterParent$neq, filterParent$contains, filterParent$startsWith, filterParent$nstartsWith, filterParent$endsWith, filterParent$nendsWith, filterParent$in, filterParent$nin, filterParent$null, filterParent$nnull, filterParent$empty, filterParent$nempty, filterParent$like, options).then((request) => request(axios, basePath));
+        menuServiceListMenu(requestParameters: MenuServiceApiMenuServiceListMenuRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListMenuReply> {
+            return localVarFp.menuServiceListMenu(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, requestParameters.filterParent$eq, requestParameters.filterParent$neq, requestParameters.filterParent$contains, requestParameters.filterParent$startsWith, requestParameters.filterParent$nstartsWith, requestParameters.filterParent$endsWith, requestParameters.filterParent$nendsWith, requestParameters.filterParent$in, requestParameters.filterParent$nin, requestParameters.filterParent$null, requestParameters.filterParent$nnull, requestParameters.filterParent$empty, requestParameters.filterParent$nempty, requestParameters.filterParent$like, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1ListMenuRequest} body 
+         * @param {MenuServiceApiMenuServiceListMenu2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceListMenu2(body: V1ListMenuRequest, options?: any): AxiosPromise<V1ListMenuReply> {
-            return localVarFp.menuServiceListMenu2(body, options).then((request) => request(axios, basePath));
+        menuServiceListMenu2(requestParameters: MenuServiceApiMenuServiceListMenu2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListMenuReply> {
+            return localVarFp.menuServiceListMenu2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} menuId 
-         * @param {V1UpdateMenuRequest} body 
+         * @param {MenuServiceApiMenuServiceUpdateMenuRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceUpdateMenu(menuId: string, body: V1UpdateMenuRequest, options?: any): AxiosPromise<V1Menu> {
-            return localVarFp.menuServiceUpdateMenu(menuId, body, options).then((request) => request(axios, basePath));
+        menuServiceUpdateMenu(requestParameters: MenuServiceApiMenuServiceUpdateMenuRequest, options?: AxiosRequestConfig): AxiosPromise<V1Menu> {
+            return localVarFp.menuServiceUpdateMenu(requestParameters.menuId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} menuId 
-         * @param {V1UpdateMenuRequest} body 
+         * @param {MenuServiceApiMenuServiceUpdateMenu2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        menuServiceUpdateMenu2(menuId: string, body: V1UpdateMenuRequest, options?: any): AxiosPromise<V1Menu> {
-            return localVarFp.menuServiceUpdateMenu2(menuId, body, options).then((request) => request(axios, basePath));
+        menuServiceUpdateMenu2(requestParameters: MenuServiceApiMenuServiceUpdateMenu2Request, options?: AxiosRequestConfig): AxiosPromise<V1Menu> {
+            return localVarFp.menuServiceUpdateMenu2(requestParameters.menuId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1249,10 +1202,10 @@ export interface MenuServiceApiMenuServiceUpdateMenuRequest {
 
     /**
      * 
-     * @type {V1UpdateMenuRequest}
+     * @type {MenuServiceUpdateMenuRequest}
      * @memberof MenuServiceApiMenuServiceUpdateMenu
      */
-    readonly body: V1UpdateMenuRequest
+    readonly body: MenuServiceUpdateMenuRequest
 }
 
 /**
@@ -1270,10 +1223,10 @@ export interface MenuServiceApiMenuServiceUpdateMenu2Request {
 
     /**
      * 
-     * @type {V1UpdateMenuRequest}
+     * @type {MenuServiceUpdateMenuRequest}
      * @memberof MenuServiceApiMenuServiceUpdateMenu2
      */
-    readonly body: V1UpdateMenuRequest
+    readonly body: MenuServiceUpdateMenuRequest
 }
 
 /**
@@ -1370,3 +1323,4 @@ export class MenuServiceApi extends BaseAPI {
         return MenuServiceApiFp(this.configuration).menuServiceUpdateMenu2(requestParameters.menuId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

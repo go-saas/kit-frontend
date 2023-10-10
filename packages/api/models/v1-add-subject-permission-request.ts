@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Effect } from './v1-effect';
 
 /**
@@ -50,7 +52,7 @@ export interface V1AddSubjectPermissionRequest {
      * @type {V1Effect}
      * @memberof V1AddSubjectPermissionRequest
      */
-    'effect'?: V1Effect;
+    'effect': V1Effect;
     /**
      * 
      * @type {string}
@@ -58,4 +60,6 @@ export interface V1AddSubjectPermissionRequest {
      */
     'tenantId'?: string;
 }
+
+
 

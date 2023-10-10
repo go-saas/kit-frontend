@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -96,12 +97,12 @@ export const MsgServiceApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
-         * @param {string} service 
+         * @param {MsgServiceApiMsgServiceQueryPreparedRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        msgServiceQueryPrepared(service: string, options?: any): AxiosPromise<object> {
-            return localVarFp.msgServiceQueryPrepared(service, options).then((request) => request(axios, basePath));
+        msgServiceQueryPrepared(requestParameters: MsgServiceApiMsgServiceQueryPreparedRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.msgServiceQueryPrepared(requestParameters.service, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -138,3 +139,4 @@ export class MsgServiceApi extends BaseAPI {
         return MsgServiceApiFp(this.configuration).msgServiceQueryPrepared(requestParameters.service, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

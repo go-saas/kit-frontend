@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -85,7 +86,7 @@ export const AuthWebApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {string} [redirect] redirect url.
+         * @param {string} [redirect] redirect url
          * @param {string} [loginChallenge] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -298,7 +299,7 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} [redirect] redirect url.
+         * @param {string} [redirect] redirect url
          * @param {string} [loginChallenge] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -359,58 +360,57 @@ export const AuthWebApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @param {string} [consentChallenge] 
+         * @param {AuthWebApiAuthWebGetConsentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authWebGetConsent(consentChallenge?: string, options?: any): AxiosPromise<V1GetConsentResponse> {
-            return localVarFp.authWebGetConsent(consentChallenge, options).then((request) => request(axios, basePath));
+        authWebGetConsent(requestParameters: AuthWebApiAuthWebGetConsentRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1GetConsentResponse> {
+            return localVarFp.authWebGetConsent(requestParameters.consentChallenge, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [redirect] redirect url.
-         * @param {string} [loginChallenge] 
+         * @param {AuthWebApiAuthWebGetWebLoginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authWebGetWebLogin(redirect?: string, loginChallenge?: string, options?: any): AxiosPromise<V1GetLoginResponse> {
-            return localVarFp.authWebGetWebLogin(redirect, loginChallenge, options).then((request) => request(axios, basePath));
+        authWebGetWebLogin(requestParameters: AuthWebApiAuthWebGetWebLoginRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1GetLoginResponse> {
+            return localVarFp.authWebGetWebLogin(requestParameters.redirect, requestParameters.loginChallenge, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [logoutChallenge] 
+         * @param {AuthWebApiAuthWebGetWebLogoutRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authWebGetWebLogout(logoutChallenge?: string, options?: any): AxiosPromise<V1GetLogoutResponse> {
-            return localVarFp.authWebGetWebLogout(logoutChallenge, options).then((request) => request(axios, basePath));
+        authWebGetWebLogout(requestParameters: AuthWebApiAuthWebGetWebLogoutRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1GetLogoutResponse> {
+            return localVarFp.authWebGetWebLogout(requestParameters.logoutChallenge, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1GrantConsentRequest} body 
+         * @param {AuthWebApiAuthWebGrantConsentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authWebGrantConsent(body: V1GrantConsentRequest, options?: any): AxiosPromise<V1GrantConsentResponse> {
-            return localVarFp.authWebGrantConsent(body, options).then((request) => request(axios, basePath));
+        authWebGrantConsent(requestParameters: AuthWebApiAuthWebGrantConsentRequest, options?: AxiosRequestConfig): AxiosPromise<V1GrantConsentResponse> {
+            return localVarFp.authWebGrantConsent(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1WebLoginAuthRequest} body 
+         * @param {AuthWebApiAuthWebWebLoginRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authWebWebLogin(body: V1WebLoginAuthRequest, options?: any): AxiosPromise<V1WebLoginAuthReply> {
-            return localVarFp.authWebWebLogin(body, options).then((request) => request(axios, basePath));
+        authWebWebLogin(requestParameters: AuthWebApiAuthWebWebLoginRequest, options?: AxiosRequestConfig): AxiosPromise<V1WebLoginAuthReply> {
+            return localVarFp.authWebWebLogin(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1LogoutRequest} body 
+         * @param {AuthWebApiAuthWebWebLogoutRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authWebWebLogout(body: V1LogoutRequest, options?: any): AxiosPromise<V1LogoutResponse> {
-            return localVarFp.authWebWebLogout(body, options).then((request) => request(axios, basePath));
+        authWebWebLogout(requestParameters: AuthWebApiAuthWebWebLogoutRequest, options?: AxiosRequestConfig): AxiosPromise<V1LogoutResponse> {
+            return localVarFp.authWebWebLogout(requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -436,7 +436,7 @@ export interface AuthWebApiAuthWebGetConsentRequest {
  */
 export interface AuthWebApiAuthWebGetWebLoginRequest {
     /**
-     * redirect url.
+     * redirect url
      * @type {string}
      * @memberof AuthWebApiAuthWebGetWebLogin
      */
@@ -579,3 +579,4 @@ export class AuthWebApi extends BaseAPI {
         return AuthWebApiFp(this.configuration).authWebWebLogout(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

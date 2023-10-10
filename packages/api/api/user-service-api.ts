@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -22,6 +23,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
+// @ts-ignore
+import { UserServiceUpdateUserRequest } from '../models';
 // @ts-ignore
 import { V1CreateUserRequest } from '../models';
 // @ts-ignore
@@ -36,8 +39,6 @@ import { V1ListUsersRequest } from '../models';
 import { V1ListUsersResponse } from '../models';
 // @ts-ignore
 import { V1SearchUserResponse } from '../models';
-// @ts-ignore
-import { V1UpdateUserRequest } from '../models';
 // @ts-ignore
 import { V1User } from '../models';
 /**
@@ -89,11 +90,10 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
          * 
          * @summary DeleteUser authz: user.user,id,delete
          * @param {string} id 
-         * @param {boolean} [force] default false. Just remove user out of tenant. set to true to remove user from system.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceDeleteUser: async (id: string, force?: boolean, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userServiceDeleteUser: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('userServiceDeleteUser', 'id', id)
             const localVarPath = `/v1/user/{id}`
@@ -111,10 +111,6 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
 
             // authentication bearer required
             await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-            if (force !== undefined) {
-                localVarQueryParameter['force'] = force;
-            }
 
 
     
@@ -730,11 +726,11 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
          * 
          * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
-         * @param {V1UpdateUserRequest} body 
+         * @param {UserServiceUpdateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceUpdateUser: async (userId: string, body: V1UpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userServiceUpdateUser: async (userId: string, body: UserServiceUpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('userServiceUpdateUser', 'userId', userId)
             // verify required parameter 'body' is not null or undefined
@@ -773,11 +769,11 @@ export const UserServiceApiAxiosParamCreator = function (configuration?: Configu
          * 
          * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
-         * @param {V1UpdateUserRequest} body 
+         * @param {UserServiceUpdateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceUpdateUser2: async (userId: string, body: V1UpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        userServiceUpdateUser2: async (userId: string, body: UserServiceUpdateUserRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'userId' is not null or undefined
             assertParamExists('userServiceUpdateUser2', 'userId', userId)
             // verify required parameter 'body' is not null or undefined
@@ -837,12 +833,11 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary DeleteUser authz: user.user,id,delete
          * @param {string} id 
-         * @param {boolean} [force] default false. Just remove user out of tenant. set to true to remove user from system.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userServiceDeleteUser(id: string, force?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceDeleteUser(id, force, options);
+        async userServiceDeleteUser(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceDeleteUser(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -986,11 +981,11 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
-         * @param {V1UpdateUserRequest} body 
+         * @param {UserServiceUpdateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userServiceUpdateUser(userId: string, body: V1UpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
+        async userServiceUpdateUser(userId: string, body: UserServiceUpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceUpdateUser(userId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -998,11 +993,11 @@ export const UserServiceApiFp = function(configuration?: Configuration) {
          * 
          * @summary UpdateUser authz: user.user,id,update
          * @param {string} userId 
-         * @param {V1UpdateUserRequest} body 
+         * @param {UserServiceUpdateUserRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async userServiceUpdateUser2(userId: string, body: V1UpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
+        async userServiceUpdateUser2(userId: string, body: UserServiceUpdateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userServiceUpdateUser2(userId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -1019,176 +1014,101 @@ export const UserServiceApiFactory = function (configuration?: Configuration, ba
         /**
          * 
          * @summary CreateUser authz: user.user,*,create
-         * @param {V1CreateUserRequest} body 
+         * @param {UserServiceApiUserServiceCreateUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceCreateUser(body: V1CreateUserRequest, options?: any): AxiosPromise<V1User> {
-            return localVarFp.userServiceCreateUser(body, options).then((request) => request(axios, basePath));
+        userServiceCreateUser(requestParameters: UserServiceApiUserServiceCreateUserRequest, options?: AxiosRequestConfig): AxiosPromise<V1User> {
+            return localVarFp.userServiceCreateUser(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary DeleteUser authz: user.user,id,delete
-         * @param {string} id 
-         * @param {boolean} [force] default false. Just remove user out of tenant. set to true to remove user from system.
+         * @param {UserServiceApiUserServiceDeleteUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceDeleteUser(id: string, force?: boolean, options?: any): AxiosPromise<object> {
-            return localVarFp.userServiceDeleteUser(id, force, options).then((request) => request(axios, basePath));
+        userServiceDeleteUser(requestParameters: UserServiceApiUserServiceDeleteUserRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.userServiceDeleteUser(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary GetUser authz: user.user,id,get
-         * @param {string} id 
+         * @param {UserServiceApiUserServiceGetUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceGetUser(id: string, options?: any): AxiosPromise<V1User> {
-            return localVarFp.userServiceGetUser(id, options).then((request) => request(axios, basePath));
+        userServiceGetUser(requestParameters: UserServiceApiUserServiceGetUserRequest, options?: AxiosRequestConfig): AxiosPromise<V1User> {
+            return localVarFp.userServiceGetUser(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary GetUserRoles authz: user.user,id,get
-         * @param {string} id 
+         * @param {UserServiceApiUserServiceGetUserRolesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceGetUserRoles(id: string, options?: any): AxiosPromise<V1GetUserRoleReply> {
-            return localVarFp.userServiceGetUserRoles(id, options).then((request) => request(axios, basePath));
+        userServiceGetUserRoles(requestParameters: UserServiceApiUserServiceGetUserRolesRequest, options?: AxiosRequestConfig): AxiosPromise<V1GetUserRoleReply> {
+            return localVarFp.userServiceGetUserRoles(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary InviteUser authz: user.user,*,create
-         * @param {V1InviteUserRequest} body 
+         * @param {UserServiceApiUserServiceInviteUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceInviteUser(body: V1InviteUserRequest, options?: any): AxiosPromise<V1InviteUserReply> {
-            return localVarFp.userServiceInviteUser(body, options).then((request) => request(axios, basePath));
+        userServiceInviteUser(requestParameters: UserServiceApiUserServiceInviteUserRequest, options?: AxiosRequestConfig): AxiosPromise<V1InviteUserReply> {
+            return localVarFp.userServiceInviteUser(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ListUsers authz: user.user,*,list
-         * @param {number} [pageOffset] 
-         * @param {number} [pageSize] 
-         * @param {string} [search] 
-         * @param {Array<string>} [sort] 
-         * @param {string} [fields] 
-         * @param {string} [filterId$eq] 
-         * @param {string} [filterId$neq] 
-         * @param {string} [filterId$contains] 
-         * @param {string} [filterId$startsWith] 
-         * @param {string} [filterId$nstartsWith] 
-         * @param {string} [filterId$endsWith] 
-         * @param {string} [filterId$nendsWith] 
-         * @param {Array<string>} [filterId$in] 
-         * @param {Array<string>} [filterId$nin] 
-         * @param {boolean} [filterId$null] 
-         * @param {boolean} [filterId$nnull] 
-         * @param {boolean} [filterId$empty] 
-         * @param {boolean} [filterId$nempty] 
-         * @param {string} [filterId$like] 
-         * @param {string} [filterGender$eq] 
-         * @param {string} [filterGender$neq] 
-         * @param {string} [filterGender$contains] 
-         * @param {string} [filterGender$startsWith] 
-         * @param {string} [filterGender$nstartsWith] 
-         * @param {string} [filterGender$endsWith] 
-         * @param {string} [filterGender$nendsWith] 
-         * @param {Array<string>} [filterGender$in] 
-         * @param {Array<string>} [filterGender$nin] 
-         * @param {boolean} [filterGender$null] 
-         * @param {boolean} [filterGender$nnull] 
-         * @param {boolean} [filterGender$empty] 
-         * @param {boolean} [filterGender$nempty] 
-         * @param {string} [filterGender$like] 
-         * @param {string} [filterBirthday$eq] 
-         * @param {string} [filterBirthday$neq] 
-         * @param {string} [filterBirthday$gt] 
-         * @param {string} [filterBirthday$gte] 
-         * @param {string} [filterBirthday$lt] 
-         * @param {string} [filterBirthday$lte] 
-         * @param {boolean} [filterBirthday$null] 
-         * @param {boolean} [filterBirthday$nnull] 
-         * @param {string} [filterRolesId$eq] 
-         * @param {string} [filterRolesId$neq] 
-         * @param {string} [filterRolesId$contains] 
-         * @param {string} [filterRolesId$startsWith] 
-         * @param {string} [filterRolesId$nstartsWith] 
-         * @param {string} [filterRolesId$endsWith] 
-         * @param {string} [filterRolesId$nendsWith] 
-         * @param {Array<string>} [filterRolesId$in] 
-         * @param {Array<string>} [filterRolesId$nin] 
-         * @param {boolean} [filterRolesId$null] 
-         * @param {boolean} [filterRolesId$nnull] 
-         * @param {boolean} [filterRolesId$empty] 
-         * @param {boolean} [filterRolesId$nempty] 
-         * @param {string} [filterRolesId$like] 
-         * @param {string} [filterRolesName$eq] 
-         * @param {string} [filterRolesName$neq] 
-         * @param {string} [filterRolesName$contains] 
-         * @param {string} [filterRolesName$startsWith] 
-         * @param {string} [filterRolesName$nstartsWith] 
-         * @param {string} [filterRolesName$endsWith] 
-         * @param {string} [filterRolesName$nendsWith] 
-         * @param {Array<string>} [filterRolesName$in] 
-         * @param {Array<string>} [filterRolesName$nin] 
-         * @param {boolean} [filterRolesName$null] 
-         * @param {boolean} [filterRolesName$nnull] 
-         * @param {boolean} [filterRolesName$empty] 
-         * @param {boolean} [filterRolesName$nempty] 
-         * @param {string} [filterRolesName$like] 
+         * @param {UserServiceApiUserServiceListUsersRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceListUsers(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterGender$eq?: string, filterGender$neq?: string, filterGender$contains?: string, filterGender$startsWith?: string, filterGender$nstartsWith?: string, filterGender$endsWith?: string, filterGender$nendsWith?: string, filterGender$in?: Array<string>, filterGender$nin?: Array<string>, filterGender$null?: boolean, filterGender$nnull?: boolean, filterGender$empty?: boolean, filterGender$nempty?: boolean, filterGender$like?: string, filterBirthday$eq?: string, filterBirthday$neq?: string, filterBirthday$gt?: string, filterBirthday$gte?: string, filterBirthday$lt?: string, filterBirthday$lte?: string, filterBirthday$null?: boolean, filterBirthday$nnull?: boolean, filterRolesId$eq?: string, filterRolesId$neq?: string, filterRolesId$contains?: string, filterRolesId$startsWith?: string, filterRolesId$nstartsWith?: string, filterRolesId$endsWith?: string, filterRolesId$nendsWith?: string, filterRolesId$in?: Array<string>, filterRolesId$nin?: Array<string>, filterRolesId$null?: boolean, filterRolesId$nnull?: boolean, filterRolesId$empty?: boolean, filterRolesId$nempty?: boolean, filterRolesId$like?: string, filterRolesName$eq?: string, filterRolesName$neq?: string, filterRolesName$contains?: string, filterRolesName$startsWith?: string, filterRolesName$nstartsWith?: string, filterRolesName$endsWith?: string, filterRolesName$nendsWith?: string, filterRolesName$in?: Array<string>, filterRolesName$nin?: Array<string>, filterRolesName$null?: boolean, filterRolesName$nnull?: boolean, filterRolesName$empty?: boolean, filterRolesName$nempty?: boolean, filterRolesName$like?: string, options?: any): AxiosPromise<V1ListUsersResponse> {
-            return localVarFp.userServiceListUsers(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterGender$eq, filterGender$neq, filterGender$contains, filterGender$startsWith, filterGender$nstartsWith, filterGender$endsWith, filterGender$nendsWith, filterGender$in, filterGender$nin, filterGender$null, filterGender$nnull, filterGender$empty, filterGender$nempty, filterGender$like, filterBirthday$eq, filterBirthday$neq, filterBirthday$gt, filterBirthday$gte, filterBirthday$lt, filterBirthday$lte, filterBirthday$null, filterBirthday$nnull, filterRolesId$eq, filterRolesId$neq, filterRolesId$contains, filterRolesId$startsWith, filterRolesId$nstartsWith, filterRolesId$endsWith, filterRolesId$nendsWith, filterRolesId$in, filterRolesId$nin, filterRolesId$null, filterRolesId$nnull, filterRolesId$empty, filterRolesId$nempty, filterRolesId$like, filterRolesName$eq, filterRolesName$neq, filterRolesName$contains, filterRolesName$startsWith, filterRolesName$nstartsWith, filterRolesName$endsWith, filterRolesName$nendsWith, filterRolesName$in, filterRolesName$nin, filterRolesName$null, filterRolesName$nnull, filterRolesName$empty, filterRolesName$nempty, filterRolesName$like, options).then((request) => request(axios, basePath));
+        userServiceListUsers(requestParameters: UserServiceApiUserServiceListUsersRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListUsersResponse> {
+            return localVarFp.userServiceListUsers(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterGender$eq, requestParameters.filterGender$neq, requestParameters.filterGender$contains, requestParameters.filterGender$startsWith, requestParameters.filterGender$nstartsWith, requestParameters.filterGender$endsWith, requestParameters.filterGender$nendsWith, requestParameters.filterGender$in, requestParameters.filterGender$nin, requestParameters.filterGender$null, requestParameters.filterGender$nnull, requestParameters.filterGender$empty, requestParameters.filterGender$nempty, requestParameters.filterGender$like, requestParameters.filterBirthday$eq, requestParameters.filterBirthday$neq, requestParameters.filterBirthday$gt, requestParameters.filterBirthday$gte, requestParameters.filterBirthday$lt, requestParameters.filterBirthday$lte, requestParameters.filterBirthday$null, requestParameters.filterBirthday$nnull, requestParameters.filterRolesId$eq, requestParameters.filterRolesId$neq, requestParameters.filterRolesId$contains, requestParameters.filterRolesId$startsWith, requestParameters.filterRolesId$nstartsWith, requestParameters.filterRolesId$endsWith, requestParameters.filterRolesId$nendsWith, requestParameters.filterRolesId$in, requestParameters.filterRolesId$nin, requestParameters.filterRolesId$null, requestParameters.filterRolesId$nnull, requestParameters.filterRolesId$empty, requestParameters.filterRolesId$nempty, requestParameters.filterRolesId$like, requestParameters.filterRolesName$eq, requestParameters.filterRolesName$neq, requestParameters.filterRolesName$contains, requestParameters.filterRolesName$startsWith, requestParameters.filterRolesName$nstartsWith, requestParameters.filterRolesName$endsWith, requestParameters.filterRolesName$nendsWith, requestParameters.filterRolesName$in, requestParameters.filterRolesName$nin, requestParameters.filterRolesName$null, requestParameters.filterRolesName$nnull, requestParameters.filterRolesName$empty, requestParameters.filterRolesName$nempty, requestParameters.filterRolesName$like, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary ListUsers authz: user.user,*,list
-         * @param {V1ListUsersRequest} body 
+         * @param {UserServiceApiUserServiceListUsers2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceListUsers2(body: V1ListUsersRequest, options?: any): AxiosPromise<V1ListUsersResponse> {
-            return localVarFp.userServiceListUsers2(body, options).then((request) => request(axios, basePath));
+        userServiceListUsers2(requestParameters: UserServiceApiUserServiceListUsers2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListUsersResponse> {
+            return localVarFp.userServiceListUsers2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [identity] 
-         * @param {string} [username] 
-         * @param {string} [email] 
-         * @param {string} [phone] 
-         * @param {string} [fields] 
+         * @param {UserServiceApiUserServiceSearchUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceSearchUser(identity?: string, username?: string, email?: string, phone?: string, fields?: string, options?: any): AxiosPromise<V1SearchUserResponse> {
-            return localVarFp.userServiceSearchUser(identity, username, email, phone, fields, options).then((request) => request(axios, basePath));
+        userServiceSearchUser(requestParameters: UserServiceApiUserServiceSearchUserRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1SearchUserResponse> {
+            return localVarFp.userServiceSearchUser(requestParameters.identity, requestParameters.username, requestParameters.email, requestParameters.phone, requestParameters.fields, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary UpdateUser authz: user.user,id,update
-         * @param {string} userId 
-         * @param {V1UpdateUserRequest} body 
+         * @param {UserServiceApiUserServiceUpdateUserRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceUpdateUser(userId: string, body: V1UpdateUserRequest, options?: any): AxiosPromise<V1User> {
-            return localVarFp.userServiceUpdateUser(userId, body, options).then((request) => request(axios, basePath));
+        userServiceUpdateUser(requestParameters: UserServiceApiUserServiceUpdateUserRequest, options?: AxiosRequestConfig): AxiosPromise<V1User> {
+            return localVarFp.userServiceUpdateUser(requestParameters.userId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary UpdateUser authz: user.user,id,update
-         * @param {string} userId 
-         * @param {V1UpdateUserRequest} body 
+         * @param {UserServiceApiUserServiceUpdateUser2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        userServiceUpdateUser2(userId: string, body: V1UpdateUserRequest, options?: any): AxiosPromise<V1User> {
-            return localVarFp.userServiceUpdateUser2(userId, body, options).then((request) => request(axios, basePath));
+        userServiceUpdateUser2(requestParameters: UserServiceApiUserServiceUpdateUser2Request, options?: AxiosRequestConfig): AxiosPromise<V1User> {
+            return localVarFp.userServiceUpdateUser2(requestParameters.userId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1219,13 +1139,6 @@ export interface UserServiceApiUserServiceDeleteUserRequest {
      * @memberof UserServiceApiUserServiceDeleteUser
      */
     readonly id: string
-
-    /**
-     * default false. Just remove user out of tenant. set to true to remove user from system.
-     * @type {boolean}
-     * @memberof UserServiceApiUserServiceDeleteUser
-     */
-    readonly force?: boolean
 }
 
 /**
@@ -1831,10 +1744,10 @@ export interface UserServiceApiUserServiceUpdateUserRequest {
 
     /**
      * 
-     * @type {V1UpdateUserRequest}
+     * @type {UserServiceUpdateUserRequest}
      * @memberof UserServiceApiUserServiceUpdateUser
      */
-    readonly body: V1UpdateUserRequest
+    readonly body: UserServiceUpdateUserRequest
 }
 
 /**
@@ -1852,10 +1765,10 @@ export interface UserServiceApiUserServiceUpdateUser2Request {
 
     /**
      * 
-     * @type {V1UpdateUserRequest}
+     * @type {UserServiceUpdateUserRequest}
      * @memberof UserServiceApiUserServiceUpdateUser2
      */
-    readonly body: V1UpdateUserRequest
+    readonly body: UserServiceUpdateUserRequest
 }
 
 /**
@@ -1886,7 +1799,7 @@ export class UserServiceApi extends BaseAPI {
      * @memberof UserServiceApi
      */
     public userServiceDeleteUser(requestParameters: UserServiceApiUserServiceDeleteUserRequest, options?: AxiosRequestConfig) {
-        return UserServiceApiFp(this.configuration).userServiceDeleteUser(requestParameters.id, requestParameters.force, options).then((request) => request(this.axios, this.basePath));
+        return UserServiceApiFp(this.configuration).userServiceDeleteUser(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1984,3 +1897,4 @@ export class UserServiceApi extends BaseAPI {
         return UserServiceApiFp(this.configuration).userServiceUpdateUser2(requestParameters.userId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

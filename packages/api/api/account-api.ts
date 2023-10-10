@@ -13,13 +13,16 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+// @ts-ignore
+import { AccountUpdateAddressesRequest } from '../models';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -30,8 +33,6 @@ import { V1GetAddressesReply } from '../models';
 import { V1GetProfileResponse } from '../models';
 // @ts-ignore
 import { V1GetSettingsResponse } from '../models';
-// @ts-ignore
-import { V1UpdateAddressesRequest } from '../models';
 // @ts-ignore
 import { V1UpdateProfileRequest } from '../models';
 // @ts-ignore
@@ -295,11 +296,11 @@ export const AccountApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {string} addressId 
-         * @param {V1UpdateAddressesRequest} body 
+         * @param {AccountUpdateAddressesRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountUpdateAddresses: async (addressId: string, body: V1UpdateAddressesRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        accountUpdateAddresses: async (addressId: string, body: AccountUpdateAddressesRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'addressId' is not null or undefined
             assertParamExists('accountUpdateAddresses', 'addressId', addressId)
             // verify required parameter 'body' is not null or undefined
@@ -486,11 +487,11 @@ export const AccountApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} addressId 
-         * @param {V1UpdateAddressesRequest} body 
+         * @param {AccountUpdateAddressesRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async accountUpdateAddresses(addressId: string, body: V1UpdateAddressesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
+        async accountUpdateAddresses(addressId: string, body: AccountUpdateAddressesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountUpdateAddresses(addressId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
@@ -527,28 +528,28 @@ export const AccountApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @param {V1CreateAddressesRequest} body 
+         * @param {AccountApiAccountCreateAddressesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountCreateAddresses(body: V1CreateAddressesRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.accountCreateAddresses(body, options).then((request) => request(axios, basePath));
+        accountCreateAddresses(requestParameters: AccountApiAccountCreateAddressesRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.accountCreateAddresses(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} id 
+         * @param {AccountApiAccountDeleteAddressesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountDeleteAddresses(id: string, options?: any): AxiosPromise<object> {
-            return localVarFp.accountDeleteAddresses(id, options).then((request) => request(axios, basePath));
+        accountDeleteAddresses(requestParameters: AccountApiAccountDeleteAddressesRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.accountDeleteAddresses(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountGetAddresses(options?: any): AxiosPromise<V1GetAddressesReply> {
+        accountGetAddresses(options?: AxiosRequestConfig): AxiosPromise<V1GetAddressesReply> {
             return localVarFp.accountGetAddresses(options).then((request) => request(axios, basePath));
         },
         /**
@@ -556,60 +557,45 @@ export const AccountApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountGetProfile(options?: any): AxiosPromise<V1GetProfileResponse> {
+        accountGetProfile(options?: AxiosRequestConfig): AxiosPromise<V1GetProfileResponse> {
             return localVarFp.accountGetProfile(options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} [fields] 
-         * @param {string} [filterKey$eq] 
-         * @param {string} [filterKey$neq] 
-         * @param {string} [filterKey$contains] 
-         * @param {string} [filterKey$startsWith] 
-         * @param {string} [filterKey$nstartsWith] 
-         * @param {string} [filterKey$endsWith] 
-         * @param {string} [filterKey$nendsWith] 
-         * @param {Array<string>} [filterKey$in] 
-         * @param {Array<string>} [filterKey$nin] 
-         * @param {boolean} [filterKey$null] 
-         * @param {boolean} [filterKey$nnull] 
-         * @param {boolean} [filterKey$empty] 
-         * @param {boolean} [filterKey$nempty] 
-         * @param {string} [filterKey$like] 
+         * @param {AccountApiAccountGetSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountGetSettings(fields?: string, filterKey$eq?: string, filterKey$neq?: string, filterKey$contains?: string, filterKey$startsWith?: string, filterKey$nstartsWith?: string, filterKey$endsWith?: string, filterKey$nendsWith?: string, filterKey$in?: Array<string>, filterKey$nin?: Array<string>, filterKey$null?: boolean, filterKey$nnull?: boolean, filterKey$empty?: boolean, filterKey$nempty?: boolean, filterKey$like?: string, options?: any): AxiosPromise<V1GetSettingsResponse> {
-            return localVarFp.accountGetSettings(fields, filterKey$eq, filterKey$neq, filterKey$contains, filterKey$startsWith, filterKey$nstartsWith, filterKey$endsWith, filterKey$nendsWith, filterKey$in, filterKey$nin, filterKey$null, filterKey$nnull, filterKey$empty, filterKey$nempty, filterKey$like, options).then((request) => request(axios, basePath));
+        accountGetSettings(requestParameters: AccountApiAccountGetSettingsRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1GetSettingsResponse> {
+            return localVarFp.accountGetSettings(requestParameters.fields, requestParameters.filterKey$eq, requestParameters.filterKey$neq, requestParameters.filterKey$contains, requestParameters.filterKey$startsWith, requestParameters.filterKey$nstartsWith, requestParameters.filterKey$endsWith, requestParameters.filterKey$nendsWith, requestParameters.filterKey$in, requestParameters.filterKey$nin, requestParameters.filterKey$null, requestParameters.filterKey$nnull, requestParameters.filterKey$empty, requestParameters.filterKey$nempty, requestParameters.filterKey$like, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} addressId 
-         * @param {V1UpdateAddressesRequest} body 
+         * @param {AccountApiAccountUpdateAddressesRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountUpdateAddresses(addressId: string, body: V1UpdateAddressesRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.accountUpdateAddresses(addressId, body, options).then((request) => request(axios, basePath));
+        accountUpdateAddresses(requestParameters: AccountApiAccountUpdateAddressesRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.accountUpdateAddresses(requestParameters.addressId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary UpdateProfile  Avatar: POST form file /v1/account/avatar
-         * @param {V1UpdateProfileRequest} body 
+         * @param {AccountApiAccountUpdateProfileRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountUpdateProfile(body: V1UpdateProfileRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.accountUpdateProfile(body, options).then((request) => request(axios, basePath));
+        accountUpdateProfile(requestParameters: AccountApiAccountUpdateProfileRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.accountUpdateProfile(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1UpdateSettingsRequest} body 
+         * @param {AccountApiAccountUpdateSettingsRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        accountUpdateSettings(body: V1UpdateSettingsRequest, options?: any): AxiosPromise<V1UpdateSettingsResponse> {
-            return localVarFp.accountUpdateSettings(body, options).then((request) => request(axios, basePath));
+        accountUpdateSettings(requestParameters: AccountApiAccountUpdateSettingsRequest, options?: AxiosRequestConfig): AxiosPromise<V1UpdateSettingsResponse> {
+            return localVarFp.accountUpdateSettings(requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -769,10 +755,10 @@ export interface AccountApiAccountUpdateAddressesRequest {
 
     /**
      * 
-     * @type {V1UpdateAddressesRequest}
+     * @type {AccountUpdateAddressesRequest}
      * @memberof AccountApiAccountUpdateAddresses
      */
-    readonly body: V1UpdateAddressesRequest
+    readonly body: AccountUpdateAddressesRequest
 }
 
 /**
@@ -897,3 +883,4 @@ export class AccountApi extends BaseAPI {
         return AccountApiFp(this.configuration).accountUpdateSettings(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

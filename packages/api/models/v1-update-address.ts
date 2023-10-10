@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { LbsAddress } from './lbs-address';
 
 /**
@@ -50,7 +52,7 @@ export interface V1UpdateAddress {
      * @type {LbsAddress}
      * @memberof V1UpdateAddress
      */
-    'address'?: LbsAddress;
+    'address': LbsAddress;
     /**
      * 
      * @type {object}

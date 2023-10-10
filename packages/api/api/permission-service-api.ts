@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -409,21 +410,21 @@ export const PermissionServiceApiFactory = function (configuration?: Configurati
         /**
          * 
          * @summary management add
-         * @param {V1AddSubjectPermissionRequest} body 
+         * @param {PermissionServiceApiPermissionServiceAddSubjectPermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceAddSubjectPermission(body: V1AddSubjectPermissionRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.permissionServiceAddSubjectPermission(body, options).then((request) => request(axios, basePath));
+        permissionServiceAddSubjectPermission(requestParameters: PermissionServiceApiPermissionServiceAddSubjectPermissionRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.permissionServiceAddSubjectPermission(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {V1CheckPermissionRequest} body 
+         * @param {PermissionServiceApiPermissionServiceCheckCurrentRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceCheckCurrent(body: V1CheckPermissionRequest, options?: any): AxiosPromise<V1CheckPermissionReply> {
-            return localVarFp.permissionServiceCheckCurrent(body, options).then((request) => request(axios, basePath));
+        permissionServiceCheckCurrent(requestParameters: PermissionServiceApiPermissionServiceCheckCurrentRequest, options?: AxiosRequestConfig): AxiosPromise<V1CheckPermissionReply> {
+            return localVarFp.permissionServiceCheckCurrent(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -431,48 +432,48 @@ export const PermissionServiceApiFactory = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceGetCurrent(options?: any): AxiosPromise<V1GetCurrentPermissionReply> {
+        permissionServiceGetCurrent(options?: AxiosRequestConfig): AxiosPromise<V1GetCurrentPermissionReply> {
             return localVarFp.permissionServiceGetCurrent(options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary management list
-         * @param {Array<string>} [subjects] 
+         * @param {PermissionServiceApiPermissionServiceListSubjectPermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceListSubjectPermission(subjects?: Array<string>, options?: any): AxiosPromise<V1ListSubjectPermissionResponse> {
-            return localVarFp.permissionServiceListSubjectPermission(subjects, options).then((request) => request(axios, basePath));
+        permissionServiceListSubjectPermission(requestParameters: PermissionServiceApiPermissionServiceListSubjectPermissionRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListSubjectPermissionResponse> {
+            return localVarFp.permissionServiceListSubjectPermission(requestParameters.subjects, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary management list
-         * @param {V1ListSubjectPermissionRequest} body 
+         * @param {PermissionServiceApiPermissionServiceListSubjectPermission2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceListSubjectPermission2(body: V1ListSubjectPermissionRequest, options?: any): AxiosPromise<V1ListSubjectPermissionResponse> {
-            return localVarFp.permissionServiceListSubjectPermission2(body, options).then((request) => request(axios, basePath));
+        permissionServiceListSubjectPermission2(requestParameters: PermissionServiceApiPermissionServiceListSubjectPermission2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListSubjectPermissionResponse> {
+            return localVarFp.permissionServiceListSubjectPermission2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary management remove
-         * @param {V1RemoveSubjectPermissionRequest} body 
+         * @param {PermissionServiceApiPermissionServiceRemoveSubjectPermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceRemoveSubjectPermission(body: V1RemoveSubjectPermissionRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.permissionServiceRemoveSubjectPermission(body, options).then((request) => request(axios, basePath));
+        permissionServiceRemoveSubjectPermission(requestParameters: PermissionServiceApiPermissionServiceRemoveSubjectPermissionRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.permissionServiceRemoveSubjectPermission(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @summary management update
-         * @param {V1UpdateSubjectPermissionRequest} body 
+         * @param {PermissionServiceApiPermissionServiceUpdateSubjectPermissionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        permissionServiceUpdateSubjectPermission(body: V1UpdateSubjectPermissionRequest, options?: any): AxiosPromise<V1UpdateSubjectPermissionResponse> {
-            return localVarFp.permissionServiceUpdateSubjectPermission(body, options).then((request) => request(axios, basePath));
+        permissionServiceUpdateSubjectPermission(requestParameters: PermissionServiceApiPermissionServiceUpdateSubjectPermissionRequest, options?: AxiosRequestConfig): AxiosPromise<V1UpdateSubjectPermissionResponse> {
+            return localVarFp.permissionServiceUpdateSubjectPermission(requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -650,3 +651,4 @@ export class PermissionServiceApi extends BaseAPI {
         return PermissionServiceApiFp(this.configuration).permissionServiceUpdateSubjectPermission(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+

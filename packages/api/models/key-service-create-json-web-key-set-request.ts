@@ -13,6 +13,8 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
 import { KeyJsonWebKeySetGeneratorRequest } from './key-json-web-key-set-generator-request';
 
 /**

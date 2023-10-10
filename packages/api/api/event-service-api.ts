@@ -13,8 +13,9 @@
  */
 
 
-import globalAxios, { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
-import { Configuration } from '../configuration';
+import type { Configuration } from '../configuration';
+import type { AxiosPromise, AxiosInstance, AxiosRequestConfig } from 'axios';
+import globalAxios from 'axios';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
@@ -105,13 +106,12 @@ export const EventServiceApiFactory = function (configuration?: Configuration, b
     return {
         /**
          * 
-         * @param {string} service 
-         * @param {EventServiceEventRequest} body 
+         * @param {EventServiceApiEventServiceEventRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        eventServiceEvent(service: string, body: EventServiceEventRequest, options?: any): AxiosPromise<object> {
-            return localVarFp.eventServiceEvent(service, body, options).then((request) => request(axios, basePath));
+        eventServiceEvent(requestParameters: EventServiceApiEventServiceEventRequest, options?: AxiosRequestConfig): AxiosPromise<object> {
+            return localVarFp.eventServiceEvent(requestParameters.service, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -155,3 +155,4 @@ export class EventServiceApi extends BaseAPI {
         return EventServiceApiFp(this.configuration).eventServiceEvent(requestParameters.service, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
+
