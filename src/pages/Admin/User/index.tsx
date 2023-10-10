@@ -12,20 +12,21 @@ import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 import { requestTransform } from '@gosaas/core';
 import type {
-  V1CreateUserRequest,
-  V1UpdateUser,
-  UserServiceUpdateUserRequest,
+  V1AdminCreateUserRequest,
+  UserAdminServiceUpdateUserAdminRequestUser,
+  UserAdminServiceUpdateUserAdminRequest,
   V1User,
   V1UserFilter,
 } from '@gosaas/api';
-import { UserServiceApi } from '@gosaas/api';
+import { UserAdminServiceApi } from '@gosaas/api';
 import { UserOutlined } from '@ant-design/icons';
 import { useIntl } from '@umijs/max';
 import RoleTag from '@/components/Roletag';
-import { genderValueEnum } from './gender';
+import { genderValueEnum } from '@/pages/Sys/User/gender';
 
-const service = new UserServiceApi();
 const TableList: React.FC = () => {
+  const service = new UserAdminServiceApi();
+  console.log(service);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
 
   const [showDetail, setShowDetail] = useState<boolean>(false);
@@ -34,12 +35,12 @@ const TableList: React.FC = () => {
   const [currentRow, setCurrentRow] = useState<V1User | undefined | null>(undefined);
   const intl = useIntl();
 
-  const handleAdd = async (fields: V1CreateUserRequest) => {
+  const handleAdd = async (fields: V1AdminCreateUserRequest) => {
     const hide = message.loading(
       intl.formatMessage({ id: 'common.creating', defaultMessage: 'Creating...' }),
     );
     try {
-      await service.userServiceCreateUser({ body: fields });
+      await service.userAdminServiceCreateUserAdmin({ body: fields });
       hide();
       message.success(
         intl.formatMessage({ id: 'common.created', defaultMessage: 'Created Successfully' }),
@@ -51,12 +52,12 @@ const TableList: React.FC = () => {
     }
   };
 
-  const handleUpdate = async (fields: UserServiceUpdateUserRequest) => {
+  const handleUpdate = async (fields: UserAdminServiceUpdateUserAdminRequest) => {
     const hide = message.loading(
       intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
     );
     try {
-      await service.userServiceUpdateUser2({ body: fields, userId: fields.user!.id! });
+      await service.userAdminServiceUpdateUserAdmin2({ body: fields, userId: currentRow!.id! });
       hide();
       message.success(
         intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),
@@ -73,7 +74,7 @@ const TableList: React.FC = () => {
       intl.formatMessage({ id: 'common.deleting', defaultMessage: 'Deleting...' }),
     );
     try {
-      await service.userServiceDeleteUser({ id: selectedRow.id! });
+      await service.userAdminServiceDeleteUserAdmin({ id: selectedRow.id! });
       message.success(
         intl.formatMessage({ id: 'common.deleted', defaultMessage: 'Delete Successfully' }),
       );
@@ -95,18 +96,6 @@ const TableList: React.FC = () => {
           <Avatar size={50} src={<Image src={entity.avatar.url} style={{ width: 48 }} />} />
         ) : (
           <Avatar size={50} icon={<UserOutlined />} />
-        );
-      },
-    },
-    {
-      title: <FormattedMessage id="sys.user.role" defaultMessage="Role" />,
-      render: (dom, entity) => {
-        return (
-          <div>
-            {(entity.roles ?? []).map((p) => (
-              <RoleTag role={p} key={p.id} />
-            ))}
-          </div>
         );
       },
     },
@@ -190,7 +179,7 @@ const TableList: React.FC = () => {
   ];
 
   const getData = requestTransform<V1User, V1UserFilter>(async (req) => {
-    const resp = await service.userServiceListUsers2({ body: req });
+    const resp = await service.userAdminServiceListUsersAdmin2({ body: req });
     return resp.data;
   });
 
@@ -234,7 +223,7 @@ const TableList: React.FC = () => {
             column={2}
             title={currentRow?.name}
             request={async () => {
-              const resp = await service.userServiceGetUser({ id: currentRow.id! });
+              const resp = await service.userAdminServiceGetUserAdmin({ id: currentRow.id! });
               return {
                 data: resp.data,
               };
@@ -250,9 +239,11 @@ const TableList: React.FC = () => {
         onSubmit={async (value) => {
           let success = false;
           if (currentRow) {
-            success = await handleUpdate({ user: value as V1UpdateUser });
+            success = await handleUpdate({
+              user: value as UserAdminServiceUpdateUserAdminRequestUser,
+            });
           } else {
-            success = await handleAdd(value as V1CreateUserRequest);
+            success = await handleAdd(value as V1AdminCreateUserRequest);
           }
           if (success) {
             handleUpdateModalVisible(false);

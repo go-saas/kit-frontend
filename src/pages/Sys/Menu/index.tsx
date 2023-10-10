@@ -18,7 +18,7 @@ import { requestTransform } from '@gosaas/core';
 import type {
   V1CreateMenuRequest,
   V1UpdateMenu,
-  V1UpdateMenuRequest,
+  MenuServiceUpdateMenuRequest,
   V1Menu,
   V1MenuFilter,
 } from '@gosaas/api';
@@ -54,12 +54,12 @@ const TableList: React.FC = () => {
     }
   };
 
-  const handleUpdate = async (fields: V1UpdateMenuRequest) => {
+  const handleUpdate = async (fields: MenuServiceUpdateMenuRequest) => {
     const hide = message.loading(
       intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
     );
     try {
-      await new MenuServiceApi().menuServiceUpdateMenu2({ body: fields, menuId: fields.menu!.id! });
+      await new MenuServiceApi().menuServiceUpdateMenu2({ body: fields, menuId: currentRow!.id! });
       hide();
       message.success(
         intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),

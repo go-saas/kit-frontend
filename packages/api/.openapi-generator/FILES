@@ -17,7 +17,6 @@ api/tenant-service-api.ts
 api/user-admin-service-api.ts
 api/user-service-api.ts
 api/we-chat-auth-service-api.ts
-common.ts
 configuration.ts
 git_push.sh
 models/account-update-addresses-request-address.ts

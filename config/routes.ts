@@ -26,6 +26,19 @@
       ],
     },
     {
+      path: '/admin',
+      locale: 'admin.title',
+      name: 'admin',
+      icon: 'smile',
+      routes: [
+        {
+          name: 'user',
+          path: '/admin/users',
+          component: './Admin/User',
+        },
+      ],
+    },
+    {
       path: '/sys',
       locale: 'sys.title',
       name: 'sys',

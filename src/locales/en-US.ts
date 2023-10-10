@@ -7,6 +7,7 @@ import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import saas from './en-US/saas';
 import sys from './en-US/sys';
+import admin from './en-US/admin';
 export default {
   'navBar.lang': 'Languages',
   'layout.user.link.help': 'Help',
@@ -25,4 +26,5 @@ export default {
   ...pages,
   ...saas,
   ...sys,
+  ...admin,
 };

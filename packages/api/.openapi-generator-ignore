@@ -23,3 +23,4 @@
 #!docs/README.md
 base.ts
 index.ts
+common.ts
