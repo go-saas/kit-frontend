@@ -177,18 +177,6 @@ const Login: React.FC = () => {
           }}
         >
           <Skeleton loading={loading} active>
-            {/* <Search
-              placeholder={intl.formatMessage({
-                id: 'saas.switch.placeholder',
-              })}
-              enterButton={intl.formatMessage({
-                id: 'saas.switch',
-              })}
-              defaultValue={initialState?.currentTenant?.tenant?.name || ''}
-              size="large"
-              onSearch={onSwitch}
-              loading={tenantSwitching}
-            /> */}
             <Tabs
               activeKey={type}
               onChange={setType}

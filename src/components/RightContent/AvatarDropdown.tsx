@@ -2,49 +2,17 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 import { history, useModel } from '@umijs/max';
 import { Avatar, Spin } from 'antd';
 import type { ItemType } from 'antd/lib/menu/hooks/useItems';
-import { stringify } from 'querystring';
+
 import type { MenuInfo } from 'rc-menu/lib/interface';
 import React, { useCallback } from 'react';
 import HeaderDropdown from '../HeaderDropdown';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
-import { AuthWebApi } from '@gosaas/api';
+
 import { setAlpha } from '@ant-design/pro-components';
+import { loginOut } from '@/utils/auth';
 
 export type GlobalHeaderRightProps = {
   menu?: boolean;
-};
-
-/**
- * 退出登录，并且将当前的 url 保存
- */
-const loginOut = async () => {
-  await new AuthWebApi().authWebWebLogout({ body: {} });
-  const { search, pathname } = window.location;
-  const urlParams = new URL(window.location.href).searchParams;
-  /** 此方法会跳转到 redirect 参数所在的位置 */
-  const redirect = urlParams.get('redirect');
-  // Note: There may be security issues, please note
-
-  //TODO validating search
-  let newSearch = '';
-  if (pathname !== '/user/login') {
-    newSearch = stringify({
-      redirect: pathname + search,
-    });
-  }
-
-  if (window.location.pathname !== '/user/login' && !redirect) {
-    // history.replace({
-    //   pathname: '/user/login',
-    //   search: newSearch,
-    // });
-    const currentPath = window.location + '';
-
-    const url = new URL(currentPath);
-    url.pathname = '/user/login';
-    url.search = newSearch;
-    window.location.replace(url.href);
-  }
 };
 
 const AvatarLogo = () => {
@@ -84,7 +52,9 @@ const Name = () => {
     };
   });
 
-  return <span className={`${nameClassName} anticon`}>{currentUser?.name}</span>;
+  return (
+    <span className={`${nameClassName} anticon`}>{currentUser?.name ?? currentUser?.username}</span>
+  );
 };
 
 const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({}) => {
@@ -135,7 +105,7 @@ const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({}) => {
 
   const { currentUser } = initialState;
 
-  if (!currentUser || !currentUser.name) {
+  if (!currentUser) {
     return loading;
   }
 

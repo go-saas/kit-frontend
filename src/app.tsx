@@ -33,12 +33,11 @@ import type { RouteObject } from 'react-router-dom';
 import { accessTree } from '@/utils/tree';
 import Realtime from './components/Realtime';
 import React from 'react';
-
+import { loginOut } from '@/utils/auth';
 import enUS0 from 'antd/es/locale/en_US';
 import zhCN0 from 'antd/es/locale/zh_CN';
 // const isDev = process.env.NODE_ENV === 'development';
 
-const loginPath = '/user/login';
 // 错误处理方案： 错误类型
 
 const changeTenant = async (idOrName?: string) => {
@@ -106,7 +105,7 @@ export async function getInitialState(): Promise<{
       const resp = await new AccountApi().accountGetProfile({ showType: ErrorShowType.SILENT });
       return resp.data as any as UserInfo;
     } catch (error) {
-      history.push(loginPath);
+      loginOut();
     }
     return undefined;
   };
@@ -361,7 +360,7 @@ export const request: RequestConfig = {
     errorInterceptor() as any,
     authRespInterceptor(() => {
       //redirect to login
-      history.push(loginPath);
+      loginOut();
     }),
     tenantErrorInterceptorRedirect(),
   ],
