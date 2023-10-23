@@ -90,6 +90,18 @@
       ],
     },
     {
+      path: '/order',
+      name: 'order',
+      icon: 'smile',
+      routes: [
+        {
+          name: 'order.orders',
+          path: '/order/orders',
+          component: './Order/Order',
+        },
+      ],
+    },
+    {
       name: 'dashboard',
       icon: 'table',
       routes: [
