@@ -102,6 +102,17 @@
       ],
     },
     {
+      path: '/product',
+      name: 'product',
+      routes: [
+        {
+          name: 'product.products',
+          path: '/product/products',
+          component: './Product/Product',
+        },
+      ],
+    },
+    {
       name: 'dashboard',
       icon: 'table',
       routes: [
