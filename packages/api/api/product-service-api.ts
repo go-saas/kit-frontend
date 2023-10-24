@@ -50,7 +50,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
         productServiceCreateProduct: async (body: V1CreateProductRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('productServiceCreateProduct', 'body', body)
-            const localVarPath = `/v1/product/product`;
+            const localVarPath = `/v1/product`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -88,7 +88,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
         productServiceDeleteProduct: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('productServiceDeleteProduct', 'id', id)
-            const localVarPath = `/v1/product/product/{id}`
+            const localVarPath = `/v1/product/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -124,7 +124,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
         productServiceGetProduct: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('productServiceGetProduct', 'id', id)
-            const localVarPath = `/v1/product/product/{id}`
+            const localVarPath = `/v1/product/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -190,7 +190,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
          * @throws {RequiredError}
          */
         productServiceListProduct: async (pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/product/product`;
+            const localVarPath = `/v1/product`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -357,7 +357,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
         productServiceListProduct2: async (body: V1ListProductRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('productServiceListProduct2', 'body', body)
-            const localVarPath = `/v1/product/product/list`;
+            const localVarPath = `/v1/product/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -398,7 +398,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
             assertParamExists('productServiceUpdateProduct', 'productId', productId)
             // verify required parameter 'body' is not null or undefined
             assertParamExists('productServiceUpdateProduct', 'body', body)
-            const localVarPath = `/v1/product/product/{product.id}`
+            const localVarPath = `/v1/product/{product.id}`
                 .replace(`{${"product.id"}}`, encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -440,7 +440,7 @@ export const ProductServiceApiAxiosParamCreator = function (configuration?: Conf
             assertParamExists('productServiceUpdateProduct2', 'productId', productId)
             // verify required parameter 'body' is not null or undefined
             assertParamExists('productServiceUpdateProduct2', 'body', body)
-            const localVarPath = `/v1/product/product/{product.id}`
+            const localVarPath = `/v1/product/{product.id}`
                 .replace(`{${"product.id"}}`, encodeURIComponent(String(productId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

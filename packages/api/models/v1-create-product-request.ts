@@ -21,13 +21,13 @@ import { V1Badge } from './v1-badge';
 import { V1CampaignRule } from './v1-campaign-rule';
 // May contain unused imports in some cases
 // @ts-ignore
+import { V1CreatePriceRequest } from './v1-create-price-request';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1Keyword } from './v1-keyword';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1Media } from './v1-media';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1Price } from './v1-price';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1Stock } from './v1-stock';
@@ -97,7 +97,7 @@ export interface V1CreateProductRequest {
      * @type {string}
      * @memberof V1CreateProductRequest
      */
-    'mainCategoryId'?: string;
+    'mainCategoryKey'?: string;
     /**
      * 
      * @type {Array<string>}
@@ -142,16 +142,16 @@ export interface V1CreateProductRequest {
     'saleableTo'?: string;
     /**
      * 
-     * @type {V1Keyword}
+     * @type {Array<V1Keyword>}
      * @memberof V1CreateProductRequest
      */
-    'keyword'?: V1Keyword;
+    'keywords'?: Array<V1Keyword>;
     /**
      * 
-     * @type {V1Price}
+     * @type {Array<V1CreatePriceRequest>}
      * @memberof V1CreateProductRequest
      */
-    'price'?: V1Price;
+    'prices'?: Array<V1CreatePriceRequest>;
     /**
      * 
      * @type {boolean}
@@ -181,6 +181,12 @@ export interface V1CreateProductRequest {
      * @type {Array<V1Stock>}
      * @memberof V1CreateProductRequest
      */
-    'stock'?: Array<V1Stock>;
+    'stocks'?: Array<V1Stock>;
+    /**
+     * 
+     * @type {object}
+     * @memberof V1CreateProductRequest
+     */
+    'content'?: object;
 }
 

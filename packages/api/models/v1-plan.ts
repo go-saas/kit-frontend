@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Price } from './v1-price';
 
 /**
  * 
@@ -38,5 +41,17 @@ export interface V1Plan {
      * @memberof V1Plan
      */
     'active'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Plan
+     */
+    'productId'?: string;
+    /**
+     * 
+     * @type {Array<V1Price>}
+     * @memberof V1Plan
+     */
+    'prices'?: Array<V1Price>;
 }
 

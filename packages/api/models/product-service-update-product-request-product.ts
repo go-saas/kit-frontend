@@ -35,157 +35,151 @@ import { V1UpdatePrice } from './v1-update-price';
 /**
  * 
  * @export
- * @interface V1UpdateProduct
+ * @interface ProductServiceUpdateProductRequestProduct
  */
-export interface V1UpdateProduct {
+export interface ProductServiceUpdateProductRequestProduct {
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
-    'id': string;
+    'title'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
-     */
-    'title': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'shortDesc'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'desc'?: string;
     /**
      * 
      * @type {V1Media}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'mainPic'?: V1Media;
     /**
      * 
      * @type {Array<V1Media>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'medias'?: Array<V1Media>;
     /**
      * 
      * @type {Array<V1Badge>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'badges'?: Array<V1Badge>;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'visibleFrom'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'visibleTo'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'isNew'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'barcode'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'model'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'brandId'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'isSaleable'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'saleableFrom'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'saleableTo'?: string;
     /**
      * 
      * @type {Array<V1Keyword>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'keywords'?: Array<V1Keyword>;
     /**
      * 
      * @type {Array<V1UpdatePrice>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'prices'?: Array<V1UpdatePrice>;
     /**
      * 
      * @type {boolean}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'isGiveaway'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'mainCategoryKey'?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'categories'?: Array<string>;
     /**
      * 
      * @type {Array<V1CampaignRule>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'campaignRules'?: Array<V1CampaignRule>;
     /**
      * 
      * @type {boolean}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'needShipping'?: boolean;
     /**
      * 
      * @type {Array<V1Stock>}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'stocks'?: Array<V1Stock>;
     /**
      * 
      * @type {object}
-     * @memberof V1UpdateProduct
+     * @memberof ProductServiceUpdateProductRequestProduct
      */
     'content'?: object;
 }

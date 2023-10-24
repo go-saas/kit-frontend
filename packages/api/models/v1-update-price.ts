@@ -15,10 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PricePricePb } from './price-price-pb';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1PriceCurrencyOption } from './v1-price-currency-option';
+import { V1PriceCurrencyOptionPrams } from './v1-price-currency-option-prams';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1PriceRecurring } from './v1-price-recurring';
@@ -32,110 +29,98 @@ import { V1PriceTransformQuantity } from './v1-price-transform-quantity';
 /**
  * 
  * @export
- * @interface V1Price
+ * @interface V1UpdatePrice
  */
-export interface V1Price {
+export interface V1UpdatePrice {
     /**
      * 
      * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
-    'createdAt'?: string;
+    'ownerType': string;
     /**
      * 
      * @type {string}
-     * @memberof V1Price
-     */
-    'updatedAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Price
-     */
-    'tenantId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Price
-     */
-    'ownerType'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'ownerId'?: string;
     /**
      * 
-     * @type {PricePricePb}
-     * @memberof V1Price
+     * @type {string}
+     * @memberof V1UpdatePrice
      */
-    'default'?: PricePricePb;
-    /**
-     * 
-     * @type {PricePricePb}
-     * @memberof V1Price
-     */
-    'discounted'?: PricePricePb;
+    'currencyCode'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
+     */
+    'defaultAmount'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1UpdatePrice
+     */
+    'discountedAmount'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1UpdatePrice
      */
     'discountText'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'denyMoreDiscounts'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
-    'billingSchema'?: string;
+    'billingSchema': string;
     /**
      * 
-     * @type {Array<V1PriceCurrencyOption>}
-     * @memberof V1Price
+     * @type {Array<V1PriceCurrencyOptionPrams>}
+     * @memberof V1UpdatePrice
      */
-    'currencyOptions'?: Array<V1PriceCurrencyOption>;
+    'currencyOptions'?: Array<V1PriceCurrencyOptionPrams>;
     /**
      * 
      * @type {V1PriceRecurring}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'recurring'?: V1PriceRecurring;
     /**
      * 
      * @type {Array<V1PriceTier>}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'tiers'?: Array<V1PriceTier>;
     /**
      * 
      * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'tiersMode'?: string;
     /**
      * 
      * @type {V1PriceTransformQuantity}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
     'transformQuantity'?: V1PriceTransformQuantity;
     /**
      * 
      * @type {string}
-     * @memberof V1Price
+     * @memberof V1UpdatePrice
      */
-    'type'?: string;
+    'type': string;
 }
 

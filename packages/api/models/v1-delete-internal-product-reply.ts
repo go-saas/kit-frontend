@@ -17,13 +17,13 @@
 /**
  * 
  * @export
- * @interface V1DeleteProductReply
+ * @interface V1DeleteInternalProductReply
  */
-export interface V1DeleteProductReply {
+export interface V1DeleteInternalProductReply {
     /**
      * 
      * @type {string}
-     * @memberof V1DeleteProductReply
+     * @memberof V1DeleteInternalProductReply
      */
     'id'?: string;
 }

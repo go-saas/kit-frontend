@@ -64,6 +64,7 @@ models/plan-service-update-plan-request-plan.ts
 models/plan-service-update-plan-request.ts
 models/price-price-pb.ts
 models/product-category-service-update-category-request.ts
+models/product-service-update-product-request-product.ts
 models/product-service-update-product-request.ts
 models/protobuf-any.ts
 models/protobuf-null-value.ts
@@ -103,6 +104,7 @@ models/v1-create-internal-order-item.ts
 models/v1-create-menu-request.ts
 models/v1-create-order-request.ts
 models/v1-create-plan-request.ts
+models/v1-create-price-request.ts
 models/v1-create-product-request.ts
 models/v1-create-role-request.ts
 models/v1-create-stripe-payment-intent-reply.ts
@@ -111,6 +113,7 @@ models/v1-create-tenant-request.ts
 models/v1-create-user-request.ts
 models/v1-delete-brand-reply.ts
 models/v1-delete-category-reply.ts
+models/v1-delete-internal-product-reply.ts
 models/v1-delete-menu-reply.ts
 models/v1-delete-notification-reply.ts
 models/v1-delete-order-reply.ts
@@ -192,6 +195,12 @@ models/v1-permission-side.ts
 models/v1-permission.ts
 models/v1-plan-filter.ts
 models/v1-plan.ts
+models/v1-price-currency-option-prams.ts
+models/v1-price-currency-option-tier.ts
+models/v1-price-currency-option.ts
+models/v1-price-recurring.ts
+models/v1-price-tier.ts
+models/v1-price-transform-quantity.ts
 models/v1-price.ts
 models/v1-product-filter.ts
 models/v1-product.ts
@@ -220,6 +229,7 @@ models/v1-update-category.ts
 models/v1-update-menu.ts
 models/v1-update-order.ts
 models/v1-update-plan.ts
+models/v1-update-price.ts
 models/v1-update-product.ts
 models/v1-update-profile-request.ts
 models/v1-update-role-permission-acl.ts

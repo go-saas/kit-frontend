@@ -13,39 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1UpdatePrice } from './v1-update-price';
 
 /**
  * 
  * @export
- * @interface V1UpdatePlan
+ * @interface V1PriceTier
  */
-export interface V1UpdatePlan {
+export interface V1PriceTier {
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePlan
+     * @memberof V1PriceTier
      */
-    'key'?: string;
+    'flatAmount'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePlan
+     * @memberof V1PriceTier
      */
-    'displayName': string;
+    'unitAmount'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof V1UpdatePlan
+     * @type {string}
+     * @memberof V1PriceTier
      */
-    'active'?: boolean;
-    /**
-     * 
-     * @type {Array<V1UpdatePrice>}
-     * @memberof V1UpdatePlan
-     */
-    'prices'?: Array<V1UpdatePrice>;
+    'upTo'?: string;
 }
 

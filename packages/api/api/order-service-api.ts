@@ -50,7 +50,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
         orderServiceCreateOrder: async (body: V1CreateOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('orderServiceCreateOrder', 'body', body)
-            const localVarPath = `/v1/order/order`;
+            const localVarPath = `/v1/order`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -88,7 +88,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
         orderServiceDeleteOrder: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('orderServiceDeleteOrder', 'id', id)
-            const localVarPath = `/v1/order/order/{id}`
+            const localVarPath = `/v1/order/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -124,7 +124,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
         orderServiceGetOrder: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('orderServiceGetOrder', 'id', id)
-            const localVarPath = `/v1/order/order/{id}`
+            const localVarPath = `/v1/order/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -206,7 +206,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
          * @throws {RequiredError}
          */
         orderServiceListOrder: async (pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterCustomerId$eq?: string, filterCustomerId$neq?: string, filterCustomerId$contains?: string, filterCustomerId$startsWith?: string, filterCustomerId$nstartsWith?: string, filterCustomerId$endsWith?: string, filterCustomerId$nendsWith?: string, filterCustomerId$in?: Array<string>, filterCustomerId$nin?: Array<string>, filterCustomerId$null?: boolean, filterCustomerId$nnull?: boolean, filterCustomerId$empty?: boolean, filterCustomerId$nempty?: boolean, filterCustomerId$like?: string, afterPageToken?: string, beforePageToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/order/order`;
+            const localVarPath = `/v1/order`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -437,7 +437,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
         orderServiceListOrder2: async (body: V1ListOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             assertParamExists('orderServiceListOrder2', 'body', body)
-            const localVarPath = `/v1/order/order/list`;
+            const localVarPath = `/v1/order/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -478,7 +478,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
             assertParamExists('orderServiceUpdateOrder', 'orderId', orderId)
             // verify required parameter 'body' is not null or undefined
             assertParamExists('orderServiceUpdateOrder', 'body', body)
-            const localVarPath = `/v1/order/order/{order.id}`
+            const localVarPath = `/v1/order/{order.id}`
                 .replace(`{${"order.id"}}`, encodeURIComponent(String(orderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -520,7 +520,7 @@ export const OrderServiceApiAxiosParamCreator = function (configuration?: Config
             assertParamExists('orderServiceUpdateOrder2', 'orderId', orderId)
             // verify required parameter 'body' is not null or undefined
             assertParamExists('orderServiceUpdateOrder2', 'body', body)
-            const localVarPath = `/v1/order/order/{order.id}`
+            const localVarPath = `/v1/order/{order.id}`
                 .replace(`{${"order.id"}}`, encodeURIComponent(String(orderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);

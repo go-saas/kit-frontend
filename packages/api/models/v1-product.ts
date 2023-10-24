@@ -13,6 +13,24 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Badge } from './v1-badge';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1CampaignRule } from './v1-campaign-rule';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Keyword } from './v1-keyword';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Media } from './v1-media';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Price } from './v1-price';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Stock } from './v1-stock';
 
 /**
  * 
@@ -25,18 +43,174 @@ export interface V1Product {
      * @type {string}
      * @memberof V1Product
      */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Product
-     */
-    'name'?: string;
+    'id': string;
     /**
      * 
      * @type {string}
      * @memberof V1Product
      */
     'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'tenantId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'title': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'shortDesc'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'desc'?: string;
+    /**
+     * 
+     * @type {V1Media}
+     * @memberof V1Product
+     */
+    'mainPic'?: V1Media;
+    /**
+     * 
+     * @type {Array<V1Media>}
+     * @memberof V1Product
+     */
+    'medias'?: Array<V1Media>;
+    /**
+     * 
+     * @type {Array<V1Badge>}
+     * @memberof V1Product
+     */
+    'badges'?: Array<V1Badge>;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'visibleFrom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'visibleTo'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Product
+     */
+    'isNew'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'mainCategoryKey'?: string;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof V1Product
+     */
+    'categories'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'barcode'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'model'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'brandId'?: string;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Product
+     */
+    'isSaleable'?: boolean;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'saleableFrom'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'saleableTo'?: string;
+    /**
+     * 
+     * @type {Array<V1Keyword>}
+     * @memberof V1Product
+     */
+    'keywords'?: Array<V1Keyword>;
+    /**
+     * 
+     * @type {Array<V1Price>}
+     * @memberof V1Product
+     */
+    'prices'?: Array<V1Price>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Product
+     */
+    'isGiveaway'?: boolean;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Product
+     */
+    'multiSku'?: boolean;
+    /**
+     * 
+     * @type {Array<V1CampaignRule>}
+     * @memberof V1Product
+     */
+    'campaignRules'?: Array<V1CampaignRule>;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Product
+     */
+    'needShipping'?: boolean;
+    /**
+     * 
+     * @type {Array<V1Stock>}
+     * @memberof V1Product
+     */
+    'stocks'?: Array<V1Stock>;
+    /**
+     * 
+     * @type {object}
+     * @memberof V1Product
+     */
+    'content'?: object;
 }
 

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { OrderServiceUpdateOrderRequestOrder } from './order-service-update-order-request-order';
+import { ProductServiceUpdateProductRequestProduct } from './product-service-update-product-request-product';
 
 /**
  * 
@@ -25,10 +25,10 @@ import { OrderServiceUpdateOrderRequestOrder } from './order-service-update-orde
 export interface ProductServiceUpdateProductRequest {
     /**
      * 
-     * @type {OrderServiceUpdateOrderRequestOrder}
+     * @type {ProductServiceUpdateProductRequestProduct}
      * @memberof ProductServiceUpdateProductRequest
      */
-    'product'?: OrderServiceUpdateOrderRequestOrder;
+    'product'?: ProductServiceUpdateProductRequestProduct;
     /**
      * 
      * @type {string}

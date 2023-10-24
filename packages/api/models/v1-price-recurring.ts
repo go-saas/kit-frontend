@@ -13,39 +13,42 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1UpdatePrice } from './v1-update-price';
 
 /**
  * 
  * @export
- * @interface V1UpdatePlan
+ * @interface V1PriceRecurring
  */
-export interface V1UpdatePlan {
+export interface V1PriceRecurring {
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePlan
+     * @memberof V1PriceRecurring
      */
-    'key'?: string;
+    'interval': string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePlan
+     * @memberof V1PriceRecurring
      */
-    'displayName': string;
+    'intervalCount'?: string;
     /**
      * 
-     * @type {boolean}
-     * @memberof V1UpdatePlan
+     * @type {string}
+     * @memberof V1PriceRecurring
      */
-    'active'?: boolean;
+    'trialPeriodDays'?: string;
     /**
      * 
-     * @type {Array<V1UpdatePrice>}
-     * @memberof V1UpdatePlan
+     * @type {string}
+     * @memberof V1PriceRecurring
      */
-    'prices'?: Array<V1UpdatePrice>;
+    'aggregateUsage': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1PriceRecurring
+     */
+    'usageType': string;
 }
 
