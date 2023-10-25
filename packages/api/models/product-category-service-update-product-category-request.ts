@@ -15,31 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { OperationStringFilterOperation } from './operation-string-filter-operation';
+import { OrderServiceUpdateOrderRequestOrder } from './order-service-update-order-request-order';
 
 /**
  * 
  * @export
- * @interface V1CategoryFilter
+ * @interface ProductCategoryServiceUpdateProductCategoryRequest
  */
-export interface V1CategoryFilter {
+export interface ProductCategoryServiceUpdateProductCategoryRequest {
     /**
      * 
-     * @type {OperationStringFilterOperation}
-     * @memberof V1CategoryFilter
+     * @type {OrderServiceUpdateOrderRequestOrder}
+     * @memberof ProductCategoryServiceUpdateProductCategoryRequest
      */
-    'key'?: OperationStringFilterOperation;
+    'category'?: OrderServiceUpdateOrderRequestOrder;
     /**
      * 
-     * @type {OperationStringFilterOperation}
-     * @memberof V1CategoryFilter
+     * @type {string}
+     * @memberof ProductCategoryServiceUpdateProductCategoryRequest
      */
-    'name'?: OperationStringFilterOperation;
-    /**
-     * 
-     * @type {OperationStringFilterOperation}
-     * @memberof V1CategoryFilter
-     */
-    'parent'?: OperationStringFilterOperation;
+    'updateMask'?: string;
 }
 

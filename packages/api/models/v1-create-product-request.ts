@@ -27,7 +27,10 @@ import { V1CreatePriceRequest } from './v1-create-price-request';
 import { V1Keyword } from './v1-keyword';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1Media } from './v1-media';
+import { V1ProductAttribute } from './v1-product-attribute';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1ProductMedia } from './v1-product-media';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1Stock } from './v1-stock';
@@ -58,16 +61,16 @@ export interface V1CreateProductRequest {
     'desc'?: string;
     /**
      * 
-     * @type {V1Media}
+     * @type {V1ProductMedia}
      * @memberof V1CreateProductRequest
      */
-    'mainPic'?: V1Media;
+    'mainPic'?: V1ProductMedia;
     /**
      * 
-     * @type {Array<V1Media>}
+     * @type {Array<V1ProductMedia>}
      * @memberof V1CreateProductRequest
      */
-    'medias'?: Array<V1Media>;
+    'medias'?: Array<V1ProductMedia>;
     /**
      * 
      * @type {Array<V1Badge>}
@@ -97,13 +100,13 @@ export interface V1CreateProductRequest {
      * @type {string}
      * @memberof V1CreateProductRequest
      */
-    'mainCategoryKey'?: string;
+    'mainCategoryKey'?: string | null;
     /**
      * 
      * @type {Array<string>}
      * @memberof V1CreateProductRequest
      */
-    'categories'?: Array<string>;
+    'categoryKeys'?: Array<string>;
     /**
      * 
      * @type {string}
@@ -121,7 +124,7 @@ export interface V1CreateProductRequest {
      * @type {string}
      * @memberof V1CreateProductRequest
      */
-    'brandId'?: string;
+    'brandId'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -158,6 +161,12 @@ export interface V1CreateProductRequest {
      * @memberof V1CreateProductRequest
      */
     'isGiveaway'?: boolean;
+    /**
+     * 
+     * @type {Array<V1ProductAttribute>}
+     * @memberof V1CreateProductRequest
+     */
+    'attributes'?: Array<V1ProductAttribute>;
     /**
      * 
      * @type {boolean}

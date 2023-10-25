@@ -17,26 +17,20 @@
 /**
  * 
  * @export
- * @interface V1Media
+ * @interface V1UpdateProductCategory
  */
-export interface V1Media {
+export interface V1UpdateProductCategory {
     /**
      * 
      * @type {string}
-     * @memberof V1Media
+     * @memberof V1UpdateProductCategory
      */
-    'id'?: string;
+    'key': string;
     /**
      * 
      * @type {string}
-     * @memberof V1Media
+     * @memberof V1UpdateProductCategory
      */
-    'type'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Media
-     */
-    'title'?: string;
+    'name'?: string;
 }
 

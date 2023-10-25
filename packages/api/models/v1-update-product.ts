@@ -24,7 +24,10 @@ import { V1CampaignRule } from './v1-campaign-rule';
 import { V1Keyword } from './v1-keyword';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1Media } from './v1-media';
+import { V1ProductAttribute } from './v1-product-attribute';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1ProductMedia } from './v1-product-media';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1Stock } from './v1-stock';
@@ -49,6 +52,12 @@ export interface V1UpdateProduct {
      * @type {string}
      * @memberof V1UpdateProduct
      */
+    'version'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1UpdateProduct
+     */
     'title': string;
     /**
      * 
@@ -64,16 +73,16 @@ export interface V1UpdateProduct {
     'desc'?: string;
     /**
      * 
-     * @type {V1Media}
+     * @type {V1ProductMedia}
      * @memberof V1UpdateProduct
      */
-    'mainPic'?: V1Media;
+    'mainPic'?: V1ProductMedia;
     /**
      * 
-     * @type {Array<V1Media>}
+     * @type {Array<V1ProductMedia>}
      * @memberof V1UpdateProduct
      */
-    'medias'?: Array<V1Media>;
+    'medias'?: Array<V1ProductMedia>;
     /**
      * 
      * @type {Array<V1Badge>}
@@ -103,6 +112,18 @@ export interface V1UpdateProduct {
      * @type {string}
      * @memberof V1UpdateProduct
      */
+    'mainCategoryKey'?: string | null;
+    /**
+     * 
+     * @type {Array<string>}
+     * @memberof V1UpdateProduct
+     */
+    'categoryKeys'?: Array<string>;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1UpdateProduct
+     */
     'barcode'?: string;
     /**
      * 
@@ -115,7 +136,7 @@ export interface V1UpdateProduct {
      * @type {string}
      * @memberof V1UpdateProduct
      */
-    'brandId'?: string;
+    'brandId'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -154,16 +175,10 @@ export interface V1UpdateProduct {
     'isGiveaway'?: boolean;
     /**
      * 
-     * @type {string}
+     * @type {Array<V1ProductAttribute>}
      * @memberof V1UpdateProduct
      */
-    'mainCategoryKey'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof V1UpdateProduct
-     */
-    'categories'?: Array<string>;
+    'attributes'?: Array<V1ProductAttribute>;
     /**
      * 
      * @type {Array<V1CampaignRule>}

@@ -15,31 +15,31 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1Category } from './v1-category';
+import { OperationStringFilterOperation } from './operation-string-filter-operation';
 
 /**
  * 
  * @export
- * @interface V1ListCategoryReply
+ * @interface V1ProductCategoryFilter
  */
-export interface V1ListCategoryReply {
+export interface V1ProductCategoryFilter {
     /**
      * 
-     * @type {number}
-     * @memberof V1ListCategoryReply
+     * @type {OperationStringFilterOperation}
+     * @memberof V1ProductCategoryFilter
      */
-    'totalSize'?: number;
+    'key'?: OperationStringFilterOperation;
     /**
      * 
-     * @type {number}
-     * @memberof V1ListCategoryReply
+     * @type {OperationStringFilterOperation}
+     * @memberof V1ProductCategoryFilter
      */
-    'filterSize'?: number;
+    'name'?: OperationStringFilterOperation;
     /**
      * 
-     * @type {Array<V1Category>}
-     * @memberof V1ListCategoryReply
+     * @type {OperationStringFilterOperation}
+     * @memberof V1ProductCategoryFilter
      */
-    'items'?: Array<V1Category>;
+    'parent'?: OperationStringFilterOperation;
 }
 

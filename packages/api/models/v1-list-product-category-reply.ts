@@ -15,25 +15,31 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { OrderServiceUpdateOrderRequestOrder } from './order-service-update-order-request-order';
+import { V1ProductCategory } from './v1-product-category';
 
 /**
  * 
  * @export
- * @interface ProductCategoryServiceUpdateCategoryRequest
+ * @interface V1ListProductCategoryReply
  */
-export interface ProductCategoryServiceUpdateCategoryRequest {
+export interface V1ListProductCategoryReply {
     /**
      * 
-     * @type {OrderServiceUpdateOrderRequestOrder}
-     * @memberof ProductCategoryServiceUpdateCategoryRequest
+     * @type {number}
+     * @memberof V1ListProductCategoryReply
      */
-    'category'?: OrderServiceUpdateOrderRequestOrder;
+    'totalSize'?: number;
     /**
      * 
-     * @type {string}
-     * @memberof ProductCategoryServiceUpdateCategoryRequest
+     * @type {number}
+     * @memberof V1ListProductCategoryReply
      */
-    'updateMask'?: string;
+    'filterSize'?: number;
+    /**
+     * 
+     * @type {Array<V1ProductCategory>}
+     * @memberof V1ListProductCategoryReply
+     */
+    'items'?: Array<V1ProductCategory>;
 }
 

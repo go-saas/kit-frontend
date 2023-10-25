@@ -13,9 +13,6 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1CreatePriceRequest } from './v1-create-price-request';
 
 /**
  * 
@@ -35,11 +32,5 @@ export interface V1CreatePlanRequest {
      * @memberof V1CreatePlanRequest
      */
     'displayName': string;
-    /**
-     * 
-     * @type {Array<V1CreatePriceRequest>}
-     * @memberof V1CreatePlanRequest
-     */
-    'prices'?: Array<V1CreatePriceRequest>;
 }
 

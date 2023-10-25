@@ -17,32 +17,20 @@
 /**
  * 
  * @export
- * @interface V1Category
+ * @interface V1DeleteProductCategoryReply
  */
-export interface V1Category {
+export interface V1DeleteProductCategoryReply {
     /**
      * 
      * @type {string}
-     * @memberof V1Category
+     * @memberof V1DeleteProductCategoryReply
      */
     'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Category
+     * @memberof V1DeleteProductCategoryReply
      */
     'name'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Category
-     */
-    'createdAt'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Category
-     */
-    'parent'?: string;
 }
 

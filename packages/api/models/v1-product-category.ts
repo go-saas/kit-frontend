@@ -17,32 +17,38 @@
 /**
  * 
  * @export
- * @interface V1Plan
+ * @interface V1ProductCategory
  */
-export interface V1Plan {
+export interface V1ProductCategory {
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1ProductCategory
      */
-    'key': string;
+    'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1ProductCategory
      */
-    'displayName': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof V1Plan
-     */
-    'active'?: boolean;
+    'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1ProductCategory
      */
-    'productId'?: string;
+    'path'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1ProductCategory
+     */
+    'createdAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1ProductCategory
+     */
+    'parent'?: string;
 }
 

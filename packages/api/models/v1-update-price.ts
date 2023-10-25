@@ -43,18 +43,6 @@ export interface V1UpdatePrice {
      * @type {string}
      * @memberof V1UpdatePrice
      */
-    'ownerType': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdatePrice
-     */
-    'ownerId'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdatePrice
-     */
     'currencyCode'?: string;
     /**
      * 
@@ -85,7 +73,7 @@ export interface V1UpdatePrice {
      * @type {string}
      * @memberof V1UpdatePrice
      */
-    'billingSchema': string;
+    'billingScheme': string;
     /**
      * 
      * @type {Array<V1PriceCurrencyOptionPrams>}

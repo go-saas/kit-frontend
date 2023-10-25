@@ -24,10 +24,19 @@ import { V1CampaignRule } from './v1-campaign-rule';
 import { V1Keyword } from './v1-keyword';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1Media } from './v1-media';
+import { V1Price } from './v1-price';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1Price } from './v1-price';
+import { V1ProductAttribute } from './v1-product-attribute';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1ProductCategory } from './v1-product-category';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1ProductManageInfo } from './v1-product-manage-info';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1ProductMedia } from './v1-product-media';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1Stock } from './v1-stock';
@@ -43,7 +52,7 @@ export interface V1Product {
      * @type {string}
      * @memberof V1Product
      */
-    'id': string;
+    'id'?: string;
     /**
      * 
      * @type {string}
@@ -67,7 +76,13 @@ export interface V1Product {
      * @type {string}
      * @memberof V1Product
      */
-    'title': string;
+    'version'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'title'?: string;
     /**
      * 
      * @type {string}
@@ -82,16 +97,16 @@ export interface V1Product {
     'desc'?: string;
     /**
      * 
-     * @type {V1Media}
+     * @type {V1ProductMedia}
      * @memberof V1Product
      */
-    'mainPic'?: V1Media;
+    'mainPic'?: V1ProductMedia;
     /**
      * 
-     * @type {Array<V1Media>}
+     * @type {Array<V1ProductMedia>}
      * @memberof V1Product
      */
-    'medias'?: Array<V1Media>;
+    'medias'?: Array<V1ProductMedia>;
     /**
      * 
      * @type {Array<V1Badge>}
@@ -121,18 +136,6 @@ export interface V1Product {
      * @type {string}
      * @memberof V1Product
      */
-    'mainCategoryKey'?: string;
-    /**
-     * 
-     * @type {Array<string>}
-     * @memberof V1Product
-     */
-    'categories'?: Array<string>;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Product
-     */
     'barcode'?: string;
     /**
      * 
@@ -145,7 +148,7 @@ export interface V1Product {
      * @type {string}
      * @memberof V1Product
      */
-    'brandId'?: string;
+    'brandId'?: string | null;
     /**
      * 
      * @type {boolean}
@@ -184,6 +187,30 @@ export interface V1Product {
     'isGiveaway'?: boolean;
     /**
      * 
+     * @type {string}
+     * @memberof V1Product
+     */
+    'mainCategoryKey'?: string;
+    /**
+     * 
+     * @type {V1ProductCategory}
+     * @memberof V1Product
+     */
+    'mainCategory'?: V1ProductCategory;
+    /**
+     * 
+     * @type {Array<V1ProductCategory>}
+     * @memberof V1Product
+     */
+    'categories'?: Array<V1ProductCategory>;
+    /**
+     * 
+     * @type {Array<V1ProductAttribute>}
+     * @memberof V1Product
+     */
+    'attributes'?: Array<V1ProductAttribute>;
+    /**
+     * 
      * @type {boolean}
      * @memberof V1Product
      */
@@ -212,5 +239,11 @@ export interface V1Product {
      * @memberof V1Product
      */
     'content'?: object;
+    /**
+     * 
+     * @type {V1ProductManageInfo}
+     * @memberof V1Product
+     */
+    'manageInfo'?: V1ProductManageInfo;
 }
 

@@ -25,12 +25,6 @@ export interface V1CreateTenantRequest {
      * @type {string}
      * @memberof V1CreateTenantRequest
      */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1CreateTenantRequest
-     */
     'name': string;
     /**
      * 

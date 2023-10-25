@@ -15,49 +15,49 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1CategoryFilter } from './v1-category-filter';
+import { V1ProductCategoryFilter } from './v1-product-category-filter';
 
 /**
  * 
  * @export
- * @interface V1ListCategoryRequest
+ * @interface V1ListProductCategoryRequest
  */
-export interface V1ListCategoryRequest {
+export interface V1ListProductCategoryRequest {
     /**
      * 
      * @type {number}
-     * @memberof V1ListCategoryRequest
+     * @memberof V1ListProductCategoryRequest
      */
     'pageOffset'?: number;
     /**
      * 
      * @type {number}
-     * @memberof V1ListCategoryRequest
+     * @memberof V1ListProductCategoryRequest
      */
     'pageSize'?: number;
     /**
      * 
      * @type {string}
-     * @memberof V1ListCategoryRequest
+     * @memberof V1ListProductCategoryRequest
      */
     'search'?: string;
     /**
      * 
      * @type {Array<string>}
-     * @memberof V1ListCategoryRequest
+     * @memberof V1ListProductCategoryRequest
      */
     'sort'?: Array<string>;
     /**
      * 
      * @type {string}
-     * @memberof V1ListCategoryRequest
+     * @memberof V1ListProductCategoryRequest
      */
     'fields'?: string;
     /**
      * 
-     * @type {V1CategoryFilter}
-     * @memberof V1ListCategoryRequest
+     * @type {V1ProductCategoryFilter}
+     * @memberof V1ListProductCategoryRequest
      */
-    'filter'?: V1CategoryFilter;
+    'filter'?: V1ProductCategoryFilter;
 }
 

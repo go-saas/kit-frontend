@@ -17,32 +17,20 @@
 /**
  * 
  * @export
- * @interface V1Plan
+ * @interface V1ProductManageInfo
  */
-export interface V1Plan {
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Plan
-     */
-    'key': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Plan
-     */
-    'displayName': string;
+export interface V1ProductManageInfo {
     /**
      * 
      * @type {boolean}
-     * @memberof V1Plan
+     * @memberof V1ProductManageInfo
      */
-    'active'?: boolean;
+    'managed'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1ProductManageInfo
      */
-    'productId'?: string;
+    'managedBy'?: string;
 }
 

@@ -17,20 +17,38 @@
 /**
  * 
  * @export
- * @interface V1UpdateCategory
+ * @interface V1ProductMedia
  */
-export interface V1UpdateCategory {
+export interface V1ProductMedia {
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateCategory
+     * @memberof V1ProductMedia
      */
-    'key': string;
+    'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdateCategory
+     * @memberof V1ProductMedia
+     */
+    'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1ProductMedia
+     */
+    'mimeType'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1ProductMedia
      */
     'name'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1ProductMedia
+     */
+    'url'?: string;
 }
 

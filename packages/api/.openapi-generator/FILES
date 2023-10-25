@@ -63,7 +63,7 @@ models/permissionv1-permission-def.ts
 models/plan-service-update-plan-request-plan.ts
 models/plan-service-update-plan-request.ts
 models/price-price-pb.ts
-models/product-category-service-update-category-request.ts
+models/product-category-service-update-product-category-request.ts
 models/product-service-update-product-request-product.ts
 models/product-service-update-product-request.ts
 models/protobuf-any.ts
@@ -88,8 +88,6 @@ models/v1-badge.ts
 models/v1-brand-filter.ts
 models/v1-brand.ts
 models/v1-campaign-rule.ts
-models/v1-category-filter.ts
-models/v1-category.ts
 models/v1-change-password-by-forget-request.ts
 models/v1-change-password-by-pre-request.ts
 models/v1-change-tenant-reply.ts
@@ -99,12 +97,12 @@ models/v1-check-subjects-permission-reply.ts
 models/v1-check-user-tenant-reply.ts
 models/v1-create-addresses-request.ts
 models/v1-create-brand-request.ts
-models/v1-create-category-request.ts
 models/v1-create-internal-order-item.ts
 models/v1-create-menu-request.ts
 models/v1-create-order-request.ts
 models/v1-create-plan-request.ts
 models/v1-create-price-request.ts
+models/v1-create-product-category-request.ts
 models/v1-create-product-request.ts
 models/v1-create-role-request.ts
 models/v1-create-stripe-payment-intent-reply.ts
@@ -112,11 +110,11 @@ models/v1-create-stripe-payment-intent-request.ts
 models/v1-create-tenant-request.ts
 models/v1-create-user-request.ts
 models/v1-delete-brand-reply.ts
-models/v1-delete-category-reply.ts
 models/v1-delete-internal-product-reply.ts
 models/v1-delete-menu-reply.ts
 models/v1-delete-notification-reply.ts
 models/v1-delete-order-reply.ts
+models/v1-delete-product-category-reply.ts
 models/v1-delete-product-reply.ts
 models/v1-delete-tenant-reply.ts
 models/v1-effect.ts
@@ -146,8 +144,6 @@ models/v1-invite-user-request.ts
 models/v1-keyword.ts
 models/v1-list-brand-reply.ts
 models/v1-list-brand-request.ts
-models/v1-list-category-reply.ts
-models/v1-list-category-request.ts
 models/v1-list-menu-reply.ts
 models/v1-list-menu-request.ts
 models/v1-list-message-reply.ts
@@ -157,6 +153,8 @@ models/v1-list-order-reply.ts
 models/v1-list-order-request.ts
 models/v1-list-plan-reply.ts
 models/v1-list-plan-request.ts
+models/v1-list-product-category-reply.ts
+models/v1-list-product-category-request.ts
 models/v1-list-product-reply.ts
 models/v1-list-product-request.ts
 models/v1-list-roles-request.ts
@@ -175,7 +173,6 @@ models/v1-login-passwordless-reply.ts
 models/v1-login-passwordless-request.ts
 models/v1-logout-request.ts
 models/v1-logout-response.ts
-models/v1-media.ts
 models/v1-menu-filter.ts
 models/v1-menu.ts
 models/v1-message-filter.ts
@@ -202,7 +199,12 @@ models/v1-price-recurring.ts
 models/v1-price-tier.ts
 models/v1-price-transform-quantity.ts
 models/v1-price.ts
+models/v1-product-attribute.ts
+models/v1-product-category-filter.ts
+models/v1-product-category.ts
 models/v1-product-filter.ts
+models/v1-product-manage-info.ts
+models/v1-product-media.ts
 models/v1-product.ts
 models/v1-refresh-remember-token-reply.ts
 models/v1-refresh-token-auth-reply.ts
@@ -225,11 +227,11 @@ models/v1-token-reply.ts
 models/v1-token-request.ts
 models/v1-update-address.ts
 models/v1-update-brand.ts
-models/v1-update-category.ts
 models/v1-update-menu.ts
 models/v1-update-order.ts
 models/v1-update-plan.ts
 models/v1-update-price.ts
+models/v1-update-product-category.ts
 models/v1-update-product.ts
 models/v1-update-profile-request.ts
 models/v1-update-role-permission-acl.ts

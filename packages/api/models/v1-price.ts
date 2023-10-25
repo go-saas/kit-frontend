@@ -100,7 +100,7 @@ export interface V1Price {
      * @type {string}
      * @memberof V1Price
      */
-    'billingSchema'?: string;
+    'billingScheme'?: string;
     /**
      * 
      * @type {Array<V1PriceCurrencyOption>}

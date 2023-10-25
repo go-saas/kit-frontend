@@ -17,20 +17,14 @@
 /**
  * 
  * @export
- * @interface V1DeleteCategoryReply
+ * @interface V1ProductAttribute
  */
-export interface V1DeleteCategoryReply {
+export interface V1ProductAttribute {
     /**
      * 
      * @type {string}
-     * @memberof V1DeleteCategoryReply
+     * @memberof V1ProductAttribute
      */
-    'key'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1DeleteCategoryReply
-     */
-    'name'?: string;
+    'title'?: string;
 }
 

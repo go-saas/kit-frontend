@@ -13,9 +13,6 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1UpdatePrice } from './v1-update-price';
 
 /**
  * 
@@ -28,7 +25,7 @@ export interface V1UpdatePlan {
      * @type {string}
      * @memberof V1UpdatePlan
      */
-    'key'?: string;
+    'key': string;
     /**
      * 
      * @type {string}
@@ -41,11 +38,5 @@ export interface V1UpdatePlan {
      * @memberof V1UpdatePlan
      */
     'active'?: boolean;
-    /**
-     * 
-     * @type {Array<V1UpdatePrice>}
-     * @memberof V1UpdatePlan
-     */
-    'prices'?: Array<V1UpdatePrice>;
 }
 

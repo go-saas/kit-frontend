@@ -79,7 +79,7 @@ export interface V1CreatePriceRequest {
      * @type {string}
      * @memberof V1CreatePriceRequest
      */
-    'billingSchema': string;
+    'billingScheme': string;
     /**
      * 
      * @type {Array<V1PriceCurrencyOptionPrams>}

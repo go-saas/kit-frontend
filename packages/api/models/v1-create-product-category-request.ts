@@ -17,25 +17,25 @@
 /**
  * 
  * @export
- * @interface V1CreateCategoryRequest
+ * @interface V1CreateProductCategoryRequest
  */
-export interface V1CreateCategoryRequest {
+export interface V1CreateProductCategoryRequest {
     /**
      * 
      * @type {string}
-     * @memberof V1CreateCategoryRequest
+     * @memberof V1CreateProductCategoryRequest
      */
     'key'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1CreateCategoryRequest
+     * @memberof V1CreateProductCategoryRequest
      */
     'name': string;
     /**
      * 
      * @type {string}
-     * @memberof V1CreateCategoryRequest
+     * @memberof V1CreateProductCategoryRequest
      */
     'parent'?: string;
 }
