@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Gatewayv1PaymentMethod } from './gatewayv1-payment-method';
+import { V1PaymentMethod } from './v1-payment-method';
 
 /**
  * 
@@ -25,9 +25,9 @@ import { Gatewayv1PaymentMethod } from './gatewayv1-payment-method';
 export interface V1GetPaymentMethodReply {
     /**
      * 
-     * @type {Array<Gatewayv1PaymentMethod>}
+     * @type {Array<V1PaymentMethod>}
      * @memberof V1GetPaymentMethodReply
      */
-    'methods'?: Array<Gatewayv1PaymentMethod>;
+    'methods'?: Array<V1PaymentMethod>;
 }
 

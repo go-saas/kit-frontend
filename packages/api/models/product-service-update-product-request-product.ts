@@ -197,5 +197,11 @@ export interface ProductServiceUpdateProductRequestProduct {
      * @memberof ProductServiceUpdateProductRequestProduct
      */
     'content'?: object;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof ProductServiceUpdateProductRequestProduct
+     */
+    'active'?: boolean;
 }
 

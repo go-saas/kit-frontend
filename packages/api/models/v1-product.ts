@@ -245,5 +245,11 @@ export interface V1Product {
      * @memberof V1Product
      */
     'manageInfo'?: V1ProductManageInfo;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1Product
+     */
+    'active'?: boolean;
 }
 

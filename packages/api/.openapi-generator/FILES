@@ -41,7 +41,6 @@ models/client-service-patch-oauth2-client-request.ts
 models/client-service-update-oauth2-client-request.ts
 models/data-dynamic-value.ts
 models/event-service-event-request.ts
-models/gatewayv1-payment-method.ts
 models/googlerpc-status.ts
 models/index.ts
 models/key-json-web-key-set-generator-request.ts
@@ -187,6 +186,7 @@ models/v1-order-product.ts
 models/v1-order.ts
 models/v1-passwordless-token-auth-reply.ts
 models/v1-passwordless-token-auth-request.ts
+models/v1-payment-method.ts
 models/v1-permission-requirement.ts
 models/v1-permission-side.ts
 models/v1-permission.ts

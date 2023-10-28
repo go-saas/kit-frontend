@@ -203,5 +203,11 @@ export interface V1UpdateProduct {
      * @memberof V1UpdateProduct
      */
     'content'?: object;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1UpdateProduct
+     */
+    'active'?: boolean;
 }
 

@@ -17,31 +17,31 @@
 /**
  * 
  * @export
- * @interface Gatewayv1PaymentMethod
+ * @interface V1PaymentMethod
  */
-export interface Gatewayv1PaymentMethod {
+export interface V1PaymentMethod {
     /**
      * 
      * @type {string}
-     * @memberof Gatewayv1PaymentMethod
+     * @memberof V1PaymentMethod
      */
     'name'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Gatewayv1PaymentMethod
+     * @memberof V1PaymentMethod
      */
     'logo'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Gatewayv1PaymentMethod
+     * @memberof V1PaymentMethod
      */
     'desc'?: string;
     /**
      * 
      * @type {string}
-     * @memberof Gatewayv1PaymentMethod
+     * @memberof V1PaymentMethod
      */
     'notice'?: string;
 }

@@ -32,5 +32,11 @@ export interface V1ProductManageInfo {
      * @memberof V1ProductManageInfo
      */
     'managedBy'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1ProductManageInfo
+     */
+    'lastSyncTime'?: string;
 }
 

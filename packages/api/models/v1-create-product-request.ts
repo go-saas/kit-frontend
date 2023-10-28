@@ -197,5 +197,11 @@ export interface V1CreateProductRequest {
      * @memberof V1CreateProductRequest
      */
     'content'?: object;
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1CreateProductRequest
+     */
+    'active'?: boolean;
 }
 
