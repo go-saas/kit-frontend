@@ -44,5 +44,11 @@ export interface PricePricePb {
      * @memberof PricePricePb
      */
     'text'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof PricePricePb
+     */
+    'amountDecimal'?: string;
 }
 

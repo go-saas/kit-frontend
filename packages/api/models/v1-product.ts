@@ -151,12 +151,6 @@ export interface V1Product {
     'brandId'?: string | null;
     /**
      * 
-     * @type {boolean}
-     * @memberof V1Product
-     */
-    'isSaleable'?: boolean;
-    /**
-     * 
      * @type {string}
      * @memberof V1Product
      */

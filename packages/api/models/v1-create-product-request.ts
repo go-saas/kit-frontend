@@ -21,10 +21,10 @@ import { V1Badge } from './v1-badge';
 import { V1CampaignRule } from './v1-campaign-rule';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1CreatePriceRequest } from './v1-create-price-request';
+import { V1Keyword } from './v1-keyword';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1Keyword } from './v1-keyword';
+import { V1PriceParams } from './v1-price-params';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1ProductAttribute } from './v1-product-attribute';
@@ -151,10 +151,10 @@ export interface V1CreateProductRequest {
     'keywords'?: Array<V1Keyword>;
     /**
      * 
-     * @type {Array<V1CreatePriceRequest>}
+     * @type {Array<V1PriceParams>}
      * @memberof V1CreateProductRequest
      */
-    'prices'?: Array<V1CreatePriceRequest>;
+    'prices'?: Array<V1PriceParams>;
     /**
      * 
      * @type {boolean}

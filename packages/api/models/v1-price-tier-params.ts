@@ -17,44 +17,26 @@
 /**
  * 
  * @export
- * @interface V1Plan
+ * @interface V1PriceTierParams
  */
-export interface V1Plan {
+export interface V1PriceTierParams {
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1PriceTierParams
      */
-    'key': string;
+    'flatAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1PriceTierParams
      */
-    'displayName': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof V1Plan
-     */
-    'active'?: boolean;
+    'unitAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1Plan
+     * @memberof V1PriceTierParams
      */
-    'createdAt'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Plan
-     */
-    'updatedAt'?: string | null;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1Plan
-     */
-    'productId'?: string;
+    'upTo'?: string;
 }
 

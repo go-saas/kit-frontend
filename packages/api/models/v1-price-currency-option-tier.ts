@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { PricePricePb } from './price-price-pb';
 
 /**
  * 
@@ -22,16 +25,16 @@
 export interface V1PriceCurrencyOptionTier {
     /**
      * 
-     * @type {string}
+     * @type {PricePricePb}
      * @memberof V1PriceCurrencyOptionTier
      */
-    'flatAmount'?: string;
+    'flat'?: PricePricePb;
     /**
      * 
-     * @type {string}
+     * @type {PricePricePb}
      * @memberof V1PriceCurrencyOptionTier
      */
-    'unitAmount'?: string;
+    'unit'?: PricePricePb;
     /**
      * 
      * @type {string}

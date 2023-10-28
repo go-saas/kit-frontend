@@ -15,13 +15,13 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1PriceCurrencyOptionPrams } from './v1-price-currency-option-prams';
+import { V1PriceCurrencyOptionParams } from './v1-price-currency-option-params';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1PriceRecurring } from './v1-price-recurring';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1PriceTier } from './v1-price-tier';
+import { V1PriceTierParams } from './v1-price-tier-params';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1PriceTransformQuantity } from './v1-price-transform-quantity';
@@ -29,85 +29,97 @@ import { V1PriceTransformQuantity } from './v1-price-transform-quantity';
 /**
  * 
  * @export
- * @interface V1UpdatePrice
+ * @interface V1PriceParams
  */
-export interface V1UpdatePrice {
+export interface V1PriceParams {
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
+     */
+    'ownerType': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1PriceParams
+     */
+    'ownerId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1PriceParams
      */
     'currencyCode'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
-    'defaultAmount'?: string;
+    'defaultAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
-    'discountedAmount'?: string;
+    'discountedAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'discountText'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'denyMoreDiscounts'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'billingScheme': string;
     /**
      * 
-     * @type {Array<V1PriceCurrencyOptionPrams>}
-     * @memberof V1UpdatePrice
+     * @type {Array<V1PriceCurrencyOptionParams>}
+     * @memberof V1PriceParams
      */
-    'currencyOptions'?: Array<V1PriceCurrencyOptionPrams>;
+    'currencyOptions'?: Array<V1PriceCurrencyOptionParams>;
     /**
      * 
      * @type {V1PriceRecurring}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'recurring'?: V1PriceRecurring;
     /**
      * 
-     * @type {Array<V1PriceTier>}
-     * @memberof V1UpdatePrice
+     * @type {Array<V1PriceTierParams>}
+     * @memberof V1PriceParams
      */
-    'tiers'?: Array<V1PriceTier>;
+    'tiers'?: Array<V1PriceTierParams>;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'tiersMode'?: string;
     /**
      * 
      * @type {V1PriceTransformQuantity}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'transformQuantity'?: V1PriceTransformQuantity;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePrice
+     * @memberof V1PriceParams
      */
     'type': string;
 }

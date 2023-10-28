@@ -100,7 +100,6 @@ models/v1-create-internal-order-item.ts
 models/v1-create-menu-request.ts
 models/v1-create-order-request.ts
 models/v1-create-plan-request.ts
-models/v1-create-price-request.ts
 models/v1-create-product-category-request.ts
 models/v1-create-product-request.ts
 models/v1-create-role-request.ts
@@ -192,10 +191,13 @@ models/v1-permission-side.ts
 models/v1-permission.ts
 models/v1-plan-filter.ts
 models/v1-plan.ts
-models/v1-price-currency-option-prams.ts
+models/v1-price-currency-option-params.ts
+models/v1-price-currency-option-tier-params.ts
 models/v1-price-currency-option-tier.ts
 models/v1-price-currency-option.ts
+models/v1-price-params.ts
 models/v1-price-recurring.ts
+models/v1-price-tier-params.ts
 models/v1-price-tier.ts
 models/v1-price-transform-quantity.ts
 models/v1-price.ts
@@ -230,7 +232,6 @@ models/v1-update-brand.ts
 models/v1-update-menu.ts
 models/v1-update-order.ts
 models/v1-update-plan.ts
-models/v1-update-price.ts
 models/v1-update-product-category.ts
 models/v1-update-product.ts
 models/v1-update-profile-request.ts

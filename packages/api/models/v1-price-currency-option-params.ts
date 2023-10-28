@@ -15,49 +15,49 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1PriceCurrencyOptionTier } from './v1-price-currency-option-tier';
+import { V1PriceCurrencyOptionTierParams } from './v1-price-currency-option-tier-params';
 
 /**
  * 
  * @export
- * @interface V1PriceCurrencyOptionPrams
+ * @interface V1PriceCurrencyOptionParams
  */
-export interface V1PriceCurrencyOptionPrams {
+export interface V1PriceCurrencyOptionParams {
     /**
      * 
      * @type {string}
-     * @memberof V1PriceCurrencyOptionPrams
+     * @memberof V1PriceCurrencyOptionParams
      */
     'currencyCode'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceCurrencyOptionPrams
+     * @memberof V1PriceCurrencyOptionParams
      */
-    'defaultAmount'?: string;
+    'defaultAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceCurrencyOptionPrams
+     * @memberof V1PriceCurrencyOptionParams
      */
-    'discountedAmount'?: string;
+    'discountedAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceCurrencyOptionPrams
+     * @memberof V1PriceCurrencyOptionParams
      */
     'discountText'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof V1PriceCurrencyOptionPrams
+     * @memberof V1PriceCurrencyOptionParams
      */
     'denyMoreDiscounts'?: boolean;
     /**
      * 
-     * @type {Array<V1PriceCurrencyOptionTier>}
-     * @memberof V1PriceCurrencyOptionPrams
+     * @type {Array<V1PriceCurrencyOptionTierParams>}
+     * @memberof V1PriceCurrencyOptionParams
      */
-    'tiers'?: Array<V1PriceCurrencyOptionTier>;
+    'tiers'?: Array<V1PriceCurrencyOptionTierParams>;
 }
 

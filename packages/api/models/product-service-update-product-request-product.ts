@@ -24,6 +24,9 @@ import { V1CampaignRule } from './v1-campaign-rule';
 import { V1Keyword } from './v1-keyword';
 // May contain unused imports in some cases
 // @ts-ignore
+import { V1PriceParams } from './v1-price-params';
+// May contain unused imports in some cases
+// @ts-ignore
 import { V1ProductAttribute } from './v1-product-attribute';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -31,9 +34,6 @@ import { V1ProductMedia } from './v1-product-media';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1Stock } from './v1-stock';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1UpdatePrice } from './v1-update-price';
 
 /**
  * 
@@ -157,10 +157,10 @@ export interface ProductServiceUpdateProductRequestProduct {
     'keywords'?: Array<V1Keyword>;
     /**
      * 
-     * @type {Array<V1UpdatePrice>}
+     * @type {Array<V1PriceParams>}
      * @memberof ProductServiceUpdateProductRequestProduct
      */
-    'prices'?: Array<V1UpdatePrice>;
+    'prices'?: Array<V1PriceParams>;
     /**
      * 
      * @type {boolean}
