@@ -7,22 +7,21 @@ import {
   TableDropdown,
 } from '@ant-design/pro-components';
 import { FormattedMessage } from '@umijs/max';
-import { Button, Drawer, message, Image } from 'antd';
+import { Button, Drawer, message } from 'antd';
 import React, { useRef, useState } from 'react';
 import UpdateForm from './components/UpdateForm';
 import { requestTransform } from '@gosaas/core';
 import type {
-  V1CreateTenantRequest,
-  V1UpdateTenant,
-  TenantServiceUpdateTenantRequest,
-  V1Tenant,
-  V1TenantFilter,
+  V1CreatePlanRequest,
+  PlanServiceUpdatePlanRequest,
+  V1Plan,
+  V1PlanFilter,
 } from '@gosaas/api';
-import { TenantServiceApi } from '@gosaas/api';
+import { PlanServiceApi } from '@gosaas/api';
 
 import { useIntl } from '@umijs/max';
 
-const service = new TenantServiceApi();
+const service = new PlanServiceApi();
 
 const TableList: React.FC = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
@@ -30,15 +29,15 @@ const TableList: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<V1Tenant | undefined | null>(undefined);
+  const [currentRow, setCurrentRow] = useState<V1Plan | undefined | null>(undefined);
 
   const intl = useIntl();
-  const handleAdd = async (fields: V1CreateTenantRequest) => {
+  const handleAdd = async (fields: V1CreatePlanRequest) => {
     const hide = message.loading(
       intl.formatMessage({ id: 'common.creating', defaultMessage: 'Creating...' }),
     );
     try {
-      await service.tenantServiceCreateTenant({ body: fields });
+      await service.planServiceCreatePlan({ body: fields });
       hide();
       message.success(
         intl.formatMessage({ id: 'common.created', defaultMessage: 'Created Successfully' }),
@@ -50,12 +49,12 @@ const TableList: React.FC = () => {
     }
   };
 
-  const handleUpdate = async (fields: TenantServiceUpdateTenantRequest) => {
+  const handleUpdate = async (fields: PlanServiceUpdatePlanRequest) => {
     const hide = message.loading(
       intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
     );
     try {
-      await service.tenantServiceUpdateTenant2({ body: fields, tenantId: currentRow!.id! });
+      await service.planServiceUpdatePlan2({ body: fields, planKey: currentRow!.key! });
       hide();
       message.success(
         intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),
@@ -67,12 +66,12 @@ const TableList: React.FC = () => {
     }
   };
 
-  const handleRemove = async (selectedRow: V1Tenant) => {
+  const handleRemove = async (selectedRow: V1Plan) => {
     const hide = message.loading(
       intl.formatMessage({ id: 'common.deleting', defaultMessage: 'Deleting...' }),
     );
     try {
-      await service.tenantServiceDeleteTenant({ id: selectedRow.id! });
+      await service.planServiceDeletePlan({ key: selectedRow.key! });
       message.success(
         intl.formatMessage({ id: 'common.deleted', defaultMessage: 'Delete Successfully' }),
       );
@@ -84,18 +83,10 @@ const TableList: React.FC = () => {
     }
   };
 
-  const columns: ProColumnType<V1Tenant>[] = [
+  const columns: ProColumnType<V1Plan>[] = [
     {
-      title: <FormattedMessage id="saas.tenant.logo" defaultMessage="Tenant Logo" />,
-      dataIndex: 'logo',
-      valueType: 'image',
-      render: (dom, entity) => {
-        return entity?.logo?.url ? <Image src={entity.logo.url} width={54} height={54} /> : <div />;
-      },
-    },
-    {
-      title: <FormattedMessage id="saas.tenant.name" defaultMessage="Tenant Name" />,
-      dataIndex: 'name',
+      title: <FormattedMessage id="saas.plan.key" defaultMessage="Plan Key" />,
+      dataIndex: 'key',
       valueType: 'text',
       render: (dom, entity) => {
         return (
@@ -111,18 +102,13 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="saas.tenant.displayName" defaultMessage="Tenant Display Name" />,
+      title: <FormattedMessage id="saas.plan.displayName" defaultMessage="Plan Display Name" />,
       dataIndex: 'displayName',
       valueType: 'text',
     },
     {
-      title: <FormattedMessage id="saas.tenant.region" defaultMessage="Tenant Region" />,
-      dataIndex: 'region',
-      valueType: 'text',
-    },
-    {
-      title: <FormattedMessage id="saas.tenant.separateDb" defaultMessage="Prefer SeparateDb" />,
-      dataIndex: 'separateDb',
+      title: <FormattedMessage id="saas.plan.active" defaultMessage="Active" />,
+      dataIndex: 'active',
       valueType: 'switch',
     },
     {
@@ -150,6 +136,16 @@ const TableList: React.FC = () => {
         >
           <FormattedMessage id="common.edit" defaultMessage="Edit" />
         </a>,
+        <a
+          key="editprice"
+          onClick={() => {
+            setCurrentRow(record);
+            setShowDetail(false);
+            handleUpdateModalVisible(true);
+          }}
+        >
+          <FormattedMessage id="saas.plan.editprice" defaultMessage="Edit Price" />
+        </a>,
         <TableDropdown
           key="actionGroup"
           onSelect={async (key) => {
@@ -171,14 +167,14 @@ const TableList: React.FC = () => {
     },
   ];
 
-  const getData = requestTransform<V1Tenant, V1TenantFilter>(async (req) => {
-    const resp = await service.tenantServiceListTenant2({ body: req });
+  const getData = requestTransform<V1Plan, V1PlanFilter>(async (req) => {
+    const resp = await service.planServiceListPlan2({ body: req });
     return resp.data;
   });
 
   return (
     <PageContainer>
-      <ProTable<V1Tenant>
+      <ProTable<V1Plan>
         actionRef={actionRef}
         rowKey="id"
         search={false}
@@ -211,18 +207,18 @@ const TableList: React.FC = () => {
         closable={false}
         destroyOnClose
       >
-        {currentRow?.id && (
-          <ProDescriptions<V1Tenant>
+        {currentRow?.key && (
+          <ProDescriptions<V1Plan>
             column={1}
-            title={currentRow?.name}
+            title={currentRow?.key}
             request={async () => {
-              const resp = await service.tenantServiceGetTenant({ idOrName: currentRow.id! });
+              const resp = await service.planServiceGetPlan({ key: currentRow.key! });
               return {
                 data: resp.data,
               };
             }}
             params={{
-              id: currentRow?.id,
+              id: currentRow?.key,
             }}
             columns={columns}
           />
@@ -230,12 +226,12 @@ const TableList: React.FC = () => {
       </Drawer>
       <UpdateForm
         onSubmit={async (value) => {
-          const { id } = value;
+          const { key } = value;
           let success = false;
-          if (id) {
-            success = await handleUpdate({ tenant: value as V1UpdateTenant });
+          if (key) {
+            success = await handleUpdate({ plan: value });
           } else {
-            success = await handleAdd(value as V1CreateTenantRequest);
+            success = await handleAdd(value);
           }
 
           if (success) {

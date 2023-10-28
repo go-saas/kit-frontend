@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { PlusOutlined } from '@ant-design/icons';
 import type { ActionType, ProColumnType } from '@ant-design/pro-components';
 import {
@@ -8,16 +7,21 @@ import {
   TableDropdown,
 } from '@ant-design/pro-components';
 import { FormattedMessage } from '@umijs/max';
-import { Button, Drawer, message } from 'antd';
+import { Button, Drawer, message, Image } from 'antd';
 import React, { useRef, useState } from 'react';
-// import UpdateForm from './components/UpdateForm';
+import UpdateForm from './components/UpdateForm';
 import { requestTransform } from '@gosaas/core';
-import type { V1Order, V1OrderFilter } from '@gosaas/api';
-import { OrderServiceApi } from '@gosaas/api';
+import type {
+  V1CreateProductRequest,
+  ProductServiceUpdateProductRequest,
+  V1Product,
+  V1ProductFilter,
+} from '@gosaas/api';
+import { ProductServiceApi } from '@gosaas/api';
 
 import { useIntl } from '@umijs/max';
 
-const service = new OrderServiceApi();
+const service = new ProductServiceApi();
 
 const TableList: React.FC = () => {
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
@@ -25,67 +29,64 @@ const TableList: React.FC = () => {
   const [showDetail, setShowDetail] = useState<boolean>(false);
 
   const actionRef = useRef<ActionType>();
-  const [currentRow, setCurrentRow] = useState<V1Order | undefined | null>(undefined);
+  const [currentRow, setCurrentRow] = useState<V1Product | undefined | null>(undefined);
 
   const intl = useIntl();
-  // const handleAdd = async (fields: V1CreateOrderRequest) => {
-  //   const hide = message.loading(
-  //     intl.formatMessage({ id: 'common.creating', defaultMessage: 'Creating...' }),
-  //   );
-  //   try {
-  //     await service.ticketingOrderServiceCreateOrder({ body: fields });
-  //     hide();
-  //     message.success(
-  //       intl.formatMessage({ id: 'common.created', defaultMessage: 'Created Successfully' }),
-  //     );
-  //     return true;
-  //   } catch (error) {
-  //     hide();
-  //     return false;
-  //   }
-  // };
+  const handleAdd = async (fields: V1CreateProductRequest) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.creating', defaultMessage: 'Creating...' }),
+    );
+    try {
+      await service.productServiceCreateProduct({ body: fields });
+      hide();
+      message.success(
+        intl.formatMessage({ id: 'common.created', defaultMessage: 'Created Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
 
-  // const handleUpdate = async (fields: V1UpdateOrderRequest) => {
-  //   const hide = message.loading(
-  //     intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
-  //   );
-  //   try {
-  //     await service.ticketingOrderServiceUpdateOrder2({
-  //       body: fields,
-  //       bannerId: fields.banner!.id!,
-  //     });
-  //     hide();
-  //     message.success(
-  //       intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),
-  //     );
-  //     return true;
-  //   } catch (error) {
-  //     hide();
-  //     return false;
-  //   }
-  // };
+  const handleUpdate = async (fields: ProductServiceUpdateProductRequest) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.updating', defaultMessage: 'Updating...' }),
+    );
+    try {
+      await service.productServiceUpdateProduct2({ body: fields, productId: currentRow!.id! });
+      hide();
+      message.success(
+        intl.formatMessage({ id: 'common.updated', defaultMessage: 'Update Successfully' }),
+      );
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
 
-  // const handleRemove = async (selectedRow: V1Order) => {
-  //   const hide = message.loading(
-  //     intl.formatMessage({ id: 'common.deleting', defaultMessage: 'Deleting...' }),
-  //   );
-  //   try {
-  //     await service.ticketingOrderServiceDeleteOrder({ id: selectedRow.id! });
-  //     message.success(
-  //       intl.formatMessage({ id: 'common.deleted', defaultMessage: 'Delete Successfully' }),
-  //     );
-  //     hide();
-  //     return true;
-  //   } catch (error) {
-  //     hide();
-  //     return false;
-  //   }
-  // };
+  const handleRemove = async (selectedRow: V1Product) => {
+    const hide = message.loading(
+      intl.formatMessage({ id: 'common.deleting', defaultMessage: 'Deleting...' }),
+    );
+    try {
+      await service.productServiceDeleteProduct({ id: selectedRow.id! });
+      message.success(
+        intl.formatMessage({ id: 'common.deleted', defaultMessage: 'Delete Successfully' }),
+      );
+      hide();
+      return true;
+    } catch (error) {
+      hide();
+      return false;
+    }
+  };
 
-  const columns: ProColumnType<V1Order>[] = [
+  const columns: ProColumnType<V1Product>[] = [
     {
-      title: <FormattedMessage id="ticketing.order.id" defaultMessage="Id" />,
-      dataIndex: 'id',
+      title: <FormattedMessage id="saas.product.title" defaultMessage="Title" />,
+      dataIndex: 'title',
       valueType: 'text',
       render: (dom, entity) => {
         return (
@@ -101,113 +102,125 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: <FormattedMessage id="ticketing.order.status" defaultMessage="Status" />,
-      dataIndex: 'status',
+      title: <FormattedMessage id="saas.product.mainPic" defaultMessage="Picture" />,
+      dataIndex: 'mainPic',
+      valueType: 'image',
+      render: (dom, entity) => {
+        return entity?.mainPic?.url ? (
+          <Image src={entity.mainPic.url} width={54} height={54} />
+        ) : (
+          <div />
+        );
+      },
+    },
+    {
+      title: <FormattedMessage id="saas.product.shortDesc" defaultMessage="Product Short Desc" />,
+      dataIndex: 'shortDesc',
       valueType: 'text',
     },
     {
-      title: <FormattedMessage id="ticketing.order.customerId" defaultMessage="customerId" />,
-      dataIndex: 'customerId',
+      title: <FormattedMessage id="saas.product.mainCategory" defaultMessage="Main Category" />,
+      dataIndex: ['mainCategory', 'name'],
       valueType: 'text',
     },
     {
-      title: <FormattedMessage id="ticketing.order.totalPrice" defaultMessage="Total Price" />,
-      dataIndex: ['totalPrice', 'text'],
-      valueType: 'text',
+      title: <FormattedMessage id="saas.product.multiSku" defaultMessage="Multi Sku" />,
+      dataIndex: 'multiSku',
+      valueType: 'switch',
     },
     {
-      title: (
-        <FormattedMessage
-          id="ticketing.order.totalPriceInclTax"
-          defaultMessage="Total Price with Tax"
-        />
-      ),
-      dataIndex: ['totalPriceInclTax', 'text'],
-      valueType: 'text',
+      title: <FormattedMessage id="saas.product.needShipping" defaultMessage="Shipping" />,
+      dataIndex: 'needShipping',
+      valueType: 'switch',
     },
     {
-      title: <FormattedMessage id="ticketing.order.originalPrice" defaultMessage="originalPrice" />,
-      dataIndex: ['originalPrice', 'text'],
-      valueType: 'text',
-    },
-    {
-      title: (
-        <FormattedMessage
-          id="ticketing.order.originalPriceInclTax"
-          defaultMessage="originalPrice with Tax"
-        />
-      ),
-      dataIndex: ['originalPriceInclTax', 'text'],
-      valueType: 'text',
-    },
-    {
-      title: (
-        <FormattedMessage id="ticketing.order.paidPrice" defaultMessage="paidPrice with Tax" />
-      ),
-      dataIndex: ['paidPrice', 'text'],
-      valueType: 'text',
-    },
-    {
-      title: <FormattedMessage id="ticketing.order.paidTime" defaultMessage="paidTime" />,
-      dataIndex: ['paidTime'],
+      title: <FormattedMessage id="saas.product.saleableFrom" defaultMessage="Saleable From" />,
+      dataIndex: 'saleableFrom',
       valueType: 'dateTime',
     },
     {
-      title: <FormattedMessage id="ticketing.order.payWay" defaultMessage="payWay" />,
-      dataIndex: 'payWay',
-      valueType: 'text',
+      title: <FormattedMessage id="saas.product.saleableTo" defaultMessage="Saleable To" />,
+      dataIndex: 'saleableTo',
+      valueType: 'dateTime',
     },
-
+    {
+      title: <FormattedMessage id="saas.product.active" defaultMessage="Active" />,
+      dataIndex: 'active',
+      valueType: 'switch',
+    },
+    {
+      title: <FormattedMessage id="saas.product.managed" defaultMessage="Managed" />,
+      dataIndex: ['manageInfo', 'managed'],
+      valueType: 'switch',
+    },
+    {
+      title: <FormattedMessage id="common.createdAt" defaultMessage="CreatedAt" />,
+      dataIndex: 'createdAt',
+      valueType: 'dateTime',
+    },
+    {
+      title: <FormattedMessage id="common.updatedAt" defaultMessage="UpdatedAt" />,
+      dataIndex: 'updatedAt',
+      valueType: 'dateTime',
+    },
     {
       title: <FormattedMessage id="common.operate" defaultMessage="Operate" />,
       key: 'option',
       valueType: 'option',
       render: (_, record) => [
-        <a
-          key="editable"
-          onClick={() => {
-            setCurrentRow(record);
-            setShowDetail(false);
-            handleUpdateModalVisible(true);
-          }}
-        >
+        record.manageInfo?.managed ?? false ? (
           <FormattedMessage id="common.edit" defaultMessage="Edit" />
-        </a>,
+        ) : (
+          <a
+            key="editable"
+            onClick={() => {
+              setCurrentRow(record);
+              setShowDetail(false);
+              handleUpdateModalVisible(true);
+            }}
+          >
+            <FormattedMessage id="common.edit" defaultMessage="Edit" />
+          </a>
+        ),
         <TableDropdown
           key="actionGroup"
           onSelect={async (key) => {
-            // if (key === 'delete') {
-            //   const ok = await handleRemove(record);
-            //   if (ok && actionRef.current) {
-            //     actionRef.current.reload();
-            //   }
-            // }
+            if (key === 'delete') {
+              const ok = await handleRemove(record);
+              if (ok && actionRef.current) {
+                actionRef.current.reload();
+              }
+            }
           }}
           menus={
-            [
-              // {
-              //   key: 'delete',
-              //   name: <FormattedMessage id="common.delete" defaultMessage="Delete" />,
-              // },
-            ]
+            record.manageInfo?.managed ?? false
+              ? []
+              : [
+                  {
+                    key: 'delete',
+                    name: <FormattedMessage id="common.delete" defaultMessage="Delete" />,
+                  },
+                ]
           }
         />,
       ],
     },
   ];
 
-  const getData = requestTransform<V1Order, V1OrderFilter>(async (req) => {
-    const resp = await service.orderServiceListOrder2({ body: req });
+  const getData = requestTransform<V1Product, V1ProductFilter>(async (req) => {
+    const resp = await service.productServiceListProduct2({ body: req });
     return resp.data;
   });
 
   return (
     <PageContainer>
-      <ProTable<V1Order>
+      <ProTable<V1Product>
         actionRef={actionRef}
         rowKey="id"
         search={false}
-        pagination={false}
+        pagination={{
+          defaultPageSize: 10,
+        }}
         toolBarRender={() => [
           <Button
             type="primary"
@@ -217,7 +230,7 @@ const TableList: React.FC = () => {
               handleUpdateModalVisible(true);
             }}
           >
-            {/* <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" /> */}
+            <PlusOutlined /> <FormattedMessage id="pages.searchTable.new" defaultMessage="New" />
           </Button>,
         ]}
         type="table"
@@ -235,18 +248,30 @@ const TableList: React.FC = () => {
         destroyOnClose
       >
         {currentRow?.id && (
-          <ProDescriptions<V1Order> column={1} dataSource={currentRow} columns={columns} />
+          <ProDescriptions<V1Product>
+            column={1}
+            title={currentRow?.title}
+            request={async () => {
+              const resp = await service.productServiceGetProduct({ id: currentRow.id! });
+              return {
+                data: resp.data,
+              };
+            }}
+            params={{
+              id: currentRow?.id,
+            }}
+            columns={columns}
+          />
         )}
       </Drawer>
-      {/* <UpdateForm
+      <UpdateForm
         onSubmit={async (value) => {
+          const { id } = value;
           let success = false;
-          if (currentRow) {
-            success = await handleUpdate({
-              banner: value as V1UpdateOrder,
-            });
+          if (id) {
+            success = await handleUpdate({ product: value });
           } else {
-            success = await handleAdd(value as V1CreateOrderRequest);
+            success = await handleAdd(value);
           }
 
           if (success) {
@@ -265,7 +290,7 @@ const TableList: React.FC = () => {
         }}
         updateModalVisible={updateModalVisible}
         values={(currentRow as any) || {}}
-      /> */}
+      />
     </PageContainer>
   );
 };

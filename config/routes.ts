@@ -87,6 +87,11 @@
           path: '/saas/tenants',
           component: './Saas/Tenant',
         },
+        {
+          name: 'plan',
+          path: '/saas/plans',
+          component: './Saas/Plan',
+        },
       ],
     },
     {
