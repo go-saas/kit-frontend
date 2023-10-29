@@ -44,18 +44,20 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
         destroyOnClose: true,
       }}
     >
-      <ProFormText
-        name="key"
-        label={intl.formatMessage({
-          id: 'saas.plan.key',
-          defaultMessage: 'Plan Key',
-        })}
-        rules={[
-          {
-            required: true,
-          },
-        ]}
-      />
+      {!props.values.key && (
+        <ProFormText
+          name="key"
+          label={intl.formatMessage({
+            id: 'saas.plan.key',
+            defaultMessage: 'Plan Key',
+          })}
+          rules={[
+            {
+              required: true,
+            },
+          ]}
+        />
+      )}
       <ProFormText
         name="displayName"
         label={intl.formatMessage({

@@ -226,9 +226,8 @@ const TableList: React.FC = () => {
       </Drawer>
       <UpdateForm
         onSubmit={async (value) => {
-          const { key } = value;
           let success = false;
-          if (key) {
+          if (currentRow) {
             success = await handleUpdate({ plan: value });
           } else {
             success = await handleAdd(value);
