@@ -4,6 +4,7 @@ import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
 import type { V1CreatePlanRequest, V1UpdatePlan } from '@gosaas/api';
 import { PlanServiceApi } from '@gosaas/api';
+import PriceForm from '../../../Product/Price/PriceForm';
 
 const service = new PlanServiceApi();
 
@@ -79,6 +80,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           })}
         />
       )}
+      <PriceForm></PriceForm>
     </DrawerForm>
   );
 };

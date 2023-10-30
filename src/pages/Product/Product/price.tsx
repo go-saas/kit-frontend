@@ -1,7 +1,3 @@
-import { ProColumnType } from '@ant-design/pro-components';
-import { V1Price } from '@gosaas/api';
-import { FormattedMessage } from '@umijs/max';
-
 export const currencyCodes = [
   // G10 currencies https://en.wikipedia.org/wiki/G10_currencies.
   'AUD',
@@ -173,18 +169,4 @@ export const currencyCodes = [
   'ZAR',
   'ZMW',
   'ZWL',
-];
-
-export const priceTableColumns: ProColumnType<V1Price>[] = [
-
-
-  {
-    title: <FormattedMessage id="product.price.billingScheme" defaultMessage="Billing Scheme" />,
-    dataIndex: 'billingScheme',
-    valueType: 'select',
-    valueEnum: {
-      per_unit: { text: 'per_unit', status: 'Default' },
-      tiered: { text: 'tiered', status: 'Default' },
-    },
-  },
 ];

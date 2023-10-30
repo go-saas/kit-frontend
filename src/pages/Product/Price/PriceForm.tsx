@@ -9,15 +9,15 @@ import {
   V1PriceTier,
   V1PriceTierParams,
 } from '@gosaas/api';
-import React, { useEffect } from 'react';
-import { Card, Button, Form, Space, Radio } from 'antd';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import React from 'react';
+import { Form, Radio, Card, Space } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import { useIntl } from '@umijs/max';
 import {
   ProForm,
   ProFormDependency,
   ProFormDigit,
+  ProFormList,
   ProFormSelect,
   ProFormSwitch,
   ProFormText,
@@ -50,301 +50,306 @@ enum PriceModelType {
   // Volume = 'volume',
 }
 
-export type PriceFormProps = {
-  fieldKey: any;
-};
+export type PriceFormProps = object;
 
+export function convertPrices(v: any): any {
+  const prices = (v ?? []).map((p1) => {
+    //TODO antd nested ProFormList bug
+    const keys = Object.keys(p1);
+    if (keys.length === 1 && keys[0] === 'currencyOptions') {
+      return p1;
+    }
+
+    const p = JSON.parse(JSON.stringify(p1)) as PriceModel;
+    p.defaultAmountDecimal = p.default?.amountDecimal?.toString();
+    p.discountedAmountDecimal = p.discounted?.amountDecimal?.toString();
+    if (p.transformQuantity?.divideBy?.toString()) {
+      p.transformQuantity.divideBy = p.transformQuantity?.divideBy?.toString();
+    }
+    p.tiers?.forEach((p) => (p.flatAmountDecimal = p.flat?.amountDecimal?.toString()));
+    p.tiers?.forEach((p) => (p.unitAmountDecimal = p.unit?.amountDecimal?.toString()));
+    p.currencyOptions?.forEach((p) => {
+      p.defaultAmountDecimal = p.default?.amountDecimal?.toString();
+      p.discountedAmountDecimal = p.discounted?.amountDecimal?.toString();
+      p.tiers?.forEach((p) => (p.flatAmountDecimal = p.flat?.amountDecimal?.toString()));
+      p.tiers?.forEach((p) => (p.unitAmountDecimal = p.unit?.amountDecimal?.toString()));
+    });
+
+    if (p.modelType) {
+      if (p.modelType === PriceModelType.Standard) {
+        p.tiersMode = '';
+        p.transformQuantity = undefined;
+      } else if (p.modelType === PriceModelType.Package) {
+        p.tiersMode = '';
+      } else {
+        p.transformQuantity = undefined;
+      }
+    }
+    if (p.type === 'one_time') {
+      p.recurring = undefined;
+    }
+    if (p.recurring) {
+      if (p.recurring.meterUsage === true) {
+        p.recurring.usageType = 'metered';
+      } else {
+        p.recurring.usageType = 'licensed';
+      }
+    }
+
+    if (!p.modelType) {
+      //set model type
+      if ((p.transformQuantity?.divideBy ?? '0') !== '0') {
+        p.modelType = 'package';
+      } else if (p.tiersMode === 'package') {
+        p.modelType = 'graduated';
+      } else {
+        p.modelType = PriceModelType.Standard;
+      }
+    }
+    if (!p.type) {
+      //set  type
+      if (p.recurring) {
+        p.type = 'recurring';
+      } else {
+        p.type = 'one_time';
+      }
+    }
+
+    if (p.recurring) {
+      if (p.recurring.meterUsage === null || p.recurring.meterUsage === undefined) {
+        if (p.recurring.usageType === 'metered') {
+          p.recurring.meterUsage = true;
+        } else {
+          p.recurring.meterUsage = false;
+        }
+      }
+    }
+    return p;
+  });
+
+  return prices;
+}
 const PriceForm: React.FC<PriceFormProps> = () => {
   const intl = useIntl();
   const form = useFormInstance();
   const prices = Form.useWatch<PriceModel[]>('prices', form);
 
-  const modelType = Form.useWatch<string | undefined>('modelType', form);
-
   //normalize pricess
   useDeepCompareEffect(() => {
-    const newPrices = (prices ?? []).map((p) => {
-      p.defaultAmountDecimal = p.default?.amountDecimal;
-      p.discountedAmountDecimal = p.discounted?.amountDecimal;
-      p.tiers?.forEach((p) => (p.flatAmountDecimal = p.flat?.amountDecimal));
-      p.tiers?.forEach((p) => (p.unitAmountDecimal = p.unit?.amountDecimal));
-      p.currencyOptions?.forEach((p) => {
-        p.defaultAmountDecimal = p.default?.amountDecimal;
-        p.discountedAmountDecimal = p.discounted?.amountDecimal;
-        p.tiers?.forEach((p) => (p.flatAmountDecimal = p.flat?.amountDecimal));
-        p.tiers?.forEach((p) => (p.unitAmountDecimal = p.unit?.amountDecimal));
-      });
-
-      if (!p.modelType) {
-        //set model type
-        if (p.transformQuantity) {
-          p.modelType = 'package';
-        } else if (p.tiersMode === 'package') {
-          p.modelType = 'graduated';
-        } else {
-          p.modelType = PriceModelType.Standard;
-        }
-      }
-      if (!p.type) {
-        //set  type
-        if (p.recurring) {
-          p.type = 'recurring';
-        } else {
-          p.type = 'one_time';
-        }
-      }
-
-      if (p.recurring) {
-        if (p.recurring.meterUsage === null) {
-          if (p.recurring.usageType === 'metered') {
-            p.recurring.meterUsage = true;
-          } else {
-            p.recurring.meterUsage = false;
-          }
-        }
-      }
-
-      //reverse set
-      if (p.modelType) {
-        if (p.modelType === PriceModelType.Standard) {
-          p.tiersMode = '';
-          p.transformQuantity = undefined;
-        } else if (p.modelType === PriceModelType.Package) {
-          p.tiersMode = '';
-        } else {
-          p.transformQuantity = undefined;
-        }
-      }
-      if (p.type === 'one_time') {
-        p.recurring = undefined;
-      }
-      if (p.recurring) {
-        if (p.recurring.meterUsage === true) {
-          p.recurring.usageType = 'metered';
-        } else {
-          p.recurring.usageType = 'licensed';
-        }
-      }
-      if (p.recurring?.meterUsage) {
-        if (!p.recurring.aggregateUsage) {
-          p.recurring.aggregateUsage = 'sum';
-        }
-      }
-      return { ...p };
-    });
+    // eslint-disable-next-line eqeqeq
+    if (prices == null) {
+      return;
+    }
     console.log('=========old prices');
     console.log(prices);
+
+    const newPrices = convertPrices(prices);
+
     console.log('=========new prices');
     console.log(newPrices);
 
-    form.setFieldValue('prices', newPrices);
+    if (JSON.stringify(prices) !== JSON.stringify(newPrices)) {
+      form.setFieldValue('prices', newPrices);
+    }
   }, [prices]);
 
   return (
-    <Form.List name="prices">
-      {(fields, { add, remove }) => {
-        return (
-          <div>
-            {fields.map((field) => (
-              <Space key={field.key} style={{ display: 'flex', marginBottom: 8 }} align="start">
-                <Card
-                  actions={[
-                    <div
-                      key="delete"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        remove(field.name);
-                      }}
-                    >
-                      <DeleteOutlined></DeleteOutlined>
-                      {intl.formatMessage({
-                        id: 'saas.product.deletePrice',
-                        defaultMessage: 'Delete Price',
-                      })}
-                    </div>,
-                  ]}
-                >
-                  <ProFormSelect
-                    name={[field.name, 'modelType']}
-                    label={intl.formatMessage({
-                      id: 'product.price.modelType',
-                      defaultMessage: 'Model Type',
-                    })}
-                    valueEnum={
-                      new Map(
-                        Object.values(PriceModelType).map((p) => [
-                          p,
-                          {
-                            text: intl.formatMessage({
-                              id: 'product.price.modelType.' + p,
-                              defaultMessage: p,
-                            }),
-                          },
-                        ]),
-                      )
-                    }
-                  />
+    <ProForm.Item
+      label={intl.formatMessage({
+        id: 'product.price.price',
+        defaultMessage: 'Prices',
+      })}
+    >
+      <ProFormList
+        name="prices"
+        creatorRecord={() => {
+          return {
+            id: uuidv4(),
+            billingScheme: 'per_unit',
+            type: 'one_time',
+            modelType: 'standard',
+          };
+        }}
+      >
+        <Space style={{ display: 'flex', marginBottom: 8 }} align="start">
+          <Card style={{ width: 500 }}>
+            <ProFormSelect
+              name={['modelType']}
+              label={intl.formatMessage({
+                id: 'product.price.modelType',
+                defaultMessage: 'Model Type',
+              })}
+              valueEnum={
+                new Map(
+                  Object.values(PriceModelType).map((p) => [
+                    p,
+                    {
+                      text: intl.formatMessage({
+                        id: 'product.price.modelType.' + p,
+                        defaultMessage: p,
+                      }),
+                    },
+                  ]),
+                )
+              }
+            />
 
-                  <ProFormSelect
-                    name={['currencyCode']}
-                    label={intl.formatMessage({
-                      id: 'product.price.currencyCode',
-                      defaultMessage: 'Currency',
-                    })}
-                    valueEnum={new Map(currencyCodes.map((p) => [p, { text: p }]))}
-                    rules={[{ required: true }]}
-                  />
-                  <ProFormDigit
-                    name={[field.name, 'default', 'amountDecimal']}
-                    label={intl.formatMessage({
-                      id: 'product.price.defaultPrice',
-                      defaultMessage: 'Default Price',
-                    })}
-                  />
-                  <ProFormDigit
-                    name={[field.name, 'discounted', 'amountDecimal']}
-                    label={intl.formatMessage({
-                      id: 'product.price.discountedPrice',
-                      defaultMessage: 'Discounted Price',
-                    })}
-                  />
-                  <ProFormText
-                    name={[field.name, 'discountText']}
-                    label={intl.formatMessage({
-                      id: 'product.price.discountText',
-                      defaultMessage: 'Discount Text',
-                    })}
-                  ></ProFormText>
-                  <ProFormSwitch
-                    name={[field.name, 'denyMoreDiscounts']}
-                    label={intl.formatMessage({
-                      id: 'product.price.denyMoreDiscounts',
-                      defaultMessage: 'Deny More Discounts',
-                    })}
-                  ></ProFormSwitch>
-                  {/* tiers */}
-
-                  {/* currencies */}
-                  <ProForm.Item>
-                    <CurrencyForm
-                      fieldKey={field.name}
-                      modelType={modelType}
-                      restCurrency={currencyCodes.filter((p) => {
-                        const existing = [
-                          prices[field.name].currencyCode,
-                          ...(prices[field.name].currencyOptions?.map((p1) => p1.currencyCode) ??
-                            []),
-                        ];
-                        return existing.indexOf(p) === -1;
+            <ProFormSelect
+              name={['currencyCode']}
+              label={intl.formatMessage({
+                id: 'product.price.currencyCode',
+                defaultMessage: 'Currency',
+              })}
+              valueEnum={new Map(currencyCodes.map((p) => [p, { text: p }]))}
+              rules={[{ required: true }]}
+            />
+            <ProFormDigit
+              name={['default', 'amountDecimal']}
+              label={intl.formatMessage({
+                id: 'product.price.defaultPrice',
+                defaultMessage: 'Default Price',
+              })}
+              rules={[{ required: true }]}
+            />
+            <ProFormDigit
+              name={['discounted', 'amountDecimal']}
+              label={intl.formatMessage({
+                id: 'product.price.discountedPrice',
+                defaultMessage: 'Discounted Price',
+              })}
+            />
+            <ProFormText
+              name={['discountText']}
+              label={intl.formatMessage({
+                id: 'product.price.discountText',
+                defaultMessage: 'Discount Text',
+              })}
+            ></ProFormText>
+            <ProFormSwitch
+              name={['denyMoreDiscounts']}
+              label={intl.formatMessage({
+                id: 'product.price.denyMoreDiscounts',
+                defaultMessage: 'Deny More Discounts',
+              })}
+            ></ProFormSwitch>
+            <ProFormDependency name={['modelType']} ignoreFormListField={false}>
+              {({ modelType }) => {
+                if (modelType === 'package') {
+                  return (
+                    <ProFormDigit
+                      name={['transformQuantity', 'divideBy']}
+                      label={intl.formatMessage({
+                        id: 'product.price.transformQuantityDivideBy',
+                        defaultMessage: 'Divide By',
                       })}
+                      rules={[{ required: true }]}
                     />
+                  );
+                } else {
+                  return <></>;
+                }
+              }}
+            </ProFormDependency>
+
+            {/* tiers */}
+
+            {/* currencies */}
+            <ProFormDependency name={['modelType']} ignoreFormListField={false}>
+              {({ modelType }) => {
+                return (
+                  <ProForm.Item>
+                    <CurrencyForm modelType={modelType} />
                   </ProForm.Item>
+                );
+              }}
+            </ProFormDependency>
+
+            <ProForm.Item
+              name={['type']}
+              label={intl.formatMessage({
+                id: 'product.price.type',
+                defaultMessage: 'Type',
+              })}
+            >
+              <Radio.Group>
+                <Radio.Button value={'recurring'}>
+                  {intl.formatMessage({
+                    id: 'product.price.recurring',
+                    defaultMessage: 'Recurring',
+                  })}
+                </Radio.Button>
+                <Radio.Button value={'one_time'}>
+                  {intl.formatMessage({
+                    id: 'product.price.oneTime',
+                    defaultMessage: 'One Time',
+                  })}
+                </Radio.Button>
+              </Radio.Group>
+            </ProForm.Item>
+            <ProFormDependency name={['type', 'recurring']} ignoreFormListField={false}>
+              {(obj) => {
+                if (obj.type === 'one_time') {
+                  return <></>;
+                }
+                return (
                   <ProForm.Item
-                    name={[field.name, 'type']}
                     label={intl.formatMessage({
-                      id: 'product.price.type',
-                      defaultMessage: 'Type',
+                      id: 'product.price.recurring',
+                      defaultMessage: 'Recurring',
                     })}
                   >
-                    <Radio.Group>
-                      <Radio.Button value={'recurring'}>
-                        {intl.formatMessage({
-                          id: 'product.price.recurring',
-                          defaultMessage: 'Recurring',
+                    <ProFormDigit
+                      name={['recurring', 'intervalCount']}
+                      label={intl.formatMessage({
+                        id: 'product.price.recurringIntervalCount',
+                        defaultMessage: 'Interval Count',
+                      })}
+                      rules={[{ required: true }]}
+                    />
+                    <ProFormSelect
+                      name={['recurring', 'interval']}
+                      label={intl.formatMessage({
+                        id: 'product.price.recurringInterval',
+                        defaultMessage: 'Interval',
+                      })}
+                      valueEnum={
+                        new Map(['day', 'week', 'month', 'year'].map((p) => [p, { text: p }]))
+                      }
+                      initialValue={'month'}
+                    />
+                    <ProFormSwitch
+                      name={['recurring', 'meterUsage']}
+                      label={intl.formatMessage({
+                        id: 'product.price.meterUsage',
+                        defaultMessage: 'Metered Usage',
+                      })}
+                    ></ProFormSwitch>
+                    {obj.recurring?.meterUsage && (
+                      <ProFormSelect
+                        name={['recurring', 'aggregateUsage']}
+                        label={intl.formatMessage({
+                          id: 'product.price.recurringAggregateUsage',
+                          defaultMessage: 'Aggregate Usage',
                         })}
-                      </Radio.Button>
-                      <Radio.Button value={'one_time'}>
-                        {intl.formatMessage({
-                          id: 'product.price.oneTime',
-                          defaultMessage: 'One Time',
-                        })}
-                      </Radio.Button>
-                    </Radio.Group>
-                    <ProFormDependency name={['prices', field.name, 'type']}>
-                      {({ type }) => {
-                        console.log('??????????console.log(type)');
-                        console.log(type);
-                        if (type === 'one_time') {
-                          return <></>;
+                        valueEnum={
+                          new Map(
+                            ['last_during_period', 'last_ever', 'max', 'sum'].map((p) => [
+                              p,
+                              { text: p },
+                            ]),
+                          )
                         }
-                        return (
-                          <ProForm.Item
-                            label={intl.formatMessage({
-                              id: 'product.price.recurring',
-                              defaultMessage: 'Recurring',
-                            })}
-                          >
-                            <ProFormDigit
-                              name={[field.name, 'recurring', 'intervalCount']}
-                              label={intl.formatMessage({
-                                id: 'product.price.recurringIntervalCount',
-                                defaultMessage: 'Interval Count',
-                              })}
-                              rules={[{ required: true }]}
-                            />
-                            <ProFormSelect
-                              name={[field.name, 'recurring', 'interval']}
-                              label={intl.formatMessage({
-                                id: 'product.price.recurringInterval',
-                                defaultMessage: 'Interval',
-                              })}
-                              valueEnum={
-                                new Map(
-                                  ['day', 'week', 'month', 'year'].map((p) => [p, { text: p }]),
-                                )
-                              }
-                              initialValue={'month'}
-                            />
-                            <ProFormSwitch
-                              name={[field.name, 'recurring', 'meterUsage']}
-                              label={intl.formatMessage({
-                                id: 'product.price.meterUsage',
-                                defaultMessage: 'Metered Usage',
-                              })}
-                            ></ProFormSwitch>
-                            {prices[field.name].recurring?.meterUsage && (
-                              <ProFormSelect
-                                name={[field.name, 'recurring', 'aggregateUsage']}
-                                label={intl.formatMessage({
-                                  id: 'product.price.recurringAggregateUsage',
-                                  defaultMessage: 'Aggregate Usage',
-                                })}
-                                valueEnum={
-                                  new Map(
-                                    ['last_during_period', 'last_ever', 'max', 'sum'].map((p) => [
-                                      p,
-                                      { text: p },
-                                    ]),
-                                  )
-                                }
-                                initialValue={'month'}
-                              />
-                            )}
-                          </ProForm.Item>
-                        );
-                      }}
-                    </ProFormDependency>
+                        initialValue={'sum'}
+                      />
+                    )}
                   </ProForm.Item>
-                </Card>
-              </Space>
-            ))}
-            <Button
-              type="dashed"
-              onClick={() => {
-                add({ id: uuidv4(), ownerType: 'product', billingScheme: 'per_unit' });
+                );
               }}
-              block
-            >
-              <PlusOutlined />
-              {intl.formatMessage({
-                id: 'saas.product.addPrice',
-                defaultMessage: 'Add Price',
-              })}
-            </Button>
-          </div>
-        );
-      }}
-    </Form.List>
+            </ProFormDependency>
+          </Card>
+        </Space>
+      </ProFormList>
+    </ProForm.Item>
   );
 };
 export default PriceForm;

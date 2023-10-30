@@ -3,18 +3,14 @@ import {
   ProFormText,
   DrawerForm,
   ProFormSwitch,
-  ProForm,
-  EditableProTable,
   ProFormDateTimePicker,
 } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
-import React, { useEffect, useRef, useState } from 'react';
-import type { V1CreateProductRequest, V1Price, V1UpdateProduct } from '@gosaas/api';
+import React, { useEffect, useRef } from 'react';
+import type { V1CreateProductRequest, V1UpdateProduct } from '@gosaas/api';
 import { ProductServiceApi } from '@gosaas/api';
 import { dateUtil } from '@gosaas/core';
-import { Form } from 'antd';
-import { v4 as uuidv4 } from 'uuid';
-import { priceTableColumns } from '../price';
+
 import PriceForm from '../../Price/PriceForm';
 
 const service = new ProductServiceApi();
@@ -40,18 +36,8 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
     }
   }, [props]);
 
-  const [form] = Form.useForm();
-  const prices = Form.useWatch<V1Price[]>('prices', form);
-  const [editableKeys, setEditableRowKeys] = useState<React.Key[]>(
-    props.values?.prices?.map((p) => p.id!) ?? [],
-  );
-  useEffect(() => {
-    setEditableRowKeys(prices?.map((p) => p.id!));
-  }, [prices]);
-
   return (
     <DrawerForm
-      form={form}
       formRef={formRef}
       initialValues={props.values}
       open={props.updateModalVisible}

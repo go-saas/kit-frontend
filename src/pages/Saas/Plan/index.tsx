@@ -136,16 +136,6 @@ const TableList: React.FC = () => {
         >
           <FormattedMessage id="common.edit" defaultMessage="Edit" />
         </a>,
-        <a
-          key="editprice"
-          onClick={() => {
-            setCurrentRow(record);
-            setShowDetail(false);
-            handleUpdateModalVisible(true);
-          }}
-        >
-          <FormattedMessage id="saas.plan.editprice" defaultMessage="Edit Price" />
-        </a>,
         <TableDropdown
           key="actionGroup"
           onSelect={async (key) => {
