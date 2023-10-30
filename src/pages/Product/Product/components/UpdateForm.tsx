@@ -3,7 +3,6 @@ import {
   ProFormText,
   DrawerForm,
   ProFormSwitch,
-  ProFormDateTimeRangePicker,
   ProForm,
   EditableProTable,
   ProFormDateTimePicker,
@@ -16,6 +15,7 @@ import { dateUtil } from '@gosaas/core';
 import { Form } from 'antd';
 import { v4 as uuidv4 } from 'uuid';
 import { priceTableColumns } from '../price';
+import PriceForm from '../../Price/PriceForm';
 
 const service = new ProductServiceApi();
 
@@ -128,32 +128,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           defaultMessage: 'Active',
         })}
       />
-      <ProForm.Item
-        label={intl.formatMessage({
-          id: 'ticketing.show.saleType.name',
-          defaultMessage: 'Sale Type',
-        })}
-        name="salesTypes"
-        trigger="onValuesChange"
-      >
-        <EditableProTable<V1Price>
-          rowKey="id"
-          toolBarRender={false}
-          columns={priceTableColumns}
-          recordCreatorProps={{
-            newRecordType: 'dataSource',
-            position: 'bottom',
-            record: () => ({ id: uuidv4() }),
-          }}
-          editable={{
-            type: 'multiple',
-            editableKeys,
-            actionRender: (row, _, dom) => {
-              return [dom.delete];
-            },
-          }}
-        />
-      </ProForm.Item>
+      <PriceForm />
     </DrawerForm>
   );
 };
