@@ -190,7 +190,8 @@ export interface UploadApiResult {
 export function uploadApi(
   url: string,
   params: UploadFileParams,
-  onUploadProgress: (progressEvent: ProgressEvent) => void,
+  onUploadProgress: ((progressEvent: ProgressEvent) => void) | undefined,
+  instance?: AxiosInstance,
 ) {
   return uploadFile<UploadApiResult>(
     {
@@ -198,6 +199,7 @@ export function uploadApi(
       onUploadProgress,
     },
     params,
+    instance,
   );
 }
 

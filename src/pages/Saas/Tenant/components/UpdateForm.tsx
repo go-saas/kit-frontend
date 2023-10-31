@@ -17,7 +17,7 @@ import Userselect from '@/components/Userselect';
 import { FriendlyError } from '@gosaas/core';
 import { ErrorShowType } from '@/utils/errors';
 import { message } from 'antd';
-
+import { getRequestInstance } from '@@/plugin-request/request';
 const service = new TenantServiceApi();
 
 export type FormValueType = V1CreateTenantRequest & V1UpdateTenant;
@@ -88,6 +88,7 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 filename: filename,
               },
               onProgress,
+              getRequestInstance
             )
               .then((e) => {
                 onSuccess?.(e.data);
