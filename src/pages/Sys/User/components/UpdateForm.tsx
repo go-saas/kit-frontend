@@ -15,7 +15,6 @@ import { uploadApi } from '@/utils/upload';
 import { uploadConvertValue, uploadTransformSingle } from '@gosaas/core';
 import RoleTag from '@/components/Roletag/Roletag';
 import { getName } from '@/components/Roletag/RoleName';
-import { getRequestInstance } from '@@/plugin-request/request';
 export type FormValueType = V1CreateUserRequest &
   V1UpdateUser & {
     user?: V1User;
@@ -200,7 +199,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                           filename: filename,
                         },
                         onProgress,
-                        getRequestInstance
                       )
                         .then((e) => {
                           onSuccess?.(e.data);

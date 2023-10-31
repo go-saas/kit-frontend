@@ -10,9 +10,9 @@ import { useIntl } from '@umijs/max';
 import React, { useEffect, useRef } from 'react';
 import type { V1CreateProductRequest, V1UpdateProduct } from '@gosaas/api';
 import { ProductServiceApi } from '@gosaas/api';
-import { dateUtil, uploadApi } from '@gosaas/core';
+import { dateUtil } from '@gosaas/core';
 import { uploadConvertValue, uploadTransformSingle } from '@gosaas/core';
-import { getRequestInstance } from '@@/plugin-request/request';
+import { uploadApi } from '@/utils/upload';
 import PriceForm from '../../Price/PriceForm';
 
 const service = new ProductServiceApi();
@@ -91,7 +91,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 filename: filename,
               },
               onProgress,
-              getRequestInstance,
             )
               .then((e) => {
                 onSuccess?.(e.data);

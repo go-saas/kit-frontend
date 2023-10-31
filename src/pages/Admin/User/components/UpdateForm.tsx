@@ -197,7 +197,6 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
                 filename: filename,
               },
               onProgress,
-              getRequestInstance,
             )
               .then((e) => {
                 onSuccess?.(e.data);
