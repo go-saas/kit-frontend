@@ -92,6 +92,7 @@ export function convertPrices(v: any): any {
       if (p.recurring.meterUsage === true) {
         p.recurring.usageType = 'metered';
       } else {
+        p.recurring.aggregateUsage = '';
         p.recurring.usageType = 'licensed';
       }
     }
