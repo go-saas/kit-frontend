@@ -31,12 +31,18 @@ export interface TenantInfo {
   logo?: BlobFile;
 }
 
+export interface PlanInfo {
+  key: string;
+  displayName: string;
+}
+
 export interface BlobFile {
   url?: string;
 }
 export interface UserTenantInfo {
   isHost: boolean;
   tenant?: TenantInfo;
+  plan?: PlanInfo;
 }
 
 export interface UserInfo {

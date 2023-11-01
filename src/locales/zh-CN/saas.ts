@@ -14,4 +14,5 @@ export default {
   'saas.tenant.adminPassword': '管理员密码',
   'saas.tenant.admin': '管理员',
   'saas.tenant.create': '创建租户',
+  'saas.tenant.upgradePlan': '升级计划',
 };

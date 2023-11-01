@@ -8,4 +8,5 @@ export default {
   'saas.tenant.separateDb': 'Prefer SeparateDb',
   'saas.tenant.admin': 'Tenant Administrator',
   'saas.tenant.create': 'Create New Tenant',
+  'saas.tenant.upgradePlan': 'Upgrade Plan',
 };

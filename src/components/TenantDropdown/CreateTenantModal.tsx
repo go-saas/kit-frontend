@@ -1,18 +1,13 @@
 import { ModalForm, ProFormText, ProFormUploadButton } from '@ant-design/pro-components';
 import {
-  PaymentGatewayServiceApi,
-  StripePaymentGatewayServiceApi,
   TenantServiceApi,
-  V1GetStripeConfigReply,
   V1Tenant,
   V1UserCreateTenantReply,
   V1UserCreateTenantRequest,
 } from '@gosaas/api';
-import { useIntl, useModel } from '@umijs/max';
+import { useIntl } from '@umijs/max';
 import { uploadApi } from '@/utils/upload';
 import { uploadConvertValue, uploadTransformSingle } from '@gosaas/core';
-import { useState, useEffect } from 'react';
-import { Spin } from 'antd';
 
 type FormValueType = V1UserCreateTenantRequest;
 export type CreateTenantModalPros = {
@@ -23,35 +18,7 @@ export type CreateTenantModalPros = {
 
 export default (props: CreateTenantModalPros) => {
   const service = new TenantServiceApi();
-  const paymentSrv = new StripePaymentGatewayServiceApi();
-  const [stripeCfg, setStripeCfg] = useState<V1GetStripeConfigReply>();
   const intl = useIntl();
-  const { initialState } = useModel('@@initialState');
-  useEffect(() => {
-    paymentSrv.stripePaymentGatewayServiceGetStripeConfig().then((resp) => {
-      setStripeCfg(resp.data);
-    });
-  }, []);
-
-  if (!stripeCfg) {
-    return (
-      <ModalForm<FormValueType>
-        open={props.open}
-        title={intl.formatMessage({
-          id: 'saas.tenant.create',
-          defaultMessage: 'Create New',
-        })}
-        modalProps={{
-          onCancel: () => {
-            props.onCancel();
-          },
-          destroyOnClose: true,
-        }}
-      >
-        <Spin />
-      </ModalForm>
-    );
-  }
 
   return (
     <ModalForm<FormValueType>
@@ -122,11 +89,6 @@ export default (props: CreateTenantModalPros) => {
           defaultMessage: 'Tenant DisplayName',
         })}
       />
-      {/* <stripe-pricing-table
-        pricing-table-id={stripeCfg.priceTables?.plan}
-        publishable-key={stripeCfg.publishKey}
-        client-reference-id={initialState?.currentUser?.id}
-      ></stripe-pricing-table> */}
     </ModalForm>
   );
 };

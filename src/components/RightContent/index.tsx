@@ -2,6 +2,7 @@ import { SelectLang, useModel } from '@umijs/max';
 import React from 'react';
 import Avatar from './AvatarDropdown';
 import NoticeIconView from '../NoticeIcon';
+import PlanDropdown from '../PlanDropdown';
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 
 export type SiderTheme = 'light' | 'dark';
@@ -41,8 +42,8 @@ const GlobalHeaderRight: React.FC = () => {
 
   return (
     <div className={className}>
+      <PlanDropdown />
       <NoticeIconView />
-
       <Avatar />
       <SelectLang className={actionClassName} />
     </div>
