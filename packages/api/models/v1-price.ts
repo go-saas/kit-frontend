@@ -73,6 +73,12 @@ export interface V1Price {
     'ownerId'?: string;
     /**
      * 
+     * @type {string}
+     * @memberof V1Price
+     */
+    'currencyCode'?: string;
+    /**
+     * 
      * @type {PricePricePb}
      * @memberof V1Price
      */
@@ -137,5 +143,11 @@ export interface V1Price {
      * @memberof V1Price
      */
     'type'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Price
+     */
+    'stripePriceId'?: string | null;
 }
 

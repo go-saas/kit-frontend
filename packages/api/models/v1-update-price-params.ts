@@ -18,97 +18,61 @@
 import { V1PriceCurrencyOptionParams } from './v1-price-currency-option-params';
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1PriceRecurring } from './v1-price-recurring';
-// May contain unused imports in some cases
-// @ts-ignore
 import { V1PriceTierParams } from './v1-price-tier-params';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1PriceTransformQuantity } from './v1-price-transform-quantity';
 
 /**
  * 
  * @export
- * @interface V1PriceParams
+ * @interface V1UpdatePriceParams
  */
-export interface V1PriceParams {
+export interface V1UpdatePriceParams {
     /**
      * 
      * @type {string}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'currencyCode'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'defaultAmountDecimal'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'discountedAmountDecimal'?: string | null;
     /**
      * 
      * @type {string}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'discountText'?: string;
     /**
      * 
      * @type {boolean}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'denyMoreDiscounts'?: boolean;
     /**
      * 
-     * @type {string}
-     * @memberof V1PriceParams
-     */
-    'billingScheme': string;
-    /**
-     * 
      * @type {Array<V1PriceCurrencyOptionParams>}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'currencyOptions'?: Array<V1PriceCurrencyOptionParams>;
     /**
      * 
-     * @type {V1PriceRecurring}
-     * @memberof V1PriceParams
-     */
-    'recurring'?: V1PriceRecurring;
-    /**
-     * 
      * @type {Array<V1PriceTierParams>}
-     * @memberof V1PriceParams
+     * @memberof V1UpdatePriceParams
      */
     'tiers'?: Array<V1PriceTierParams>;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1PriceParams
-     */
-    'tiersMode'?: string;
-    /**
-     * 
-     * @type {V1PriceTransformQuantity}
-     * @memberof V1PriceParams
-     */
-    'transformQuantity'?: V1PriceTransformQuantity;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1PriceParams
-     */
-    'type': string;
 }
 

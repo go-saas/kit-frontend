@@ -43,12 +43,12 @@ export interface V1PriceRecurring {
      * @type {string}
      * @memberof V1PriceRecurring
      */
-    'aggregateUsage': string;
+    'aggregateUsage'?: string;
     /**
      * 
      * @type {string}
      * @memberof V1PriceRecurring
      */
-    'usageType': string;
+    'usageType'?: string;
 }
 

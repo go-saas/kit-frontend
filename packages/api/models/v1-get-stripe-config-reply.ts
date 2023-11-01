@@ -13,39 +13,30 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1PriceParams } from './v1-price-params';
 
 /**
  * 
  * @export
- * @interface V1CreatePlanRequest
+ * @interface V1GetStripeConfigReply
  */
-export interface V1CreatePlanRequest {
+export interface V1GetStripeConfigReply {
+    /**
+     * 
+     * @type {boolean}
+     * @memberof V1GetStripeConfigReply
+     */
+    'isTest'?: boolean;
     /**
      * 
      * @type {string}
-     * @memberof V1CreatePlanRequest
+     * @memberof V1GetStripeConfigReply
      */
-    'key': string;
+    'publishKey'?: string;
     /**
      * 
-     * @type {string}
-     * @memberof V1CreatePlanRequest
+     * @type {{ [key: string]: string; }}
+     * @memberof V1GetStripeConfigReply
      */
-    'displayName': string;
-    /**
-     * 
-     * @type {Array<V1PriceParams>}
-     * @memberof V1CreatePlanRequest
-     */
-    'prices'?: Array<V1PriceParams>;
-    /**
-     * 
-     * @type {number}
-     * @memberof V1CreatePlanRequest
-     */
-    'sort'?: number;
+    'priceTables'?: { [key: string]: string; };
 }
 

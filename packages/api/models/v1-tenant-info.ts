@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { BlobBlobFile } from './blob-blob-file';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Plan } from './v1-plan';
 
 /**
  * 
@@ -59,5 +62,17 @@ export interface V1TenantInfo {
      * @memberof V1TenantInfo
      */
     'host'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1TenantInfo
+     */
+    'planKey'?: string | null;
+    /**
+     * 
+     * @type {V1Plan}
+     * @memberof V1TenantInfo
+     */
+    'plan'?: V1Plan;
 }
 

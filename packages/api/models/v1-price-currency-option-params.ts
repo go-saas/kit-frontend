@@ -40,7 +40,7 @@ export interface V1PriceCurrencyOptionParams {
      * @type {string}
      * @memberof V1PriceCurrencyOptionParams
      */
-    'discountedAmountDecimal'?: string;
+    'discountedAmountDecimal'?: string | null;
     /**
      * 
      * @type {string}

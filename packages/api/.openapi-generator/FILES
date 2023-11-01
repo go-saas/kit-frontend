@@ -134,6 +134,7 @@ models/v1-get-payment-method-reply.ts
 models/v1-get-profile-response.ts
 models/v1-get-role-permission-response.ts
 models/v1-get-settings-response.ts
+models/v1-get-stripe-config-reply.ts
 models/v1-get-user-role-reply.ts
 models/v1-grant-consent-request.ts
 models/v1-grant-consent-response.ts
@@ -232,6 +233,7 @@ models/v1-update-brand.ts
 models/v1-update-menu.ts
 models/v1-update-order.ts
 models/v1-update-plan.ts
+models/v1-update-price-params.ts
 models/v1-update-product-category.ts
 models/v1-update-product.ts
 models/v1-update-profile-request.ts

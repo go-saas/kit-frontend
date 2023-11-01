@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1UpdatePriceParams } from './v1-update-price-params';
 
 /**
  * 
@@ -38,5 +41,17 @@ export interface V1UpdatePlan {
      * @memberof V1UpdatePlan
      */
     'active'?: boolean;
+    /**
+     * 
+     * @type {Array<V1UpdatePriceParams>}
+     * @memberof V1UpdatePlan
+     */
+    'prices'?: Array<V1UpdatePriceParams>;
+    /**
+     * 
+     * @type {number}
+     * @memberof V1UpdatePlan
+     */
+    'sort'?: number;
 }
 
