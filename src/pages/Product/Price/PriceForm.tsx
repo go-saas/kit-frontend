@@ -11,7 +11,6 @@ import {
 } from '@gosaas/api';
 import React from 'react';
 import { Form, Radio, Card, Space } from 'antd';
-import { v4 as uuidv4 } from 'uuid';
 import { useIntl } from '@umijs/max';
 import {
   ProForm,
@@ -163,187 +162,187 @@ const PriceForm: React.FC<PriceFormProps> = () => {
     >
       <ProFormList
         name="prices"
+        alwaysShowItemLabel={true}
         creatorRecord={() => {
           return {
-            id: uuidv4(),
             billingScheme: 'per_unit',
             type: 'one_time',
             modelType: 'standard',
           };
         }}
       >
-        <Space style={{ display: 'flex', marginBottom: 8 }} align="start">
+        <Space style={{ marginBottom: 8 }} align="start">
           <Card style={{ width: 500 }}>
-            <ProFormSelect
-              name={['modelType']}
-              label={intl.formatMessage({
-                id: 'product.price.modelType',
-                defaultMessage: 'Model Type',
-              })}
-              valueEnum={
-                new Map(
-                  Object.values(PriceModelType).map((p) => [
-                    p,
-                    {
-                      text: intl.formatMessage({
-                        id: 'product.price.modelType.' + p,
-                        defaultMessage: p,
-                      }),
-                    },
-                  ]),
-                )
-              }
-            />
-
-            <ProFormSelect
-              name={['currencyCode']}
-              label={intl.formatMessage({
-                id: 'product.price.currencyCode',
-                defaultMessage: 'Currency',
-              })}
-              valueEnum={new Map(currencyCodes.map((p) => [p, { text: p }]))}
-              rules={[{ required: true }]}
-            />
-            <ProFormDigit
-              name={['default', 'amountDecimal']}
-              label={intl.formatMessage({
-                id: 'product.price.defaultPrice',
-                defaultMessage: 'Default Price',
-              })}
-              rules={[{ required: true }]}
-            />
-            <ProFormDigit
-              name={['discounted', 'amountDecimal']}
-              label={intl.formatMessage({
-                id: 'product.price.discountedPrice',
-                defaultMessage: 'Discounted Price',
-              })}
-            />
-            <ProFormText
-              name={['discountText']}
-              label={intl.formatMessage({
-                id: 'product.price.discountText',
-                defaultMessage: 'Discount Text',
-              })}
-            ></ProFormText>
-            <ProFormSwitch
-              name={['denyMoreDiscounts']}
-              label={intl.formatMessage({
-                id: 'product.price.denyMoreDiscounts',
-                defaultMessage: 'Deny More Discounts',
-              })}
-            ></ProFormSwitch>
-            <ProFormDependency name={['modelType']} ignoreFormListField={false}>
-              {({ modelType }) => {
-                if (modelType === 'package') {
-                  return (
-                    <ProFormDigit
-                      name={['transformQuantity', 'divideBy']}
-                      label={intl.formatMessage({
-                        id: 'product.price.transformQuantityDivideBy',
-                        defaultMessage: 'Divide By',
-                      })}
-                      rules={[{ required: true }]}
-                    />
-                  );
-                } else {
-                  return <></>;
-                }
-              }}
-            </ProFormDependency>
-
-            {/* tiers */}
-
-            {/* currencies */}
-            <ProFormDependency name={['modelType']} ignoreFormListField={false}>
-              {({ modelType }) => {
-                return (
-                  <ProForm.Item>
-                    <CurrencyForm modelType={modelType} />
-                  </ProForm.Item>
-                );
-              }}
-            </ProFormDependency>
-
-            <ProForm.Item
-              name={['type']}
-              label={intl.formatMessage({
-                id: 'product.price.type',
-                defaultMessage: 'Type',
-              })}
+            <ProFormDependency
+              name={['modelType', 'type', 'recurring', 'id']}
+              ignoreFormListField={false}
             >
-              <Radio.Group>
-                <Radio.Button value={'recurring'}>
-                  {intl.formatMessage({
-                    id: 'product.price.recurring',
-                    defaultMessage: 'Recurring',
-                  })}
-                </Radio.Button>
-                <Radio.Button value={'one_time'}>
-                  {intl.formatMessage({
-                    id: 'product.price.oneTime',
-                    defaultMessage: 'One Time',
-                  })}
-                </Radio.Button>
-              </Radio.Group>
-            </ProForm.Item>
-            <ProFormDependency name={['type', 'recurring']} ignoreFormListField={false}>
-              {(obj) => {
-                if (obj.type === 'one_time') {
-                  return <></>;
-                }
+              {({ modelType, type, recurring, id }) => {
+                const disabled = !!id;
                 return (
-                  <ProForm.Item
-                    label={intl.formatMessage({
-                      id: 'product.price.recurring',
-                      defaultMessage: 'Recurring',
-                    })}
-                  >
-                    <ProFormDigit
-                      name={['recurring', 'intervalCount']}
-                      label={intl.formatMessage({
-                        id: 'product.price.recurringIntervalCount',
-                        defaultMessage: 'Interval Count',
-                      })}
-                      rules={[{ required: true }]}
-                    />
+                  <>
                     <ProFormSelect
-                      name={['recurring', 'interval']}
+                      disabled={disabled}
+                      name={['modelType']}
                       label={intl.formatMessage({
-                        id: 'product.price.recurringInterval',
-                        defaultMessage: 'Interval',
+                        id: 'product.price.modelType',
+                        defaultMessage: 'Model Type',
                       })}
                       valueEnum={
-                        new Map(['day', 'week', 'month', 'year'].map((p) => [p, { text: p }]))
+                        new Map(
+                          Object.values(PriceModelType).map((p) => [
+                            p,
+                            {
+                              text: intl.formatMessage({
+                                id: 'product.price.modelType.' + p,
+                                defaultMessage: p,
+                              }),
+                            },
+                          ]),
+                        )
                       }
-                      initialValue={'month'}
                     />
-                    <ProFormSwitch
-                      name={['recurring', 'meterUsage']}
+
+                    <ProFormSelect
+                      disabled={disabled}
+                      name={['currencyCode']}
                       label={intl.formatMessage({
-                        id: 'product.price.meterUsage',
-                        defaultMessage: 'Metered Usage',
+                        id: 'product.price.currencyCode',
+                        defaultMessage: 'Currency',
+                      })}
+                      valueEnum={new Map(currencyCodes.map((p) => [p, { text: p }]))}
+                      rules={[{ required: true }]}
+                    />
+                    <ProFormDigit
+                      disabled={disabled}
+                      name={['default', 'amountDecimal']}
+                      label={intl.formatMessage({
+                        id: 'product.price.defaultPrice',
+                        defaultMessage: 'Default Price',
+                      })}
+                      rules={[{ required: true }]}
+                    />
+                    <ProFormDigit
+                      disabled={disabled}
+                      name={['discounted', 'amountDecimal']}
+                      label={intl.formatMessage({
+                        id: 'product.price.discountedPrice',
+                        defaultMessage: 'Discounted Price',
+                      })}
+                    />
+                    <ProFormText
+                      name={['discountText']}
+                      label={intl.formatMessage({
+                        id: 'product.price.discountText',
+                        defaultMessage: 'Discount Text',
+                      })}
+                    ></ProFormText>
+                    <ProFormSwitch
+                      name={['denyMoreDiscounts']}
+                      label={intl.formatMessage({
+                        id: 'product.price.denyMoreDiscounts',
+                        defaultMessage: 'Deny More Discounts',
                       })}
                     ></ProFormSwitch>
-                    {obj.recurring?.meterUsage && (
-                      <ProFormSelect
-                        name={['recurring', 'aggregateUsage']}
+                    {modelType === 'package' ? (
+                      <ProFormDigit
+                        disabled={disabled}
+                        name={['transformQuantity', 'divideBy']}
                         label={intl.formatMessage({
-                          id: 'product.price.recurringAggregateUsage',
-                          defaultMessage: 'Aggregate Usage',
+                          id: 'product.price.transformQuantityDivideBy',
+                          defaultMessage: 'Divide By',
                         })}
-                        valueEnum={
-                          new Map(
-                            ['last_during_period', 'last_ever', 'max', 'sum'].map((p) => [
-                              p,
-                              { text: p },
-                            ]),
-                          )
-                        }
-                        initialValue={'sum'}
+                        rules={[{ required: true }]}
                       />
+                    ) : null}
+
+                    {/* tiers */}
+
+                    {/* currencies */}
+                    <ProForm.Item>
+                      <CurrencyForm modelType={modelType} />
+                    </ProForm.Item>
+
+                    <ProForm.Item
+                      name={['type']}
+                      label={intl.formatMessage({
+                        id: 'product.price.type',
+                        defaultMessage: 'Type',
+                      })}
+                    >
+                      <Radio.Group>
+                        <Radio.Button value={'recurring'} disabled={disabled}>
+                          {intl.formatMessage({
+                            id: 'product.price.recurring',
+                            defaultMessage: 'Recurring',
+                          })}
+                        </Radio.Button>
+                        <Radio.Button value={'one_time'} disabled={disabled}>
+                          {intl.formatMessage({
+                            id: 'product.price.oneTime',
+                            defaultMessage: 'One Time',
+                          })}
+                        </Radio.Button>
+                      </Radio.Group>
+                    </ProForm.Item>
+                    {type === 'one_time' ? null : (
+                      <ProForm.Item
+                        label={intl.formatMessage({
+                          id: 'product.price.recurring',
+                          defaultMessage: 'Recurring',
+                        })}
+                      >
+                        <ProFormDigit
+                          disabled={disabled}
+                          name={['recurring', 'intervalCount']}
+                          label={intl.formatMessage({
+                            id: 'product.price.recurringIntervalCount',
+                            defaultMessage: 'Interval Count',
+                          })}
+                          rules={[{ required: true }]}
+                        />
+                        <ProFormSelect
+                          disabled={disabled}
+                          name={['recurring', 'interval']}
+                          label={intl.formatMessage({
+                            id: 'product.price.recurringInterval',
+                            defaultMessage: 'Interval',
+                          })}
+                          valueEnum={
+                            new Map(['day', 'week', 'month', 'year'].map((p) => [p, { text: p }]))
+                          }
+                          initialValue={'month'}
+                        />
+                        <ProFormSwitch
+                          disabled={disabled}
+                          name={['recurring', 'meterUsage']}
+                          label={intl.formatMessage({
+                            id: 'product.price.meterUsage',
+                            defaultMessage: 'Metered Usage',
+                          })}
+                        ></ProFormSwitch>
+                        {recurring?.meterUsage && (
+                          <ProFormSelect
+                            disabled={disabled}
+                            name={['recurring', 'aggregateUsage']}
+                            label={intl.formatMessage({
+                              id: 'product.price.recurringAggregateUsage',
+                              defaultMessage: 'Aggregate Usage',
+                            })}
+                            valueEnum={
+                              new Map(
+                                ['last_during_period', 'last_ever', 'max', 'sum'].map((p) => [
+                                  p,
+                                  { text: p },
+                                ]),
+                              )
+                            }
+                            initialValue={'sum'}
+                          />
+                        )}
+                      </ProForm.Item>
                     )}
-                  </ProForm.Item>
+                  </>
                 );
               }}
             </ProFormDependency>

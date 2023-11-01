@@ -71,6 +71,13 @@ const UpdateForm: React.FC<UpdateFormProps> = (props) => {
           },
         ]}
       />
+      <ProFormText
+        name="sort"
+        label={intl.formatMessage({
+          id: 'saas.plan.sort',
+          defaultMessage: 'Sort',
+        })}
+      />
       {props.values.key && (
         <ProFormSwitch
           name="active"

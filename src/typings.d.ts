@@ -1,3 +1,5 @@
+import * as React from 'react';
+
 declare module 'slash2';
 declare module '*.css';
 declare module '*.less';
@@ -24,5 +26,16 @@ declare const BASE_URL: string;
 declare module 'axios' {
   export interface AxiosRequestConfig {
     showType: number;
+  }
+}
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      'stripe-pricing-table': React.DetailedHTMLProps<
+        React.HTMLAttributes<HTMLElement>,
+        HTMLElement
+      >;
+    }
   }
 }

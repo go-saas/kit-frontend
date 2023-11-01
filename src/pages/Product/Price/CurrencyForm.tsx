@@ -6,7 +6,6 @@ import {
   ProFormText,
   ProFormSwitch,
   ProFormList,
-  ProForm,
 } from '@ant-design/pro-components';
 import { useIntl } from '@umijs/max';
 import { currencyCodes } from '../Product/price';
@@ -20,6 +19,7 @@ const CurrencyForm: React.FC<CurrencyFormProps> = (props) => {
   const intl = useIntl();
   return (
     <ProFormList
+      alwaysShowItemLabel={true}
       name={['currencyOptions']}
       creatorButtonProps={{
         creatorButtonText: intl.formatMessage({

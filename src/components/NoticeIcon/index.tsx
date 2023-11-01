@@ -8,6 +8,7 @@ import styles from './index.less';
 import { BellOutlined, DeleteOutlined } from '@ant-design/icons';
 import classNames from 'classnames';
 import HeaderDropdown from '../HeaderDropdown';
+import { useEmotionCss } from '@ant-design/use-emotion-css';
 export type GlobalHeaderRightProps = {
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
@@ -94,14 +95,11 @@ const NoticeIconView: React.FC = () => {
     //reload state
     await loadMoreData('');
   };
-  const noticeButtonClass = classNames(styles.noticeButton);
-  const NoticeBellIcon = <BellOutlined className={styles.icon} />;
-  const visible = false;
+
+  const NoticeBellIcon = <BellOutlined />;
   const trigger = (
-    <span className={classNames(noticeButtonClass, { opened: visible })}>
-      <Badge count={unreadSize} style={{ boxShadow: 'none' }} className={styles.badge}>
-        {NoticeBellIcon}
-      </Badge>
+    <span>
+      <Badge dot={unreadSize > 0}>{NoticeBellIcon} </Badge>
     </span>
   );
 
@@ -147,16 +145,32 @@ const NoticeIconView: React.FC = () => {
       </InfiniteScroll>
     </Card>
   );
-
+  const actionClassName = useEmotionCss(({ token }) => {
+    return {
+      display: 'flex',
+      float: 'right',
+      height: '48px',
+      marginLeft: 'auto',
+      overflow: 'hidden',
+      cursor: 'pointer',
+      padding: '0 8px',
+      borderRadius: token.borderRadius,
+      '&:hover': {
+        backgroundColor: token.colorBgTextHover,
+      },
+    };
+  });
   return (
-    <HeaderDropdown
-      placement="bottomRight"
-      overlay={notificationBox}
-      overlayClassName={styles.popover}
-      trigger={['click']}
-    >
-      {trigger}
-    </HeaderDropdown>
+    <span className={actionClassName}>
+      <HeaderDropdown
+        placement="bottomRight"
+        dropdownRender={() => notificationBox}
+        overlayClassName={styles.popover}
+        trigger={['click']}
+      >
+        {trigger}
+      </HeaderDropdown>
+    </span>
   );
 };
 

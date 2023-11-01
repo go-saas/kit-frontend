@@ -31,7 +31,11 @@ const AvatarLogo = () => {
     };
   });
 
-  return <Avatar size="small" className={avatarClassName} src={currentUser?.avatar} alt="avatar" />;
+  return currentUser?.avatar ? (
+    <Avatar size="small" className={avatarClassName} src={currentUser?.avatar} alt="avatar" />
+  ) : (
+    <Avatar size="small" className={avatarClassName} icon={<UserOutlined />} alt="avatar" />
+  );
 };
 
 const Name = () => {
