@@ -15,43 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1PriceParams } from './v1-price-params';
+import { V1User } from './v1-user';
 
 /**
  * 
  * @export
- * @interface V1UpdatePlan
+ * @interface V1FindOrCreateStripeCustomerReply
  */
-export interface V1UpdatePlan {
+export interface V1FindOrCreateStripeCustomerReply {
+    /**
+     * 
+     * @type {V1User}
+     * @memberof V1FindOrCreateStripeCustomerReply
+     */
+    'user'?: V1User;
     /**
      * 
      * @type {string}
-     * @memberof V1UpdatePlan
+     * @memberof V1FindOrCreateStripeCustomerReply
      */
-    'key': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1UpdatePlan
-     */
-    'displayName': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof V1UpdatePlan
-     */
-    'active'?: boolean;
-    /**
-     * 
-     * @type {Array<V1PriceParams>}
-     * @memberof V1UpdatePlan
-     */
-    'prices'?: Array<V1PriceParams>;
-    /**
-     * 
-     * @type {number}
-     * @memberof V1UpdatePlan
-     */
-    'sort'?: number;
+    'stripeCustomerId'?: string;
 }
 

@@ -116,6 +116,7 @@ models/v1-delete-product-category-reply.ts
 models/v1-delete-product-reply.ts
 models/v1-delete-tenant-reply.ts
 models/v1-effect.ts
+models/v1-find-or-create-stripe-customer-reply.ts
 models/v1-forget-password-reply.ts
 models/v1-forget-password-request.ts
 models/v1-forget-password-token-reply.ts
@@ -233,7 +234,6 @@ models/v1-update-brand.ts
 models/v1-update-menu.ts
 models/v1-update-order.ts
 models/v1-update-plan.ts
-models/v1-update-price-params.ts
 models/v1-update-product-category.ts
 models/v1-update-product.ts
 models/v1-update-profile-request.ts

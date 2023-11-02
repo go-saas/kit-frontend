@@ -38,5 +38,11 @@ export interface V1GetStripeConfigReply {
      * @memberof V1GetStripeConfigReply
      */
     'priceTables'?: { [key: string]: string; };
+    /**
+     * 
+     * @type {string}
+     * @memberof V1GetStripeConfigReply
+     */
+    'customerId'?: string;
 }
 

@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1UpdatePriceParams } from './v1-update-price-params';
+import { V1PriceParams } from './v1-price-params';
 
 /**
  * 
@@ -37,10 +37,10 @@ export interface PlanServiceUpdatePlanRequestPlan {
     'active'?: boolean;
     /**
      * 
-     * @type {Array<V1UpdatePriceParams>}
+     * @type {Array<V1PriceParams>}
      * @memberof PlanServiceUpdatePlanRequestPlan
      */
-    'prices'?: Array<V1UpdatePriceParams>;
+    'prices'?: Array<V1PriceParams>;
     /**
      * 
      * @type {number}
