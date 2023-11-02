@@ -4,8 +4,6 @@ import { Button, Card, Space, Spin, Switch } from 'antd';
 import { Modal } from 'antd';
 import { useEffect, useState } from 'react';
 
-import classNames from 'classnames';
-
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { useIntl, useModel } from '@umijs/max';
 import React from 'react';
@@ -16,12 +14,11 @@ export type GlobalHeaderRightProps = {
 };
 
 const PlanDropdown: React.FC = () => {
-  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const paymentSrv = new StripePaymentGatewayServiceApi();
   const planSrv = new PlanServiceApi();
   const [stripeCfg, setStripeCfg] = useState<V1GetStripeConfigReply>();
-  const [plans, setPlans] = useState<V1Plan[]>([]);
+  const [plans, setPlans] = useState<V1Plan[] | undefined>(undefined);
   const intl = useIntl();
 
   useEffect(() => {
@@ -35,18 +32,39 @@ const PlanDropdown: React.FC = () => {
     });
   }, []);
 
+  const actionClassName = useEmotionCss(({}) => {
+    return {
+      display: 'flex',
+      float: 'right',
+      height: '48px',
+      marginLeft: 'auto',
+      overflow: 'hidden',
+      alignItems: 'center',
+      padding: '0 8px',
+    };
+  });
+
   const { initialState } = useModel('@@initialState');
 
   if (initialState?.currentTenant?.isHost) {
     return <></>;
   }
 
-  if (!stripeCfg) {
-    return <Spin></Spin>;
+  if (!stripeCfg || plans === undefined) {
+    return (
+      <span className={actionClassName}>
+        <Spin></Spin>
+      </span>
+    );
+  }
+
+  if (plans.length === 0) {
+    //no plan
+    return <></>;
   }
 
   return (
-    <span>
+    <span className={actionClassName}>
       <Button
         type="primary"
         onClick={() => {
