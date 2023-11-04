@@ -16,27 +16,30 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import { Subscriptionv1Subscription } from './subscriptionv1-subscription';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1Plan } from './v1-plan';
 
 /**
  * 
  * @export
- * @interface V1GetAvailablePlansReply
+ * @interface V1ListSubscriptionReply
  */
-export interface V1GetAvailablePlansReply {
+export interface V1ListSubscriptionReply {
     /**
      * 
-     * @type {Array<V1Plan>}
-     * @memberof V1GetAvailablePlansReply
+     * @type {number}
+     * @memberof V1ListSubscriptionReply
      */
-    'items'?: Array<V1Plan>;
+    'totalSize'?: number;
     /**
      * 
-     * @type {Subscriptionv1Subscription}
-     * @memberof V1GetAvailablePlansReply
+     * @type {number}
+     * @memberof V1ListSubscriptionReply
      */
-    'activeSubscription'?: Subscriptionv1Subscription;
+    'filterSize'?: number;
+    /**
+     * 
+     * @type {Array<Subscriptionv1Subscription>}
+     * @memberof V1ListSubscriptionReply
+     */
+    'items'?: Array<Subscriptionv1Subscription>;
 }
 

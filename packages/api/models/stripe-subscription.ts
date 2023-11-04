@@ -15,28 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Subscriptionv1Subscription } from './subscriptionv1-subscription';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1Plan } from './v1-plan';
+import { StripeInvoice } from './stripe-invoice';
 
 /**
  * 
  * @export
- * @interface V1GetAvailablePlansReply
+ * @interface StripeSubscription
  */
-export interface V1GetAvailablePlansReply {
+export interface StripeSubscription {
     /**
      * 
-     * @type {Array<V1Plan>}
-     * @memberof V1GetAvailablePlansReply
+     * @type {string}
+     * @memberof StripeSubscription
      */
-    'items'?: Array<V1Plan>;
+    'id'?: string;
     /**
      * 
-     * @type {Subscriptionv1Subscription}
-     * @memberof V1GetAvailablePlansReply
+     * @type {StripeInvoice}
+     * @memberof StripeSubscription
      */
-    'activeSubscription'?: Subscriptionv1Subscription;
+    'latestInvoice'?: StripeInvoice;
 }
 

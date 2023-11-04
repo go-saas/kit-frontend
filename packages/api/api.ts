@@ -34,6 +34,7 @@ export * from './api/product-category-service-api';
 export * from './api/product-service-api';
 export * from './api/role-service-api';
 export * from './api/stripe-payment-gateway-service-api';
+export * from './api/subscription-service-api';
 export * from './api/tenant-service-api';
 export * from './api/usage-app-api';
 export * from './api/user-admin-service-api';

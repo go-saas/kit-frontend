@@ -15,28 +15,25 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { Subscriptionv1Subscription } from './subscriptionv1-subscription';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1Plan } from './v1-plan';
+import { V1SubscriptionItemParams } from './v1-subscription-item-params';
 
 /**
  * 
  * @export
- * @interface V1GetAvailablePlansReply
+ * @interface V1UpdateSubscription
  */
-export interface V1GetAvailablePlansReply {
+export interface V1UpdateSubscription {
     /**
      * 
-     * @type {Array<V1Plan>}
-     * @memberof V1GetAvailablePlansReply
+     * @type {string}
+     * @memberof V1UpdateSubscription
      */
-    'items'?: Array<V1Plan>;
+    'id': string;
     /**
      * 
-     * @type {Subscriptionv1Subscription}
-     * @memberof V1GetAvailablePlansReply
+     * @type {Array<V1SubscriptionItemParams>}
+     * @memberof V1UpdateSubscription
      */
-    'activeSubscription'?: Subscriptionv1Subscription;
+    'items'?: Array<V1SubscriptionItemParams>;
 }
 
