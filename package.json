@@ -49,6 +49,8 @@
     "@ant-design/use-emotion-css": "1.0.4",
     "@gosaas/api": "workspace:^",
     "@gosaas/core": "workspace:^",
+    "@stripe/react-stripe-js": "^2.3.1",
+    "@stripe/stripe-js": "^2.1.11",
     "@types/uuid": "^8.3.4",
     "@umijs/route-utils": "^2.1.3",
     "ahooks": "^3.7.4",

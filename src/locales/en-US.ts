@@ -8,6 +8,7 @@ import settings from './en-US/settings';
 import saas from './en-US/saas';
 import sys from './en-US/sys';
 import admin from './en-US/admin';
+import product from './en-US/product';
 export default {
   'navBar.lang': 'Languages',
   'layout.user.link.help': 'Help',
@@ -27,4 +28,5 @@ export default {
   ...saas,
   ...sys,
   ...admin,
+  ...product,
 };

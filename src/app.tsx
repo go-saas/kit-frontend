@@ -32,6 +32,7 @@ import pRetry from 'p-retry';
 import type { RouteObject } from 'react-router-dom';
 import { accessTree } from '@/utils/tree';
 import Realtime from './components/Realtime';
+import StripeProvider from './components/StripeProvider';
 import React from 'react';
 import { loginOut } from '@/utils/auth';
 import enUS0 from 'antd/es/locale/en_US';
@@ -54,7 +55,7 @@ const changeTenant = async (idOrName?: string) => {
     //change to host
     setSettingTenantId();
   } else {
-    setSettingTenantId(tenantPub.data?.tenant.id);
+    setSettingTenantId(tenantPub.data?.tenant?.id);
   }
   window.location.reload();
 };
@@ -261,7 +262,7 @@ export const layout: RunTimeLayoutConfig = ({ initialState, setInitialState }) =
 };
 
 export function rootContainer(container: any) {
-  return React.createElement(Realtime, null, container);
+  return React.createElement(StripeProvider, null, React.createElement(Realtime, null, container));
 }
 
 function errorInterceptor() {

@@ -29,6 +29,7 @@ export interface TenantInfo {
   displayName: string;
   region: string;
   logo?: BlobFile;
+  plan?: PlanInfo;
 }
 
 export interface PlanInfo {
@@ -42,7 +43,6 @@ export interface BlobFile {
 export interface UserTenantInfo {
   isHost: boolean;
   tenant?: TenantInfo;
-  plan?: PlanInfo;
 }
 
 export interface UserInfo {

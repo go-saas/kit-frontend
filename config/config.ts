@@ -59,7 +59,6 @@ export default defineConfig({
   headScripts: [
     // 解决首次加载时白屏的问题
     { src: '/scripts/loading.js', async: true },
-    { src: 'https://js.stripe.com/v3/pricing-table.js', async: true },
   ],
   presets: ['umi-presets-pro'],
   define: {

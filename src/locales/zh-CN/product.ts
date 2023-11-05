@@ -1,0 +1,15 @@
+export default {
+  'product.price.recurringInterval': '周期',
+  'product.price.recurringInterval.day': '按年',
+  'product.price.recurringInterval.week': '按周',
+  'product.price.recurringInterval.month': '按月',
+  'product.price.recurringInterval.year': '按年',
+  'product.price.recurringInterval.one-time': '一次性',
+  'product.price.recurringInterval.perday': '每天',
+  'product.price.recurringInterval.perweek': '每周',
+  'product.price.recurringInterval.permonth': '每月',
+  'product.price.recurringInterval.peryear': '每年',
+  'product.price.buyNow': '即刻购买',
+  'product.price.subscribeNow': '即刻订阅',
+  'product.quantity': '数量',
+};

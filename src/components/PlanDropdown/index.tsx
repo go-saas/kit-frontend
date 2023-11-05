@@ -1,12 +1,14 @@
-import type { V1GetStripeConfigReply, V1Plan } from '@gosaas/api';
-import { PlanServiceApi, StripePaymentGatewayServiceApi, TenantServiceApi } from '@gosaas/api';
-import { Button, Card, Space, Spin, Switch } from 'antd';
+import type { V1Plan, V1Price } from '@gosaas/api';
+import { PlanServiceApi } from '@gosaas/api';
+import { Button } from 'antd';
 import { Modal } from 'antd';
 import { useEffect, useState } from 'react';
 
 import { useEmotionCss } from '@ant-design/use-emotion-css';
 import { useIntl, useModel } from '@umijs/max';
 import React from 'react';
+
+import PriceTable from './PriceTable';
 export type GlobalHeaderRightProps = {
   fetchingNotices?: boolean;
   onNoticeVisibleChange?: (visible: boolean) => void;
@@ -15,17 +17,12 @@ export type GlobalHeaderRightProps = {
 
 const PlanDropdown: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const paymentSrv = new StripePaymentGatewayServiceApi();
+
   const planSrv = new PlanServiceApi();
-  const [stripeCfg, setStripeCfg] = useState<V1GetStripeConfigReply>();
+
   const [plans, setPlans] = useState<V1Plan[] | undefined>(undefined);
   const intl = useIntl();
 
-  useEffect(() => {
-    paymentSrv.stripePaymentGatewayServiceGetStripeConfig().then((resp) => {
-      setStripeCfg(resp.data);
-    });
-  }, []);
   useEffect(() => {
     planSrv.planServiceGetAvailablePlans().then((resp) => {
       setPlans(resp.data.items ?? []);
@@ -46,19 +43,54 @@ const PlanDropdown: React.FC = () => {
 
   const { initialState } = useModel('@@initialState');
 
+  const [groupedData, setGroupedData] = useState<
+    Map<string, Array<{ plan: V1Plan; price: V1Price }>>
+  >(new Map());
+  const [currentPeriod, setCurrentPeriod] = useState<string>();
+
+  useEffect(() => {
+    const allprices = (plans ?? []).flatMap(
+      (plan) =>
+        plan.prices?.map((price) => {
+          return { plan, price };
+        }) ?? [],
+    );
+
+    //group by period
+    const periodTypes = ['day', 'week', 'month', 'year'];
+    const newGroupeddata: Map<string, Array<{ plan: V1Plan; price: V1Price }>> = new Map();
+    periodTypes.forEach((periodType) => {
+      const thisPeriodTypePrices = allprices
+        .filter((items) => items?.price?.recurring?.interval === periodType)
+        .sort((a, b) => {
+          return Number(
+            BigInt(a?.price.default?.amount ?? 0) - BigInt(b?.price.default?.amount ?? 0),
+          );
+        });
+      if (thisPeriodTypePrices.length > 0) {
+        newGroupeddata.set(periodType, thisPeriodTypePrices);
+      }
+    });
+    const oneTime = allprices
+      .filter((items) => !items?.price?.recurring)
+      .sort((a, b) => {
+        return Number(
+          BigInt(a?.price.default?.amount ?? 0) - BigInt(b?.price.default?.amount ?? 0),
+        );
+      });
+    if (oneTime.length > 0) {
+      newGroupeddata.set('one-time', oneTime);
+    }
+
+    setGroupedData(newGroupeddata);
+    setCurrentPeriod(newGroupeddata.keys().next().value);
+  }, [plans]);
+
   if (initialState?.currentTenant?.isHost) {
     return <></>;
   }
 
-  if (!stripeCfg || plans === undefined) {
-    return (
-      <span className={actionClassName}>
-        <Spin></Spin>
-      </span>
-    );
-  }
-
-  if (plans.length === 0) {
+  if ((plans ?? []).length === 0) {
     //no plan
     return <></>;
   }
@@ -72,7 +104,7 @@ const PlanDropdown: React.FC = () => {
         }}
       >
         {initialState?.currentTenant?.tenant?.plan
-          ? initialState.currentTenant.tenant.plan.diplayName
+          ? initialState.currentTenant.tenant.plan.displayName
           : intl.formatMessage({ id: 'saas.tenant.upgradePlan', defaultMessage: 'Upgrade Plan' })}
       </Button>
       <Modal
@@ -83,11 +115,16 @@ const PlanDropdown: React.FC = () => {
           setIsModalOpen(false);
         }}
       >
-        <stripe-pricing-table
-          pricing-table-id={stripeCfg.priceTables?.plan}
-          publishable-key={stripeCfg.publishKey}
-          client-reference-id={initialState?.currentUser?.id}
-        ></stripe-pricing-table>
+        <PriceTable
+          data={groupedData}
+          currentPeriod={currentPeriod!}
+          onPeriodChange={(v) => {
+            setCurrentPeriod(v);
+          }}
+          onConfirm={() => {
+            setIsModalOpen(false);
+          }}
+        ></PriceTable>
       </Modal>
     </span>
   );

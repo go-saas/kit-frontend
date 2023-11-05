@@ -309,7 +309,18 @@ const PriceForm: React.FC<PriceFormProps> = () => {
                             defaultMessage: 'Interval',
                           })}
                           valueEnum={
-                            new Map(['day', 'week', 'month', 'year'].map((p) => [p, { text: p }]))
+                            new Map(
+                              ['day', 'week', 'month', 'year'].map((p) => [
+                                p,
+                                {
+                                  text: intl.formatMessage({
+                                    id: 'product.price.recurringInterval.' + p,
+                                    defaultMessage: p,
+                                  }),
+                                  value: p,
+                                },
+                              ]),
+                            )
                           }
                           initialValue={'month'}
                         />
