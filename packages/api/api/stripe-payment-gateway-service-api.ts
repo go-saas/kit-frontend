@@ -24,10 +24,6 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
-import { V1CreateStripePaymentIntentReply } from '../models';
-// @ts-ignore
-import { V1CreateStripePaymentIntentRequest } from '../models';
-// @ts-ignore
 import { V1GetStripeConfigReply } from '../models';
 /**
  * StripePaymentGatewayServiceApi - axios parameter creator
@@ -35,44 +31,6 @@ import { V1GetStripeConfigReply } from '../models';
  */
 export const StripePaymentGatewayServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @param {V1CreateStripePaymentIntentRequest} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stripePaymentGatewayServiceCreateStripePaymentIntent: async (body: V1CreateStripePaymentIntentRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('stripePaymentGatewayServiceCreateStripePaymentIntent', 'body', body)
-            const localVarPath = `/v1/payment/stripe/intent`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @param {*} [options] Override http request option.
@@ -155,16 +113,6 @@ export const StripePaymentGatewayServiceApiFp = function(configuration?: Configu
     return {
         /**
          * 
-         * @param {V1CreateStripePaymentIntentRequest} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async stripePaymentGatewayServiceCreateStripePaymentIntent(body: V1CreateStripePaymentIntentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1CreateStripePaymentIntentReply>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.stripePaymentGatewayServiceCreateStripePaymentIntent(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -194,15 +142,6 @@ export const StripePaymentGatewayServiceApiFactory = function (configuration?: C
     return {
         /**
          * 
-         * @param {StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntentRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        stripePaymentGatewayServiceCreateStripePaymentIntent(requestParameters: StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntentRequest, options?: AxiosRequestConfig): AxiosPromise<V1CreateStripePaymentIntentReply> {
-            return localVarFp.stripePaymentGatewayServiceCreateStripePaymentIntent(requestParameters.body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -220,20 +159,6 @@ export const StripePaymentGatewayServiceApiFactory = function (configuration?: C
         },
     };
 };
-
-/**
- * Request parameters for stripePaymentGatewayServiceCreateStripePaymentIntent operation in StripePaymentGatewayServiceApi.
- * @export
- * @interface StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntentRequest
- */
-export interface StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntentRequest {
-    /**
-     * 
-     * @type {V1CreateStripePaymentIntentRequest}
-     * @memberof StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntent
-     */
-    readonly body: V1CreateStripePaymentIntentRequest
-}
 
 /**
  * Request parameters for stripePaymentGatewayServiceStripeWebhook operation in StripePaymentGatewayServiceApi.
@@ -256,17 +181,6 @@ export interface StripePaymentGatewayServiceApiStripePaymentGatewayServiceStripe
  * @extends {BaseAPI}
  */
 export class StripePaymentGatewayServiceApi extends BaseAPI {
-    /**
-     * 
-     * @param {StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntentRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof StripePaymentGatewayServiceApi
-     */
-    public stripePaymentGatewayServiceCreateStripePaymentIntent(requestParameters: StripePaymentGatewayServiceApiStripePaymentGatewayServiceCreateStripePaymentIntentRequest, options?: AxiosRequestConfig) {
-        return StripePaymentGatewayServiceApiFp(this.configuration).stripePaymentGatewayServiceCreateStripePaymentIntent(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @param {*} [options] Override http request option.

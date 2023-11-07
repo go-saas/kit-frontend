@@ -15,25 +15,31 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1SubscriptionItemParams } from './v1-subscription-item-params';
+import { V1CheckoutItemParams } from './v1-checkout-item-params';
 
 /**
  * 
  * @export
- * @interface V1CreateMySubscriptionRequest
+ * @interface V1CheckoutNowRequest
  */
-export interface V1CreateMySubscriptionRequest {
+export interface V1CheckoutNowRequest {
     /**
      * 
      * @type {string}
-     * @memberof V1CreateMySubscriptionRequest
+     * @memberof V1CheckoutNowRequest
      */
-    'provider'?: string;
+    'provider': string;
     /**
      * 
-     * @type {Array<V1SubscriptionItemParams>}
-     * @memberof V1CreateMySubscriptionRequest
+     * @type {string}
+     * @memberof V1CheckoutNowRequest
      */
-    'items'?: Array<V1SubscriptionItemParams>;
+    'currencyCode'?: string;
+    /**
+     * 
+     * @type {Array<V1CheckoutItemParams>}
+     * @memberof V1CheckoutNowRequest
+     */
+    'items'?: Array<V1CheckoutItemParams>;
 }
 

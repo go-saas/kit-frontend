@@ -76,6 +76,12 @@ export interface V1Price {
      * @type {string}
      * @memberof V1Price
      */
+    'productId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Price
+     */
     'currencyCode'?: string;
     /**
      * 

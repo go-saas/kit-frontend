@@ -30,10 +30,10 @@ import { V1ListOrderRequest } from '../models';
 // @ts-ignore
 import { V1Order } from '../models';
 /**
- * UsageAppApi - axios parameter creator
+ * MyOrderServiceApi - axios parameter creator
  * @export
  */
-export const UsageAppApiAxiosParamCreator = function (configuration?: Configuration) {
+export const MyOrderServiceApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
          * 
@@ -41,10 +41,10 @@ export const UsageAppApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceGetAppOrder: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        myOrderServiceGetMyOrder: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
-            assertParamExists('orderAppServiceGetAppOrder', 'id', id)
-            const localVarPath = `/v1/order/app/order/{id}`
+            assertParamExists('myOrderServiceGetMyOrder', 'id', id)
+            const localVarPath = `/v1/order/my/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -125,8 +125,8 @@ export const UsageAppApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceListAppOrder: async (pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterCustomerId$eq?: string, filterCustomerId$neq?: string, filterCustomerId$contains?: string, filterCustomerId$startsWith?: string, filterCustomerId$nstartsWith?: string, filterCustomerId$endsWith?: string, filterCustomerId$nendsWith?: string, filterCustomerId$in?: Array<string>, filterCustomerId$nin?: Array<string>, filterCustomerId$null?: boolean, filterCustomerId$nnull?: boolean, filterCustomerId$empty?: boolean, filterCustomerId$nempty?: boolean, filterCustomerId$like?: string, afterPageToken?: string, beforePageToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/v1/order/app/order`;
+        myOrderServiceListMyOrder: async (pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterCustomerId$eq?: string, filterCustomerId$neq?: string, filterCustomerId$contains?: string, filterCustomerId$startsWith?: string, filterCustomerId$nstartsWith?: string, filterCustomerId$endsWith?: string, filterCustomerId$nendsWith?: string, filterCustomerId$in?: Array<string>, filterCustomerId$nin?: Array<string>, filterCustomerId$null?: boolean, filterCustomerId$nnull?: boolean, filterCustomerId$empty?: boolean, filterCustomerId$nempty?: boolean, filterCustomerId$like?: string, afterPageToken?: string, beforePageToken?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/v1/order/my`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -354,10 +354,10 @@ export const UsageAppApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceListAppOrder2: async (body: V1ListOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        myOrderServiceListMyOrder2: async (body: V1ListOrderRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('orderAppServiceListAppOrder2', 'body', body)
-            const localVarPath = `/v1/order/app/order/list`;
+            assertParamExists('myOrderServiceListMyOrder2', 'body', body)
+            const localVarPath = `/v1/order/my/list`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -393,12 +393,12 @@ export const UsageAppApiAxiosParamCreator = function (configuration?: Configurat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceRefundAppOrder: async (orderId: string, body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        myOrderServiceRefundMyOrder: async (orderId: string, body: object, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'orderId' is not null or undefined
-            assertParamExists('orderAppServiceRefundAppOrder', 'orderId', orderId)
+            assertParamExists('myOrderServiceRefundMyOrder', 'orderId', orderId)
             // verify required parameter 'body' is not null or undefined
-            assertParamExists('orderAppServiceRefundAppOrder', 'body', body)
-            const localVarPath = `/v1/order/app/refund/{orderId}`
+            assertParamExists('myOrderServiceRefundMyOrder', 'body', body)
+            const localVarPath = `/v1/order/my/{orderId}/refund`
                 .replace(`{${"orderId"}}`, encodeURIComponent(String(orderId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -432,11 +432,11 @@ export const UsageAppApiAxiosParamCreator = function (configuration?: Configurat
 };
 
 /**
- * UsageAppApi - functional programming interface
+ * MyOrderServiceApi - functional programming interface
  * @export
  */
-export const UsageAppApiFp = function(configuration?: Configuration) {
-    const localVarAxiosParamCreator = UsageAppApiAxiosParamCreator(configuration)
+export const MyOrderServiceApiFp = function(configuration?: Configuration) {
+    const localVarAxiosParamCreator = MyOrderServiceApiAxiosParamCreator(configuration)
     return {
         /**
          * 
@@ -444,8 +444,8 @@ export const UsageAppApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orderAppServiceGetAppOrder(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Order>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orderAppServiceGetAppOrder(id, options);
+        async myOrderServiceGetMyOrder(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Order>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceGetMyOrder(id, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -502,8 +502,8 @@ export const UsageAppApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orderAppServiceListAppOrder(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterCustomerId$eq?: string, filterCustomerId$neq?: string, filterCustomerId$contains?: string, filterCustomerId$startsWith?: string, filterCustomerId$nstartsWith?: string, filterCustomerId$endsWith?: string, filterCustomerId$nendsWith?: string, filterCustomerId$in?: Array<string>, filterCustomerId$nin?: Array<string>, filterCustomerId$null?: boolean, filterCustomerId$nnull?: boolean, filterCustomerId$empty?: boolean, filterCustomerId$nempty?: boolean, filterCustomerId$like?: string, afterPageToken?: string, beforePageToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListOrderReply>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orderAppServiceListAppOrder(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterCustomerId$eq, filterCustomerId$neq, filterCustomerId$contains, filterCustomerId$startsWith, filterCustomerId$nstartsWith, filterCustomerId$endsWith, filterCustomerId$nendsWith, filterCustomerId$in, filterCustomerId$nin, filterCustomerId$null, filterCustomerId$nnull, filterCustomerId$empty, filterCustomerId$nempty, filterCustomerId$like, afterPageToken, beforePageToken, options);
+        async myOrderServiceListMyOrder(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterCustomerId$eq?: string, filterCustomerId$neq?: string, filterCustomerId$contains?: string, filterCustomerId$startsWith?: string, filterCustomerId$nstartsWith?: string, filterCustomerId$endsWith?: string, filterCustomerId$nendsWith?: string, filterCustomerId$in?: Array<string>, filterCustomerId$nin?: Array<string>, filterCustomerId$null?: boolean, filterCustomerId$nnull?: boolean, filterCustomerId$empty?: boolean, filterCustomerId$nempty?: boolean, filterCustomerId$like?: string, afterPageToken?: string, beforePageToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListOrderReply>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceListMyOrder(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterCustomerId$eq, filterCustomerId$neq, filterCustomerId$contains, filterCustomerId$startsWith, filterCustomerId$nstartsWith, filterCustomerId$endsWith, filterCustomerId$nendsWith, filterCustomerId$in, filterCustomerId$nin, filterCustomerId$null, filterCustomerId$nnull, filterCustomerId$empty, filterCustomerId$nempty, filterCustomerId$like, afterPageToken, beforePageToken, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -512,8 +512,8 @@ export const UsageAppApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orderAppServiceListAppOrder2(body: V1ListOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListOrderReply>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orderAppServiceListAppOrder2(body, options);
+        async myOrderServiceListMyOrder2(body: V1ListOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListOrderReply>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceListMyOrder2(body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
         /**
@@ -523,507 +523,507 @@ export const UsageAppApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orderAppServiceRefundAppOrder(orderId: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Order>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.orderAppServiceRefundAppOrder(orderId, body, options);
+        async myOrderServiceRefundMyOrder(orderId: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Order>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceRefundMyOrder(orderId, body, options);
             return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
         },
     }
 };
 
 /**
- * UsageAppApi - factory interface
+ * MyOrderServiceApi - factory interface
  * @export
  */
-export const UsageAppApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
-    const localVarFp = UsageAppApiFp(configuration)
+export const MyOrderServiceApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
+    const localVarFp = MyOrderServiceApiFp(configuration)
     return {
         /**
          * 
-         * @param {UsageAppApiOrderAppServiceGetAppOrderRequest} requestParameters Request parameters.
+         * @param {MyOrderServiceApiMyOrderServiceGetMyOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceGetAppOrder(requestParameters: UsageAppApiOrderAppServiceGetAppOrderRequest, options?: AxiosRequestConfig): AxiosPromise<V1Order> {
-            return localVarFp.orderAppServiceGetAppOrder(requestParameters.id, options).then((request) => request(axios, basePath));
+        myOrderServiceGetMyOrder(requestParameters: MyOrderServiceApiMyOrderServiceGetMyOrderRequest, options?: AxiosRequestConfig): AxiosPromise<V1Order> {
+            return localVarFp.myOrderServiceGetMyOrder(requestParameters.id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {UsageAppApiOrderAppServiceListAppOrderRequest} requestParameters Request parameters.
+         * @param {MyOrderServiceApiMyOrderServiceListMyOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceListAppOrder(requestParameters: UsageAppApiOrderAppServiceListAppOrderRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListOrderReply> {
-            return localVarFp.orderAppServiceListAppOrder(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, requestParameters.filterCustomerId$eq, requestParameters.filterCustomerId$neq, requestParameters.filterCustomerId$contains, requestParameters.filterCustomerId$startsWith, requestParameters.filterCustomerId$nstartsWith, requestParameters.filterCustomerId$endsWith, requestParameters.filterCustomerId$nendsWith, requestParameters.filterCustomerId$in, requestParameters.filterCustomerId$nin, requestParameters.filterCustomerId$null, requestParameters.filterCustomerId$nnull, requestParameters.filterCustomerId$empty, requestParameters.filterCustomerId$nempty, requestParameters.filterCustomerId$like, requestParameters.afterPageToken, requestParameters.beforePageToken, options).then((request) => request(axios, basePath));
+        myOrderServiceListMyOrder(requestParameters: MyOrderServiceApiMyOrderServiceListMyOrderRequest = {}, options?: AxiosRequestConfig): AxiosPromise<V1ListOrderReply> {
+            return localVarFp.myOrderServiceListMyOrder(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, requestParameters.filterCustomerId$eq, requestParameters.filterCustomerId$neq, requestParameters.filterCustomerId$contains, requestParameters.filterCustomerId$startsWith, requestParameters.filterCustomerId$nstartsWith, requestParameters.filterCustomerId$endsWith, requestParameters.filterCustomerId$nendsWith, requestParameters.filterCustomerId$in, requestParameters.filterCustomerId$nin, requestParameters.filterCustomerId$null, requestParameters.filterCustomerId$nnull, requestParameters.filterCustomerId$empty, requestParameters.filterCustomerId$nempty, requestParameters.filterCustomerId$like, requestParameters.afterPageToken, requestParameters.beforePageToken, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {UsageAppApiOrderAppServiceListAppOrder2Request} requestParameters Request parameters.
+         * @param {MyOrderServiceApiMyOrderServiceListMyOrder2Request} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceListAppOrder2(requestParameters: UsageAppApiOrderAppServiceListAppOrder2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListOrderReply> {
-            return localVarFp.orderAppServiceListAppOrder2(requestParameters.body, options).then((request) => request(axios, basePath));
+        myOrderServiceListMyOrder2(requestParameters: MyOrderServiceApiMyOrderServiceListMyOrder2Request, options?: AxiosRequestConfig): AxiosPromise<V1ListOrderReply> {
+            return localVarFp.myOrderServiceListMyOrder2(requestParameters.body, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {UsageAppApiOrderAppServiceRefundAppOrderRequest} requestParameters Request parameters.
+         * @param {MyOrderServiceApiMyOrderServiceRefundMyOrderRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orderAppServiceRefundAppOrder(requestParameters: UsageAppApiOrderAppServiceRefundAppOrderRequest, options?: AxiosRequestConfig): AxiosPromise<V1Order> {
-            return localVarFp.orderAppServiceRefundAppOrder(requestParameters.orderId, requestParameters.body, options).then((request) => request(axios, basePath));
+        myOrderServiceRefundMyOrder(requestParameters: MyOrderServiceApiMyOrderServiceRefundMyOrderRequest, options?: AxiosRequestConfig): AxiosPromise<V1Order> {
+            return localVarFp.myOrderServiceRefundMyOrder(requestParameters.orderId, requestParameters.body, options).then((request) => request(axios, basePath));
         },
     };
 };
 
 /**
- * Request parameters for orderAppServiceGetAppOrder operation in UsageAppApi.
+ * Request parameters for myOrderServiceGetMyOrder operation in MyOrderServiceApi.
  * @export
- * @interface UsageAppApiOrderAppServiceGetAppOrderRequest
+ * @interface MyOrderServiceApiMyOrderServiceGetMyOrderRequest
  */
-export interface UsageAppApiOrderAppServiceGetAppOrderRequest {
+export interface MyOrderServiceApiMyOrderServiceGetMyOrderRequest {
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceGetAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceGetMyOrder
      */
     readonly id: string
 }
 
 /**
- * Request parameters for orderAppServiceListAppOrder operation in UsageAppApi.
+ * Request parameters for myOrderServiceListMyOrder operation in MyOrderServiceApi.
  * @export
- * @interface UsageAppApiOrderAppServiceListAppOrderRequest
+ * @interface MyOrderServiceApiMyOrderServiceListMyOrderRequest
  */
-export interface UsageAppApiOrderAppServiceListAppOrderRequest {
+export interface MyOrderServiceApiMyOrderServiceListMyOrderRequest {
     /**
      * 
      * @type {number}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly pageOffset?: number
 
     /**
      * 
      * @type {number}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly pageSize?: number
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly search?: string
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly sort?: Array<string>
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly fields?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$eq?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$neq?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$contains?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$startsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$nstartsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$endsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$nendsWith?: string
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$in?: Array<string>
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$nin?: Array<string>
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$null?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$nnull?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$empty?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$nempty?: boolean
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterId$like?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$eq?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$neq?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$contains?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$startsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$nstartsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$endsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$nendsWith?: string
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$in?: Array<string>
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$nin?: Array<string>
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$null?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$nnull?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$empty?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$nempty?: boolean
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterName$like?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$eq?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$neq?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$contains?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$startsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$nstartsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$endsWith?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$nendsWith?: string
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$in?: Array<string>
 
     /**
      * 
      * @type {Array<string>}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$nin?: Array<string>
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$null?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$nnull?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$empty?: boolean
 
     /**
      * 
      * @type {boolean}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$nempty?: boolean
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly filterCustomerId$like?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly afterPageToken?: string
 
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder
      */
     readonly beforePageToken?: string
 }
 
 /**
- * Request parameters for orderAppServiceListAppOrder2 operation in UsageAppApi.
+ * Request parameters for myOrderServiceListMyOrder2 operation in MyOrderServiceApi.
  * @export
- * @interface UsageAppApiOrderAppServiceListAppOrder2Request
+ * @interface MyOrderServiceApiMyOrderServiceListMyOrder2Request
  */
-export interface UsageAppApiOrderAppServiceListAppOrder2Request {
+export interface MyOrderServiceApiMyOrderServiceListMyOrder2Request {
     /**
      * 
      * @type {V1ListOrderRequest}
-     * @memberof UsageAppApiOrderAppServiceListAppOrder2
+     * @memberof MyOrderServiceApiMyOrderServiceListMyOrder2
      */
     readonly body: V1ListOrderRequest
 }
 
 /**
- * Request parameters for orderAppServiceRefundAppOrder operation in UsageAppApi.
+ * Request parameters for myOrderServiceRefundMyOrder operation in MyOrderServiceApi.
  * @export
- * @interface UsageAppApiOrderAppServiceRefundAppOrderRequest
+ * @interface MyOrderServiceApiMyOrderServiceRefundMyOrderRequest
  */
-export interface UsageAppApiOrderAppServiceRefundAppOrderRequest {
+export interface MyOrderServiceApiMyOrderServiceRefundMyOrderRequest {
     /**
      * 
      * @type {string}
-     * @memberof UsageAppApiOrderAppServiceRefundAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceRefundMyOrder
      */
     readonly orderId: string
 
     /**
      * 
      * @type {object}
-     * @memberof UsageAppApiOrderAppServiceRefundAppOrder
+     * @memberof MyOrderServiceApiMyOrderServiceRefundMyOrder
      */
     readonly body: object
 }
 
 /**
- * UsageAppApi - object-oriented interface
+ * MyOrderServiceApi - object-oriented interface
  * @export
- * @class UsageAppApi
+ * @class MyOrderServiceApi
  * @extends {BaseAPI}
  */
-export class UsageAppApi extends BaseAPI {
+export class MyOrderServiceApi extends BaseAPI {
     /**
      * 
-     * @param {UsageAppApiOrderAppServiceGetAppOrderRequest} requestParameters Request parameters.
+     * @param {MyOrderServiceApiMyOrderServiceGetMyOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsageAppApi
+     * @memberof MyOrderServiceApi
      */
-    public orderAppServiceGetAppOrder(requestParameters: UsageAppApiOrderAppServiceGetAppOrderRequest, options?: AxiosRequestConfig) {
-        return UsageAppApiFp(this.configuration).orderAppServiceGetAppOrder(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
+    public myOrderServiceGetMyOrder(requestParameters: MyOrderServiceApiMyOrderServiceGetMyOrderRequest, options?: AxiosRequestConfig) {
+        return MyOrderServiceApiFp(this.configuration).myOrderServiceGetMyOrder(requestParameters.id, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {UsageAppApiOrderAppServiceListAppOrderRequest} requestParameters Request parameters.
+     * @param {MyOrderServiceApiMyOrderServiceListMyOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsageAppApi
+     * @memberof MyOrderServiceApi
      */
-    public orderAppServiceListAppOrder(requestParameters: UsageAppApiOrderAppServiceListAppOrderRequest = {}, options?: AxiosRequestConfig) {
-        return UsageAppApiFp(this.configuration).orderAppServiceListAppOrder(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, requestParameters.filterCustomerId$eq, requestParameters.filterCustomerId$neq, requestParameters.filterCustomerId$contains, requestParameters.filterCustomerId$startsWith, requestParameters.filterCustomerId$nstartsWith, requestParameters.filterCustomerId$endsWith, requestParameters.filterCustomerId$nendsWith, requestParameters.filterCustomerId$in, requestParameters.filterCustomerId$nin, requestParameters.filterCustomerId$null, requestParameters.filterCustomerId$nnull, requestParameters.filterCustomerId$empty, requestParameters.filterCustomerId$nempty, requestParameters.filterCustomerId$like, requestParameters.afterPageToken, requestParameters.beforePageToken, options).then((request) => request(this.axios, this.basePath));
+    public myOrderServiceListMyOrder(requestParameters: MyOrderServiceApiMyOrderServiceListMyOrderRequest = {}, options?: AxiosRequestConfig) {
+        return MyOrderServiceApiFp(this.configuration).myOrderServiceListMyOrder(requestParameters.pageOffset, requestParameters.pageSize, requestParameters.search, requestParameters.sort, requestParameters.fields, requestParameters.filterId$eq, requestParameters.filterId$neq, requestParameters.filterId$contains, requestParameters.filterId$startsWith, requestParameters.filterId$nstartsWith, requestParameters.filterId$endsWith, requestParameters.filterId$nendsWith, requestParameters.filterId$in, requestParameters.filterId$nin, requestParameters.filterId$null, requestParameters.filterId$nnull, requestParameters.filterId$empty, requestParameters.filterId$nempty, requestParameters.filterId$like, requestParameters.filterName$eq, requestParameters.filterName$neq, requestParameters.filterName$contains, requestParameters.filterName$startsWith, requestParameters.filterName$nstartsWith, requestParameters.filterName$endsWith, requestParameters.filterName$nendsWith, requestParameters.filterName$in, requestParameters.filterName$nin, requestParameters.filterName$null, requestParameters.filterName$nnull, requestParameters.filterName$empty, requestParameters.filterName$nempty, requestParameters.filterName$like, requestParameters.filterCustomerId$eq, requestParameters.filterCustomerId$neq, requestParameters.filterCustomerId$contains, requestParameters.filterCustomerId$startsWith, requestParameters.filterCustomerId$nstartsWith, requestParameters.filterCustomerId$endsWith, requestParameters.filterCustomerId$nendsWith, requestParameters.filterCustomerId$in, requestParameters.filterCustomerId$nin, requestParameters.filterCustomerId$null, requestParameters.filterCustomerId$nnull, requestParameters.filterCustomerId$empty, requestParameters.filterCustomerId$nempty, requestParameters.filterCustomerId$like, requestParameters.afterPageToken, requestParameters.beforePageToken, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {UsageAppApiOrderAppServiceListAppOrder2Request} requestParameters Request parameters.
+     * @param {MyOrderServiceApiMyOrderServiceListMyOrder2Request} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsageAppApi
+     * @memberof MyOrderServiceApi
      */
-    public orderAppServiceListAppOrder2(requestParameters: UsageAppApiOrderAppServiceListAppOrder2Request, options?: AxiosRequestConfig) {
-        return UsageAppApiFp(this.configuration).orderAppServiceListAppOrder2(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    public myOrderServiceListMyOrder2(requestParameters: MyOrderServiceApiMyOrderServiceListMyOrder2Request, options?: AxiosRequestConfig) {
+        return MyOrderServiceApiFp(this.configuration).myOrderServiceListMyOrder2(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
-     * @param {UsageAppApiOrderAppServiceRefundAppOrderRequest} requestParameters Request parameters.
+     * @param {MyOrderServiceApiMyOrderServiceRefundMyOrderRequest} requestParameters Request parameters.
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
-     * @memberof UsageAppApi
+     * @memberof MyOrderServiceApi
      */
-    public orderAppServiceRefundAppOrder(requestParameters: UsageAppApiOrderAppServiceRefundAppOrderRequest, options?: AxiosRequestConfig) {
-        return UsageAppApiFp(this.configuration).orderAppServiceRefundAppOrder(requestParameters.orderId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
+    public myOrderServiceRefundMyOrder(requestParameters: MyOrderServiceApiMyOrderServiceRefundMyOrderRequest, options?: AxiosRequestConfig) {
+        return MyOrderServiceApiFp(this.configuration).myOrderServiceRefundMyOrder(requestParameters.orderId, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

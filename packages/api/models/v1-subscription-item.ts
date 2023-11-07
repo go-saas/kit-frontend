@@ -13,15 +13,6 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1Price } from './v1-price';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1Product } from './v1-product';
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1ProductSku } from './v1-product-sku';
 
 /**
  * 
@@ -49,27 +40,27 @@ export interface V1SubscriptionItem {
     'productId'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof V1SubscriptionItem
      */
-    'quantity'?: number;
+    'quantity'?: string;
     /**
      * 
-     * @type {V1Price}
+     * @type {string}
      * @memberof V1SubscriptionItem
      */
-    'price'?: V1Price;
+    'priceOwnerId'?: string;
     /**
      * 
-     * @type {V1Product}
+     * @type {string}
      * @memberof V1SubscriptionItem
      */
-    'product'?: V1Product;
+    'priceOwnerType'?: string;
     /**
      * 
-     * @type {V1ProductSku}
+     * @type {object}
      * @memberof V1SubscriptionItem
      */
-    'productSku'?: V1ProductSku;
+    'bizPayload'?: object;
 }
 

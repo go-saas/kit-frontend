@@ -34,10 +34,16 @@ export interface V1OrderItem {
     'id'?: string;
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof V1OrderItem
      */
-    'qty'?: number;
+    'qty'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1OrderItem
+     */
+    'currencyCode'?: string;
     /**
      * 
      * @type {PricePricePb}
@@ -49,13 +55,19 @@ export interface V1OrderItem {
      * @type {PricePricePb}
      * @memberof V1OrderItem
      */
-    'tax'?: PricePricePb;
+    'priceTax'?: PricePricePb;
     /**
      * 
      * @type {PricePricePb}
      * @memberof V1OrderItem
      */
     'priceInclTax'?: PricePricePb;
+    /**
+     * 
+     * @type {PricePricePb}
+     * @memberof V1OrderItem
+     */
+    'originalPrice'?: PricePricePb;
     /**
      * 
      * @type {PricePricePb}
@@ -79,12 +91,6 @@ export interface V1OrderItem {
      * @type {PricePricePb}
      * @memberof V1OrderItem
      */
-    'originalPrice'?: PricePricePb;
-    /**
-     * 
-     * @type {PricePricePb}
-     * @memberof V1OrderItem
-     */
     'rowDiscount'?: PricePricePb;
     /**
      * 
@@ -98,5 +104,11 @@ export interface V1OrderItem {
      * @memberof V1OrderItem
      */
     'isGiveaway'?: boolean;
+    /**
+     * 
+     * @type {object}
+     * @memberof V1OrderItem
+     */
+    'bizPayload'?: object;
 }
 

@@ -37,7 +37,7 @@ export interface V1OrderProduct {
      * @type {string}
      * @memberof V1OrderProduct
      */
-    'id'?: string;
+    'id'?: string | null;
     /**
      * 
      * @type {string}
@@ -55,12 +55,18 @@ export interface V1OrderProduct {
      * @type {string}
      * @memberof V1OrderProduct
      */
-    'skuId'?: string;
+    'skuId'?: string | null;
     /**
      * 
      * @type {string}
      * @memberof V1OrderProduct
      */
     'skuTitle'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1OrderProduct
+     */
+    'priceId'?: string | null;
 }
 

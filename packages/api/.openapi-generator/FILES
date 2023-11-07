@@ -5,14 +5,14 @@ api/account-api.ts
 api/auth-api.ts
 api/auth-web-api.ts
 api/brand-service-api.ts
+api/checkout-service-api.ts
 api/client-service-api.ts
-api/event-service-api.ts
 api/key-service-api.ts
 api/locale-service-api.ts
 api/menu-service-api.ts
 api/msg-service-api.ts
+api/my-order-service-api.ts
 api/notification-service-api.ts
-api/order-app-service-api.ts
 api/order-service-api.ts
 api/payment-gateway-service-api.ts
 api/permission-service-api.ts
@@ -23,7 +23,6 @@ api/role-service-api.ts
 api/stripe-payment-gateway-service-api.ts
 api/subscription-service-api.ts
 api/tenant-service-api.ts
-api/usage-app-api.ts
 api/user-admin-service-api.ts
 api/user-service-api.ts
 api/we-chat-auth-service-api.ts
@@ -34,6 +33,7 @@ models/account-update-addresses-request.ts
 models/blob-blob-file.ts
 models/brand-service-update-brand-request-brand.ts
 models/brand-service-update-brand-request.ts
+models/checkout-service-checkout-order-request.ts
 models/client-list-client-request.ts
 models/client-oauth2-client-list.ts
 models/client-oauth2-client.ts
@@ -41,7 +41,6 @@ models/client-patch-oauth2-client.ts
 models/client-service-patch-oauth2-client-request.ts
 models/client-service-update-oauth2-client-request.ts
 models/data-dynamic-value.ts
-models/event-service-event-request.ts
 models/googlerpc-status.ts
 models/index.ts
 models/key-json-web-key-set-generator-request.ts
@@ -72,6 +71,7 @@ models/role-service-update-role-permission-request.ts
 models/role-service-update-role-request-role.ts
 models/role-service-update-role-request.ts
 models/search-user-response-search-user.ts
+models/stripe-ephemeral-key.ts
 models/stripe-invoice.ts
 models/stripe-payment-intent.ts
 models/stripe-subscription.ts
@@ -102,18 +102,19 @@ models/v1-check-permission-reply.ts
 models/v1-check-permission-request.ts
 models/v1-check-subjects-permission-reply.ts
 models/v1-check-user-tenant-reply.ts
+models/v1-checkout-item-params.ts
+models/v1-checkout-now-reply.ts
+models/v1-checkout-now-request.ts
+models/v1-checkout-order-reply.ts
 models/v1-create-addresses-request.ts
 models/v1-create-brand-request.ts
 models/v1-create-internal-order-item.ts
 models/v1-create-menu-request.ts
-models/v1-create-my-subscription-request.ts
 models/v1-create-order-request.ts
 models/v1-create-plan-request.ts
 models/v1-create-product-category-request.ts
 models/v1-create-product-request.ts
 models/v1-create-role-request.ts
-models/v1-create-stripe-payment-intent-reply.ts
-models/v1-create-stripe-payment-intent-request.ts
 models/v1-create-subscription-request.ts
 models/v1-create-tenant-request.ts
 models/v1-create-user-request.ts
@@ -197,6 +198,9 @@ models/v1-oauth-client.ts
 models/v1-oauth-provider.ts
 models/v1-order-filter.ts
 models/v1-order-item.ts
+models/v1-order-payment-provider-info.ts
+models/v1-order-payment-provider.ts
+models/v1-order-payment-stripe-info.ts
 models/v1-order-product.ts
 models/v1-order.ts
 models/v1-passwordless-token-auth-reply.ts
@@ -223,7 +227,6 @@ models/v1-product-category.ts
 models/v1-product-filter.ts
 models/v1-product-manage-info.ts
 models/v1-product-media.ts
-models/v1-product-sku.ts
 models/v1-product.ts
 models/v1-refresh-remember-token-reply.ts
 models/v1-refresh-token-auth-reply.ts
@@ -241,6 +244,7 @@ models/v1-subscription-filter.ts
 models/v1-subscription-item-params.ts
 models/v1-subscription-item.ts
 models/v1-subscription-provider-info.ts
+models/v1-subscription-stripe-info.ts
 models/v1-tenant-connection-string.ts
 models/v1-tenant-feature.ts
 models/v1-tenant-filter.ts

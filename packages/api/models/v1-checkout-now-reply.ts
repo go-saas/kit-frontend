@@ -15,19 +15,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1SubscriptionStripeInfo } from './v1-subscription-stripe-info';
+import { Subscriptionv1Subscription } from './subscriptionv1-subscription';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Order } from './v1-order';
 
 /**
  * 
  * @export
- * @interface V1SubscriptionProviderInfo
+ * @interface V1CheckoutNowReply
  */
-export interface V1SubscriptionProviderInfo {
+export interface V1CheckoutNowReply {
     /**
      * 
-     * @type {V1SubscriptionStripeInfo}
-     * @memberof V1SubscriptionProviderInfo
+     * @type {Subscriptionv1Subscription}
+     * @memberof V1CheckoutNowReply
      */
-    'stripe'?: V1SubscriptionStripeInfo;
+    'subscription'?: Subscriptionv1Subscription;
+    /**
+     * 
+     * @type {V1Order}
+     * @memberof V1CheckoutNowReply
+     */
+    'order'?: V1Order;
 }
 

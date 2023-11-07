@@ -17,26 +17,32 @@
 /**
  * 
  * @export
- * @interface V1CreateStripePaymentIntentReply
+ * @interface V1CheckoutItemParams
  */
-export interface V1CreateStripePaymentIntentReply {
+export interface V1CheckoutItemParams {
     /**
      * 
      * @type {string}
-     * @memberof V1CreateStripePaymentIntentReply
+     * @memberof V1CheckoutItemParams
      */
-    'paymentIntent'?: string;
+    'id'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1CreateStripePaymentIntentReply
+     * @memberof V1CheckoutItemParams
      */
-    'ephemeralKey'?: string;
+    'priceId'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1CreateStripePaymentIntentReply
+     * @memberof V1CheckoutItemParams
      */
-    'customerId'?: string;
+    'quantity'?: string;
+    /**
+     * 
+     * @type {object}
+     * @memberof V1CheckoutItemParams
+     */
+    'bizPayload'?: object;
 }
 

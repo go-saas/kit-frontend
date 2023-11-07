@@ -13,18 +13,21 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1OrderPaymentProviderInfo } from './v1-order-payment-provider-info';
 
 /**
  * 
  * @export
- * @interface V1CreateStripePaymentIntentRequest
+ * @interface V1CheckoutOrderReply
  */
-export interface V1CreateStripePaymentIntentRequest {
+export interface V1CheckoutOrderReply {
     /**
      * 
-     * @type {string}
-     * @memberof V1CreateStripePaymentIntentRequest
+     * @type {V1OrderPaymentProviderInfo}
+     * @memberof V1CheckoutOrderReply
      */
-    'orderId'?: string;
+    'paymentProviderInfo'?: V1OrderPaymentProviderInfo;
 }
 

@@ -15,9 +15,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { PricePricePb } from './price-price-pb';
-// May contain unused imports in some cases
-// @ts-ignore
 import { V1OrderProduct } from './v1-order-product';
 
 /**
@@ -28,22 +25,22 @@ import { V1OrderProduct } from './v1-order-product';
 export interface V1CreateInternalOrderItem {
     /**
      * 
-     * @type {number}
+     * @type {string}
      * @memberof V1CreateInternalOrderItem
      */
-    'qty'?: number;
+    'qty'?: string;
     /**
      * 
-     * @type {PricePricePb}
+     * @type {string}
      * @memberof V1CreateInternalOrderItem
      */
-    'price'?: PricePricePb;
+    'priceAmount'?: string;
     /**
      * 
-     * @type {PricePricePb}
+     * @type {string}
      * @memberof V1CreateInternalOrderItem
      */
-    'originalPrice'?: PricePricePb;
+    'originalPriceAmount'?: string;
     /**
      * 
      * @type {boolean}
@@ -56,5 +53,11 @@ export interface V1CreateInternalOrderItem {
      * @memberof V1CreateInternalOrderItem
      */
     'product': V1OrderProduct;
+    /**
+     * 
+     * @type {object}
+     * @memberof V1CreateInternalOrderItem
+     */
+    'bizPayload'?: object;
 }
 

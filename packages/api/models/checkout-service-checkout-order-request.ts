@@ -13,21 +13,24 @@
  */
 
 
-// May contain unused imports in some cases
-// @ts-ignore
-import { V1MessageProto } from './v1-message-proto';
 
 /**
  * 
  * @export
- * @interface EventServiceEventRequest
+ * @interface CheckoutServiceCheckoutOrderRequest
  */
-export interface EventServiceEventRequest {
+export interface CheckoutServiceCheckoutOrderRequest {
     /**
      * 
-     * @type {V1MessageProto}
-     * @memberof EventServiceEventRequest
+     * @type {string}
+     * @memberof CheckoutServiceCheckoutOrderRequest
      */
-    'message'?: V1MessageProto;
+    'provider': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof CheckoutServiceCheckoutOrderRequest
+     */
+    'currencyCode'?: string;
 }
 

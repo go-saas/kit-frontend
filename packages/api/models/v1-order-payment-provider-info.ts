@@ -15,19 +15,19 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1SubscriptionStripeInfo } from './v1-subscription-stripe-info';
+import { V1OrderPaymentStripeInfo } from './v1-order-payment-stripe-info';
 
 /**
  * 
  * @export
- * @interface V1SubscriptionProviderInfo
+ * @interface V1OrderPaymentProviderInfo
  */
-export interface V1SubscriptionProviderInfo {
+export interface V1OrderPaymentProviderInfo {
     /**
      * 
-     * @type {V1SubscriptionStripeInfo}
-     * @memberof V1SubscriptionProviderInfo
+     * @type {V1OrderPaymentStripeInfo}
+     * @memberof V1OrderPaymentProviderInfo
      */
-    'stripe'?: V1SubscriptionStripeInfo;
+    'stripe'?: V1OrderPaymentStripeInfo;
 }
 

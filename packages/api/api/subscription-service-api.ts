@@ -30,8 +30,6 @@ import { SubscriptionServiceUpdateSubscriptionRequest } from '../models';
 // @ts-ignore
 import { Subscriptionv1Subscription } from '../models';
 // @ts-ignore
-import { V1CreateMySubscriptionRequest } from '../models';
-// @ts-ignore
 import { V1CreateSubscriptionRequest } from '../models';
 // @ts-ignore
 import { V1ListMySubscriptionReply } from '../models';
@@ -103,44 +101,6 @@ export const SubscriptionServiceApiAxiosParamCreator = function (configuration?:
             assertParamExists('subscriptionServiceCancelSubscription', 'body', body)
             const localVarPath = `/v1/subscription/{id}/cancel`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            // authentication bearer required
-            await setApiKeyToObject(localVarHeaderParameter, "Authorization", configuration)
-
-
-    
-            localVarHeaderParameter['Content-Type'] = 'application/json';
-
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {V1CreateMySubscriptionRequest} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        subscriptionServiceCreateMySubscription: async (body: V1CreateMySubscriptionRequest, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('subscriptionServiceCreateMySubscription', 'body', body)
-            const localVarPath = `/v1/subscription/my`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -1147,16 +1107,6 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
         },
         /**
          * 
-         * @param {V1CreateMySubscriptionRequest} body 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async subscriptionServiceCreateMySubscription(body: V1CreateMySubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceCreateMySubscription(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
-        },
-        /**
-         * 
          * @param {V1CreateSubscriptionRequest} body 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1397,15 +1347,6 @@ export const SubscriptionServiceApiFactory = function (configuration?: Configura
         },
         /**
          * 
-         * @param {SubscriptionServiceApiSubscriptionServiceCreateMySubscriptionRequest} requestParameters Request parameters.
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        subscriptionServiceCreateMySubscription(requestParameters: SubscriptionServiceApiSubscriptionServiceCreateMySubscriptionRequest, options?: AxiosRequestConfig): AxiosPromise<Subscriptionv1Subscription> {
-            return localVarFp.subscriptionServiceCreateMySubscription(requestParameters.body, options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {SubscriptionServiceApiSubscriptionServiceCreateSubscriptionRequest} requestParameters Request parameters.
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -1528,20 +1469,6 @@ export interface SubscriptionServiceApiSubscriptionServiceCancelSubscriptionRequ
      * @memberof SubscriptionServiceApiSubscriptionServiceCancelSubscription
      */
     readonly body: object
-}
-
-/**
- * Request parameters for subscriptionServiceCreateMySubscription operation in SubscriptionServiceApi.
- * @export
- * @interface SubscriptionServiceApiSubscriptionServiceCreateMySubscriptionRequest
- */
-export interface SubscriptionServiceApiSubscriptionServiceCreateMySubscriptionRequest {
-    /**
-     * 
-     * @type {V1CreateMySubscriptionRequest}
-     * @memberof SubscriptionServiceApiSubscriptionServiceCreateMySubscription
-     */
-    readonly body: V1CreateMySubscriptionRequest
 }
 
 /**
@@ -2551,17 +2478,6 @@ export class SubscriptionServiceApi extends BaseAPI {
      */
     public subscriptionServiceCancelSubscription(requestParameters: SubscriptionServiceApiSubscriptionServiceCancelSubscriptionRequest, options?: AxiosRequestConfig) {
         return SubscriptionServiceApiFp(this.configuration).subscriptionServiceCancelSubscription(requestParameters.id, requestParameters.body, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {SubscriptionServiceApiSubscriptionServiceCreateMySubscriptionRequest} requestParameters Request parameters.
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SubscriptionServiceApi
-     */
-    public subscriptionServiceCreateMySubscription(requestParameters: SubscriptionServiceApiSubscriptionServiceCreateMySubscriptionRequest, options?: AxiosRequestConfig) {
-        return SubscriptionServiceApiFp(this.configuration).subscriptionServiceCreateMySubscription(requestParameters.body, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

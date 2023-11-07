@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import { OperationBooleanFilterOperators } from './operation-boolean-filter-operators';
+// May contain unused imports in some cases
+// @ts-ignore
 import { OperationStringFilterOperation } from './operation-string-filter-operation';
 
 /**
@@ -35,5 +38,11 @@ export interface V1ProductFilter {
      * @memberof V1ProductFilter
      */
     'name'?: OperationStringFilterOperation;
+    /**
+     * 
+     * @type {OperationBooleanFilterOperators}
+     * @memberof V1ProductFilter
+     */
+    'internal'?: OperationBooleanFilterOperators;
 }
 

@@ -15,19 +15,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1SubscriptionStripeInfo } from './v1-subscription-stripe-info';
+import { StripeEphemeralKey } from './stripe-ephemeral-key';
+// May contain unused imports in some cases
+// @ts-ignore
+import { StripePaymentIntent } from './stripe-payment-intent';
 
 /**
  * 
  * @export
- * @interface V1SubscriptionProviderInfo
+ * @interface V1OrderPaymentStripeInfo
  */
-export interface V1SubscriptionProviderInfo {
+export interface V1OrderPaymentStripeInfo {
     /**
      * 
-     * @type {V1SubscriptionStripeInfo}
-     * @memberof V1SubscriptionProviderInfo
+     * @type {StripePaymentIntent}
+     * @memberof V1OrderPaymentStripeInfo
      */
-    'stripe'?: V1SubscriptionStripeInfo;
+    'paymentIntent'?: StripePaymentIntent;
+    /**
+     * 
+     * @type {StripeEphemeralKey}
+     * @memberof V1OrderPaymentStripeInfo
+     */
+    'ephemeralKey'?: StripeEphemeralKey;
 }
 

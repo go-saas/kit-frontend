@@ -17,32 +17,14 @@
 /**
  * 
  * @export
- * @interface V1SubscriptionItemParams
+ * @interface StripeEphemeralKey
  */
-export interface V1SubscriptionItemParams {
+export interface StripeEphemeralKey {
     /**
      * 
      * @type {string}
-     * @memberof V1SubscriptionItemParams
+     * @memberof StripeEphemeralKey
      */
-    'id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof V1SubscriptionItemParams
-     */
-    'priceId'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof V1SubscriptionItemParams
-     */
-    'quantity'?: number;
-    /**
-     * 
-     * @type {object}
-     * @memberof V1SubscriptionItemParams
-     */
-    'bizPayload'?: object;
+    'secret'?: string;
 }
 

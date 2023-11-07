@@ -17,32 +17,20 @@
 /**
  * 
  * @export
- * @interface V1SubscriptionItemParams
+ * @interface V1OrderPaymentProvider
  */
-export interface V1SubscriptionItemParams {
+export interface V1OrderPaymentProvider {
     /**
      * 
      * @type {string}
-     * @memberof V1SubscriptionItemParams
+     * @memberof V1OrderPaymentProvider
      */
-    'id'?: string;
+    'provider'?: string;
     /**
      * 
      * @type {string}
-     * @memberof V1SubscriptionItemParams
+     * @memberof V1OrderPaymentProvider
      */
-    'priceId'?: string;
-    /**
-     * 
-     * @type {number}
-     * @memberof V1SubscriptionItemParams
-     */
-    'quantity'?: number;
-    /**
-     * 
-     * @type {object}
-     * @memberof V1SubscriptionItemParams
-     */
-    'bizPayload'?: object;
+    'providerKey'?: string;
 }
 

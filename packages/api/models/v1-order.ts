@@ -22,6 +22,12 @@ import { PricePricePb } from './price-price-pb';
 // May contain unused imports in some cases
 // @ts-ignore
 import { V1OrderItem } from './v1-order-item';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1OrderPaymentProvider } from './v1-order-payment-provider';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1OrderPaymentProviderInfo } from './v1-order-payment-provider-info';
 
 /**
  * 
@@ -46,7 +52,25 @@ export interface V1Order {
      * @type {string}
      * @memberof V1Order
      */
+    'updatedAt'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Order
+     */
+    'tenantId'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Order
+     */
     'status'?: string;
+    /**
+     * 
+     * @type {string}
+     * @memberof V1Order
+     */
+    'currencyCode'?: string;
     /**
      * 
      * @type {PricePricePb}
@@ -76,12 +100,6 @@ export interface V1Order {
      * @type {PricePricePb}
      * @memberof V1Order
      */
-    'originalPriceInclTax'?: PricePricePb;
-    /**
-     * 
-     * @type {PricePricePb}
-     * @memberof V1Order
-     */
     'paidPrice'?: PricePricePb;
     /**
      * 
@@ -100,7 +118,7 @@ export interface V1Order {
      * @type {string}
      * @memberof V1Order
      */
-    'payWay'?: string;
+    'payProvider'?: string;
     /**
      * 
      * @type {LbsAddress}
@@ -125,5 +143,17 @@ export interface V1Order {
      * @memberof V1Order
      */
     'items'?: Array<V1OrderItem>;
+    /**
+     * 
+     * @type {V1OrderPaymentProviderInfo}
+     * @memberof V1Order
+     */
+    'paymentProviderInfo'?: V1OrderPaymentProviderInfo;
+    /**
+     * 
+     * @type {Array<V1OrderPaymentProvider>}
+     * @memberof V1Order
+     */
+    'paymentProviders'?: Array<V1OrderPaymentProvider>;
 }
 
