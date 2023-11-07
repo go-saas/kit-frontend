@@ -95,13 +95,18 @@
       ],
     },
     {
-      path: '/order',
-      name: 'order',
+      path: '/payment',
+      name: 'payment',
       icon: 'smile',
       routes: [
         {
-          name: 'order.orders',
-          path: '/order/orders',
+          name: 'payment.orders',
+          path: '/payment/orders',
+          component: './Order/Order',
+        },
+        {
+          name: 'payment.subscriptions',
+          path: '/payment/subscriptions',
           component: './Order/Order',
         },
       ],

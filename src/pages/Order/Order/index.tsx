@@ -132,16 +132,6 @@ const TableList: React.FC = () => {
     },
     {
       title: (
-        <FormattedMessage
-          id="ticketing.order.originalPriceInclTax"
-          defaultMessage="originalPrice with Tax"
-        />
-      ),
-      dataIndex: ['originalPriceInclTax', 'text'],
-      valueType: 'text',
-    },
-    {
-      title: (
         <FormattedMessage id="ticketing.order.paidPrice" defaultMessage="paidPrice with Tax" />
       ),
       dataIndex: ['paidPrice', 'text'],

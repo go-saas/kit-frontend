@@ -1,6 +1,6 @@
 import {
+  CheckoutServiceApi,
   StripePaymentIntent,
-  SubscriptionServiceApi,
   type V1Plan,
   type V1Price,
 } from '@gosaas/api';
@@ -8,7 +8,7 @@ import styles from './index.less';
 import React, { useState, useEffect } from 'react';
 import { Button, message, InputNumber, Radio } from 'antd';
 import { ProCard } from '@ant-design/pro-components';
-import { useIntl } from '@umijs/max';
+import { useIntl, useModel } from '@umijs/max';
 import { useStripe, PaymentElement, Elements, ElementsConsumer } from '@stripe/react-stripe-js';
 
 export type PriceTableProps = {
@@ -19,7 +19,7 @@ export type PriceTableProps = {
 };
 
 const PriceTable: React.FC<PriceTableProps> = (props) => {
-  const subscriptionSrv = new SubscriptionServiceApi();
+  const checkoutSrv = new CheckoutServiceApi();
   const [messageApi] = message.useMessage();
   const groupedData = props.data;
   const currentPeriod = props.currentPeriod;
@@ -28,6 +28,7 @@ const PriceTable: React.FC<PriceTableProps> = (props) => {
   const [quantity, setQuantity] = useState<number>(1);
   const [currentPrice, setCurrentPrice] = useState<{ plan: V1Plan; price: V1Price }>();
   const intl = useIntl();
+  const { initialState } = useModel('@@initialState');
 
   let btnMsg = intl.formatMessage({
     id: 'product.price.subscribeNow',
@@ -140,13 +141,15 @@ const PriceTable: React.FC<PriceTableProps> = (props) => {
                   setLoading(true);
                   setCurrentPrice(p);
                   try {
-                    const resp = await subscriptionSrv.subscriptionServiceCreateMySubscription({
+                    const resp = await checkoutSrv.checkoutServiceCheckoutNow({
                       body: {
                         provider: 'stripe',
-                        items: [{ priceId: p.price.id, quantity: quantity }],
+                        items: [{ priceId: p.price.id, quantity: quantity.toString(),bizPayload:{
+                          "tenant_id":initialState?.currentTenant?.tenant?.id
+                        } }],
                       },
                     });
-                    setPaymentIntent(resp.data.providerInfo?.stripe?.latestInvoice?.paymentIntent);
+                    setPaymentIntent(resp.data.subscription?.providerInfo?.stripe?.subscription?.latestInvoice?.paymentIntent || resp.data.order?.paymentProviderInfo?.stripe?.paymentIntent);
                   } finally {
                     setLoading(false);
                   }

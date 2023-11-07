@@ -114,6 +114,7 @@ const PlanDropdown: React.FC = () => {
         onCancel={() => {
           setIsModalOpen(false);
         }}
+        destroyOnClose
       >
         <PriceTable
           data={groupedData}
