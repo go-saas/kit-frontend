@@ -7,7 +7,7 @@ import {
   ProFormText,
 } from '@ant-design/pro-components';
 import { FormattedMessage, SelectLang, useIntl, useModel, history } from '@umijs/max';
-import { Alert, message, Tabs, Skeleton } from 'antd';
+import { Alert, message, Tabs, Skeleton, Button } from 'antd';
 import type { InputRef } from 'antd';
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -33,14 +33,12 @@ const LoginMessage: React.FC<{
 
 interface LoginResult {
   status?: 'error';
-  type: 'account' | 'mobile';
 }
 
 type LoginParams = {
   username: string;
   password: string;
   autoLogin?: boolean;
-  type?: string;
 };
 
 const Lang = () => {
@@ -66,7 +64,7 @@ const Lang = () => {
 };
 
 const Login: React.FC = () => {
-  const [userLoginState, setUserLoginState] = useState<LoginResult>({ type: 'account' });
+  const [userLoginState, setUserLoginState] = useState<LoginResult>({});
   const [type, setType] = useState<string>('account');
   const { initialState, setInitialState } = useModel('@@initialState');
 
@@ -142,10 +140,12 @@ const Login: React.FC = () => {
       window.location.replace(finalRedirect);
       return;
     } catch (error) {
-      setUserLoginState({ status: 'error', type: 'account' });
+      setUserLoginState((v) => {
+        return { ...v, status: 'error' };
+      });
     }
   };
-  const { status, type: loginType } = userLoginState;
+  const { status } = userLoginState;
   const titile = initialState?.currentTenant?.tenant?.displayName || '';
   const logo = initialState?.currentTenant?.tenant?.logo?.url || '/logo.png';
 
@@ -171,7 +171,23 @@ const Login: React.FC = () => {
           initialValues={{
             autoLogin: true,
           }}
-          actions={[]}
+          actions={[
+            <Button
+              key="registerbtn"
+              type="link"
+              style={{
+                float: 'right',
+              }}
+              onClick={() => {
+                history.push('/user/register');
+              }}
+            >
+              <FormattedMessage
+                id="pages.register.tips"
+                defaultMessage="Do not have an account? Go to register"
+              />
+            </Button>,
+          ]}
           onFinish={async (values) => {
             await handleSubmit(values as LoginParams);
           }}
@@ -191,7 +207,7 @@ const Login: React.FC = () => {
               ]}
             ></Tabs>
 
-            {status === 'error' && loginType === 'account' && (
+            {status === 'error' && type === 'account' && (
               <LoginMessage
                 content={intl.formatMessage({
                   id: 'pages.login.accountLogin.errorMessage',
@@ -210,7 +226,7 @@ const Login: React.FC = () => {
                   }}
                   placeholder={intl.formatMessage({
                     id: 'pages.login.username.placeholder',
-                    defaultMessage: '用户名或邮箱',
+                    defaultMessage: '用户名',
                   })}
                   rules={[
                     {
@@ -218,7 +234,7 @@ const Login: React.FC = () => {
                       message: (
                         <FormattedMessage
                           id="pages.login.username.required"
-                          defaultMessage="请输入用户名或者邮箱!"
+                          defaultMessage="请输入用户名!"
                         />
                       ),
                     },
@@ -249,7 +265,7 @@ const Login: React.FC = () => {
               </>
             )}
 
-            {status === 'error' && loginType === 'mobile' && <LoginMessage content="验证码错误" />}
+            {status === 'error' && type === 'mobile' && <LoginMessage content="验证码错误" />}
             {type === 'mobile' && (
               <>
                 <ProFormText

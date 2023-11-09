@@ -56,6 +56,7 @@
     "ahooks": "^3.7.4",
     "antd": "^5.2.0",
     "antd-img-crop": "^4.2.3",
+    "antd-style": "^3.5.2",
     "centrifuge": "^3.0.1",
     "classnames": "^2.3.2",
     "lodash": "^4.17.21",
