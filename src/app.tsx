@@ -3,7 +3,7 @@ import { ProBreadcrumb } from '@ant-design/pro-components';
 import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RunTimeLayoutConfig } from '@umijs/max';
-import { history } from '@umijs/max';
+import { getLocale } from '@umijs/max';
 import defaultSettings from '../config/defaultSettings';
 import { AccountApi, TenantServiceApi } from '@gosaas/api';
 import { message, notification } from 'antd';
@@ -25,7 +25,7 @@ import type { V1LocaleLanguage } from '@gosaas/api';
 import { setDefaultAxiosFactory, MenuServiceApi, LocaleServiceApi } from '@gosaas/api';
 import type { Route } from '@/utils/menuTransform';
 import { transformMenu } from '@/utils/menuTransform';
-import type { AxiosResponse } from '@umijs/max';
+import type { AxiosResponse, AxiosRequestConfig } from '@umijs/max';
 import { ErrorShowType } from '@/utils/errors';
 import TenantDropdown from '@/components/TenantDropdown';
 import pRetry from 'p-retry';
@@ -347,6 +347,17 @@ function tenantErrorInterceptorRedirect() {
   ];
 }
 
+function languageInterceptor() {
+  return function (config: AxiosRequestConfig) {
+    const locale = getLocale();
+    config.headers = config.headers || {};
+    if (locale) {
+      config.headers['Accept-Language'] = locale;
+    }
+    return config;
+  };
+}
+
 export const request: RequestConfig = {
   baseURL: BASE_URL,
   withCredentials: true,
@@ -354,6 +365,7 @@ export const request: RequestConfig = {
     authRequestInterceptor(),
     csrfRequestInterceptor(),
     saasRequestInterceptor(),
+    languageInterceptor(),
   ],
   responseInterceptors: [
     csrfRespInterceptor(),
