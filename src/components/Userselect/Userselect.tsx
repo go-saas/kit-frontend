@@ -67,7 +67,9 @@ const Userselect: React.FC<UserselectProps> = (props: UserselectProps) => {
 
   const search = async (body: UserServiceApiUserServiceSearchUserRequest) => {
     try {
-      const resp = await service.userServiceSearchUser(body, { showType: ErrorShowType.SILENT });
+      const resp = await service.userServicePublicSearchUser(body, {
+        showType: ErrorShowType.SILENT,
+      });
       const u = resp.data?.user ? [resp.data?.user] : [];
       setUserList(u);
       setOpen(u.length > 0);
