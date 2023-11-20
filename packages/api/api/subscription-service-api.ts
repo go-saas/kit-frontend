@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -1092,7 +1092,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceCancelMySubscription(id: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceCancelMySubscription(id, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceCancelMySubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1103,7 +1105,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceCancelSubscription(id: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceCancelSubscription(id, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceCancelSubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1113,7 +1117,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceCreateSubscription(body: V1CreateSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceCreateSubscription(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceCreateSubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1123,7 +1129,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceGetMySubscription(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceGetMySubscription(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceGetMySubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1133,7 +1141,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceGetSubscription(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceGetSubscription(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceGetSubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1203,7 +1213,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceListMySubscription(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterUserId$eq?: string, filterUserId$neq?: string, filterUserId$contains?: string, filterUserId$startsWith?: string, filterUserId$nstartsWith?: string, filterUserId$endsWith?: string, filterUserId$nendsWith?: string, filterUserId$in?: Array<string>, filterUserId$nin?: Array<string>, filterUserId$null?: boolean, filterUserId$nnull?: boolean, filterUserId$empty?: boolean, filterUserId$nempty?: boolean, filterUserId$like?: string, filterProvider$eq?: string, filterProvider$neq?: string, filterProvider$contains?: string, filterProvider$startsWith?: string, filterProvider$nstartsWith?: string, filterProvider$endsWith?: string, filterProvider$nendsWith?: string, filterProvider$in?: Array<string>, filterProvider$nin?: Array<string>, filterProvider$null?: boolean, filterProvider$nnull?: boolean, filterProvider$empty?: boolean, filterProvider$nempty?: boolean, filterProvider$like?: string, filterProviderKey$eq?: string, filterProviderKey$neq?: string, filterProviderKey$contains?: string, filterProviderKey$startsWith?: string, filterProviderKey$nstartsWith?: string, filterProviderKey$endsWith?: string, filterProviderKey$nendsWith?: string, filterProviderKey$in?: Array<string>, filterProviderKey$nin?: Array<string>, filterProviderKey$null?: boolean, filterProviderKey$nnull?: boolean, filterProviderKey$empty?: boolean, filterProviderKey$nempty?: boolean, filterProviderKey$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListMySubscriptionReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceListMySubscription(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterUserId$eq, filterUserId$neq, filterUserId$contains, filterUserId$startsWith, filterUserId$nstartsWith, filterUserId$endsWith, filterUserId$nendsWith, filterUserId$in, filterUserId$nin, filterUserId$null, filterUserId$nnull, filterUserId$empty, filterUserId$nempty, filterUserId$like, filterProvider$eq, filterProvider$neq, filterProvider$contains, filterProvider$startsWith, filterProvider$nstartsWith, filterProvider$endsWith, filterProvider$nendsWith, filterProvider$in, filterProvider$nin, filterProvider$null, filterProvider$nnull, filterProvider$empty, filterProvider$nempty, filterProvider$like, filterProviderKey$eq, filterProviderKey$neq, filterProviderKey$contains, filterProviderKey$startsWith, filterProviderKey$nstartsWith, filterProviderKey$endsWith, filterProviderKey$nendsWith, filterProviderKey$in, filterProviderKey$nin, filterProviderKey$null, filterProviderKey$nnull, filterProviderKey$empty, filterProviderKey$nempty, filterProviderKey$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceListMySubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1213,7 +1225,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceListMySubscription2(body: V1ListMySubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListMySubscriptionReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceListMySubscription2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceListMySubscription2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1283,7 +1297,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceListSubscription(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterUserId$eq?: string, filterUserId$neq?: string, filterUserId$contains?: string, filterUserId$startsWith?: string, filterUserId$nstartsWith?: string, filterUserId$endsWith?: string, filterUserId$nendsWith?: string, filterUserId$in?: Array<string>, filterUserId$nin?: Array<string>, filterUserId$null?: boolean, filterUserId$nnull?: boolean, filterUserId$empty?: boolean, filterUserId$nempty?: boolean, filterUserId$like?: string, filterProvider$eq?: string, filterProvider$neq?: string, filterProvider$contains?: string, filterProvider$startsWith?: string, filterProvider$nstartsWith?: string, filterProvider$endsWith?: string, filterProvider$nendsWith?: string, filterProvider$in?: Array<string>, filterProvider$nin?: Array<string>, filterProvider$null?: boolean, filterProvider$nnull?: boolean, filterProvider$empty?: boolean, filterProvider$nempty?: boolean, filterProvider$like?: string, filterProviderKey$eq?: string, filterProviderKey$neq?: string, filterProviderKey$contains?: string, filterProviderKey$startsWith?: string, filterProviderKey$nstartsWith?: string, filterProviderKey$endsWith?: string, filterProviderKey$nendsWith?: string, filterProviderKey$in?: Array<string>, filterProviderKey$nin?: Array<string>, filterProviderKey$null?: boolean, filterProviderKey$nnull?: boolean, filterProviderKey$empty?: boolean, filterProviderKey$nempty?: boolean, filterProviderKey$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListSubscriptionReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceListSubscription(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterUserId$eq, filterUserId$neq, filterUserId$contains, filterUserId$startsWith, filterUserId$nstartsWith, filterUserId$endsWith, filterUserId$nendsWith, filterUserId$in, filterUserId$nin, filterUserId$null, filterUserId$nnull, filterUserId$empty, filterUserId$nempty, filterUserId$like, filterProvider$eq, filterProvider$neq, filterProvider$contains, filterProvider$startsWith, filterProvider$nstartsWith, filterProvider$endsWith, filterProvider$nendsWith, filterProvider$in, filterProvider$nin, filterProvider$null, filterProvider$nnull, filterProvider$empty, filterProvider$nempty, filterProvider$like, filterProviderKey$eq, filterProviderKey$neq, filterProviderKey$contains, filterProviderKey$startsWith, filterProviderKey$nstartsWith, filterProviderKey$endsWith, filterProviderKey$nendsWith, filterProviderKey$in, filterProviderKey$nin, filterProviderKey$null, filterProviderKey$nnull, filterProviderKey$empty, filterProviderKey$nempty, filterProviderKey$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceListSubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1293,7 +1309,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceListSubscription2(body: V1ListSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListSubscriptionReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceListSubscription2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceListSubscription2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1304,7 +1322,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceUpdateMySubscription(subscriptionId: string, body: SubscriptionServiceUpdateMySubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceUpdateMySubscription(subscriptionId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceUpdateMySubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -1315,7 +1335,9 @@ export const SubscriptionServiceApiFp = function(configuration?: Configuration) 
          */
         async subscriptionServiceUpdateSubscription(subscriptionId: string, body: SubscriptionServiceUpdateSubscriptionRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Subscriptionv1Subscription>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.subscriptionServiceUpdateSubscription(subscriptionId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['SubscriptionServiceApi.subscriptionServiceUpdateSubscription']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

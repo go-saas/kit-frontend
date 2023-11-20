@@ -24,3 +24,4 @@
 base.ts
 index.ts
 common.ts
+models/protobuf-any.ts

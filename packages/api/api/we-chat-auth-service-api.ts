@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -129,7 +129,9 @@ export const WeChatAuthServiceApiFp = function(configuration?: Configuration) {
          */
         async weChatAuthServiceMiniProgramCode(body: V1WechatMiniProgramCodeReq, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1WeChatLoginReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.weChatAuthServiceMiniProgramCode(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['WeChatAuthServiceApi.weChatAuthServiceMiniProgramCode']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -139,7 +141,9 @@ export const WeChatAuthServiceApiFp = function(configuration?: Configuration) {
          */
         async weChatAuthServiceMiniProgramPhoneCode(body: V1WechatMiniProgramPhoneCodeReq, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1WeChatLoginReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.weChatAuthServiceMiniProgramPhoneCode(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['WeChatAuthServiceApi.weChatAuthServiceMiniProgramPhoneCode']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

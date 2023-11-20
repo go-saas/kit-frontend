@@ -65,7 +65,6 @@ models/price-price-pb.ts
 models/product-category-service-update-product-category-request.ts
 models/product-service-update-product-request-product.ts
 models/product-service-update-product-request.ts
-models/protobuf-any.ts
 models/protobuf-null-value.ts
 models/role-service-update-role-permission-request.ts
 models/role-service-update-role-request-role.ts
@@ -83,10 +82,10 @@ models/tenant-service-update-tenant-request-tenant.ts
 models/tenant-service-update-tenant-request.ts
 models/user-admin-service-update-user-admin-request-user.ts
 models/user-admin-service-update-user-admin-request.ts
+models/user-service-update-user-permission-request.ts
 models/user-service-update-user-request-user.ts
 models/user-service-update-user-request.ts
 models/userv1-user-role.ts
-models/v1-add-subject-permission-request.ts
 models/v1-admin-create-user-request.ts
 models/v1-admin-list-users-request.ts
 models/v1-admin-list-users-response.ts
@@ -147,6 +146,7 @@ models/v1-get-profile-response.ts
 models/v1-get-role-permission-response.ts
 models/v1-get-settings-response.ts
 models/v1-get-stripe-config-reply.ts
+models/v1-get-user-permission-reply.ts
 models/v1-get-user-role-reply.ts
 models/v1-grant-consent-request.ts
 models/v1-grant-consent-response.ts
@@ -172,7 +172,6 @@ models/v1-list-product-reply.ts
 models/v1-list-product-request.ts
 models/v1-list-roles-request.ts
 models/v1-list-roles-response.ts
-models/v1-list-subject-permission-request.ts
 models/v1-list-subject-permission-response.ts
 models/v1-list-subscription-reply.ts
 models/v1-list-subscription-request.ts
@@ -233,7 +232,6 @@ models/v1-refresh-token-auth-reply.ts
 models/v1-refresh-token-auth-request.ts
 models/v1-register-auth-reply.ts
 models/v1-register-auth-request.ts
-models/v1-remove-subject-permission-request.ts
 models/v1-role-filter.ts
 models/v1-role.ts
 models/v1-search-user-response.ts
@@ -267,7 +265,6 @@ models/v1-update-settings-request.ts
 models/v1-update-settings-response.ts
 models/v1-update-settings.ts
 models/v1-update-subject-permission-acl.ts
-models/v1-update-subject-permission-request.ts
 models/v1-update-subject-permission-response.ts
 models/v1-update-subscription.ts
 models/v1-update-tenant.ts

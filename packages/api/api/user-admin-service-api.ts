@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -686,7 +686,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceCreateUserAdmin(body: V1AdminCreateUserRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceCreateUserAdmin(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceCreateUserAdmin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -697,7 +699,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceDeleteUserAdmin(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceDeleteUserAdmin(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceDeleteUserAdmin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -708,7 +712,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceGetUserAdmin(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceGetUserAdmin(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceGetUserAdmin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -787,7 +793,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceListUsersAdmin(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterGender$eq?: string, filterGender$neq?: string, filterGender$contains?: string, filterGender$startsWith?: string, filterGender$nstartsWith?: string, filterGender$endsWith?: string, filterGender$nendsWith?: string, filterGender$in?: Array<string>, filterGender$nin?: Array<string>, filterGender$null?: boolean, filterGender$nnull?: boolean, filterGender$empty?: boolean, filterGender$nempty?: boolean, filterGender$like?: string, filterBirthday$eq?: string, filterBirthday$neq?: string, filterBirthday$gt?: string, filterBirthday$gte?: string, filterBirthday$lt?: string, filterBirthday$lte?: string, filterBirthday$null?: boolean, filterBirthday$nnull?: boolean, filterRolesId$eq?: string, filterRolesId$neq?: string, filterRolesId$contains?: string, filterRolesId$startsWith?: string, filterRolesId$nstartsWith?: string, filterRolesId$endsWith?: string, filterRolesId$nendsWith?: string, filterRolesId$in?: Array<string>, filterRolesId$nin?: Array<string>, filterRolesId$null?: boolean, filterRolesId$nnull?: boolean, filterRolesId$empty?: boolean, filterRolesId$nempty?: boolean, filterRolesId$like?: string, filterRolesName$eq?: string, filterRolesName$neq?: string, filterRolesName$contains?: string, filterRolesName$startsWith?: string, filterRolesName$nstartsWith?: string, filterRolesName$endsWith?: string, filterRolesName$nendsWith?: string, filterRolesName$in?: Array<string>, filterRolesName$nin?: Array<string>, filterRolesName$null?: boolean, filterRolesName$nnull?: boolean, filterRolesName$empty?: boolean, filterRolesName$nempty?: boolean, filterRolesName$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1AdminListUsersResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceListUsersAdmin(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterGender$eq, filterGender$neq, filterGender$contains, filterGender$startsWith, filterGender$nstartsWith, filterGender$endsWith, filterGender$nendsWith, filterGender$in, filterGender$nin, filterGender$null, filterGender$nnull, filterGender$empty, filterGender$nempty, filterGender$like, filterBirthday$eq, filterBirthday$neq, filterBirthday$gt, filterBirthday$gte, filterBirthday$lt, filterBirthday$lte, filterBirthday$null, filterBirthday$nnull, filterRolesId$eq, filterRolesId$neq, filterRolesId$contains, filterRolesId$startsWith, filterRolesId$nstartsWith, filterRolesId$endsWith, filterRolesId$nendsWith, filterRolesId$in, filterRolesId$nin, filterRolesId$null, filterRolesId$nnull, filterRolesId$empty, filterRolesId$nempty, filterRolesId$like, filterRolesName$eq, filterRolesName$neq, filterRolesName$contains, filterRolesName$startsWith, filterRolesName$nstartsWith, filterRolesName$endsWith, filterRolesName$nendsWith, filterRolesName$in, filterRolesName$nin, filterRolesName$null, filterRolesName$nnull, filterRolesName$empty, filterRolesName$nempty, filterRolesName$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceListUsersAdmin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -798,7 +806,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceListUsersAdmin2(body: V1AdminListUsersRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1AdminListUsersResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceListUsersAdmin2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceListUsersAdmin2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -810,7 +820,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceUpdateUserAdmin(userId: string, body: UserAdminServiceUpdateUserAdminRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceUpdateUserAdmin(userId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceUpdateUserAdmin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -822,7 +834,9 @@ export const UserAdminServiceApiFp = function(configuration?: Configuration) {
          */
         async userAdminServiceUpdateUserAdmin2(userId: string, body: UserAdminServiceUpdateUserAdminRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1User>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userAdminServiceUpdateUserAdmin2(userId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['UserAdminServiceApi.userAdminServiceUpdateUserAdmin2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

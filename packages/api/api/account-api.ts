@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { AccountUpdateAddressesRequest } from '../models';
 // @ts-ignore
@@ -430,7 +430,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountCreateAddresses(body: V1CreateAddressesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountCreateAddresses(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountCreateAddresses']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -440,7 +442,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountDeleteAddresses(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountDeleteAddresses(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountDeleteAddresses']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -449,7 +453,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountGetAddresses(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetAddressesReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountGetAddresses(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountGetAddresses']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -458,7 +464,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountGetProfile(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetProfileResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountGetProfile(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountGetProfile']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -482,7 +490,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountGetSettings(fields?: string, filterKey$eq?: string, filterKey$neq?: string, filterKey$contains?: string, filterKey$startsWith?: string, filterKey$nstartsWith?: string, filterKey$endsWith?: string, filterKey$nendsWith?: string, filterKey$in?: Array<string>, filterKey$nin?: Array<string>, filterKey$null?: boolean, filterKey$nnull?: boolean, filterKey$empty?: boolean, filterKey$nempty?: boolean, filterKey$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetSettingsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountGetSettings(fields, filterKey$eq, filterKey$neq, filterKey$contains, filterKey$startsWith, filterKey$nstartsWith, filterKey$endsWith, filterKey$nendsWith, filterKey$in, filterKey$nin, filterKey$null, filterKey$nnull, filterKey$empty, filterKey$nempty, filterKey$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountGetSettings']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -493,7 +503,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountUpdateAddresses(addressId: string, body: AccountUpdateAddressesRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountUpdateAddresses(addressId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountUpdateAddresses']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -504,7 +516,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountUpdateProfile(body: V1UpdateProfileRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountUpdateProfile(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountUpdateProfile']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -514,7 +528,9 @@ export const AccountApiFp = function(configuration?: Configuration) {
          */
         async accountUpdateSettings(body: V1UpdateSettingsRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1UpdateSettingsResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.accountUpdateSettings(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AccountApi.accountUpdateSettings']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

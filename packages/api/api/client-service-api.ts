@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { ClientListClientRequest } from '../models';
 // @ts-ignore
@@ -351,7 +351,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServiceCreateOAuth2Client(body: ClientOAuth2Client, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2Client>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceCreateOAuth2Client(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServiceCreateOAuth2Client']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -361,7 +363,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServiceDeleteOAuth2Client(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceDeleteOAuth2Client(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServiceDeleteOAuth2Client']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -371,7 +375,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServiceGetOAuth2Client(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2Client>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceGetOAuth2Client(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServiceGetOAuth2Client']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -386,7 +392,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServiceListOAuth2Clients(limit?: string, offset?: string, clientName?: string, owner?: string, afterPageToken?: string, beforePageToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2ClientList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceListOAuth2Clients(limit, offset, clientName, owner, afterPageToken, beforePageToken, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServiceListOAuth2Clients']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -396,7 +404,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServiceListOAuth2Clients2(body: ClientListClientRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2ClientList>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceListOAuth2Clients2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServiceListOAuth2Clients2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -407,7 +417,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServicePatchOAuth2Client(id: string, body: ClientServicePatchOAuth2ClientRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2Client>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServicePatchOAuth2Client(id, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServicePatchOAuth2Client']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -418,7 +430,9 @@ export const ClientServiceApiFp = function(configuration?: Configuration) {
          */
         async clientServiceUpdateOAuth2Client(id: string, body: ClientServiceUpdateOAuth2ClientRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ClientOAuth2Client>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.clientServiceUpdateOAuth2Client(id, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ClientServiceApi.clientServiceUpdateOAuth2Client']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

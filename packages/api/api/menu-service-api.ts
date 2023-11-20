@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -592,7 +592,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceCreateMenu(body: V1CreateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceCreateMenu(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceCreateMenu']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -602,7 +604,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceDeleteMenu(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1DeleteMenuReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceDeleteMenu(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceDeleteMenu']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -611,7 +615,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceGetAvailableMenus(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetAvailableMenusReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceGetAvailableMenus(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceGetAvailableMenus']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -621,7 +627,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceGetMenu(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceGetMenu(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceGetMenu']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -677,7 +685,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceListMenu(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterParent$eq?: string, filterParent$neq?: string, filterParent$contains?: string, filterParent$startsWith?: string, filterParent$nstartsWith?: string, filterParent$endsWith?: string, filterParent$nendsWith?: string, filterParent$in?: Array<string>, filterParent$nin?: Array<string>, filterParent$null?: boolean, filterParent$nnull?: boolean, filterParent$empty?: boolean, filterParent$nempty?: boolean, filterParent$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListMenuReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceListMenu(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterParent$eq, filterParent$neq, filterParent$contains, filterParent$startsWith, filterParent$nstartsWith, filterParent$endsWith, filterParent$nendsWith, filterParent$in, filterParent$nin, filterParent$null, filterParent$nnull, filterParent$empty, filterParent$nempty, filterParent$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceListMenu']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -687,7 +697,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceListMenu2(body: V1ListMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListMenuReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceListMenu2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceListMenu2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -698,7 +710,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceUpdateMenu(menuId: string, body: MenuServiceUpdateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceUpdateMenu(menuId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceUpdateMenu']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -709,7 +723,9 @@ export const MenuServiceApiFp = function(configuration?: Configuration) {
          */
         async menuServiceUpdateMenu2(menuId: string, body: MenuServiceUpdateMenuRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Menu>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.menuServiceUpdateMenu2(menuId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MenuServiceApi.menuServiceUpdateMenu2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

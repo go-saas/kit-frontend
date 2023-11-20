@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -340,7 +340,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceCreateJsonWebKeySet(set: string, body: KeyServiceCreateJsonWebKeySetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KeyJsonWebKeySet>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceCreateJsonWebKeySet(set, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceCreateJsonWebKeySet']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -351,7 +353,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceDeleteJsonWebKey(set: string, kid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceDeleteJsonWebKey(set, kid, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceDeleteJsonWebKey']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -361,7 +365,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceDeleteJsonWebKeySet(set: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceDeleteJsonWebKeySet(set, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceDeleteJsonWebKeySet']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -372,7 +378,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceGetJsonWebKey(set: string, kid: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KeyJsonWebKeySet>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceGetJsonWebKey(set, kid, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceGetJsonWebKey']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -382,7 +390,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceGetJsonWebKeySet(set: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KeyJsonWebKeySet>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceGetJsonWebKeySet(set, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceGetJsonWebKeySet']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -394,7 +404,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceUpdateJsonWebKey(set: string, kid: string, body: KeyServiceUpdateJsonWebKeyRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KeyJsonWebKey>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceUpdateJsonWebKey(set, kid, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceUpdateJsonWebKey']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -405,7 +417,9 @@ export const KeyServiceApiFp = function(configuration?: Configuration) {
          */
         async keyServiceUpdateJsonWebKeySet(set: string, body: KeyServiceUpdateJsonWebKeySetRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<KeyJsonWebKeySet>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.keyServiceUpdateJsonWebKeySet(set, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['KeyServiceApi.keyServiceUpdateJsonWebKeySet']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

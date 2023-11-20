@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -285,7 +285,9 @@ export const NotificationServiceApiFp = function(configuration?: Configuration) 
          */
         async notificationServiceDeleteNotification(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1DeleteNotificationReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.notificationServiceDeleteNotification(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['NotificationServiceApi.notificationServiceDeleteNotification']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -295,7 +297,9 @@ export const NotificationServiceApiFp = function(configuration?: Configuration) 
          */
         async notificationServiceGetNotification(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Notification>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.notificationServiceGetNotification(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['NotificationServiceApi.notificationServiceGetNotification']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -313,7 +317,9 @@ export const NotificationServiceApiFp = function(configuration?: Configuration) 
          */
         async notificationServiceListNotification(afterPageToken?: string, beforePageToken?: string, pageSize?: number, sort?: Array<string>, fields?: string, filterHasRead$eq?: boolean, filterHasRead$neq?: boolean, filterHasRead$null?: boolean, filterHasRead$nnull?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListNotificationReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.notificationServiceListNotification(afterPageToken, beforePageToken, pageSize, sort, fields, filterHasRead$eq, filterHasRead$neq, filterHasRead$null, filterHasRead$nnull, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['NotificationServiceApi.notificationServiceListNotification']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -323,7 +329,9 @@ export const NotificationServiceApiFp = function(configuration?: Configuration) 
          */
         async notificationServiceListNotification2(body: V1ListNotificationRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListNotificationReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.notificationServiceListNotification2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['NotificationServiceApi.notificationServiceListNotification2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -335,7 +343,9 @@ export const NotificationServiceApiFp = function(configuration?: Configuration) 
          */
         async notificationServiceReadNotification(id: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.notificationServiceReadNotification(id, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['NotificationServiceApi.notificationServiceReadNotification']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

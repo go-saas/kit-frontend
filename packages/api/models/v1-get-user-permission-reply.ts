@@ -15,25 +15,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import { V1UpdateSubjectPermissionAcl } from './v1-update-subject-permission-acl';
+import { Permissionv1PermissionDefGroup } from './permissionv1-permission-def-group';
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1Permission } from './v1-permission';
 
 /**
  * 
  * @export
- * @interface V1UpdateSubjectPermissionRequest
+ * @interface V1GetUserPermissionReply
  */
-export interface V1UpdateSubjectPermissionRequest {
+export interface V1GetUserPermissionReply {
     /**
      * 
-     * @type {string}
-     * @memberof V1UpdateSubjectPermissionRequest
+     * @type {Array<V1Permission>}
+     * @memberof V1GetUserPermissionReply
      */
-    'subject': string;
+    'acl'?: Array<V1Permission>;
     /**
      * 
-     * @type {Array<V1UpdateSubjectPermissionAcl>}
-     * @memberof V1UpdateSubjectPermissionRequest
+     * @type {Array<Permissionv1PermissionDefGroup>}
+     * @memberof V1GetUserPermissionReply
      */
-    'acl'?: Array<V1UpdateSubjectPermissionAcl>;
+    'defGroups'?: Array<Permissionv1PermissionDefGroup>;
 }
 

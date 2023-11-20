@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -446,7 +446,9 @@ export const MyOrderServiceApiFp = function(configuration?: Configuration) {
          */
         async myOrderServiceGetMyOrder(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Order>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceGetMyOrder(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MyOrderServiceApi.myOrderServiceGetMyOrder']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -504,7 +506,9 @@ export const MyOrderServiceApiFp = function(configuration?: Configuration) {
          */
         async myOrderServiceListMyOrder(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterCustomerId$eq?: string, filterCustomerId$neq?: string, filterCustomerId$contains?: string, filterCustomerId$startsWith?: string, filterCustomerId$nstartsWith?: string, filterCustomerId$endsWith?: string, filterCustomerId$nendsWith?: string, filterCustomerId$in?: Array<string>, filterCustomerId$nin?: Array<string>, filterCustomerId$null?: boolean, filterCustomerId$nnull?: boolean, filterCustomerId$empty?: boolean, filterCustomerId$nempty?: boolean, filterCustomerId$like?: string, afterPageToken?: string, beforePageToken?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListOrderReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceListMyOrder(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterCustomerId$eq, filterCustomerId$neq, filterCustomerId$contains, filterCustomerId$startsWith, filterCustomerId$nstartsWith, filterCustomerId$endsWith, filterCustomerId$nendsWith, filterCustomerId$in, filterCustomerId$nin, filterCustomerId$null, filterCustomerId$nnull, filterCustomerId$empty, filterCustomerId$nempty, filterCustomerId$like, afterPageToken, beforePageToken, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MyOrderServiceApi.myOrderServiceListMyOrder']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -514,7 +518,9 @@ export const MyOrderServiceApiFp = function(configuration?: Configuration) {
          */
         async myOrderServiceListMyOrder2(body: V1ListOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListOrderReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceListMyOrder2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MyOrderServiceApi.myOrderServiceListMyOrder2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -525,7 +531,9 @@ export const MyOrderServiceApiFp = function(configuration?: Configuration) {
          */
         async myOrderServiceRefundMyOrder(orderId: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Order>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.myOrderServiceRefundMyOrder(orderId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['MyOrderServiceApi.myOrderServiceRefundMyOrder']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

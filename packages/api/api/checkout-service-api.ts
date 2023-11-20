@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { CheckoutServiceCheckoutOrderRequest } from '../models';
 // @ts-ignore
@@ -135,7 +135,9 @@ export const CheckoutServiceApiFp = function(configuration?: Configuration) {
          */
         async checkoutServiceCheckoutNow(body: V1CheckoutNowRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1CheckoutNowReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkoutServiceCheckoutNow(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['CheckoutServiceApi.checkoutServiceCheckoutNow']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -146,7 +148,9 @@ export const CheckoutServiceApiFp = function(configuration?: Configuration) {
          */
         async checkoutServiceCheckoutOrder(orderId: string, body: CheckoutServiceCheckoutOrderRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1CheckoutOrderReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.checkoutServiceCheckoutOrder(orderId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['CheckoutServiceApi.checkoutServiceCheckoutOrder']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

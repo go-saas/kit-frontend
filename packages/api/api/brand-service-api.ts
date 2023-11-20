@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { BrandServiceUpdateBrandRequest } from '../models';
 // @ts-ignore
@@ -488,7 +488,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceCreateBrand(body: V1CreateBrandRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Brand>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceCreateBrand(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceCreateBrand']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -498,7 +500,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceDeleteBrand(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1DeleteBrandReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceDeleteBrand(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceDeleteBrand']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -508,7 +512,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceGetBrand(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Brand>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceGetBrand(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceGetBrand']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -550,7 +556,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceListBrand(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterCode$eq?: string, filterCode$neq?: string, filterCode$contains?: string, filterCode$startsWith?: string, filterCode$nstartsWith?: string, filterCode$endsWith?: string, filterCode$nendsWith?: string, filterCode$in?: Array<string>, filterCode$nin?: Array<string>, filterCode$null?: boolean, filterCode$nnull?: boolean, filterCode$empty?: boolean, filterCode$nempty?: boolean, filterCode$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListBrandReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceListBrand(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterCode$eq, filterCode$neq, filterCode$contains, filterCode$startsWith, filterCode$nstartsWith, filterCode$endsWith, filterCode$nendsWith, filterCode$in, filterCode$nin, filterCode$null, filterCode$nnull, filterCode$empty, filterCode$nempty, filterCode$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceListBrand']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -560,7 +568,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceListBrand2(body: V1ListBrandRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListBrandReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceListBrand2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceListBrand2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -571,7 +581,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceUpdateBrand(brandId: string, body: BrandServiceUpdateBrandRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Brand>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceUpdateBrand(brandId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceUpdateBrand']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -582,7 +594,9 @@ export const BrandServiceApiFp = function(configuration?: Configuration) {
          */
         async brandServiceUpdateBrand2(brandId: string, body: BrandServiceUpdateBrandRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Brand>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.brandServiceUpdateBrand2(brandId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['BrandServiceApi.brandServiceUpdateBrand2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

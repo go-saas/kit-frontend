@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -558,7 +558,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceCreateProductCategory(body: V1CreateProductCategoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ProductCategory>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceCreateProductCategory(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceCreateProductCategory']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -568,7 +570,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceDeleteProductCategory(key: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1DeleteProductCategoryReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceDeleteProductCategory(key, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceDeleteProductCategory']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -578,7 +582,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceGetProductCategory(key: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ProductCategory>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceGetProductCategory(key, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceGetProductCategory']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -634,7 +640,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceListProductCategory(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterKey$eq?: string, filterKey$neq?: string, filterKey$contains?: string, filterKey$startsWith?: string, filterKey$nstartsWith?: string, filterKey$endsWith?: string, filterKey$nendsWith?: string, filterKey$in?: Array<string>, filterKey$nin?: Array<string>, filterKey$null?: boolean, filterKey$nnull?: boolean, filterKey$empty?: boolean, filterKey$nempty?: boolean, filterKey$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterParent$eq?: string, filterParent$neq?: string, filterParent$contains?: string, filterParent$startsWith?: string, filterParent$nstartsWith?: string, filterParent$endsWith?: string, filterParent$nendsWith?: string, filterParent$in?: Array<string>, filterParent$nin?: Array<string>, filterParent$null?: boolean, filterParent$nnull?: boolean, filterParent$empty?: boolean, filterParent$nempty?: boolean, filterParent$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListProductCategoryReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceListProductCategory(pageOffset, pageSize, search, sort, fields, filterKey$eq, filterKey$neq, filterKey$contains, filterKey$startsWith, filterKey$nstartsWith, filterKey$endsWith, filterKey$nendsWith, filterKey$in, filterKey$nin, filterKey$null, filterKey$nnull, filterKey$empty, filterKey$nempty, filterKey$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterParent$eq, filterParent$neq, filterParent$contains, filterParent$startsWith, filterParent$nstartsWith, filterParent$endsWith, filterParent$nendsWith, filterParent$in, filterParent$nin, filterParent$null, filterParent$nnull, filterParent$empty, filterParent$nempty, filterParent$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceListProductCategory']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -644,7 +652,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceListProductCategory2(body: V1ListProductCategoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListProductCategoryReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceListProductCategory2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceListProductCategory2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -655,7 +665,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceUpdateProductCategory(categoryKey: string, body: ProductCategoryServiceUpdateProductCategoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ProductCategory>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceUpdateProductCategory(categoryKey, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceUpdateProductCategory']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -666,7 +678,9 @@ export const ProductCategoryServiceApiFp = function(configuration?: Configuratio
          */
         async productCategoryServiceUpdateProductCategory2(categoryKey: string, body: ProductCategoryServiceUpdateProductCategoryRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ProductCategory>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.productCategoryServiceUpdateProductCategory2(categoryKey, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['ProductCategoryServiceApi.productCategoryServiceUpdateProductCategory2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

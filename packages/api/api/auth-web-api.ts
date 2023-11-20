@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -295,7 +295,9 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
          */
         async authWebGetConsent(consentChallenge?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetConsentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authWebGetConsent(consentChallenge, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthWebApi.authWebGetConsent']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -306,7 +308,9 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
          */
         async authWebGetWebLogin(redirect?: string, loginChallenge?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetLoginResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authWebGetWebLogin(redirect, loginChallenge, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthWebApi.authWebGetWebLogin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -316,7 +320,9 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
          */
         async authWebGetWebLogout(logoutChallenge?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetLogoutResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authWebGetWebLogout(logoutChallenge, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthWebApi.authWebGetWebLogout']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -326,7 +332,9 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
          */
         async authWebGrantConsent(body: V1GrantConsentRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GrantConsentResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authWebGrantConsent(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthWebApi.authWebGrantConsent']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -336,7 +344,9 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
          */
         async authWebWebLogin(body: V1WebLoginAuthRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1WebLoginAuthReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authWebWebLogin(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthWebApi.authWebWebLogin']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -346,7 +356,9 @@ export const AuthWebApiFp = function(configuration?: Configuration) {
          */
         async authWebWebLogout(body: V1LogoutRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1LogoutResponse>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authWebWebLogout(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['AuthWebApi.authWebWebLogout']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

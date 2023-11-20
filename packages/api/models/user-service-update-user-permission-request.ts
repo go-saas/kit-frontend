@@ -13,18 +13,21 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import { V1UpdateSubjectPermissionAcl } from './v1-update-subject-permission-acl';
 
 /**
  * 
  * @export
- * @interface V1ListSubjectPermissionRequest
+ * @interface UserServiceUpdateUserPermissionRequest
  */
-export interface V1ListSubjectPermissionRequest {
+export interface UserServiceUpdateUserPermissionRequest {
     /**
      * 
-     * @type {Array<string>}
-     * @memberof V1ListSubjectPermissionRequest
+     * @type {Array<V1UpdateSubjectPermissionAcl>}
+     * @memberof UserServiceUpdateUserPermissionRequest
      */
-    'subjects'?: Array<string>;
+    'acl'?: Array<V1UpdateSubjectPermissionAcl>;
 }
 

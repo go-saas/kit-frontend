@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -727,7 +727,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceChangeTenant(idOrName: string, body: object, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ChangeTenantReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceChangeTenant(idOrName, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceChangeTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -738,7 +740,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceCreateTenant(body: V1CreateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceCreateTenant(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceCreateTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -749,7 +753,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceDeleteTenant(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1DeleteTenantReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceDeleteTenant(id, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceDeleteTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -759,7 +765,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceGetCurrentTenant(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetCurrentTenantReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceGetCurrentTenant(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceGetCurrentTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -770,7 +778,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceGetTenant(idOrName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceGetTenant(idOrName, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceGetTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -781,7 +791,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceGetTenantPublic(idOrName: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1TenantInfo>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceGetTenantPublic(idOrName, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceGetTenantPublic']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -838,7 +850,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceListTenant(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterId$eq?: string, filterId$neq?: string, filterId$contains?: string, filterId$startsWith?: string, filterId$nstartsWith?: string, filterId$endsWith?: string, filterId$nendsWith?: string, filterId$in?: Array<string>, filterId$nin?: Array<string>, filterId$null?: boolean, filterId$nnull?: boolean, filterId$empty?: boolean, filterId$nempty?: boolean, filterId$like?: string, filterName$eq?: string, filterName$neq?: string, filterName$contains?: string, filterName$startsWith?: string, filterName$nstartsWith?: string, filterName$endsWith?: string, filterName$nendsWith?: string, filterName$in?: Array<string>, filterName$nin?: Array<string>, filterName$null?: boolean, filterName$nnull?: boolean, filterName$empty?: boolean, filterName$nempty?: boolean, filterName$like?: string, filterRegion$eq?: string, filterRegion$neq?: string, filterRegion$contains?: string, filterRegion$startsWith?: string, filterRegion$nstartsWith?: string, filterRegion$endsWith?: string, filterRegion$nendsWith?: string, filterRegion$in?: Array<string>, filterRegion$nin?: Array<string>, filterRegion$null?: boolean, filterRegion$nnull?: boolean, filterRegion$empty?: boolean, filterRegion$nempty?: boolean, filterRegion$like?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListTenantReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceListTenant(pageOffset, pageSize, search, sort, fields, filterId$eq, filterId$neq, filterId$contains, filterId$startsWith, filterId$nstartsWith, filterId$endsWith, filterId$nendsWith, filterId$in, filterId$nin, filterId$null, filterId$nnull, filterId$empty, filterId$nempty, filterId$like, filterName$eq, filterName$neq, filterName$contains, filterName$startsWith, filterName$nstartsWith, filterName$endsWith, filterName$nendsWith, filterName$in, filterName$nin, filterName$null, filterName$nnull, filterName$empty, filterName$nempty, filterName$like, filterRegion$eq, filterRegion$neq, filterRegion$contains, filterRegion$startsWith, filterRegion$nstartsWith, filterRegion$endsWith, filterRegion$nendsWith, filterRegion$in, filterRegion$nin, filterRegion$null, filterRegion$nnull, filterRegion$empty, filterRegion$nempty, filterRegion$like, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceListTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -849,7 +863,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceListTenant2(body: V1ListTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListTenantReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceListTenant2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceListTenant2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -861,7 +877,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceUpdateTenant(tenantId: string, body: TenantServiceUpdateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceUpdateTenant(tenantId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceUpdateTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -873,7 +891,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceUpdateTenant2(tenantId: string, body: TenantServiceUpdateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Tenant>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceUpdateTenant2(tenantId, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceUpdateTenant2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -884,7 +904,9 @@ export const TenantServiceApiFp = function(configuration?: Configuration) {
          */
         async tenantServiceUserCreateTenant(body: V1UserCreateTenantRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1UserCreateTenantReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.tenantServiceUserCreateTenant(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['TenantServiceApi.tenantServiceUserCreateTenant']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };

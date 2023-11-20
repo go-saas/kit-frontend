@@ -20,7 +20,7 @@ import globalAxios from 'axios';
 // @ts-ignore
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
-import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
 import { GooglerpcStatus } from '../models';
 // @ts-ignore
@@ -540,7 +540,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceCreatePlan(body: V1CreatePlanRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Plan>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceCreatePlan(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceCreatePlan']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -550,7 +552,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceDeletePlan(key: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<object>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceDeletePlan(key, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceDeletePlan']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -559,7 +563,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceGetAvailablePlans(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1GetAvailablePlansReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceGetAvailablePlans(options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceGetAvailablePlans']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -569,7 +575,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceGetPlan(key: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Plan>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceGetPlan(key, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceGetPlan']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -615,7 +623,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceListPlan(pageOffset?: number, pageSize?: number, search?: string, sort?: Array<string>, fields?: string, filterKey$eq?: string, filterKey$neq?: string, filterKey$contains?: string, filterKey$startsWith?: string, filterKey$nstartsWith?: string, filterKey$endsWith?: string, filterKey$nendsWith?: string, filterKey$in?: Array<string>, filterKey$nin?: Array<string>, filterKey$null?: boolean, filterKey$nnull?: boolean, filterKey$empty?: boolean, filterKey$nempty?: boolean, filterKey$like?: string, filterDisplayName$eq?: string, filterDisplayName$neq?: string, filterDisplayName$contains?: string, filterDisplayName$startsWith?: string, filterDisplayName$nstartsWith?: string, filterDisplayName$endsWith?: string, filterDisplayName$nendsWith?: string, filterDisplayName$in?: Array<string>, filterDisplayName$nin?: Array<string>, filterDisplayName$null?: boolean, filterDisplayName$nnull?: boolean, filterDisplayName$empty?: boolean, filterDisplayName$nempty?: boolean, filterDisplayName$like?: string, filterActive$eq?: boolean, filterActive$neq?: boolean, filterActive$null?: boolean, filterActive$nnull?: boolean, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListPlanReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceListPlan(pageOffset, pageSize, search, sort, fields, filterKey$eq, filterKey$neq, filterKey$contains, filterKey$startsWith, filterKey$nstartsWith, filterKey$endsWith, filterKey$nendsWith, filterKey$in, filterKey$nin, filterKey$null, filterKey$nnull, filterKey$empty, filterKey$nempty, filterKey$like, filterDisplayName$eq, filterDisplayName$neq, filterDisplayName$contains, filterDisplayName$startsWith, filterDisplayName$nstartsWith, filterDisplayName$endsWith, filterDisplayName$nendsWith, filterDisplayName$in, filterDisplayName$nin, filterDisplayName$null, filterDisplayName$nnull, filterDisplayName$empty, filterDisplayName$nempty, filterDisplayName$like, filterActive$eq, filterActive$neq, filterActive$null, filterActive$nnull, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceListPlan']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -625,7 +635,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceListPlan2(body: V1ListPlanRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1ListPlanReply>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceListPlan2(body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceListPlan2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -636,7 +648,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceUpdatePlan(planKey: string, body: PlanServiceUpdatePlanRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Plan>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceUpdatePlan(planKey, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceUpdatePlan']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
         /**
          * 
@@ -647,7 +661,9 @@ export const PlanServiceApiFp = function(configuration?: Configuration) {
          */
         async planServiceUpdatePlan2(planKey: string, body: PlanServiceUpdatePlanRequest, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<V1Plan>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.planServiceUpdatePlan2(planKey, body, options);
-            return createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration);
+            const index = configuration?.serverIndex ?? 0;
+            const operationBasePath = operationServerMap['PlanServiceApi.planServiceUpdatePlan2']?.[index]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, operationBasePath || basePath);
         },
     }
 };
